@@ -77,7 +77,7 @@ export function Hero() {
           </RevealAnimation>
         </div>
 
-        <div className="relative mx-auto w-full max-w-md flex-1 lg:mx-0 lg:max-w-lg">
+        <div className="relative mx-auto w-full max-w-md flex-1 -translate-y-4 lg:mx-0 lg:max-w-lg lg:-translate-y-8">
           <RevealAnimation direction="left" delay={0.15}>
             <div className="relative">
               {!prefersReducedMotion && (
