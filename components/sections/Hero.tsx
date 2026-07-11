@@ -3,7 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Sparkles } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
 import { RevealAnimation } from "@/components/ui/RevealAnimation";
 import { BrushStroke } from "@/components/ui/BrushStroke";
 import { VKButton } from "@/components/ui/VKButton";
@@ -20,14 +19,10 @@ const trustMarkers = [
   "Индивидуальные концепции вместо шаблонной генерации",
 ];
 
-const aiFocusTags = ["AI-видео", "AI-изображения", "сайты", "ВКонтакте"];
-
 export function Hero() {
-  const prefersReducedMotion = useReducedMotion();
-
   return (
     <section id="top" className="relative min-h-screen overflow-hidden pt-20 md:pt-24">
-      <div className="container-site relative z-10 flex min-h-[calc(100vh-5rem)] flex-col justify-center gap-12 py-16 lg:flex-row lg:items-center lg:gap-16">
+      <div className="container-site relative z-10 flex min-h-[calc(100vh-5rem)] flex-col justify-center gap-12 py-16 lg:flex-row lg:items-center lg:gap-14">
         <div className="flex-1 lg:max-w-2xl">
           <RevealAnimation>
             <div className="glass-panel-soft rounded-3xl p-8 md:p-10 lg:p-12">
@@ -82,78 +77,29 @@ export function Hero() {
           </RevealAnimation>
         </div>
 
-        <div className="relative mx-auto w-full max-w-md flex-1 -translate-y-4 lg:mx-0 lg:max-w-lg lg:-translate-y-8">
+        <div className="relative mx-auto w-full max-w-xl flex-1 lg:mx-0 lg:max-w-[34rem] lg:-translate-y-6">
           <RevealAnimation direction="left" delay={0.15}>
             <div className="relative">
-              {!prefersReducedMotion && (
-                <>
-                  <motion.div
-                    className="absolute -left-6 top-10 h-28 w-28 rounded-full bg-gold/15 blur-2xl"
-                    animate={{ scale: [1, 1.15, 1], opacity: [0.35, 0.55, 0.35] }}
-                    transition={{ duration: 8, repeat: Infinity }}
-                  />
-                  <motion.div
-                    className="absolute -right-4 bottom-16 h-24 w-24 rounded-full bg-berry/20 blur-xl"
-                    animate={{ y: [0, -12, 0] }}
-                    transition={{ duration: 6, repeat: Infinity }}
-                  />
-                </>
-              )}
-
-              <div className="relative aspect-[3/4] overflow-hidden rounded-[2rem] border border-border-subtle shadow-[0_24px_64px_rgba(14,18,48,0.35)]">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-border-subtle bg-graphite/20 shadow-[0_24px_64px_rgba(14,18,48,0.35)]">
                 <Image
                   src={SPECIALIST_PHOTO}
-                  alt={`${SPECIALIST_NAME} — ${SPECIALIST_ROLES}`}
+                  alt={SPECIALIST_NAME}
                   fill
                   priority
-                  className="object-cover object-[center_18%]"
-                  sizes="(max-width: 1024px) 100vw, 512px"
+                  quality={95}
+                  className="object-cover object-[center_12%] contrast-[1.03] saturate-[1.05]"
+                  sizes="(max-width: 1024px) 92vw, 544px"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-graphite/95 via-graphite/20 to-transparent" />
-
-                <div className="absolute inset-x-0 bottom-0 px-6 pb-6 pt-24">
-                  <p className="font-heading text-2xl text-white-text md:text-3xl">{SPECIALIST_NAME}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-gold md:text-base">{SPECIALIST_ROLES}</p>
-                </div>
               </div>
 
-              <div className="absolute -right-3 top-8 hidden rounded-2xl border border-border-subtle bg-card-bg px-4 py-3 backdrop-blur-md sm:block">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-gold">
-                  Опыт
+              <div className="glass-panel-soft mt-5 rounded-2xl px-5 py-5 text-center md:px-6 md:py-6 lg:text-left">
+                <p className="font-heading text-[1.75rem] leading-tight text-white-text md:text-3xl">
+                  {SPECIALIST_NAME}
                 </p>
-                <p className="mt-1 font-heading text-2xl text-white-text">10+</p>
-                <p className="text-xs text-text-secondary">лет в искусстве</p>
+                <p className="mt-2 text-sm leading-relaxed text-gold md:text-base">{SPECIALIST_ROLES}</p>
+                <div className="gold-line mx-auto my-4 lg:mx-0" />
+                <p className="text-sm text-text-secondary">10+ лет художественного видения и опыта</p>
               </div>
-
-              <motion.div
-                className="absolute -left-4 bottom-24 w-28 overflow-hidden rounded-xl border border-border-subtle shadow-2xl"
-                animate={prefersReducedMotion ? {} : { y: [0, -8, 0] }}
-                transition={{ duration: 5, repeat: Infinity }}
-              >
-                <Image
-                  src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=300&q=80"
-                  alt="Пример AI-видео"
-                  width={112}
-                  height={80}
-                  className="h-20 w-28 object-cover"
-                />
-              </motion.div>
-
-              {!prefersReducedMotion && (
-                <div className="absolute -bottom-3 left-1/2 flex -translate-x-1/2 flex-wrap justify-center gap-2">
-                  {aiFocusTags.map((tag, i) => (
-                    <motion.span
-                      key={tag}
-                      className="tag-glass whitespace-nowrap"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.8 + i * 0.15 }}
-                    >
-                      {tag}
-                    </motion.span>
-                  ))}
-                </div>
-              )}
             </div>
           </RevealAnimation>
         </div>
