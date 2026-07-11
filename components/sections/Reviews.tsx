@@ -11,7 +11,7 @@ export function Reviews() {
 
   if (visibleReviews.length === 0) {
     return (
-      <section id="reviews" className="py-20 md:py-28">
+      <section id="reviews" className="py-16 md:py-28">
         <div className="container-site text-center">
           <RevealAnimation>
             <SectionHeading title={reviews.title} subtitle={reviews.subtitle} align="center" />
@@ -29,7 +29,7 @@ export function Reviews() {
   }
 
   return (
-    <section id="reviews" className="py-20 md:py-28">
+    <section id="reviews" className="py-16 md:py-28">
       <div className="container-site">
         <RevealAnimation>
           <SectionHeading title={reviews.title} subtitle={reviews.subtitle} align="center" />

@@ -17,13 +17,13 @@ export function Hero() {
       <div className="container-site relative z-10 flex min-h-[calc(100vh-5rem)] flex-col justify-center gap-12 py-16 lg:flex-row lg:items-center lg:gap-14">
         <div className="flex-1 lg:max-w-2xl">
           <RevealAnimation>
-            <div className="glass-panel-soft rounded-3xl p-8 md:p-10 lg:p-12">
+            <div className="glass-panel-soft rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12">
               <p className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-gold">
                 <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
                 {hero.eyebrow}
               </p>
               <BrushStroke className="mb-6" />
-              <h1 className="heading-display mb-6 text-balance text-[40px] leading-[1.05] md:text-[56px] lg:text-[64px]">
+              <h1 className="heading-display mb-6 text-balance text-[32px] leading-[1.08] sm:text-[40px] md:text-[56px] lg:text-[64px]">
                 {hero.titleMain}{" "}
                 <span className="text-gold">{hero.titleHighlight}</span>
                 {hero.titleSuffix}
@@ -86,7 +86,7 @@ export function Hero() {
                 <p className="font-heading text-[1.75rem] leading-tight text-white-text md:text-3xl">
                   {hero.specialistName}
                 </p>
-                <p className="mt-2 text-sm leading-relaxed text-gold md:text-base">{hero.specialistRoles}</p>
+                <p className="mt-2 break-words-safe text-sm leading-relaxed text-gold md:text-base">{hero.specialistRoles}</p>
                 <div className="gold-line mx-auto my-4 lg:mx-0" />
                 <p className="text-sm text-text-secondary">{hero.specialistExperience}</p>
               </div>

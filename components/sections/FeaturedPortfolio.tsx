@@ -8,8 +8,11 @@ import { PortfolioFilter } from "@/components/portfolio/PortfolioFilter";
 import { RevealAnimation } from "@/components/ui/RevealAnimation";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
+import { useSiteContent } from "@/components/providers/SiteContentProvider";
+
 export function FeaturedPortfolio() {
   const [activeCategory, setActiveCategory] = useState("all");
+  const { portfolio } = useSiteContent();
   const projects = getFeaturedProjects();
   const filtered =
     activeCategory === "all"
@@ -17,13 +20,13 @@ export function FeaturedPortfolio() {
       : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="portfolio" className="py-20 md:py-28">
+    <section id="portfolio" className="py-16 md:py-28">
       <div className="container-site">
         <RevealAnimation>
           <SectionHeading
-            label="Портфолио"
-            title="Избранные проекты"
-            subtitle="В каждом проекте — своя задача, атмосфера и визуальный язык."
+            label={portfolio.featured.label}
+            title={portfolio.featured.title}
+            subtitle={portfolio.featured.subtitle}
           />
         </RevealAnimation>
 
@@ -43,7 +46,7 @@ export function FeaturedPortfolio() {
 
         <RevealAnimation className="mt-12 text-center">
           <Link href="/portfolio" className="btn-secondary">
-            Смотреть все проекты
+            {portfolio.featured.ctaLabel}
           </Link>
         </RevealAnimation>
       </div>

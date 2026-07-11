@@ -28,7 +28,7 @@ export function Services() {
   const { services } = useSiteContent();
 
   return (
-    <section id="services" className="py-20 md:py-28">
+    <section id="services" className="py-16 md:py-28">
       <div className="container-site">
         <RevealAnimation>
           <SectionHeading

@@ -51,13 +51,13 @@ export default function ContactsPage() {
             <div className="mt-12 card-glass p-6 text-left">
               <p className="mb-2 text-sm text-text-secondary">
                 <span className="text-gold">ВКонтакте (личная):</span>{" "}
-                <a href={VK_PROFILE_URL} className="text-link" target="_blank" rel="noopener noreferrer">
+                <a href={VK_PROFILE_URL} className="break-all text-link" target="_blank" rel="noopener noreferrer">
                   {VK_PROFILE_URL}
                 </a>
               </p>
               <p className="mb-2 text-sm text-text-secondary">
                 <span className="text-gold">Сообщество:</span>{" "}
-                <a href={VK_COMMUNITY_URL} className="text-link" target="_blank" rel="noopener noreferrer">
+                <a href={VK_COMMUNITY_URL} className="break-all text-link" target="_blank" rel="noopener noreferrer">
                   {VK_COMMUNITY_URL}
                 </a>
               </p>

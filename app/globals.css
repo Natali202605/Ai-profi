@@ -209,11 +209,31 @@
     background: rgba(44, 36, 92, 0.48);
     border: 1px solid rgba(200, 188, 255, 0.22);
   }
+
+  @media (hover: none) {
+    .portfolio-card-touch .portfolio-card-desc,
+    .portfolio-card-touch .portfolio-card-cta {
+      opacity: 1;
+    }
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .break-words-safe {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .mobile-fab-offset {
+    bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
   }
 
   .canvas-texture {

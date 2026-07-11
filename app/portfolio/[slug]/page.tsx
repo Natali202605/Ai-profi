@@ -176,14 +176,14 @@ export default async function ProjectPage({ params }: Props) {
           </aside>
         </div>
 
-        <nav className="mt-16 flex justify-between border-t border-border-subtle pt-8">
+        <nav className="mt-16 flex flex-col gap-4 border-t border-border-subtle pt-8 sm:flex-row sm:items-center sm:justify-between">
           {prev ? (
             <Link
               href={`/portfolio/${prev.slug}`}
-              className="flex items-center gap-2 text-sm text-gold hover:text-peach"
+              className="flex min-h-11 max-w-full items-center gap-2 text-sm text-gold hover:text-peach sm:max-w-[45%]"
             >
-              <ArrowLeft className="h-4 w-4" />
-              {prev.title}
+              <ArrowLeft className="h-4 w-4 shrink-0" />
+              <span className="truncate">{prev.title}</span>
             </Link>
           ) : (
             <span />
@@ -191,10 +191,10 @@ export default async function ProjectPage({ params }: Props) {
           {next && (
             <Link
               href={`/portfolio/${next.slug}`}
-              className="flex items-center gap-2 text-right text-sm text-gold hover:text-peach"
+              className="flex min-h-11 max-w-full items-center justify-end gap-2 text-sm text-gold hover:text-peach sm:max-w-[45%] sm:text-right"
             >
-              {next.title}
-              <ArrowRight className="h-4 w-4" />
+              <span className="truncate">{next.title}</span>
+              <ArrowRight className="h-4 w-4 shrink-0" />
             </Link>
           )}
         </nav>

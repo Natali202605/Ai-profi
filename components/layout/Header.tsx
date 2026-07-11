@@ -68,7 +68,7 @@ export function Header() {
           </nav>
 
           <button
-            className="rounded-lg p-2 text-white-text lg:hidden"
+            className="flex min-h-11 min-w-11 items-center justify-center rounded-lg text-white-text lg:hidden"
             onClick={() => setMenuOpen(true)}
             aria-label="Открыть меню"
           >

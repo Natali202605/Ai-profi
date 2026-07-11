@@ -1,9 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { SiteContent, SiteReview, SiteService } from "@/lib/site-content-types";
+import type { SiteContent, SiteFaqItem, SiteReview, SiteService, LegalBlock, LegalPageContent } from "@/lib/site-content-types";
 
-type Tab = "brand" | "hero" | "intro" | "about" | "services" | "reviews" | "images" | "account";
+type Tab =
+  | "brand"
+  | "hero"
+  | "intro"
+  | "about"
+  | "services"
+  | "reviews"
+  | "faq"
+  | "portfolio"
+  | "legal"
+  | "images"
+  | "account";
 
 const tabs: { id: Tab; label: string }[] = [
   { id: "brand", label: "Бренд" },
@@ -12,6 +23,9 @@ const tabs: { id: Tab; label: string }[] = [
   { id: "about", label: "Обо мне" },
   { id: "services", label: "Услуги" },
   { id: "reviews", label: "Отзывы" },
+  { id: "faq", label: "FAQ" },
+  { id: "portfolio", label: "Портфолио" },
+  { id: "legal", label: "Юр. страницы" },
   { id: "images", label: "Фото" },
   { id: "account", label: "Логин и пароль" },
 ];
@@ -255,13 +269,13 @@ export function AdminContentEditor() {
 
       {message ? <p className="mb-4 text-sm text-gold">{message}</p> : null}
 
-      <div className="mb-6 flex flex-wrap gap-2">
+      <div className="mb-6 -mx-1 flex gap-2 overflow-x-auto px-1 pb-1">
         {tabs.map((item) => (
           <button
             key={item.id}
             type="button"
             onClick={() => setTab(item.id)}
-            className={`rounded-full px-4 py-2 text-xs uppercase tracking-wider transition-colors ${
+            className={`min-h-11 shrink-0 rounded-full px-4 py-2 text-xs uppercase tracking-wider transition-colors ${
               tab === item.id ? "bg-gold text-plum" : "bg-plum/40 text-text-secondary hover:text-white-text"
             }`}
           >
@@ -399,6 +413,94 @@ export function AdminContentEditor() {
           />
         )}
 
+        {tab === "faq" && (
+          <>
+            <Field label="Заголовок секции" value={content.faq.title} onChange={(v) => patchContent({ faq: { ...content.faq, title: v } })} />
+            <div className="space-y-6 pt-4">
+              {content.faq.items.map((item, index) => (
+                <FaqEditor
+                  key={item.id}
+                  item={item}
+                  onChange={(updated) => {
+                    const items = [...content.faq.items];
+                    items[index] = updated;
+                    patchContent({ faq: { ...content.faq, items } });
+                  }}
+                  onDelete={() =>
+                    patchContent({
+                      faq: { ...content.faq, items: content.faq.items.filter((_, i) => i !== index) },
+                    })
+                  }
+                />
+              ))}
+              <button
+                type="button"
+                className="btn-secondary !text-xs"
+                onClick={() =>
+                  patchContent({
+                    faq: {
+                      ...content.faq,
+                      items: [
+                        ...content.faq.items,
+                        {
+                          id: `faq-${Date.now()}`,
+                          question: "Новый вопрос",
+                          answer: "Ответ",
+                          visible: true,
+                        },
+                      ],
+                    },
+                  })
+                }
+              >
+                + Добавить вопрос
+              </button>
+            </div>
+          </>
+        )}
+
+        {tab === "portfolio" && (
+          <>
+            <p className="text-sm text-gold">Секция на главной</p>
+            <Field label="Метка" value={content.portfolio.featured.label} onChange={(v) => patchContent({ portfolio: { ...content.portfolio, featured: { ...content.portfolio.featured, label: v } } })} />
+            <Field label="Заголовок" value={content.portfolio.featured.title} onChange={(v) => patchContent({ portfolio: { ...content.portfolio, featured: { ...content.portfolio.featured, title: v } } })} />
+            <Field label="Подзаголовок" value={content.portfolio.featured.subtitle} onChange={(v) => patchContent({ portfolio: { ...content.portfolio, featured: { ...content.portfolio.featured, subtitle: v } } })} multiline />
+            <Field label="Текст кнопки" value={content.portfolio.featured.ctaLabel} onChange={(v) => patchContent({ portfolio: { ...content.portfolio, featured: { ...content.portfolio.featured, ctaLabel: v } } })} />
+            <p className="pt-4 text-sm text-gold">Страница /portfolio</p>
+            <Field label="Метка" value={content.portfolio.page.label} onChange={(v) => patchContent({ portfolio: { ...content.portfolio, page: { ...content.portfolio.page, label: v } } })} />
+            <Field label="Заголовок" value={content.portfolio.page.title} onChange={(v) => patchContent({ portfolio: { ...content.portfolio, page: { ...content.portfolio.page, title: v } } })} />
+            <Field label="Подзаголовок" value={content.portfolio.page.subtitle} onChange={(v) => patchContent({ portfolio: { ...content.portfolio, page: { ...content.portfolio.page, subtitle: v } } })} multiline />
+          </>
+        )}
+
+        {tab === "legal" && (
+          <>
+            <p className="text-sm text-gold">Оператор</p>
+            <Field label="Бренд" value={content.legal.operator.brand} onChange={(v) => patchContent({ legal: { ...content.legal, operator: { ...content.legal.operator, brand: v } } })} />
+            <Field label="ФИО" value={content.legal.operator.fullName} onChange={(v) => patchContent({ legal: { ...content.legal, operator: { ...content.legal.operator, fullName: v } } })} />
+            <Field label="Статус" value={content.legal.operator.status} onChange={(v) => patchContent({ legal: { ...content.legal, operator: { ...content.legal.operator, status: v } } })} multiline />
+            <Field label="URL сайта" value={content.legal.operator.siteUrl} onChange={(v) => patchContent({ legal: { ...content.legal, operator: { ...content.legal.operator, siteUrl: v } } })} />
+            <Field label="VK профиль" value={content.legal.operator.vkProfile} onChange={(v) => patchContent({ legal: { ...content.legal, operator: { ...content.legal.operator, vkProfile: v } } })} />
+            <Field label="VK сообщество" value={content.legal.operator.vkCommunity} onChange={(v) => patchContent({ legal: { ...content.legal, operator: { ...content.legal.operator, vkCommunity: v } } })} />
+            <Field label="Дата оферты" value={content.legal.offer.publishedAt} onChange={(v) => patchContent({ legal: { ...content.legal, offer: { ...content.legal.offer, publishedAt: v } } })} />
+            <LegalPageEditor
+              label="Политика конфиденциальности"
+              page={content.legal.privacy}
+              onChange={(privacy) => patchContent({ legal: { ...content.legal, privacy } })}
+            />
+            <LegalPageEditor
+              label="Согласие на обработку данных"
+              page={content.legal.consent}
+              onChange={(consent) => patchContent({ legal: { ...content.legal, consent } })}
+            />
+            <LegalPageEditor
+              label="Публичная оферта"
+              page={content.legal.offer}
+              onChange={(offer) => patchContent({ legal: { ...content.legal, offer: { ...content.legal.offer, ...offer } } })}
+            />
+          </>
+        )}
+
         {tab === "account" && (
           <>
             <p className="text-sm text-text-secondary">
@@ -433,6 +535,90 @@ function ServiceEditor({
         <Field label="Описание" value={service.description} onChange={(v) => onChange({ ...service, description: v })} multiline />
         <Field label="Текст ссылки" value={service.cta} onChange={(v) => onChange({ ...service, cta: v })} />
         <StringListEditor label="Что входит" items={service.includes} onChange={(includes) => onChange({ ...service, includes })} />
+      </div>
+    </div>
+  );
+}
+
+function FaqEditor({
+  item,
+  onChange,
+  onDelete,
+}: {
+  item: SiteFaqItem;
+  onChange: (item: SiteFaqItem) => void;
+  onDelete: () => void;
+}) {
+  return (
+    <div className="rounded-2xl border border-border-subtle/60 p-4">
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <p className="text-xs uppercase tracking-wider text-gold">{item.id}</p>
+        <label className="flex items-center gap-2 text-xs text-text-secondary">
+          <input
+            type="checkbox"
+            checked={item.visible}
+            onChange={(e) => onChange({ ...item, visible: e.target.checked })}
+          />
+          Показывать
+        </label>
+        <button type="button" className="btn-secondary !px-3 !py-1 !text-xs" onClick={onDelete}>
+          Удалить
+        </button>
+      </div>
+      <div className="space-y-3">
+        <Field label="Вопрос" value={item.question} onChange={(v) => onChange({ ...item, question: v })} />
+        <Field label="Ответ" value={item.answer} onChange={(v) => onChange({ ...item, answer: v })} multiline />
+      </div>
+    </div>
+  );
+}
+
+function LegalPageEditor({
+  label,
+  page,
+  onChange,
+}: {
+  label: string;
+  page: LegalPageContent;
+  onChange: (page: LegalPageContent) => void;
+}) {
+  function updateBlock(index: number, block: LegalBlock) {
+    const blocks = [...page.blocks];
+    blocks[index] = block;
+    onChange({ ...page, blocks });
+  }
+
+  return (
+    <div className="space-y-4 border-t border-border-subtle/60 pt-6">
+      <p className="text-sm font-medium text-white-text">{label}</p>
+      <Field label="Заголовок страницы" value={page.title} onChange={(v) => onChange({ ...page, title: v })} />
+      <div className="space-y-4">
+        {page.blocks.map((block, index) => (
+          <div key={`${block.type}-${index}`} className="rounded-xl border border-border-subtle/40 p-3">
+            <p className="mb-2 text-xs uppercase tracking-wider text-text-secondary">{block.type}</p>
+            {block.type === "p" && (
+              <Field label="Текст" value={block.text} onChange={(v) => updateBlock(index, { ...block, text: v })} multiline />
+            )}
+            {block.type === "h2" && (
+              <Field label="Заголовок" value={block.text} onChange={(v) => updateBlock(index, { ...block, text: v })} />
+            )}
+            {block.type === "ul" && (
+              <StringListEditor label="Пункты списка" items={block.items} onChange={(items) => updateBlock(index, { ...block, items })} />
+            )}
+            {block.type === "p_vk" && (
+              <>
+                <Field label="Текст до ссылки" value={block.before} onChange={(v) => updateBlock(index, { ...block, before: v })} multiline />
+                <Field label="Текст ссылки" value={block.linkLabel} onChange={(v) => updateBlock(index, { ...block, linkLabel: v })} />
+                <Field label="Текст после ссылки" value={block.after || ""} onChange={(v) => updateBlock(index, { ...block, after: v })} />
+              </>
+            )}
+            {(block.type === "related" || block.type === "contact") && (
+              <p className="text-xs text-text-secondary/70">
+                Блок со ссылками или контактами — редактируйте через оператора и соседние текстовые блоки.
+              </p>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );

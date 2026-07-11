@@ -27,7 +27,7 @@ export function PortfolioCard({ project, index = 0 }: PortfolioCardProps) {
     <Link
       href={`/portfolio/${project.slug}`}
       className={cn(
-        "group relative overflow-hidden rounded-2xl border border-border-subtle bg-card-bg",
+        "portfolio-card-touch group relative overflow-hidden rounded-2xl border border-border-subtle bg-card-bg",
         layoutClasses[layout] || "lg:col-span-5"
       )}
       onClick={() => trackEvent("portfolio_open", { project: project.slug })}
@@ -55,10 +55,10 @@ export function PortfolioCard({ project, index = 0 }: PortfolioCardProps) {
         >
           {project.title}
         </h3>
-        <p className="mt-2 line-clamp-2 text-sm text-text-secondary opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        <p className="portfolio-card-desc mt-2 line-clamp-2 text-sm text-text-secondary opacity-0 transition-opacity duration-300 group-hover:opacity-100">
           {project.shortDescription}
         </p>
-        <div className="mt-3 flex items-center gap-2 text-sm text-gold opacity-0 transition-all duration-300 group-hover:opacity-100">
+        <div className="portfolio-card-cta mt-3 flex items-center gap-2 text-sm text-gold opacity-0 transition-all duration-300 group-hover:opacity-100">
           Смотреть проект
           <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </div>

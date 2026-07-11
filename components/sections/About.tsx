@@ -11,7 +11,7 @@ export function About() {
   const { about, brand } = useSiteContent();
 
   return (
-    <section id="about" className="section-light py-20 md:py-28">
+    <section id="about" className="section-light py-16 md:py-28">
       <div className="container-site">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <RevealAnimation direction="left">
@@ -25,7 +25,7 @@ export function About() {
                   sizes="(max-width: 1024px) 100vw, 40vw"
                 />
               </div>
-              <div className="absolute -bottom-4 -right-4 glass-panel p-4">
+              <div className="absolute -bottom-4 right-0 glass-panel p-4 sm:-right-4">
                 <p className="font-heading text-3xl text-gold">{about.badgeValue}</p>
                 <p className="text-xs text-text-secondary">{about.badgeLabel}</p>
               </div>

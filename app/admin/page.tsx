@@ -25,6 +25,7 @@ export default async function AdminDashboardPage() {
           <ul className="mt-4 space-y-2 text-sm text-text-secondary">
             <li>• Заявки с сайта</li>
             <li>• Редактор контента, фото и текстов</li>
+            <li>• FAQ, портфолио и юридические страницы</li>
             <li>• Смена логина и пароля</li>
           </ul>
         </div>

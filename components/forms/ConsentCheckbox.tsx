@@ -7,14 +7,14 @@ type ConsentCheckboxProps = {  checked: boolean;
 
 export function ConsentCheckbox({ checked, onChange, error }: ConsentCheckboxProps) {
   return (
-    <label className="flex cursor-pointer items-start gap-3 text-sm">
+    <label className="flex min-h-11 cursor-pointer items-start gap-3 py-1 text-sm">
       <input
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
-        className="mt-1 h-4 w-4 rounded border-border-subtle accent-gold"
+        className="mt-1 h-5 w-5 shrink-0 rounded border-border-subtle accent-gold"
       />
-      <span className="text-text-secondary">
+      <span className="break-words-safe text-text-secondary">
         Я соглашаюсь на{" "}
         <a href="/consent" className="text-link" target="_blank">
           обработку персональных данных

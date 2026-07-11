@@ -27,7 +27,7 @@ export function SectionHeading({
         </p>
       )}
       <h2
-        className={`heading-display text-balance text-4xl md:text-5xl lg:text-[56px] text-white-text`}
+        className={`heading-display text-balance text-3xl text-white-text sm:text-4xl md:text-5xl lg:text-[56px]`}
       >
         {title}
       </h2>

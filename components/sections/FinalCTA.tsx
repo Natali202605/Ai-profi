@@ -4,11 +4,11 @@ import { VKButton } from "@/components/ui/VKButton";
 
 export function FinalCTA() {
   return (
-    <section className="border-t border-border-subtle py-20 md:py-28">
+    <section className="border-t border-border-subtle py-16 md:py-28">
       <div className="container-site text-center">
         <RevealAnimation>
-          <div className="glass-panel-soft mx-auto max-w-3xl rounded-3xl p-10 md:p-14">
-          <h2 className="heading-display mb-4 text-balance text-4xl text-white-text md:text-5xl">
+          <div className="glass-panel-soft mx-auto max-w-3xl rounded-3xl p-6 sm:p-10 md:p-14">
+          <h2 className="heading-display mb-4 text-balance text-3xl text-white-text sm:text-4xl md:text-5xl">
             У вас есть идея? Давайте найдём для неё визуальный образ
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-text-secondary">

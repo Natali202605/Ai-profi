@@ -15,6 +15,48 @@ export type SiteService = {
   includes: string[];
 };
 
+export type SiteFaqItem = {
+  id: string;
+  question: string;
+  answer: string;
+  visible: boolean;
+};
+
+export type LegalBlock =
+  | { type: "p"; text: string }
+  | { type: "h2"; text: string }
+  | { type: "ul"; items: string[] }
+  | { type: "p_vk"; before: string; linkLabel: string; after?: string }
+  | {
+      type: "related";
+      before: string;
+      links: { href: string; label: string }[];
+      middle?: string;
+      linksAfter?: { href: string; label: string }[];
+      after?: string;
+    }
+  | { type: "contact"; lines: string[] };
+
+export type LegalPageContent = {
+  title: string;
+  blocks: LegalBlock[];
+};
+
+export type SiteLegal = {
+  operator: {
+    brand: string;
+    fullName: string;
+    status: string;
+    siteUrl: string;
+    vkProfile: string;
+    vkCommunity: string;
+    vkReviews: string;
+  };
+  privacy: LegalPageContent;
+  consent: LegalPageContent;
+  offer: LegalPageContent & { publishedAt: string };
+};
+
 export type SiteContent = {
   brand: {
     siteName: string;
@@ -65,4 +107,22 @@ export type SiteContent = {
   images: {
     backgroundPhoto: string;
   };
+  faq: {
+    title: string;
+    items: SiteFaqItem[];
+  };
+  portfolio: {
+    featured: {
+      label: string;
+      title: string;
+      subtitle: string;
+      ctaLabel: string;
+    };
+    page: {
+      label: string;
+      title: string;
+      subtitle: string;
+    };
+  };
+  legal: SiteLegal;
 };

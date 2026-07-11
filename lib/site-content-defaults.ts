@@ -1,5 +1,7 @@
 import { reviews } from "@/data/content";
+import { faqItems } from "@/data/faq";
 import { services } from "@/data/services";
+import { buildDefaultLegalContent } from "@/lib/legal-page-defaults";
 import type { SiteContent } from "@/lib/site-content-types";
 
 export function buildDefaultSiteContent(): SiteContent {
@@ -85,5 +87,28 @@ export function buildDefaultSiteContent(): SiteContent {
     images: {
       backgroundPhoto: "/images/bg-watercolor.png",
     },
+    faq: {
+      title: "Частые вопросы",
+      items: faqItems.map((item, index) => ({
+        id: `faq-${index + 1}`,
+        question: item.question,
+        answer: item.answer,
+        visible: true,
+      })),
+    },
+    portfolio: {
+      featured: {
+        label: "Портфолио",
+        title: "Избранные проекты",
+        subtitle: "В каждом проекте — своя задача, атмосфера и визуальный язык.",
+        ctaLabel: "Смотреть все проекты",
+      },
+      page: {
+        label: "Портфолио",
+        title: "Все проекты",
+        subtitle: "Каждый проект — отдельная задача, атмосфера и визуальный язык.",
+      },
+    },
+    legal: buildDefaultLegalContent(),
   };
 }

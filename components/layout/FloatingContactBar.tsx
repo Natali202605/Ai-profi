@@ -7,13 +7,13 @@ import { trackEvent } from "@/lib/analytics";
 
 export function FloatingContactBar() {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border-subtle bg-plum/70 backdrop-blur-xl md:hidden">
+    <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border-subtle bg-plum/70 backdrop-blur-xl safe-bottom md:hidden">
       <div className="flex">
         <a
           href={VK_PROFILE_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-1 items-center justify-center gap-2 py-3.5 text-sm font-medium text-white-text"
+          className="flex min-h-11 flex-1 items-center justify-center gap-2 py-3.5 text-sm font-medium text-white-text"
           onClick={() => trackEvent("vk_profile_click", { source: "mobile_bar" })}
         >
           <MessageCircle className="h-5 w-5 text-gold" />
@@ -21,7 +21,7 @@ export function FloatingContactBar() {
         </a>
         <Link
           href="/#contact"
-          className="flex flex-1 items-center justify-center gap-2 border-l border-border-subtle py-3.5 text-sm font-medium text-gold"
+          className="flex min-h-11 flex-1 items-center justify-center gap-2 border-l border-border-subtle py-3.5 text-sm font-medium text-gold"
         >
           <FileText className="h-5 w-5" />
           Заявка

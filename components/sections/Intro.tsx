@@ -8,7 +8,7 @@ export function Intro() {
   const { intro } = useSiteContent();
 
   return (
-    <section className="section-light py-20 md:py-28">
+    <section className="section-light py-16 md:py-28">
       <div className="container-site">
         <RevealAnimation>
           <SectionHeading light title={intro.title} />
@@ -21,7 +21,7 @@ export function Intro() {
             </div>
           </RevealAnimation>
           <RevealAnimation delay={0.2}>
-            <blockquote className="glass-panel relative p-8">
+            <blockquote className="glass-panel relative p-6 sm:p-8">
               <div className="absolute -left-1 top-6 h-12 w-1 rounded-full bg-gold" />
               <p className="font-heading text-2xl leading-relaxed text-white-text md:text-3xl">{intro.quote}</p>
             </blockquote>

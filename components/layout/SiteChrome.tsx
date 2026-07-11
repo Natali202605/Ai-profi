@@ -21,7 +21,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
     <>
       <AnimatedBackground />
       <Header />
-      <main className="pb-16 md:pb-0">{children}</main>
+      <main className="pb-24 safe-bottom md:pb-0">{children}</main>
       <Footer />
       <ChatWidget />
       <FloatingContactBar />
