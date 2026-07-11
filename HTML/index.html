@@ -375,6 +375,54 @@
     @media (min-width: 768px) { .float-bar { display: none; } body { padding-bottom: 0; } }
     @media (max-width: 767px) { body { padding-bottom: 3.5rem; } }
 
+    @media (max-width: 767px) { body { padding-bottom: 3.5rem; } }
+
+    /* Chat Adelin */
+    .chat-fab {
+      position: fixed; right: 1rem; z-index: 95;
+      bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
+      width: 3.5rem; height: 3.5rem; border: none; border-radius: 50%;
+      background: linear-gradient(135deg, #f0ebff 0%, #c4b5fd 50%, #a89ee8 100%);
+      color: var(--graphite); font-size: 1.25rem; cursor: pointer;
+      box-shadow: 0 4px 24px rgba(164,148,255,.4);
+    }
+    @media (min-width: 768px) { .chat-fab { bottom: 1.5rem; } }
+    .chat-panel {
+      display: none; position: fixed; right: 1rem; z-index: 96;
+      bottom: calc(8.5rem + env(safe-area-inset-bottom, 0px));
+      width: min(360px, calc(100vw - 2rem)); max-height: min(500px, calc(100dvh - 10rem));
+      flex-direction: column; overflow: hidden; border-radius: 1rem;
+      border: 1px solid var(--border); background: rgba(42,31,82,.92);
+      backdrop-filter: blur(20px); box-shadow: 0 16px 48px rgba(14,18,48,.45);
+    }
+    .chat-panel.open { display: flex; }
+    @media (min-width: 768px) { .chat-panel { bottom: 6rem; max-height: 500px; } }
+    .chat-head { display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding: .875rem 1rem; border-bottom: 1px solid var(--border); background: rgba(42,31,82,.5); }
+    .chat-head-info { display: flex; align-items: center; gap: .75rem; }
+    .chat-avatar { width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(184,164,255,.2); color: var(--gold); font-family: var(--font-h); font-size: 1.125rem; }
+    .chat-head-title { font-size: .875rem; font-weight: 600; color: var(--white); }
+    .chat-head-sub { font-size: .75rem; color: var(--text-sec); }
+    .chat-close { background: none; border: none; color: var(--text-sec); font-size: 1.25rem; cursor: pointer; min-width: 44px; min-height: 44px; }
+    .chat-messages { flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: .75rem; }
+    .chat-msg { max-width: 85%; padding: .625rem 1rem; border-radius: 1rem; font-size: .875rem; line-height: 1.5; }
+    .chat-msg.bot { align-self: flex-start; background: var(--card); color: var(--text-sec); }
+    .chat-msg.user { align-self: flex-end; background: linear-gradient(135deg, #f0ebff 0%, #c4b5fd 100%); color: var(--graphite); }
+    .chat-msg-name { display: block; font-size: .6875rem; font-weight: 600; color: var(--gold); margin-bottom: .25rem; }
+    .chat-buttons { display: flex; flex-wrap: wrap; gap: .375rem; margin-top: .5rem; }
+    .chat-buttons button {
+      min-height: 36px; padding: .375rem .75rem; border-radius: 999px; border: 1px solid rgba(184,164,255,.3);
+      background: rgba(184,164,255,.1); color: var(--gold); font-size: .75rem; cursor: pointer;
+    }
+    .chat-input-row { display: flex; gap: .5rem; padding: .75rem; border-top: 1px solid var(--border); }
+    .chat-input-row input {
+      flex: 1; border-radius: .75rem; border: 1px solid var(--border); background: var(--card);
+      padding: .5rem .75rem; color: var(--white); font-size: .875rem; outline: none;
+    }
+    .chat-input-row button {
+      width: 2.5rem; height: 2.5rem; border: none; border-radius: .75rem; cursor: pointer;
+      background: linear-gradient(135deg, #f0ebff 0%, #c4b5fd 100%); color: var(--graphite);
+    }
+
     .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
     .fade-in.visible { opacity: 1; transform: none; }
     @media (prefers-reduced-motion: reduce) {
@@ -454,6 +502,7 @@
         <a href="#reviews">Отзывы</a>
         <a href="#vk">ВКонтакте</a>
         <a href="#contact">Контакты</a>
+        <a href="https://natali-neero.ru/admin/login">Вход для сотрудников</a>
         <a href="#contact" class="btn btn-gold" style="padding:.5rem 1.25rem;font-size:.875rem;">Обсудить проект</a>
       </nav>
       <button class="menu-btn" id="menuOpen" aria-label="Меню">☰</button>
@@ -469,6 +518,7 @@
     <a href="#vk">ВКонтакте</a>
     <a href="#contact">Контакты</a>
     <a href="#contact" class="btn btn-gold" style="margin-top:1rem;text-align:center;">Обсудить проект</a>
+    <a href="https://natali-neero.ru/admin/login" class="btn btn-outline" style="margin-top:.75rem;text-align:center;">Вход для сотрудников</a>
   </div>
 
   <section class="hero" id="top">
@@ -705,6 +755,25 @@
     <a href="#contact">Заявка</a>
   </div>
 
+  <button class="chat-fab" id="chatFab" aria-label="Открыть чат с Аделин" title="Аделин">💬</button>
+  <div class="chat-panel" id="chatPanel" aria-hidden="true">
+    <div class="chat-head">
+      <div class="chat-head-info">
+        <div class="chat-avatar">А</div>
+        <div>
+          <p class="chat-head-title">Аделин</p>
+          <p class="chat-head-sub">виртуальный ассистент</p>
+        </div>
+      </div>
+      <button class="chat-close" id="chatClose" aria-label="Закрыть чат">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input-row" id="chatInputRow">
+      <input id="chatInput" type="text" placeholder="Сообщение для Аделин..." />
+      <button id="chatSend" aria-label="Отправить">➤</button>
+    </div>
+  </div>
+
   <script>
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
@@ -727,6 +796,83 @@
       e.target.querySelector('button').disabled = true;
       return false;
     }
+
+    (function initAdelinChat() {
+      const BOT_NAME = 'Аделин';
+      const VK = 'https://vk.ru/id170079854';
+      const panel = document.getElementById('chatPanel');
+      const messagesEl = document.getElementById('chatMessages');
+      const input = document.getElementById('chatInput');
+      const inputRow = document.getElementById('chatInputRow');
+      let step = 'start';
+
+      const initialButtons = ['Видео', 'Изображения', 'Сайт', 'Оформление ВКонтакте', 'Посмотреть портфолио', 'Задать вопрос'];
+
+      function addMsg(role, text, buttons) {
+        const el = document.createElement('div');
+        el.className = 'chat-msg ' + role;
+        if (role === 'bot') el.innerHTML = '<span class="chat-msg-name">' + BOT_NAME + '</span>' + text;
+        else el.textContent = text;
+        if (buttons && buttons.length) {
+          const wrap = document.createElement('div');
+          wrap.className = 'chat-buttons';
+          buttons.forEach(function (label) {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.textContent = label;
+            btn.onclick = function () { handleButton(label); };
+            wrap.appendChild(btn);
+          });
+          el.appendChild(wrap);
+        }
+        messagesEl.appendChild(el);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      function handleButton(label) {
+        addMsg('user', label);
+        if (label === 'Посмотреть портфолио') {
+          addMsg('bot', 'Прокрутите страницу до раздела «Портфолио» или напишите Натали во ВКонтакте.', ['Написать ВКонтакте', 'Оставить заявку']);
+          return;
+        }
+        if (label === 'Задать вопрос') {
+          step = 'question';
+          addMsg('bot', 'Напишите ваш вопрос — я постараюсь помочь или передам его Натали.');
+          return;
+        }
+        if (label === 'Написать ВКонтакте') { window.open(VK, '_blank'); return; }
+        if (label === 'Оставить заявку') { location.hash = 'contact'; panel.classList.remove('open'); return; }
+        step = 'contact';
+        addMsg('bot', 'Отлично! Оставьте заявку в форме ниже или напишите напрямую во ВКонтакте.', ['Оставить заявку', 'Написать ВКонтакте']);
+      }
+
+      function handleSend() {
+        const text = input.value.trim();
+        if (!text) return;
+        input.value = '';
+        addMsg('user', text);
+        if (step === 'question') {
+          addMsg('bot', 'Этот вопрос лучше обсудить лично. Оставьте заявку или напишите Натали во ВКонтакте.', ['Оставить заявку', 'Написать ВКонтакте']);
+          step = 'start';
+        } else {
+          addMsg('bot', 'Спасибо! Для заявки заполните форму на странице или напишите во ВКонтакте.', ['Оставить заявку', 'Написать ВКонтакте']);
+        }
+      }
+
+      document.getElementById('chatFab').onclick = function () {
+        panel.classList.add('open');
+        panel.setAttribute('aria-hidden', 'false');
+        if (!messagesEl.children.length) {
+          addMsg('bot', 'Здравствуйте! Я ' + BOT_NAME + ' — виртуальный ассистент NATALI NEERO. Помогу сориентироваться в услугах. Что вы планируете создать?', initialButtons);
+        }
+      };
+      document.getElementById('chatClose').onclick = function () {
+        panel.classList.remove('open');
+        panel.setAttribute('aria-hidden', 'true');
+      };
+      document.getElementById('chatSend').onclick = handleSend;
+      input.addEventListener('keydown', function (e) { if (e.key === 'Enter') handleSend(); });
+    })();
   </script>
 </body>
 </html>
