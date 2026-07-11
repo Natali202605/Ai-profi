@@ -40,8 +40,7 @@ export function AdminAuthShell({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#1e2860]">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#1a1848]/40 via-transparent to-[#0f1a40]/50" />
+    <div className="relative min-h-screen overflow-hidden">
       <div className="container-site relative z-10 flex min-h-screen items-center justify-center py-16">
         <div className="w-full max-w-md">
           <div className="mb-6 text-center">

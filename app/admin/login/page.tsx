@@ -3,7 +3,11 @@ import { AdminLoginForm } from "./AdminLoginForm";
 
 export default function AdminLoginPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#1e2860]" />}>
+    <Suspense fallback={
+      <div className="relative flex min-h-screen items-center justify-center">
+        <p className="text-text-secondary">Загрузка...</p>
+      </div>
+    }>
       <AdminLoginForm />
     </Suspense>
   );

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Вход для сотрудников — NATALI NEERO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="../js/site-config.js"></script>
+  <style>
+    :root { --gold:#b8a4ff; --white:#fff; --text-sec:rgba(245,242,255,.92); --border:rgba(200,188,255,.28); }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { min-height:100vh; font-family:'Manrope',system-ui,sans-serif; color:var(--white); background:#1e2860; }
+    .bg { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+    .bg-image { position:absolute; inset:-8%; background:url("../images/bg-watercolor.png") center/cover no-repeat; animation:bg-drift 48s ease-in-out infinite; }
+    .bg-overlay { position:absolute; inset:0; background:linear-gradient(180deg,rgba(26,24,72,.35) 0%,transparent 40%,rgba(15,26,64,.45) 100%),rgba(30,40,96,.12); }
+    @keyframes bg-drift { 0%,100%{transform:scale(1) translate(0,0)} 50%{transform:scale(1.06) translate(-1%,-.8%)} }
+    .wrap { position:relative; z-index:1; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:2rem 1.25rem; }
+    .panel {
+      width:100%; max-width:28rem; padding:2rem; border-radius:1rem;
+      background:linear-gradient(145deg,rgba(52,42,108,.72) 0%,rgba(38,54,122,.66) 50%,rgba(44,36,96,.7) 100%);
+      border:1px solid var(--border); backdrop-filter:blur(22px); box-shadow:0 8px 36px rgba(14,18,48,.28); text-align:center;
+    }
+    .logo { font-family:'Cormorant Garamond',serif; font-size:1.5rem; letter-spacing:.08em; }
+    .sub { margin-top:.5rem; font-size:.75rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); }
+    h1 { margin:1.5rem 0 .75rem; font-family:'Cormorant Garamond',serif; font-size:1.75rem; font-weight:500; }
+    p { color:var(--text-sec); font-size:.9375rem; line-height:1.6; }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; min-height:44px; margin-top:1.5rem;
+      padding:.75rem 1.75rem; border-radius:999px; font-size:.9375rem; font-weight:600; text-decoration:none;
+      background:linear-gradient(135deg,#f0ebff 0%,#c4b5fd 50%,#a89ee8 100%); color:#181530;
+      box-shadow:0 4px 24px rgba(164,148,255,.25);
+    }
+    .back { display:inline-block; margin-top:1rem; color:var(--gold); font-size:.875rem; text-decoration:none; }
+  </style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"><div class="bg-image"></div><div class="bg-overlay"></div></div>
+  <div class="wrap">
+    <div class="panel">
+      <p class="logo">NATALI NEERO</p>
+      <p class="sub">Admin</p>
+      <h1>Вход для сотрудников</h1>
+      <p id="status">Переход в админ-панель полной версии сайта…</p>
+      <a id="adminLink" class="btn" href="#">Открыть админ-панель</a>
+      <br />
+      <a class="back" href="../index.html">← На главную</a>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var config = window.NATALI_SITE || {};
+      var target = config.adminLoginUrl || "https://natali-neero.ru/admin/login";
+      var onGithubPages = location.hostname.indexOf("github.io") !== -1;
+
+      if (!onGithubPages && location.pathname.indexOf("/admin/") !== -1) {
+        target = location.origin + "/admin/login";
+      }
+
+      var link = document.getElementById("adminLink");
+      link.href = target;
+
+      if (onGithubPages) {
+        setTimeout(function () {
+          window.location.href = target;
+        }, 600);
+      } else {
+        document.getElementById("status").textContent =
+          "Админ-панель доступна в полной версии сайта (Next.js).";
+      }
+    })();
+  </script>
+</body>
+</html>

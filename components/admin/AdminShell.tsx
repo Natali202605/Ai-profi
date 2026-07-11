@@ -27,7 +27,7 @@ export function AdminShell({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-[#1e2860] pt-24 pb-16">
+    <div className="min-h-screen pt-24 pb-16">
       <div className="container-site">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
           <div>
