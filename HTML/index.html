@@ -41,6 +41,55 @@
       background: url("images/bg-watercolor.png") center/cover no-repeat;
       animation: bg-drift 48s ease-in-out infinite;
     }
+    .bg-head-stars-track {
+      position: absolute; inset: -8%;
+      animation: bg-drift 48s ease-in-out infinite;
+    }
+    .bg-head-stars { position: absolute; inset: 0; pointer-events: none; }
+    .bg-head-star {
+      position: absolute; border-radius: 50%; background: #fff;
+      animation: head-star-twinkle 2.8s ease-in-out infinite;
+    }
+    .bg-head-star.sparkle {
+      border-radius: 0; background: transparent;
+      animation: head-star-sparkle 3s ease-in-out infinite;
+    }
+    .bg-head-star.sparkle::before,
+    .bg-head-star.sparkle::after {
+      content: ''; position: absolute; left: 50%; top: 50%;
+      background: rgba(255,255,255,.92); border-radius: 999px;
+      transform: translate(-50%, -50%);
+    }
+    .bg-head-star.sparkle::before { width: 180%; height: 1px; }
+    .bg-head-star.sparkle::after { width: 1px; height: 180%; }
+    .bg-head-star.sparkle .ray-diag {
+      position: absolute; inset: 0;
+    }
+    .bg-head-star.sparkle .ray-diag::before,
+    .bg-head-star.sparkle .ray-diag::after {
+      content: ''; position: absolute; left: 50%; top: 50%;
+      background: rgba(255,255,255,.75); border-radius: 999px;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+    .bg-head-star.sparkle .ray-diag::before { width: 130%; height: 1px; }
+    .bg-head-star.sparkle .ray-diag::after { width: 1px; height: 130%; }
+    .bg-head-star.sparkle .core {
+      position: absolute; left: 50%; top: 50%;
+      width: 5px; height: 5px; border-radius: 50%; background: #fff;
+      transform: translate(-50%, -50%);
+    }
+    @keyframes head-star-twinkle {
+      0%, 100% { opacity: .25; transform: scale(.85); box-shadow: 0 0 6px rgba(255,255,255,.45), 0 0 12px rgba(200,220,255,.35); }
+      35% { opacity: .55; transform: scale(1.1); box-shadow: 0 0 10px rgba(255,255,255,.75), 0 0 18px rgba(200,220,255,.55); }
+      55% { opacity: 1; transform: scale(1.6); box-shadow: 0 0 16px rgba(255,255,255,1), 0 0 28px rgba(200,220,255,.85), 0 0 40px rgba(184,164,255,.45); }
+      75% { opacity: .6; transform: scale(1.15); box-shadow: 0 0 12px rgba(255,255,255,.8), 0 0 22px rgba(200,220,255,.6); }
+    }
+    @keyframes head-star-sparkle {
+      0%, 100% { opacity: .3; transform: scale(.9) rotate(0deg); filter: drop-shadow(0 0 6px rgba(255,255,255,.5)); }
+      35% { opacity: .65; transform: scale(1.05) rotate(22deg); filter: drop-shadow(0 0 12px rgba(255,255,255,.75)); }
+      55% { opacity: 1; transform: scale(1.35) rotate(45deg); filter: drop-shadow(0 0 18px rgba(255,255,255,1)) drop-shadow(0 0 32px rgba(200,220,255,.8)); }
+      75% { opacity: .7; transform: scale(1.1) rotate(22deg); filter: drop-shadow(0 0 14px rgba(255,255,255,.85)); }
+    }
     .bg-glow {
       position: absolute; border-radius: 50%; filter: blur(80px); opacity: .45;
       animation: glow-float 32s ease-in-out infinite;
@@ -133,7 +182,7 @@
       100% { stroke-dashoffset: 0; opacity: 0; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .bg-image, .bg-glow, .bg-shimmer::after, .bg-sparkle, .bg-electric-svg .spark { animation: none; }
+      .bg-image, .bg-glow, .bg-shimmer::after, .bg-sparkle, .bg-electric-svg .spark, .bg-head-star, .bg-head-stars-track { animation: none; }
     }
     a { color: var(--gold); text-decoration: none; transition: color .3s; }
     a:hover { color: var(--peach); }
@@ -332,6 +381,22 @@
     <div class="bg-shimmer"></div>
     <div class="bg-vignette"></div>
     <div class="bg-effects" aria-hidden="true">
+      <div class="bg-head-stars-track">
+        <div class="bg-head-stars">
+          <span class="bg-head-star sparkle" style="top:13%;left:11%;width:7px;height:7px;animation-delay:0s"><span class="ray-diag"></span><span class="core"></span></span>
+          <span class="bg-head-star sparkle" style="top:23%;left:10%;width:9px;height:9px;animation-delay:.5s"><span class="ray-diag"></span><span class="core"></span></span>
+          <span class="bg-head-star" style="top:17%;left:14%;width:4px;height:4px;animation-delay:1.1s"></span>
+          <span class="bg-head-star" style="top:19%;left:7%;width:3px;height:3px;animation-delay:.3s"></span>
+          <span class="bg-head-star" style="top:21%;left:17%;width:4px;height:4px;animation-delay:1.6s"></span>
+          <span class="bg-head-star" style="top:27%;left:13%;width:4px;height:4px;animation-delay:.8s"></span>
+          <span class="bg-head-star" style="top:29%;left:18%;width:3px;height:3px;animation-delay:2s"></span>
+          <span class="bg-head-star" style="top:31%;left:11%;width:3px;height:3px;animation-delay:1.4s"></span>
+          <span class="bg-head-star" style="top:15%;left:9%;width:3px;height:3px;animation-delay:2.3s"></span>
+          <span class="bg-head-star" style="top:25%;left:15%;width:3px;height:3px;animation-delay:.2s"></span>
+          <span class="bg-head-star" style="top:20%;left:12%;width:3px;height:3px;animation-delay:1.8s"></span>
+          <span class="bg-head-star" style="top:33%;left:16%;width:3px;height:3px;animation-delay:2.6s"></span>
+        </div>
+      </div>
       <span class="bg-sparkle" style="top:8%;left:12%;width:3px;height:3px;animation-delay:0s"></span>
       <span class="bg-sparkle" style="top:14%;left:34%;width:2px;height:2px;animation-delay:.8s"></span>
       <span class="bg-sparkle" style="top:11%;left:58%;width:3px;height:3px;animation-delay:1.4s"></span>

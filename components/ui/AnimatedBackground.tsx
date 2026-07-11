@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { ElectricSparks } from "@/components/ui/ElectricSparks";
+import { HeadStarsTwinkle } from "@/components/ui/HeadStarsTwinkle";
 import { TwinklingDots } from "@/components/ui/TwinklingDots";
 
 export function AnimatedBackground() {
@@ -23,8 +24,7 @@ export function AnimatedBackground() {
   return (
     <div className="pointer-events-none fixed inset-0 -z-20 overflow-hidden" aria-hidden="true">
       <motion.div
-        className="absolute -inset-[10%] bg-cover bg-center will-change-transform"
-        style={{ backgroundImage: "url(/images/bg-watercolor.png)" }}
+        className="absolute -inset-[10%] will-change-transform"
         animate={{
           scale: [1, 1.08, 1.03, 1.07, 1],
           x: ["0%", "-2%", "1%", "-1.5%", "0%"],
@@ -32,7 +32,12 @@ export function AnimatedBackground() {
           rotate: [0, 0.4, -0.2, 0.3, 0],
         }}
         transition={{ duration: 42, repeat: Infinity, ease: "easeInOut" }}
-      />
+      >
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url(/images/bg-watercolor.png)" }}
+        />
+      </motion.div>
 
       <motion.div
         className="absolute -inset-[6%] bg-cover bg-center opacity-25 mix-blend-soft-light will-change-transform"
@@ -91,6 +96,18 @@ export function AnimatedBackground() {
       <div className="absolute inset-0 bg-gradient-to-r from-[#1a1848]/12 via-transparent to-[#1a2860]/18" />
 
       <div className="absolute inset-0 z-[1]">
+        <motion.div
+          className="absolute -inset-[10%] will-change-transform"
+          animate={{
+            scale: [1, 1.08, 1.03, 1.07, 1],
+            x: ["0%", "-2%", "1%", "-1.5%", "0%"],
+            y: ["0%", "-1.2%", "0.6%", "-0.8%", "0%"],
+            rotate: [0, 0.4, -0.2, 0.3, 0],
+          }}
+          transition={{ duration: 42, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <HeadStarsTwinkle />
+        </motion.div>
         <ElectricSparks />
         <TwinklingDots />
       </div>
