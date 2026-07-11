@@ -1,10 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { ConsentCheckbox } from "@/components/forms/ConsentCheckbox";
-
-type ConsentCheckboxProps = {
-  checked: boolean;
+type ConsentCheckboxProps = {  checked: boolean;
   onChange: (checked: boolean) => void;
   error?: string;
 };
@@ -26,6 +22,10 @@ export function ConsentCheckbox({ checked, onChange, error }: ConsentCheckboxPro
         в соответствии с{" "}
         <a href="/privacy" className="text-link" target="_blank">
           политикой конфиденциальности
+        </a>{" "}
+        и принимаю условия{" "}
+        <a href="/offer" className="text-link" target="_blank">
+          публичной оферты
         </a>
       </span>
       {error && <p className="mt-1 text-sm text-peach">{error}</p>}

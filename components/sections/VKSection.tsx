@@ -30,8 +30,11 @@ export function VKSection() {
               <div className="flex items-end gap-4">
                 <div className="h-20 w-20 -mt-10 rounded-full border-4 border-plum/60 bg-sand" />
                 <div>
-                  <p className="font-semibold text-white-text">[Название сообщества]</p>
-                  <p className="text-sm text-text-secondary">[Описание проекта]</p>
+                  <p className="font-semibold text-white-text">Сайты | Нейровидео | Чат-боты | Визуал</p>
+                  <p className="text-sm text-text-secondary">
+                    Сайты под ключ, умные боты, видео с ИИ и дизайн — всё для продвижения бизнеса в
+                    одном месте.
+                  </p>
                 </div>
               </div>
               <div className="mt-4 flex gap-2">
@@ -48,7 +51,8 @@ export function VKSection() {
                 <div className="glass-inset rounded-xl p-4">
                   <p className="text-xs text-gold">Закреплённый пост</p>
                   <p className="mt-1 text-sm text-text-secondary">
-                    [Текст закреплённой публикации]
+                    Создаю digital-продукты: сайты под ключ, умные боты, видео с ИИ и дизайн. Всё для
+                    продвижения вашего бизнеса в одном месте.
                   </p>
                 </div>
                 <div className="grid grid-cols-2 gap-2">

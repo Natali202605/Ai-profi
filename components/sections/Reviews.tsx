@@ -1,4 +1,5 @@
 import { reviews } from "@/data/content";
+import { VK_REVIEWS_URL } from "@/lib/utils";
 import { RevealAnimation } from "@/components/ui/RevealAnimation";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TestimonialCard } from "@/components/ui/TestimonialCard";
@@ -35,13 +36,31 @@ export function Reviews() {
     <section id="reviews" className="py-20 md:py-28">
       <div className="container-site">
         <RevealAnimation>
-          <SectionHeading title="Что говорят о работе со мной" align="center" />
+          <SectionHeading
+            title="Что говорят о работе со мной"
+            subtitle="Отзывы клиентов из сообщества ВКонтакте."
+            align="center"
+          />
         </RevealAnimation>
         <div className="grid gap-6 lg:grid-cols-3">
           {visibleReviews.map((review, i) => (
             <TestimonialCard key={review.id} review={review} featured={i === 0} />
           ))}
         </div>
+        <RevealAnimation delay={0.2}>
+          <p className="mt-8 text-center text-sm text-text-secondary">
+            Больше отзывов — в обсуждении{" "}
+            <a
+              href={VK_REVIEWS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-link"
+            >
+              ВКонтакте
+            </a>
+            .
+          </p>
+        </RevealAnimation>
       </div>
     </section>
   );

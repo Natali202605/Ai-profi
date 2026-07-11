@@ -9,6 +9,7 @@ const footerLinks = [
   { href: "/contacts", label: "Контакты" },
   { href: "/privacy", label: "Политика конфиденциальности" },
   { href: "/consent", label: "Согласие на обработку данных" },
+  { href: "/offer", label: "Публичная оферта" },
 ];
 
 export function Footer() {

@@ -319,6 +319,19 @@
     .card ul { list-style: none; margin-bottom: 1.25rem; }
     .card li { font-size: .8125rem; color: rgba(245,242,255,.85); padding: .15rem 0; padding-left: 1rem; position: relative; }
     .card li::before { content: ''; position: absolute; left: 0; top: .55rem; width: 4px; height: 4px; border-radius: 50%; background: var(--gold); }
+    .reviews-grid { display: grid; gap: 1.5rem; }
+    @media (min-width: 1024px) { .reviews-grid { grid-template-columns: repeat(3, 1fr); } }
+    .review-card { background: linear-gradient(145deg, rgba(52,42,108,.72) 0%, rgba(38,54,122,.66) 50%, rgba(44,36,96,.7) 100%); border: 1px solid var(--border); border-radius: 1rem; padding: 1.75rem; backdrop-filter: blur(22px); box-shadow: 0 8px 36px rgba(14,18,48,.28); }
+    .review-text { font-style: italic; color: var(--text-sec); line-height: 1.6; }
+    .review-author { margin-top: 1.25rem; font-weight: 600; color: var(--white); }
+    .review-role { font-size: .875rem; color: var(--text-sec); margin-top: .25rem; }
+    .review-service { font-size: .75rem; color: var(--gold); margin-top: .5rem; }
+    .legal-page { padding: 7rem 0 4rem; }
+    .legal-page h1 { font-family: var(--font-h); font-size: clamp(2rem, 4vw, 2.75rem); margin-bottom: 2rem; }
+    .legal-page h2 { font-family: var(--font-h); font-size: 1.5rem; margin: 2rem 0 1rem; color: var(--white); }
+    .legal-page p, .legal-page li { color: var(--text-sec); line-height: 1.7; margin-bottom: .75rem; }
+    .legal-page ul { padding-left: 1.25rem; margin-bottom: 1rem; }
+    .legal-back { display: inline-block; margin-bottom: 1.5rem; color: var(--gold); font-size: .875rem; }
 
     /* About */
     .about-grid { display: grid; gap: 3rem; align-items: center; }
@@ -439,6 +452,7 @@
         <a href="#about">Обо мне</a>
         <a href="#services">Услуги</a>
         <a href="#portfolio">Портфолио</a>
+        <a href="#reviews">Отзывы</a>
         <a href="#vk">ВКонтакте</a>
         <a href="#contact">Контакты</a>
         <a href="#contact" class="btn btn-gold" style="padding:.5rem 1.25rem;font-size:.875rem;">Обсудить проект</a>
@@ -452,6 +466,7 @@
     <a href="#about">Обо мне</a>
     <a href="#services">Услуги</a>
     <a href="#portfolio">Портфолио</a>
+    <a href="#reviews">Отзывы</a>
     <a href="#vk">ВКонтакте</a>
     <a href="#contact">Контакты</a>
     <a href="#contact" class="btn btn-gold" style="margin-top:1rem;text-align:center;">Обсудить проект</a>
@@ -572,6 +587,7 @@
         <h2>Здравствуйте, я Натали</h2>
         <p style="margin-top:1rem;">Я AI-специалист и художник с опытом более 10 лет. Создаю видео, изображения, сайты и визуальное оформление для экспертов, брендов и творческих проектов.</p>
         <p style="margin-top:1rem;">Мне важно внимательно услышать человека и почувствовать его проект. Поэтому я не работаю по одному шаблону — для каждой задачи ищу собственную интонацию и визуальное решение.</p>
+        <p style="margin-top:1rem;">В сообществе <a href="https://vk.com/natali_neero" target="_blank" rel="noopener">ВКонтакте</a> я также развиваю направление digital-продуктов: сайты под ключ, умные чат-боты, нейровидео и визуал для бизнеса. Профессиональное обучение по AI-инструментам и vibe-coding подтверждено сертификатами.</p>
         <div style="margin-top:2rem;display:flex;flex-wrap:wrap;gap:1rem;">
           <a href="#portfolio" class="btn btn-outline">Посмотреть работы</a>
           <a href="https://vk.ru/id170079854" target="_blank" rel="noopener" class="btn btn-gold">Написать ВКонтакте</a>
@@ -584,10 +600,41 @@
     <div class="container">
       <h2>ВКонтакте как пространство вашего бренда</h2>
       <p class="section-sub">Хорошо оформленное сообщество помогает быстро понять, кто вы и чем можете быть полезны.</p>
+      <p class="section-sub">Сообщество «Сайты | Нейровидео | Чат-боты | Визуал» — сайты под ключ, умные боты, видео с ИИ и дизайн для бизнеса.</p>
       <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-top:1rem;">
         <a href="https://vk.ru/id170079854" target="_blank" rel="noopener" class="btn btn-gold">Личная страница</a>
         <a href="https://vk.com/natali_neero" target="_blank" rel="noopener" class="btn btn-outline">Сообщество</a>
       </div>
+    </div>
+  </section>
+
+  <section id="reviews" class="light fade-in">
+    <div class="container">
+      <h2 style="text-align:center;">Что говорят о работе со мной</h2>
+      <p class="section-sub" style="text-align:center;margin-left:auto;margin-right:auto;">Отзывы клиентов из сообщества ВКонтакте.</p>
+      <div class="reviews-grid" style="margin-top:2rem;">
+        <article class="review-card">
+          <p class="review-text">«Спасибо за видео, которое вы создали для меня — оно волшебно. Вы учли все пожелания и точно уловили мысль, которую я хотела донести. А самое главное — быстро, точно, красиво. Смотрела как кинофильм.»</p>
+          <p class="review-author">Катерина Белова</p>
+          <p class="review-role">Заказчик видеоролика</p>
+          <p class="review-service">AI-видео</p>
+        </article>
+        <article class="review-card">
+          <p class="review-text">«Наташенька, ты супер! Видео класс с мамой — я проревелась. Спасибо большое за эмоции.»</p>
+          <p class="review-author">Олеся Кочнева</p>
+          <p class="review-role">Заказчик видеоролика</p>
+          <p class="review-service">AI-видео</p>
+        </article>
+        <article class="review-card">
+          <p class="review-text">«Спасибо огромное за все картины, за терпение с непростыми задумками и идеями, за вашу работу. Все получились великолепными, волшебными и замечательными — прямо то, что нужно и что задумывалось.»</p>
+          <p class="review-author">Владимир Сопов</p>
+          <p class="review-role">Заказчик художественных работ</p>
+          <p class="review-service">Художественные работы и AI-визуал</p>
+        </article>
+      </div>
+      <p style="text-align:center;margin-top:2rem;font-size:.875rem;color:var(--text-sec);">
+        Больше отзывов — в обсуждении <a href="https://vk.com/topic-235128878_66094958" target="_blank" rel="noopener">ВКонтакте</a>.
+      </p>
     </div>
   </section>
 
@@ -620,8 +667,10 @@
           <textarea id="description" name="description" required placeholder="Расскажите о задаче..."></textarea>
         </div>
         <p style="font-size:.8125rem;color:var(--text-sec);margin-bottom:1.25rem;">
-          Отправляя форму, вы соглашаетесь на обработку персональных данных.
-          Для полной версии с API — используйте Next.js-проект.
+          Отправляя форму, вы соглашаетесь на
+          <a href="consent.html">обработку персональных данных</a>,
+          <a href="privacy.html">политику конфиденциальности</a> и
+          <a href="offer.html">публичную оферту</a>.
         </p>
         <button type="submit" class="btn btn-gold" style="width:100%;">Отправить заявку</button>
         <p id="formSuccess" style="display:none;text-align:center;margin-top:1rem;color:var(--berry);font-weight:600;">
@@ -641,7 +690,11 @@
         <p style="font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:.75rem;">Навигация</p>
         <p><a href="#services" style="font-size:.875rem;color:var(--text-sec);">Услуги</a></p>
         <p><a href="#portfolio" style="font-size:.875rem;color:var(--text-sec);">Портфолио</a></p>
+        <p><a href="#reviews" style="font-size:.875rem;color:var(--text-sec);">Отзывы</a></p>
         <p><a href="#contact" style="font-size:.875rem;color:var(--text-sec);">Контакты</a></p>
+        <p><a href="privacy.html" style="font-size:.875rem;color:var(--text-sec);">Политика конфиденциальности</a></p>
+        <p><a href="consent.html" style="font-size:.875rem;color:var(--text-sec);">Согласие на обработку данных</a></p>
+        <p><a href="offer.html" style="font-size:.875rem;color:var(--text-sec);">Публичная оферта</a></p>
       </div>
       <div>
         <p style="font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:.75rem;">ВКонтакте</p>
