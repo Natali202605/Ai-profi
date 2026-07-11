@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AdminShell } from "@/components/admin/AdminShell";
+import { AdminContentEditor } from "@/components/admin/AdminContentEditor";
 import { getAdminSession } from "@/lib/admin-session";
 import { getLeadsForAdmin } from "@/lib/admin-leads";
 
@@ -23,8 +24,8 @@ export default async function AdminDashboardPage() {
           <p className="text-sm text-text-secondary">Разделы</p>
           <ul className="mt-4 space-y-2 text-sm text-text-secondary">
             <li>• Заявки с сайта</li>
-            <li>• Контент сайта (скоро)</li>
-            <li>• Настройки (скоро)</li>
+            <li>• Редактор контента, фото и текстов</li>
+            <li>• Смена логина и пароля</li>
           </ul>
         </div>
       </div>
@@ -60,6 +61,8 @@ export default async function AdminDashboardPage() {
           </div>
         )}
       </section>
+
+      <AdminContentEditor />
     </AdminShell>
   );
 }

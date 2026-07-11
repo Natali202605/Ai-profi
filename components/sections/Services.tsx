@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Video,
   Image as ImageIcon,
@@ -8,9 +10,10 @@ import {
   ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
-import { services } from "@/data/services";
+import { services as serviceMeta } from "@/data/services";
 import { RevealAnimation } from "@/components/ui/RevealAnimation";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { useSiteContent } from "@/components/providers/SiteContentProvider";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   video: Video,
@@ -22,20 +25,25 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 };
 
 export function Services() {
+  const { services } = useSiteContent();
+
   return (
     <section id="services" className="py-20 md:py-28">
       <div className="container-site">
         <RevealAnimation>
           <SectionHeading
             label="Услуги"
-            title="Чем я могу помочь"
-            subtitle="Можно заказать отдельную услугу или собрать комплексное решение для вашего проекта."
+            title={services.sectionTitle}
+            subtitle={services.sectionSubtitle}
           />
         </RevealAnimation>
 
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {services.map((service, i) => {
-            const Icon = iconMap[service.icon] || Layers;
+          {services.items.map((service, i) => {
+            const meta = serviceMeta.find((item) => item.id === service.id);
+            const Icon = iconMap[meta?.icon || "layers"] || Layers;
+            const slug = meta?.slug || service.id;
+
             return (
               <RevealAnimation key={service.id} delay={i * 0.08}>
                 <article className="card-glass group flex h-full flex-col p-6 transition-all duration-500 hover:border-gold/40 hover:shadow-[0_0_40px_rgba(164,148,255,0.12)] md:p-8">
@@ -45,10 +53,8 @@ export function Services() {
                   <h3 className="heading-display mb-3 text-2xl text-white-text md:text-[28px]">
                     {service.title}
                   </h3>
-                  <p className="mb-4 flex-1 text-text-secondary leading-relaxed">
-                    {service.description}
-                  </p>
-                  {service.includes && (
+                  <p className="mb-4 flex-1 text-text-secondary leading-relaxed">{service.description}</p>
+                  {service.includes.length > 0 && (
                     <ul className="mb-6 space-y-1">
                       {service.includes.slice(0, 4).map((item) => (
                         <li key={item} className="flex items-start gap-2 text-sm text-text-secondary/80">
@@ -57,14 +63,12 @@ export function Services() {
                         </li>
                       ))}
                       {service.includes.length > 4 && (
-                        <li className="text-sm text-gold/70">
-                          и ещё {service.includes.length - 4}...
-                        </li>
+                        <li className="text-sm text-gold/70">и ещё {service.includes.length - 4}...</li>
                       )}
                     </ul>
                   )}
                   <Link
-                    href={`/services/${service.slug}`}
+                    href={`/services/${slug}`}
                     className="inline-flex items-center gap-2 text-sm font-medium text-gold transition-colors hover:text-peach"
                   >
                     {service.cta}

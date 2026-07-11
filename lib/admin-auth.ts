@@ -23,6 +23,12 @@ export function getAdminEmail() {
   return process.env.ADMIN_EMAIL?.trim().toLowerCase() || "";
 }
 
+export async function resolveAdminEmail() {
+  const { getStoredAdminEmail } = await import("@/lib/admin-account-store");
+  const stored = await getStoredAdminEmail();
+  return stored || getAdminEmail();
+}
+
 async function readStoredPasswordHash() {
   try {
     const filePath = path.join(process.cwd(), "data", ".admin-password-hash");

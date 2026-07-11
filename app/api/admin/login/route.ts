@@ -5,8 +5,8 @@ import { cookies } from "next/headers";
 export const runtime = "nodejs";
 import {
   createSessionToken,
-  getAdminEmail,
   isAdminAuthConfigured,
+  resolveAdminEmail,
   verifyAdminPassword,
   SESSION_COOKIE,
 } from "@/lib/admin-auth";
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const data = adminLoginSchema.parse(body);
-    const adminEmail = getAdminEmail();
+    const adminEmail = await resolveAdminEmail();
 
     if (data.email.trim().toLowerCase() !== adminEmail) {
       return NextResponse.json({ error: "Неверный логин или пароль" }, { status: 401 });

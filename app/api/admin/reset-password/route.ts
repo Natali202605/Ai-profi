@@ -4,15 +4,15 @@ import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 import path from "path";
 import {
-  getAdminEmail,
   hashPassword,
   isAdminAuthConfigured,
+  resolveAdminEmail,
   verifyResetToken,
 } from "@/lib/admin-auth";
 import { adminResetSchema } from "@/lib/admin-validation";
 import { getSiteUrl, sendAdminEmail } from "@/lib/admin-email";
 
-async function persistPasswordHash(hash: string) {
+async function persistPasswordHash(hash: string, email: string) {
   if (process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
     const response = await fetch(`${process.env.SUPABASE_URL}/rest/v1/admin_auth?id=eq.1`, {
       method: "PATCH",
@@ -40,7 +40,7 @@ async function persistPasswordHash(hash: string) {
       },
       body: JSON.stringify({
         id: 1,
-        email: getAdminEmail(),
+        email,
         password_hash: hash,
         updated_at: new Date().toISOString(),
       }),
@@ -61,19 +61,20 @@ export async function POST(request: Request) {
     const body = await request.json();
     const data = adminResetSchema.parse(body);
     const email = await verifyResetToken(data.token);
+    const adminEmail = await resolveAdminEmail();
 
-    if (!email || email !== getAdminEmail()) {
+    if (!email || email !== adminEmail) {
       return NextResponse.json({ error: "Ссылка недействительна или устарела" }, { status: 400 });
     }
 
     const hash = await hashPassword(data.password);
 
     try {
-      await persistPasswordHash(hash);
+      await persistPasswordHash(hash, adminEmail);
     } catch {
       if (process.env.RESEND_API_KEY) {
         await sendAdminEmail({
-          to: getAdminEmail(),
+          to: adminEmail,
           subject: "Новый пароль админ-панели NATALI NEERO",
           text: `Пароль изменён. Новый hash для ADMIN_PASSWORD_HASH:\n${hash}\n\nОбновите переменную окружения на хостинге.`,
         });

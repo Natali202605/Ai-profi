@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { cn, SITE_NAME, SITE_TAGLINE } from "@/lib/utils";
+import { cn } from "@/lib/utils";
+import { useSiteContent } from "@/components/providers/SiteContentProvider";
 import { MobileMenu } from "./MobileMenu";
 import { trackEvent } from "@/lib/analytics";
 
@@ -19,6 +20,7 @@ const navLinks = [
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { brand } = useSiteContent();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -39,10 +41,10 @@ export function Header() {
         <div className="container-site flex h-16 items-center justify-between md:h-20">
           <Link href="/" className="group flex flex-col">
             <span className="font-heading text-lg font-semibold tracking-wider text-white-text md:text-xl">
-              {SITE_NAME}
+              {brand.siteName}
             </span>
             <span className="hidden text-[10px] uppercase tracking-[0.15em] text-text-secondary sm:block">
-              {SITE_TAGLINE}
+              {brand.siteTagline}
             </span>
           </Link>
 

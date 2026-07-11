@@ -39,3 +39,7 @@ next-env.d.ts
 # uploads
 /public/uploads
 /data/.admin-password-hash
+/data/site-overrides.json
+/data/admin-account.json
+/public/images/cms/*
+!/public/images/cms/.gitkeep

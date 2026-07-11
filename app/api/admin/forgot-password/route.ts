@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import {
   createResetToken,
-  getAdminEmail,
   isAdminAuthConfigured,
+  resolveAdminEmail,
 } from "@/lib/admin-auth";
 import { adminForgotSchema } from "@/lib/admin-validation";
 import { getSiteUrl, sendAdminEmail } from "@/lib/admin-email";
@@ -15,7 +15,7 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const data = adminForgotSchema.parse(body);
-    const adminEmail = getAdminEmail();
+    const adminEmail = await resolveAdminEmail();
 
     if (data.email.trim().toLowerCase() !== adminEmail) {
       return NextResponse.json({

@@ -5,6 +5,8 @@ import { SiteChrome } from "@/components/layout/SiteChrome";
 import { JsonLd } from "@/components/layout/JsonLd";
 import { ScrollTracker } from "@/components/layout/ScrollTracker";
 import { YandexMetrika } from "@/components/layout/YandexMetrika";
+import { SiteContentProvider } from "@/components/providers/SiteContentProvider";
+import { getSiteContent } from "@/lib/site-content-store";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin", "cyrillic"],
@@ -50,14 +52,18 @@ export const metadata: Metadata = {
   icons: { icon: "/favicon.svg" },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const siteContent = await getSiteContent();
+
   return (
     <html lang="ru" className={`${cormorant.variable} ${manrope.variable}`}>
       <body className="canvas-texture min-h-screen">
         <JsonLd />
         <ScrollTracker />
         <YandexMetrika />
-        <SiteChrome>{children}</SiteChrome>
+        <SiteContentProvider content={siteContent}>
+          <SiteChrome>{children}</SiteChrome>
+        </SiteContentProvider>
       </body>
     </html>
   );

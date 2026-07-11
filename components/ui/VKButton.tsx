@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
-import { VK_COMMUNITY_URL, VK_PROFILE_URL } from "@/lib/utils";
-import { trackEvent } from "@/lib/analytics";
 import { ExternalLink } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
+import { useSiteContent } from "@/components/providers/SiteContentProvider";
 
 type VKButtonProps = {
   variant?: "profile" | "community";
@@ -13,7 +12,8 @@ type VKButtonProps = {
 };
 
 export function VKButton({ variant = "profile", className, children }: VKButtonProps) {
-  const href = variant === "profile" ? VK_PROFILE_URL : VK_COMMUNITY_URL;
+  const { brand } = useSiteContent();
+  const href = variant === "profile" ? brand.vkProfileUrl : brand.vkCommunityUrl;
   const event = variant === "profile" ? "vk_profile_click" : "vk_community_click";
 
   return (
@@ -23,7 +23,7 @@ export function VKButton({ variant = "profile", className, children }: VKButtonP
       rel="noopener noreferrer"
       className={cn(
         "inline-flex min-h-11 items-center gap-2 text-gold transition-colors hover:text-peach",
-        className
+        className,
       )}
       onClick={() => trackEvent(event)}
     >
