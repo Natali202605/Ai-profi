@@ -1,0 +1,60 @@
+import { z } from "zod";
+
+export const serviceOptions = [
+  "AI-видео",
+  "AI-изображения",
+  "Сайт",
+  "Оформление ВКонтакте",
+  "Продвижение ВКонтакте",
+  "Комплексная упаковка",
+  "Консультация",
+  "Другое",
+] as const;
+
+export const leadFormSchema = z.object({
+  name: z.string().min(2, "Укажите имя"),
+  contact: z.string().min(5, "Укажите телефон или мессенджер"),
+  projectUrl: z.string().url("Укажите корректную ссылку").optional().or(z.literal("")),
+  service: z.enum(serviceOptions, { required_error: "Выберите услугу" }),
+  description: z.string().min(10, "Опишите задачу подробнее"),
+  deadline: z.string().optional(),
+  budget: z.string().optional(),
+  consent: z.literal(true, {
+    errorMap: () => ({ message: "Необходимо согласие на обработку данных" }),
+  }),
+  honeypot: z.string().max(0).optional(),
+  utmSource: z.string().optional(),
+  utmMedium: z.string().optional(),
+  utmCampaign: z.string().optional(),
+  utmContent: z.string().optional(),
+  utmTerm: z.string().optional(),
+  source: z.string().optional(),
+  brief_goal: z.string().optional(),
+  brief_duration: z.string().optional(),
+  brief_platform: z.string().optional(),
+  brief_count: z.string().optional(),
+  brief_format: z.string().optional(),
+  brief_purpose: z.string().optional(),
+  brief_type: z.string().optional(),
+  brief_pages: z.string().optional(),
+  brief_functions: z.string().optional(),
+  brief_vk_link: z.string().optional(),
+  brief_vk_theme: z.string().optional(),
+  brief_vk_goal: z.string().optional(),
+});
+
+export type LeadFormData = z.infer<typeof leadFormSchema>;
+
+export const chatbotLeadSchema = z.object({
+  name: z.string().min(2),
+  contact: z.string().min(5),
+  service: z.string(),
+  summary: z.string(),
+  consent: z.literal(true),
+  utmSource: z.string().optional(),
+  utmMedium: z.string().optional(),
+  utmCampaign: z.string().optional(),
+  source: z.literal("chatbot"),
+});
+
+export type ChatbotLeadData = z.infer<typeof chatbotLeadSchema>;

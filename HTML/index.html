@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Натали Neero — AI-видео, изображения, сайты и оформление ВКонтакте</title>
+  <meta name="description" content="AI-специалист и художник с опытом более 10 лет. Создание AI-видео, изображений, сайтов, оформление и развитие аккаунтов и сообществ ВКонтакте." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --graphite: #17161b;
+      --plum: #241a2b;
+      --indigo: #242842;
+      --milk: #f6f0e8;
+      --sand: #e8d8c4;
+      --gold: #d5a85d;
+      --peach: #e79c7c;
+      --berry: #a94c70;
+      --white: #fffdfc;
+      --text-sec: #d8d1d9;
+      --text-dark: #252129;
+      --border: rgba(255,255,255,0.12);
+      --card: rgba(255,255,255,0.06);
+      --font-h: 'Cormorant Garamond', Georgia, serif;
+      --font-b: 'Manrope', system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-b);
+      background: var(--graphite);
+      color: var(--white);
+      line-height: 1.6;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(213,168,93,.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(169,76,112,.06) 0%, transparent 50%);
+    }
+    a { color: var(--gold); text-decoration: none; transition: color .3s; }
+    a:hover { color: var(--peach); }
+    img { max-width: 100%; display: block; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
+
+    /* Header */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1rem 0;
+      transition: background .4s, backdrop-filter .4s;
+    }
+    header.scrolled {
+      background: rgba(23,22,27,.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: var(--font-h); font-size: 1.25rem; font-weight: 600; letter-spacing: .08em; color: var(--white); }
+    .logo span { display: block; font-family: var(--font-b); font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; color: var(--text-sec); margin-top: 2px; }
+    nav { display: none; gap: 1.5rem; align-items: center; }
+    nav a { color: var(--text-sec); font-size: .875rem; }
+    nav a:hover { color: var(--gold); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 44px; padding: .75rem 1.75rem; border-radius: 999px;
+      font-size: .9375rem; font-weight: 600; border: none; cursor: pointer;
+      transition: all .3s;
+    }
+    .btn-gold { background: var(--gold); color: var(--graphite); }
+    .btn-gold:hover { background: #c99a50; box-shadow: 0 0 30px rgba(213,168,93,.3); color: var(--graphite); }
+    .btn-outline { background: var(--card); color: var(--white); border: 1px solid var(--border); backdrop-filter: blur(8px); }
+    .btn-outline:hover { border-color: rgba(213,168,93,.4); background: rgba(255,255,255,.1); color: var(--white); }
+    .menu-btn { background: none; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; display: block; }
+    @media (min-width: 1024px) { nav { display: flex; } .menu-btn { display: none; } }
+
+    /* Mobile menu */
+    .mobile-nav {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(23,22,27,.97); backdrop-filter: blur(20px);
+      padding: 5rem 1.25rem 2rem;
+    }
+    .mobile-nav.open { display: flex; flex-direction: column; gap: 1.5rem; }
+    .mobile-nav a { font-family: var(--font-h); font-size: 1.75rem; color: var(--white); }
+    .mobile-close { position: absolute; top: 1.25rem; right: 1.25rem; background: none; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; }
+
+    /* Hero */
+    .hero { min-height: 100vh; display: flex; align-items: center; padding: 6rem 0 4rem; }
+    .hero-grid { display: grid; gap: 3rem; align-items: center; }
+    @media (min-width: 1024px) { .hero-grid { grid-template-columns: 1fr 1fr; } }
+    .eyebrow { font-size: .75rem; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .gold-line { width: 4rem; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin-bottom: 1.5rem; }
+    h1 { font-family: var(--font-h); font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.05; font-weight: 500; margin-bottom: 1.5rem; }
+    h1 em { font-style: normal; color: var(--gold); }
+    .hero p { font-size: 1.125rem; color: var(--text-sec); max-width: 36rem; margin-bottom: 2rem; }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
+    .hero-note { font-size: .875rem; font-style: italic; color: rgba(216,209,217,.8); }
+    .trust { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; margin-top: 2.5rem; list-style: none; }
+    .trust li { display: flex; align-items: center; gap: .5rem; font-size: .875rem; color: var(--text-sec); }
+    .trust li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    .hero-visual { position: relative; max-width: 32rem; margin: 0 auto; }
+    .hero-img { border-radius: 1.5rem; overflow: hidden; border: 1px solid var(--border); aspect-ratio: 1; }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+    .float-tag { position: absolute; bottom: -1rem; left: 50%; transform: translateX(-50%); display: flex; gap: .5rem; flex-wrap: wrap; justify-content: center; }
+    .float-tag span { background: var(--card); border: 1px solid var(--border); backdrop-filter: blur(8px); padding: .25rem .75rem; border-radius: 999px; font-size: .75rem; color: var(--text-sec); }
+
+    /* Sections */
+    section { padding: 5rem 0; }
+    .light { background: var(--milk); color: var(--text-dark); }
+    .light p { color: rgba(37,33,41,.75); }
+    h2 { font-family: var(--font-h); font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.1; margin-bottom: 1rem; }
+    .section-sub { font-size: 1.125rem; max-width: 40rem; margin-bottom: 3rem; }
+    .light .section-sub { color: rgba(37,33,41,.65); }
+    .dark .section-sub { color: var(--text-sec); }
+
+    /* Quote */
+    blockquote {
+      background: white; border-radius: 1rem; padding: 2rem;
+      border: 1px solid rgba(37,33,41,.1); position: relative;
+      font-family: var(--font-h); font-size: 1.5rem; line-height: 1.4; color: var(--text-dark);
+    }
+    blockquote::before { content: ''; position: absolute; left: -4px; top: 1.5rem; width: 4px; height: 3rem; background: var(--gold); border-radius: 2px; }
+
+    /* Services */
+    .services-grid { display: grid; gap: 1.5rem; }
+    @media (min-width: 768px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1200px) { .services-grid { grid-template-columns: repeat(3, 1fr); } }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 1rem;
+      padding: 2rem; backdrop-filter: blur(12px); transition: border-color .4s, box-shadow .4s;
+    }
+    .card:hover { border-color: rgba(213,168,93,.3); box-shadow: 0 0 40px rgba(213,168,93,.08); }
+    .card h3 { font-family: var(--font-h); font-size: 1.5rem; margin-bottom: .75rem; }
+    .card p { font-size: .9375rem; color: var(--text-sec); margin-bottom: 1rem; }
+    .card ul { list-style: none; margin-bottom: 1.25rem; }
+    .card li { font-size: .8125rem; color: rgba(216,209,217,.8); padding: .15rem 0; padding-left: 1rem; position: relative; }
+    .card li::before { content: ''; position: absolute; left: 0; top: .55rem; width: 4px; height: 4px; border-radius: 50%; background: var(--gold); }
+
+    /* About */
+    .about-grid { display: grid; gap: 3rem; align-items: center; }
+    @media (min-width: 1024px) { .about-grid { grid-template-columns: 1fr 1.2fr; } }
+    .about-photo { position: relative; max-width: 24rem; margin: 0 auto; }
+    .about-photo img { border-radius: 1rem; width: 100%; aspect-ratio: 3/4; object-fit: cover; }
+    .badge { position: absolute; bottom: -1rem; right: -1rem; background: white; border-radius: .75rem; padding: 1rem; box-shadow: 0 8px 30px rgba(0,0,0,.1); text-align: center; }
+    .badge strong { font-family: var(--font-h); font-size: 2rem; color: var(--gold); display: block; }
+    .badge span { font-size: .75rem; color: rgba(37,33,41,.6); }
+
+    /* Contact */
+    .contact-form { max-width: 36rem; margin: 0 auto; }
+    .form-group { margin-bottom: 1.25rem; }
+    label { display: block; font-size: .875rem; font-weight: 500; margin-bottom: .4rem; }
+    .light label { color: var(--text-dark); }
+    input, select, textarea {
+      width: 100%; padding: .75rem 1rem; border-radius: .75rem;
+      border: 1px solid rgba(37,33,41,.15); background: white;
+      font-family: var(--font-b); font-size: 1rem; color: var(--text-dark);
+      outline: none; transition: border-color .3s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+    textarea { resize: vertical; min-height: 120px; }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); padding: 4rem 0 2rem; background: rgba(36,26,43,.5); }
+    .footer-grid { display: grid; gap: 2rem; }
+    @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
+    .footer-logo { font-family: var(--font-h); font-size: 1.5rem; font-weight: 600; letter-spacing: .08em; }
+    .footer-copy { text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); font-size: .875rem; color: var(--text-sec); }
+
+    /* Floating bar mobile */
+    .float-bar {
+      display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+      border-top: 1px solid var(--border); background: rgba(23,22,27,.95); backdrop-filter: blur(16px);
+    }
+    .float-bar a { flex: 1; display: flex; align-items: center; justify-content: center; gap: .5rem; padding: .875rem; font-size: .875rem; font-weight: 500; color: var(--white); }
+    .float-bar a + a { border-left: 1px solid var(--border); color: var(--gold); }
+    @media (min-width: 768px) { .float-bar { display: none; } body { padding-bottom: 0; } }
+    @media (max-width: 767px) { body { padding-bottom: 3.5rem; } }
+
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+    .fade-in.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">NATALI NEERO<span>AI-специалист • художник • визуальный автор</span></a>
+      <nav>
+        <a href="#about">Обо мне</a>
+        <a href="#services">Услуги</a>
+        <a href="#portfolio">Портфолио</a>
+        <a href="#vk">ВКонтакте</a>
+        <a href="#contact">Контакты</a>
+        <a href="#contact" class="btn btn-gold" style="padding:.5rem 1.25rem;font-size:.875rem;">Обсудить проект</a>
+      </nav>
+      <button class="menu-btn" id="menuOpen" aria-label="Меню">☰</button>
+    </div>
+  </header>
+
+  <div class="mobile-nav" id="mobileNav">
+    <button class="mobile-close" id="menuClose" aria-label="Закрыть">✕</button>
+    <a href="#about">Обо мне</a>
+    <a href="#services">Услуги</a>
+    <a href="#portfolio">Портфолио</a>
+    <a href="#vk">ВКонтакте</a>
+    <a href="#contact">Контакты</a>
+    <a href="#contact" class="btn btn-gold" style="margin-top:1rem;text-align:center;">Обсудить проект</a>
+  </div>
+
+  <section class="hero" id="top">
+    <div class="container hero-grid">
+      <div class="fade-in">
+        <p class="eyebrow">AI-специалист × художник</p>
+        <div class="gold-line"></div>
+        <h1>Создаю визуальные проекты, в которых <em>технологии обретают характер</em></h1>
+        <p>AI-видео, изображения, сайты и оформление ВКонтакте для экспертов, брендов и творческих проектов. Более 10 лет художественного опыта помогают мне создавать визуал с композицией, настроением и смыслом.</p>
+        <div class="hero-btns">
+          <a href="#contact" class="btn btn-gold">Обсудить проект</a>
+          <a href="#portfolio" class="btn btn-outline">Посмотреть портфолио</a>
+        </div>
+        <a href="https://vk.ru/id170079854" target="_blank" rel="noopener">Написать ВКонтакте →</a>
+        <p class="hero-note" style="margin-top:1rem;">Не шаблонная генерация, а индивидуальная визуальная концепция.</p>
+        <ul class="trust">
+          <li>Более 10 лет в искусстве</li>
+          <li>Индивидуальные визуальные концепции</li>
+          <li>AI, дизайн и продвижение в одном проекте</li>
+        </ul>
+      </div>
+      <div class="hero-visual fade-in">
+        <div class="hero-img">
+          <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=800&q=80" alt="[Добавить художественный портрет специалиста]" loading="eager" />
+        </div>
+        <div class="float-tag">
+          <span>видео</span><span>изображения</span><span>сайты</span><span>ВКонтакте</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="light fade-in">
+    <div class="container">
+      <h2>Не просто создаю контент. Помогаю увидеть образ вашего проекта</h2>
+      <div style="display:grid;gap:2.5rem;margin-top:2rem;">
+        <div>
+          <p>Каждый проект начинается не с выбора нейросети или шаблона, а с понимания человека, идеи и задачи. Я соединяю возможности современных AI-инструментов с художественным опытом, чувством композиции, цвета и атмосферы.</p>
+          <p style="margin-top:1rem;">Благодаря этому изображения, видео, сайты и сообщества выглядят не как набор отдельных элементов, а как единая визуальная история.</p>
+        </div>
+        <blockquote>Для меня важно, чтобы визуал был не только красивым. Он должен передавать характер, вызывать чувство и помогать человеку запомнить ваш проект.</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="dark fade-in">
+    <div class="container">
+      <h2>Чем я могу помочь</h2>
+      <p class="section-sub">Можно заказать отдельную услугу или собрать комплексное решение для вашего проекта.</p>
+      <div class="services-grid">
+        <div class="card">
+          <h3>AI-видео и визуальные истории</h3>
+          <p>Атмосферные, рекламные и имиджевые видео с помощью современных AI-инструментов.</p>
+          <ul><li>сценарная концепция</li><li>генерация сцен</li><li>монтаж и звук</li></ul>
+          <a href="#contact">Обсудить видео →</a>
+        </div>
+        <div class="card">
+          <h3>Изображения с художественным характером</h3>
+          <p>Рекламные изображения, портреты, серии в едином стиле для соцсетей и сайтов.</p>
+          <ul><li>рекламные визуалы</li><li>серии в едином стиле</li><li>доработка и ретушь</li></ul>
+          <a href="#contact">Заказать изображения →</a>
+        </div>
+        <div class="card">
+          <h3>Сайты с индивидуальной концепцией</h3>
+          <p>Современные сайты, которые передают характер специалиста или бренда.</p>
+          <ul><li>дизайн и тексты</li><li>AI-визуалы</li><li>формы заявок</li></ul>
+          <a href="#contact">Обсудить сайт →</a>
+        </div>
+        <div class="card">
+          <h3>Оформление ВКонтакте</h3>
+          <p>Цельный визуальный образ для личной страницы или сообщества.</p>
+          <ul><li>обложка и аватар</li><li>шаблоны публикаций</li><li>визуальная система</li></ul>
+          <a href="#contact">Оформить ВКонтакте →</a>
+        </div>
+        <div class="card">
+          <h3>Продвижение сообщества</h3>
+          <p>Структура контента и визуальная подача для последовательного знакомства с аудиторией.</p>
+          <ul><li>контент-план</li><li>оформление публикаций</li><li>рекомендации по продвижению</li></ul>
+          <a href="#contact">Обсудить продвижение →</a>
+        </div>
+        <div class="card">
+          <h3>Визуальная упаковка под ключ</h3>
+          <p>Комплексное решение: от идеи до сайта, изображений, видео и оформления ВКонтакте.</p>
+          <a href="#contact">Собрать проект →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="light fade-in" id="portfolio">
+    <div class="container">
+      <h2>Избранные проекты</h2>
+      <p class="section-sub">В каждом проекте — своя задача, атмосфера и визуальный язык.</p>
+      <p style="text-align:center;padding:2rem;background:white;border-radius:1rem;border:1px solid rgba(37,33,41,.1);">
+        [Добавить реальные проекты портфолио]<br><br>
+        <small>Полная версия с фильтрами и кейсами — в Next.js-проекте (корень репозитория)</small>
+      </p>
+    </div>
+  </section>
+
+  <section id="about" class="light fade-in">
+    <div class="container about-grid">
+      <div class="about-photo">
+        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600&q=80" alt="[Добавить портрет Натали]" loading="lazy" />
+        <div class="badge"><strong>10+</strong><span>лет в искусстве</span></div>
+      </div>
+      <div>
+        <h2>Здравствуйте, я Натали</h2>
+        <p style="margin-top:1rem;">Я AI-специалист и художник с опытом более 10 лет. Создаю видео, изображения, сайты и визуальное оформление для экспертов, брендов и творческих проектов.</p>
+        <p style="margin-top:1rem;">Мне важно внимательно услышать человека и почувствовать его проект. Поэтому я не работаю по одному шаблону — для каждой задачи ищу собственную интонацию и визуальное решение.</p>
+        <div style="margin-top:2rem;display:flex;flex-wrap:wrap;gap:1rem;">
+          <a href="#portfolio" class="btn btn-outline" style="color:var(--text-dark);border-color:rgba(37,33,41,.15);background:white;">Посмотреть работы</a>
+          <a href="https://vk.ru/id170079854" target="_blank" rel="noopener" class="btn btn-gold">Написать ВКонтакте</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="vk" class="dark fade-in">
+    <div class="container">
+      <h2>ВКонтакте как пространство вашего бренда</h2>
+      <p class="section-sub">Хорошо оформленное сообщество помогает быстро понять, кто вы и чем можете быть полезны.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-top:1rem;">
+        <a href="https://vk.ru/id170079854" target="_blank" rel="noopener" class="btn btn-gold">Личная страница</a>
+        <a href="https://vk.com/natali_neero" target="_blank" rel="noopener" class="btn btn-outline">Сообщество</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="light fade-in">
+    <div class="container">
+      <h2 style="text-align:center;">Расскажите о своём проекте</h2>
+      <p class="section-sub" style="text-align:center;margin-left:auto;margin-right:auto;">Опишите задачу в нескольких словах. Я изучу сообщение и свяжусь с вами.</p>
+      <form class="contact-form" id="contactForm" onsubmit="return handleSubmit(event)">
+        <div class="form-group">
+          <label for="name">Имя *</label>
+          <input type="text" id="name" name="name" required placeholder="Ваше имя" />
+        </div>
+        <div class="form-group">
+          <label for="contact_field">Телефон или мессенджер *</label>
+          <input type="text" id="contact_field" name="contact" required placeholder="+7 ... или @username" />
+        </div>
+        <div class="form-group">
+          <label for="service">Услуга</label>
+          <select id="service" name="service">
+            <option value="">Выберите услугу</option>
+            <option>AI-видео</option>
+            <option>AI-изображения</option>
+            <option>Сайт</option>
+            <option>Оформление ВКонтакте</option>
+            <option>Комплексная упаковка</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="description">Описание задачи *</label>
+          <textarea id="description" name="description" required placeholder="Расскажите о задаче..."></textarea>
+        </div>
+        <p style="font-size:.8125rem;color:rgba(37,33,41,.6);margin-bottom:1.25rem;">
+          Отправляя форму, вы соглашаетесь на обработку персональных данных.
+          Для полной версии с API — используйте Next.js-проект.
+        </p>
+        <button type="submit" class="btn btn-gold" style="width:100%;">Отправить заявку</button>
+        <p id="formSuccess" style="display:none;text-align:center;margin-top:1rem;color:var(--berry);font-weight:600;">
+          Спасибо! Напишите также во <a href="https://vk.ru/id170079854" target="_blank">ВКонтакте</a> для быстрой связи.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <p class="footer-logo">NATALI NEERO</p>
+        <p style="font-size:.875rem;color:var(--text-sec);margin-top:.5rem;">AI-специалист • художник • визуальный автор</p>
+      </div>
+      <div>
+        <p style="font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:.75rem;">Навигация</p>
+        <p><a href="#services" style="font-size:.875rem;color:var(--text-sec);">Услуги</a></p>
+        <p><a href="#portfolio" style="font-size:.875rem;color:var(--text-sec);">Портфолио</a></p>
+        <p><a href="#contact" style="font-size:.875rem;color:var(--text-sec);">Контакты</a></p>
+      </div>
+      <div>
+        <p style="font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:.75rem;">ВКонтакте</p>
+        <p><a href="https://vk.ru/id170079854" target="_blank" style="font-size:.875rem;color:var(--text-sec);">Личная страница</a></p>
+        <p><a href="https://vk.com/natali_neero" target="_blank" style="font-size:.875rem;color:var(--text-sec);">Сообщество</a></p>
+      </div>
+    </div>
+    <p class="footer-copy container">© NATALI NEERO, 2026. AI-визуалы, видео, сайты и оформление ВКонтакте.</p>
+  </footer>
+
+  <div class="float-bar">
+    <a href="https://vk.ru/id170079854" target="_blank" rel="noopener">Написать</a>
+    <a href="#contact">Заявка</a>
+  </div>
+
+  <script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+
+    const mobileNav = document.getElementById('mobileNav');
+    document.getElementById('menuOpen').onclick = () => mobileNav.classList.add('open');
+    document.getElementById('menuClose').onclick = () => mobileNav.classList.remove('open');
+    mobileNav.querySelectorAll('a').forEach(a => a.onclick = () => mobileNav.classList.remove('open'));
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      document.getElementById('formSuccess').style.display = 'block';
+      e.target.querySelector('button').disabled = true;
+      return false;
+    }
+  </script>
+</body>
+</html>

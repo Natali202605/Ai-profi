@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  --color-graphite: #17161b;
+  --color-plum: #241a2b;
+  --color-indigo-deep: #242842;
+  --color-milk: #f6f0e8;
+  --color-sand: #e8d8c4;
+  --color-gold: #d5a85d;
+  --color-peach: #e79c7c;
+  --color-berry: #a94c70;
+  --color-white-text: #fffdfc;
+  --color-text-secondary: #d8d1d9;
+  --color-text-dark: #252129;
+  --color-card-bg: rgba(255, 255, 255, 0.06);
+  --color-border-subtle: rgba(255, 255, 255, 0.12);
+
+  --font-heading: var(--font-cormorant);
+  --font-body: var(--font-manrope);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    @apply bg-graphite text-white-text font-body antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(213, 168, 93, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 20%, rgba(169, 76, 112, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 50% at 10% 80%, rgba(36, 40, 66, 0.4) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    @apply bg-gold/30 text-white-text;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-gold;
+  }
+}
+
+@layer components {
+  .section-light {
+    @apply bg-milk text-text-dark;
+  }
+
+  .section-dark {
+    @apply bg-transparent text-white-text;
+  }
+
+  .container-site {
+    @apply mx-auto w-full max-w-7xl px-5 md:px-8 lg:px-10;
+  }
+
+  .heading-display {
+    @apply font-heading font-medium leading-[1.1] tracking-tight;
+  }
+
+  .btn-primary {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gold px-7 py-3 text-[15px] font-semibold text-graphite transition-all duration-300 hover:bg-gold/90 hover:shadow-[0_0_30px_rgba(213,168,93,0.3)] focus-visible:outline-gold;
+  }
+
+  .btn-secondary {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-border-subtle bg-card-bg px-7 py-3 text-[15px] font-medium text-white-text backdrop-blur-sm transition-all duration-300 hover:border-gold/40 hover:bg-white/10;
+  }
+
+  .btn-secondary-light {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-text-dark/15 bg-white px-7 py-3 text-[15px] font-medium text-text-dark transition-all duration-300 hover:border-gold hover:shadow-md;
+  }
+
+  .card-glass {
+    @apply rounded-2xl border border-border-subtle bg-card-bg backdrop-blur-md;
+  }
+
+  .text-link {
+    @apply text-gold underline-offset-4 transition-colors hover:text-peach hover:underline;
+  }
+
+  .gold-line {
+    @apply h-px w-16 bg-gradient-to-r from-transparent via-gold to-transparent;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .canvas-texture {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+}
