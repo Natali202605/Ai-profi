@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import { ElectricSparks } from "@/components/ui/ElectricSparks";
 
 const sparkles = [
   { top: "12%", left: "18%", size: 3, delay: 0 },
@@ -112,6 +113,8 @@ export function AnimatedBackground() {
           transition={{ duration: 4 + (i % 3), repeat: Infinity, ease: "easeInOut", delay: s.delay }}
         />
       ))}
+
+      <ElectricSparks />
 
       <div className="absolute inset-0 bg-[#1e2860]/16 mix-blend-multiply" />
       <div className="absolute inset-0 bg-gradient-to-b from-[#1a1848]/28 via-transparent to-[#0f1a40]/38" />

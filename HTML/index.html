@@ -100,8 +100,30 @@
       0%, 100% { opacity: .2; transform: scale(1); }
       50% { opacity: .9; transform: scale(1.4); }
     }
+    .bg-electric {
+      position: absolute; inset: 0; overflow: hidden; opacity: .45;
+    }
+    .bg-electric svg { position: absolute; overflow: visible; }
+    .bg-electric path {
+      fill: none; stroke: rgba(210,200,255,.65); stroke-width: 1;
+      stroke-linecap: round; stroke-linejoin: round;
+      stroke-dasharray: 6 94;
+      filter: drop-shadow(0 0 3px rgba(200,190,255,.6));
+      animation: electric-run 2.6s ease-in-out infinite;
+    }
+    .bg-electric .e1 { top: 18%; left: 8%; width: 180px; height: 140px; animation-delay: 0s; animation-duration: 2.4s; }
+    .bg-electric .e2 { top: 42%; left: 62%; width: 200px; height: 130px; animation-delay: 2.5s; animation-duration: 2.8s; }
+    .bg-electric .e3 { top: 58%; left: 22%; width: 170px; height: 120px; animation-delay: 4s; animation-duration: 2.2s; }
+    .bg-electric .e4 { top: 28%; left: 78%; width: 150px; height: 110px; animation-delay: 1.2s; animation-duration: 2.6s; }
+    .bg-electric .e5 { top: 72%; left: 48%; width: 190px; height: 100px; animation-delay: 3.8s; animation-duration: 2.5s; }
+    @keyframes electric-run {
+      0% { stroke-dashoffset: 100; opacity: 0; }
+      20% { opacity: .7; }
+      70% { stroke-dashoffset: 0; opacity: .35; }
+      100% { stroke-dashoffset: 0; opacity: 0; }
+    }
     @media (prefers-reduced-motion: reduce) {
-      .bg-image, .bg-glow, .bg-shimmer::after, .bg-sparkle { animation: none; }
+      .bg-image, .bg-glow, .bg-shimmer::after, .bg-sparkle, .bg-electric path { animation: none; }
     }
     a { color: var(--gold); text-decoration: none; transition: color .3s; }
     a:hover { color: var(--peach); }
@@ -303,6 +325,13 @@
     <span class="bg-sparkle" style="top:55%;left:82%;width:3px;height:3px;animation-delay:2s"></span>
     <span class="bg-sparkle" style="top:68%;left:28%;width:2px;height:2px;animation-delay:1.8s"></span>
     <span class="bg-sparkle" style="top:78%;left:58%;width:3px;height:3px;animation-delay:.4s"></span>
+    <div class="bg-electric" aria-hidden="true">
+      <svg class="e1" viewBox="0 0 120 120"><path d="M 8,90 L 35,78 L 52,92 L 68,65 L 88,72 L 105,58"/><path d="M 68,65 L 72,48 L 80,42" style="animation-delay:.3s"/><path d="M 52,92 L 44,108 L 38,118" style="animation-delay:.6s"/></svg>
+      <svg class="e2" viewBox="0 0 120 120"><path d="M 12,70 L 40,82 L 58,68 L 75,88 L 95,75 L 118,62"/><path d="M 75,88 L 82,102" style="animation-delay:.3s"/><path d="M 58,68 L 50,52" style="animation-delay:.6s"/></svg>
+      <svg class="e3" viewBox="0 0 120 120"><path d="M 10,55 L 38,68 L 55,52 L 72,70 L 90,58"/><path d="M 72,70 L 78,85 L 85,92" style="animation-delay:.3s"/><path d="M 55,52 L 48,38" style="animation-delay:.6s"/></svg>
+      <svg class="e4" viewBox="0 0 120 120"><path d="M 15,60 L 42,72 L 58,55 L 75,68 L 92,50"/><path d="M 58,55 L 52,40" style="animation-delay:.3s"/></svg>
+      <svg class="e5" viewBox="0 0 120 120"><path d="M 5,45 L 32,58 L 50,42 L 68,55 L 88,40 L 110,48"/><path d="M 68,55 L 74,68" style="animation-delay:.3s"/><path d="M 50,42 L 42,28" style="animation-delay:.6s"/></svg>
+    </div>
     <div class="bg-vignette"></div>
   </div>
 
