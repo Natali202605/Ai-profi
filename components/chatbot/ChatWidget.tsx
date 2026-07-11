@@ -5,6 +5,7 @@ import { MessageCircle, X, Send } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { trackEvent, getUtmParams } from "@/lib/analytics";
 import { VK_PROFILE_URL } from "@/lib/utils";
+import { useAdelinChat } from "@/components/chatbot/AdelinChatContext";
 
 const BOT_NAME = "Аделин";
 
@@ -26,7 +27,7 @@ const initialButtons = [
 ];
 
 export function ChatWidget() {
-  const [open, setOpen] = useState(false);
+  const { open, setOpen } = useAdelinChat();
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "bot",
@@ -188,19 +189,22 @@ export function ChatWidget() {
       <button
         onClick={() => {
           setOpen(true);
-          trackEvent("chatbot_open", { bot: "adelin" });
+          trackEvent("chatbot_open", { bot: "adelin", source: "fab" });
         }}
-        className="mobile-fab-offset fixed right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gold text-graphite shadow-[0_4px_24px_rgba(164,148,255,0.4)] transition-transform hover:scale-105 md:bottom-6"
+        className="mobile-fab-offset fixed right-4 z-[60] flex items-center gap-2 rounded-full bg-gold text-graphite shadow-[0_4px_24px_rgba(164,148,255,0.4)] transition-transform hover:scale-105 md:bottom-6"
         aria-label={`Открыть чат с ${BOT_NAME}`}
         title={BOT_NAME}
       >
-        <MessageCircle className="h-6 w-6" />
+        <span className="flex h-14 w-14 items-center justify-center">
+          <MessageCircle className="h-6 w-6" />
+        </span>
+        <span className="hidden pr-4 text-sm font-semibold md:inline">{BOT_NAME}</span>
       </button>
 
       <AnimatePresence>
         {open && (
           <motion.div
-            className="mobile-fab-offset fixed right-4 z-50 flex h-[min(500px,calc(100dvh-10rem))] w-[360px] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-border-subtle bg-plum/90 shadow-2xl backdrop-blur-xl md:bottom-24 md:h-[500px]"
+            className="mobile-fab-offset fixed right-4 z-[60] flex h-[min(500px,calc(100dvh-10rem))] w-[360px] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-border-subtle bg-plum/90 shadow-2xl backdrop-blur-xl md:bottom-24 md:h-[500px]"
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}

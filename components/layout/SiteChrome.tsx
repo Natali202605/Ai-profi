@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ChatWidget } from "@/components/chatbot/ChatWidget";
+import { AdelinChatProvider } from "@/components/chatbot/AdelinChatContext";
 import { FloatingContactBar } from "@/components/layout/FloatingContactBar";
 import { CookieNotice } from "@/components/layout/CookieNotice";
 import { AnimatedBackground } from "@/components/ui/AnimatedBackground";
@@ -18,7 +19,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <>
+    <AdelinChatProvider>
       <AnimatedBackground />
       <Header />
       <main className="pb-24 safe-bottom md:pb-0">{children}</main>
@@ -26,7 +27,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       <ChatWidget />
       <FloatingContactBar />
       <CookieNotice />
-    </>
+    </AdelinChatProvider>
   );
 }
 

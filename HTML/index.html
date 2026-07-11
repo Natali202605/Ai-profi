@@ -260,6 +260,25 @@
     .hero p { font-size: 1.125rem; color: var(--text-sec); max-width: 36rem; margin-bottom: 2rem; }
     .hero-btns { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
     .hero-note { font-size: .875rem; font-style: italic; color: rgba(216,209,217,.8); }
+    .adelin-hero {
+      margin-top: 1.5rem; display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 1.25rem;
+      border-radius: 1rem; border: 1px solid rgba(200,188,255,.22);
+      background: linear-gradient(145deg, rgba(50,40,102,.58) 0%, rgba(36,50,114,.5) 100%);
+      backdrop-filter: blur(20px); box-shadow: 0 4px 28px rgba(14,18,48,.22);
+    }
+    .adelin-hero-avatar {
+      width: 2.75rem; height: 2.75rem; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(184,164,255,.2); color: var(--gold); font-family: var(--font-h); font-size: 1.125rem;
+    }
+    .adelin-hero-title { font-size: .875rem; font-weight: 600; color: var(--white); }
+    .adelin-hero-text { margin-top: .25rem; font-size: .875rem; line-height: 1.5; color: var(--text-sec); }
+    .adelin-hero-btn {
+      margin-top: .75rem; display: inline-flex; align-items: center; gap: .5rem;
+      min-height: 36px; padding: .5rem 1rem; border-radius: 999px; border: 1px solid var(--border);
+      background: rgba(44,36,92,.55); color: var(--white); font-size: .8125rem; font-weight: 500; cursor: pointer;
+    }
+    .adelin-hero-btn:hover { border-color: rgba(184,164,255,.5); color: var(--gold); }
     .trust { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; margin-top: 2.5rem; list-style: none; }
     .trust li { display: flex; align-items: center; gap: .5rem; font-size: .875rem; color: var(--text-sec); }
     .trust li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
@@ -384,14 +403,19 @@
 
     /* Chat Adelin */
     .chat-fab {
-      position: fixed; right: 1rem; z-index: 95;
+      position: fixed; right: 1rem; z-index: 96;
       bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
-      width: 3.5rem; height: 3.5rem; border: none; border-radius: 50%;
+      display: flex; align-items: center; gap: 0; border: none; border-radius: 999px;
       background: linear-gradient(135deg, #f0ebff 0%, #c4b5fd 50%, #a89ee8 100%);
-      color: var(--graphite); font-size: 1.25rem; cursor: pointer;
+      color: var(--graphite); cursor: pointer;
       box-shadow: 0 4px 24px rgba(164,148,255,.4);
     }
-    @media (min-width: 768px) { .chat-fab { bottom: 1.5rem; } }
+    .chat-fab-icon { width: 3.5rem; height: 3.5rem; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
+    .chat-fab-label { display: none; padding-right: 1rem; font-size: .875rem; font-weight: 600; }
+    @media (min-width: 768px) {
+      .chat-fab { bottom: 1.5rem; gap: .25rem; }
+      .chat-fab-label { display: inline; }
+    }
     .chat-panel {
       display: none; position: fixed; right: 1rem; z-index: 96;
       bottom: calc(8.5rem + env(safe-area-inset-bottom, 0px));
@@ -539,6 +563,14 @@
         </div>
         <a href="https://vk.ru/id170079854" target="_blank" rel="noopener">Написать ВКонтакте →</a>
         <p class="hero-note" style="margin-top:1rem;">Стратегия, AI-инструменты и визуальная экспертиза — в одном проекте.</p>
+        <div class="adelin-hero">
+          <div class="adelin-hero-avatar" aria-hidden="true">А</div>
+          <div>
+            <p class="adelin-hero-title">Аделин</p>
+            <p class="adelin-hero-text">Виртуальный ассистент NATALI NEERO. Помогу выбрать услугу и ответить на вопросы.</p>
+            <button type="button" class="adelin-hero-btn" id="adelinHeroBtn">💬 Начать диалог</button>
+          </div>
+        </div>
         <ul class="trust">
           <li>AI-видео, изображения, сайты и оформление ВКонтакте</li>
           <li>Более 10 лет художественного видения и практики</li>
@@ -759,7 +791,10 @@
     <a href="#contact">Заявка</a>
   </div>
 
-  <button class="chat-fab" id="chatFab" aria-label="Открыть чат с Аделин" title="Аделин">💬</button>
+  <button class="chat-fab" id="chatFab" aria-label="Открыть чат с Аделин" title="Аделин">
+    <span class="chat-fab-icon">💬</span>
+    <span class="chat-fab-label">Аделин</span>
+  </button>
   <div class="chat-panel" id="chatPanel" aria-hidden="true">
     <div class="chat-head">
       <div class="chat-head-info">
@@ -871,6 +906,8 @@
           addMsg('bot', 'Здравствуйте! Я ' + BOT_NAME + ' — виртуальный ассистент NATALI NEERO. Помогу сориентироваться в услугах. Что вы планируете создать?', initialButtons);
         }
       };
+      var heroBtn = document.getElementById('adelinHeroBtn');
+      if (heroBtn) heroBtn.onclick = function () { document.getElementById('chatFab').click(); };
       document.getElementById('chatClose').onclick = function () {
         panel.classList.remove('open');
         panel.setAttribute('aria-hidden', 'true');

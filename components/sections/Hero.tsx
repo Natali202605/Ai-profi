@@ -7,6 +7,7 @@ import { RevealAnimation } from "@/components/ui/RevealAnimation";
 import { BrushStroke } from "@/components/ui/BrushStroke";
 import { VKButton } from "@/components/ui/VKButton";
 import { trackEvent } from "@/lib/analytics";
+import { AdelinHeroInvite } from "@/components/chatbot/AdelinHeroInvite";
 import { useSiteContent } from "@/components/providers/SiteContentProvider";
 
 export function Hero() {
@@ -52,6 +53,7 @@ export function Hero() {
                 <VKButton />
               </div>
               <p className="mt-6 text-sm text-text-secondary/90">{hero.note}</p>
+              <AdelinHeroInvite />
             </div>
           </RevealAnimation>
 
