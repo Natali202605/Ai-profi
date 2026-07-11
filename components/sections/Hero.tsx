@@ -2,12 +2,17 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Sparkles, UserRound } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { RevealAnimation } from "@/components/ui/RevealAnimation";
 import { BrushStroke } from "@/components/ui/BrushStroke";
 import { VKButton } from "@/components/ui/VKButton";
 import { trackEvent } from "@/lib/analytics";
+import {
+  SPECIALIST_NAME,
+  SPECIALIST_PHOTO,
+  SPECIALIST_ROLES,
+} from "@/lib/utils";
 
 const trustMarkers = [
   "AI-видео, изображения, сайты и оформление ВКонтакте",
@@ -96,33 +101,28 @@ export function Hero() {
               )}
 
               <div className="relative aspect-[3/4] overflow-hidden rounded-[2rem] border border-border-subtle shadow-[0_24px_64px_rgba(14,18,48,0.35)]">
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-deep/40 via-plum/30 to-graphite/50" />
+                <Image
+                  src={SPECIALIST_PHOTO}
+                  alt={`${SPECIALIST_NAME} — ${SPECIALIST_ROLES}`}
+                  fill
+                  priority
+                  className="object-cover object-[center_18%]"
+                  sizes="(max-width: 1024px) 100vw, 512px"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-graphite/95 via-graphite/20 to-transparent" />
 
-                <div className="relative flex h-full flex-col items-center justify-center gap-4 p-8 text-center">
-                  <div className="flex h-20 w-20 items-center justify-center rounded-full border border-border-subtle bg-white/8 backdrop-blur-sm">
-                    <UserRound className="h-9 w-9 text-gold/80" strokeWidth={1.5} aria-hidden="true" />
-                  </div>
-                  <div>
-                    <p className="font-heading text-xl text-white-text md:text-2xl">
-                      [Добавить фото специалиста]
-                    </p>
-                    <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-                      Портрет в профессиональном формате для главного экрана
-                    </p>
-                  </div>
-                </div>
-
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-graphite/90 via-graphite/50 to-transparent px-6 pb-6 pt-24">
-                  <p className="font-heading text-2xl text-gold">10+</p>
-                  <p className="text-sm text-text-secondary">лет художественного видения и опыта</p>
+                <div className="absolute inset-x-0 bottom-0 px-6 pb-6 pt-24">
+                  <p className="font-heading text-2xl text-white-text md:text-3xl">{SPECIALIST_NAME}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-gold md:text-base">{SPECIALIST_ROLES}</p>
                 </div>
               </div>
 
               <div className="absolute -right-3 top-8 hidden rounded-2xl border border-border-subtle bg-card-bg px-4 py-3 backdrop-blur-md sm:block">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-gold">
-                  AI-фокус
+                  Опыт
                 </p>
-                <p className="mt-1 text-sm text-white-text">Видео • Изображения • Сайты</p>
+                <p className="mt-1 font-heading text-2xl text-white-text">10+</p>
+                <p className="text-xs text-text-secondary">лет в искусстве</p>
               </div>
 
               <motion.div
