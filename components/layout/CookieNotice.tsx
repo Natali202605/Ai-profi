@@ -20,7 +20,7 @@ export function CookieNotice() {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-16 left-4 right-4 z-50 rounded-2xl border border-border-subtle bg-plum/95 p-4 backdrop-blur-xl md:bottom-4 md:left-auto md:right-4 md:max-w-md">
+    <div className="fixed bottom-16 left-4 right-4 z-50 rounded-2xl border border-border-subtle bg-plum/80 p-4 backdrop-blur-xl md:bottom-4 md:left-auto md:right-4 md:max-w-md">
       <div className="flex items-start gap-3">
         <p className="flex-1 text-sm text-text-secondary">
           Сайт использует cookies для аналитики. Продолжая использование, вы соглашаетесь с{" "}

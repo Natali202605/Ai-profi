@@ -10,7 +10,7 @@ export function ProcessStep({ step, title, description, light }: ProcessStepProp
     <div
       className={`rounded-2xl border p-6 md:p-8 ${
         light
-          ? "border-text-dark/10 bg-white shadow-sm"
+          ? "glass-panel"
           : "card-glass"
       }`}
     >
@@ -21,14 +21,10 @@ export function ProcessStep({ step, title, description, light }: ProcessStepProp
       >
         {step}
       </span>
-      <h3
-        className={`heading-display mb-2 text-xl ${
-          light ? "text-text-dark" : "text-white-text"
-        }`}
-      >
+      <h3 className="heading-display mb-2 text-xl text-white-text">
         {title}
       </h3>
-      <p className={`text-sm leading-relaxed ${light ? "text-text-dark/70" : "text-text-secondary"}`}>
+      <p className="text-sm leading-relaxed text-text-secondary">
         {description}
       </p>
     </div>

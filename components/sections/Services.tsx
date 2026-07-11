@@ -38,7 +38,7 @@ export function Services() {
             const Icon = iconMap[service.icon] || Layers;
             return (
               <RevealAnimation key={service.id} delay={i * 0.08}>
-                <article className="card-glass group flex h-full flex-col p-6 transition-all duration-500 hover:border-gold/30 hover:shadow-[0_0_40px_rgba(213,168,93,0.08)] md:p-8">
+                <article className="card-glass group flex h-full flex-col p-6 transition-all duration-500 hover:border-gold/40 hover:shadow-[0_0_40px_rgba(164,148,255,0.12)] md:p-8">
                   <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gold/10 text-gold transition-colors group-hover:bg-gold/20">
                     <Icon className="h-6 w-6" />
                   </div>

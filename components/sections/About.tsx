@@ -30,7 +30,7 @@ export function About() {
                   sizes="(max-width: 1024px) 100vw, 40vw"
                 />
               </div>
-              <div className="absolute -bottom-4 -right-4 rounded-xl border border-text-dark/10 bg-white p-4 shadow-lg">
+              <div className="absolute -bottom-4 -right-4 glass-panel p-4">
                 <p className="font-heading text-3xl text-gold">10+</p>
                 <p className="text-xs text-text-dark/60">лет в искусстве</p>
               </div>

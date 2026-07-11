@@ -36,7 +36,7 @@ export function ArtApproach() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-br from-sand/30 to-transparent" />
               </div>
-              <div className="absolute -bottom-4 -right-4 h-24 w-24 rounded-full border-2 border-gold/30 bg-milk" />
+              <div className="absolute -bottom-4 -right-4 h-24 w-24 rounded-full border-2 border-gold/40 bg-white/15 backdrop-blur-md" />
             </div>
           </RevealAnimation>
 
@@ -61,7 +61,7 @@ export function ArtApproach() {
 
           <RevealAnimation direction="right" className="lg:col-start-2">
             <div className="relative mt-4 lg:mt-0">
-              <div className="relative aspect-video overflow-hidden rounded-2xl border border-text-dark/10">
+              <div className="relative aspect-video overflow-hidden rounded-2xl border border-border-subtle">
                 <Image
                   src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80"
                   alt="AI-визуал и цифровые технологии"

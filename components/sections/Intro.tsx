@@ -24,7 +24,7 @@ export function Intro() {
             </p>
           </RevealAnimation>
           <RevealAnimation delay={0.2}>
-            <blockquote className="relative rounded-2xl border border-text-dark/10 bg-white p-8 shadow-sm">
+            <blockquote className="glass-panel relative p-8">
               <div className="absolute -left-1 top-6 h-12 w-1 rounded-full bg-gold" />
               <p className="font-heading text-2xl leading-relaxed text-text-dark md:text-3xl">
                 Для меня важно, чтобы визуал был не только красивым. Он должен передавать характер,

@@ -81,12 +81,12 @@ export function Hero() {
             {!prefersReducedMotion && (
               <>
                 <motion.div
-                  className="absolute -left-8 top-8 h-32 w-32 rounded-2xl bg-gold/10 blur-2xl"
+                  className="absolute -left-8 top-8 h-32 w-32 rounded-2xl bg-gold/15 blur-2xl"
                   animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
                   transition={{ duration: 8, repeat: Infinity }}
                 />
                 <motion.div
-                  className="absolute -right-4 bottom-12 h-24 w-24 rounded-full bg-berry/20 blur-xl"
+                  className="absolute -right-4 bottom-12 h-24 w-24 rounded-full bg-berry/25 blur-xl"
                   animate={{ y: [0, -15, 0] }}
                   transition={{ duration: 6, repeat: Infinity }}
                 />
@@ -102,7 +102,7 @@ export function Hero() {
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-graphite/60 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-indigo-deep/70 via-transparent to-transparent" />
             </div>
 
             <motion.div

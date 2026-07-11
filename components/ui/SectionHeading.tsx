@@ -27,9 +27,7 @@ export function SectionHeading({
         </p>
       )}
       <h2
-        className={`heading-display text-balance text-4xl md:text-5xl lg:text-[56px] ${
-          light ? "text-text-dark" : "text-white-text"
-        }`}
+        className={`heading-display text-balance text-4xl md:text-5xl lg:text-[56px] text-white-text`}
       >
         {title}
       </h2>
@@ -37,7 +35,7 @@ export function SectionHeading({
         <p
           className={`mt-4 max-w-2xl text-lg leading-relaxed ${
             align === "center" ? "mx-auto" : ""
-          } ${light ? "text-text-dark/70" : "text-text-secondary"}`}
+          } text-text-secondary`}
         >
           {subtitle}
         </p>

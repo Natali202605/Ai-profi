@@ -194,7 +194,7 @@ export function ChatWidget() {
           setOpen(true);
           trackEvent("chatbot_open");
         }}
-        className="fixed bottom-20 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gold text-graphite shadow-lg transition-transform hover:scale-105 md:bottom-6"
+        className="fixed bottom-20 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gold text-graphite shadow-[0_4px_24px_rgba(164,148,255,0.4)] transition-transform hover:scale-105 md:bottom-6"
         aria-label="Открыть чат"
       >
         <MessageCircle className="h-6 w-6" />
@@ -203,12 +203,12 @@ export function ChatWidget() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="fixed bottom-36 right-4 z-50 flex h-[500px] w-[360px] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-border-subtle bg-plum shadow-2xl md:bottom-24"
+            className="fixed bottom-36 right-4 z-50 flex h-[500px] w-[360px] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-border-subtle bg-plum/90 shadow-2xl backdrop-blur-xl md:bottom-24"
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
           >
-            <div className="flex items-center justify-between border-b border-border-subtle bg-graphite/50 px-4 py-3">
+            <div className="flex items-center justify-between border-b border-border-subtle bg-plum/50 px-4 py-3 backdrop-blur-md">
               <div>
                 <p className="text-sm font-semibold text-white-text">Помощник NATALI NEERO</p>
                 <p className="text-xs text-text-secondary">AI-консультант</p>

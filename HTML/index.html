@@ -10,19 +10,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --graphite: #17161b;
-      --plum: #241a2b;
-      --indigo: #242842;
-      --milk: #f6f0e8;
-      --sand: #e8d8c4;
-      --gold: #d5a85d;
-      --peach: #e79c7c;
-      --berry: #a94c70;
-      --white: #fffdfc;
-      --text-sec: #d8d1d9;
-      --text-dark: #252129;
-      --border: rgba(255,255,255,0.12);
-      --card: rgba(255,255,255,0.06);
+      --graphite: #152040;
+      --plum: #2a1f52;
+      --indigo: #2d4a8a;
+      --milk: rgba(255,255,255,0.85);
+      --sand: #ddd6f3;
+      --gold: #d4c8ff;
+      --peach: #b8a8f0;
+      --berry: #8b7ec8;
+      --white: #faf8ff;
+      --text-sec: rgba(245,242,255,0.78);
+      --text-dark: #1e1840;
+      --border: rgba(255,255,255,0.18);
+      --card: rgba(255,255,255,0.08);
       --font-h: 'Cormorant Garamond', Georgia, serif;
       --font-b: 'Manrope', system-ui, sans-serif;
     }
@@ -30,12 +30,14 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: var(--font-b);
-      background: var(--graphite);
+      background-color: #243878;
+      background-image: url("images/bg-watercolor.png");
+      background-size: cover;
+      background-position: center top;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
       color: var(--white);
       line-height: 1.6;
-      background-image:
-        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(213,168,93,.08) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(169,76,112,.06) 0%, transparent 50%);
     }
     a { color: var(--gold); text-decoration: none; transition: color .3s; }
     a:hover { color: var(--peach); }
@@ -49,7 +51,7 @@
       transition: background .4s, backdrop-filter .4s;
     }
     header.scrolled {
-      background: rgba(23,22,27,.85);
+      background: rgba(42,31,82,.35);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
@@ -65,17 +67,25 @@
       font-size: .9375rem; font-weight: 600; border: none; cursor: pointer;
       transition: all .3s;
     }
-    .btn-gold { background: var(--gold); color: var(--graphite); }
-    .btn-gold:hover { background: #c99a50; box-shadow: 0 0 30px rgba(213,168,93,.3); color: var(--graphite); }
-    .btn-outline { background: var(--card); color: var(--white); border: 1px solid var(--border); backdrop-filter: blur(8px); }
-    .btn-outline:hover { border-color: rgba(213,168,93,.4); background: rgba(255,255,255,.1); color: var(--white); }
+    .btn-gold {
+      background: linear-gradient(135deg, #f0ebff 0%, #c4b5fd 50%, #a89ee8 100%);
+      color: var(--graphite);
+      box-shadow: 0 4px 24px rgba(164,148,255,.25);
+    }
+    .btn-gold:hover {
+      background: linear-gradient(135deg, #f5f0ff 0%, #d4c8ff 50%, #b8a8f0 100%);
+      box-shadow: 0 8px 32px rgba(164,148,255,.4);
+      color: var(--graphite);
+    }
+    .btn-outline { background: var(--card); color: var(--white); border: 1px solid var(--border); backdrop-filter: blur(12px); }
+    .btn-outline:hover { border-color: rgba(212,200,255,.5); background: rgba(255,255,255,.12); color: var(--white); }
     .menu-btn { background: none; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; display: block; }
     @media (min-width: 1024px) { nav { display: flex; } .menu-btn { display: none; } }
 
     /* Mobile menu */
     .mobile-nav {
       display: none; position: fixed; inset: 0; z-index: 200;
-      background: rgba(23,22,27,.97); backdrop-filter: blur(20px);
+      background: rgba(42,31,82,.85); backdrop-filter: blur(20px);
       padding: 5rem 1.25rem 2rem;
     }
     .mobile-nav.open { display: flex; flex-direction: column; gap: 1.5rem; }
@@ -104,18 +114,24 @@
 
     /* Sections */
     section { padding: 5rem 0; }
-    .light { background: var(--milk); color: var(--text-dark); }
-    .light p { color: rgba(37,33,41,.75); }
+    .light {
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(255,255,255,.14);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      color: var(--white);
+    }
+    .light p { color: var(--text-sec); }
     h2 { font-family: var(--font-h); font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.1; margin-bottom: 1rem; }
     .section-sub { font-size: 1.125rem; max-width: 40rem; margin-bottom: 3rem; }
-    .light .section-sub { color: rgba(37,33,41,.65); }
+    .light .section-sub { color: var(--text-sec); }
     .dark .section-sub { color: var(--text-sec); }
 
     /* Quote */
     blockquote {
-      background: white; border-radius: 1rem; padding: 2rem;
-      border: 1px solid rgba(37,33,41,.1); position: relative;
-      font-family: var(--font-h); font-size: 1.5rem; line-height: 1.4; color: var(--text-dark);
+      background: rgba(255,255,255,.08); border-radius: 1rem; padding: 2rem;
+      border: 1px solid var(--border); backdrop-filter: blur(12px); position: relative;
+      font-family: var(--font-h); font-size: 1.5rem; line-height: 1.4; color: var(--white);
     }
     blockquote::before { content: ''; position: absolute; left: -4px; top: 1.5rem; width: 4px; height: 3rem; background: var(--gold); border-radius: 2px; }
 
@@ -127,7 +143,7 @@
       background: var(--card); border: 1px solid var(--border); border-radius: 1rem;
       padding: 2rem; backdrop-filter: blur(12px); transition: border-color .4s, box-shadow .4s;
     }
-    .card:hover { border-color: rgba(213,168,93,.3); box-shadow: 0 0 40px rgba(213,168,93,.08); }
+    .card:hover { border-color: rgba(212,200,255,.4); box-shadow: 0 0 40px rgba(164,148,255,.12); }
     .card h3 { font-family: var(--font-h); font-size: 1.5rem; margin-bottom: .75rem; }
     .card p { font-size: .9375rem; color: var(--text-sec); margin-bottom: 1rem; }
     .card ul { list-style: none; margin-bottom: 1.25rem; }
@@ -139,26 +155,29 @@
     @media (min-width: 1024px) { .about-grid { grid-template-columns: 1fr 1.2fr; } }
     .about-photo { position: relative; max-width: 24rem; margin: 0 auto; }
     .about-photo img { border-radius: 1rem; width: 100%; aspect-ratio: 3/4; object-fit: cover; }
-    .badge { position: absolute; bottom: -1rem; right: -1rem; background: white; border-radius: .75rem; padding: 1rem; box-shadow: 0 8px 30px rgba(0,0,0,.1); text-align: center; }
+    .badge { position: absolute; bottom: -1rem; right: -1rem; background: rgba(255,255,255,.08); border: 1px solid var(--border); border-radius: .75rem; padding: 1rem; backdrop-filter: blur(12px); text-align: center; }
     .badge strong { font-family: var(--font-h); font-size: 2rem; color: var(--gold); display: block; }
-    .badge span { font-size: .75rem; color: rgba(37,33,41,.6); }
+    .badge span { font-size: .75rem; color: var(--text-sec); }
 
     /* Contact */
     .contact-form { max-width: 36rem; margin: 0 auto; }
     .form-group { margin-bottom: 1.25rem; }
     label { display: block; font-size: .875rem; font-weight: 500; margin-bottom: .4rem; }
-    .light label { color: var(--text-dark); }
+    .light label { color: var(--white); }
     input, select, textarea {
       width: 100%; padding: .75rem 1rem; border-radius: .75rem;
-      border: 1px solid rgba(37,33,41,.15); background: white;
-      font-family: var(--font-b); font-size: 1rem; color: var(--text-dark);
+      border: 1px solid var(--border); background: rgba(255,255,255,.15);
+      backdrop-filter: blur(12px);
+      font-family: var(--font-b); font-size: 1rem; color: var(--white);
       outline: none; transition: border-color .3s;
     }
-    input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+    input::placeholder, textarea::placeholder { color: var(--text-sec); }
+    input:focus, select:focus, textarea:focus { border-color: rgba(212,200,255,.6); }
+    select option { background: #2a1f52; color: #faf8ff; }
     textarea { resize: vertical; min-height: 120px; }
 
     /* Footer */
-    footer { border-top: 1px solid var(--border); padding: 4rem 0 2rem; background: rgba(36,26,43,.5); }
+    footer { border-top: 1px solid var(--border); padding: 4rem 0 2rem; background: rgba(42,31,82,.25); backdrop-filter: blur(12px); }
     .footer-grid { display: grid; gap: 2rem; }
     @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
     .footer-logo { font-family: var(--font-h); font-size: 1.5rem; font-weight: 600; letter-spacing: .08em; }
@@ -167,7 +186,7 @@
     /* Floating bar mobile */
     .float-bar {
       display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
-      border-top: 1px solid var(--border); background: rgba(23,22,27,.95); backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border); background: rgba(42,31,82,.7); backdrop-filter: blur(16px);
     }
     .float-bar a { flex: 1; display: flex; align-items: center; justify-content: center; gap: .5rem; padding: .875rem; font-size: .875rem; font-weight: 500; color: var(--white); }
     .float-bar a + a { border-left: 1px solid var(--border); color: var(--gold); }
@@ -300,7 +319,7 @@
     <div class="container">
       <h2>Избранные проекты</h2>
       <p class="section-sub">В каждом проекте — своя задача, атмосфера и визуальный язык.</p>
-      <p style="text-align:center;padding:2rem;background:white;border-radius:1rem;border:1px solid rgba(37,33,41,.1);">
+      <p style="text-align:center;padding:2rem;background:rgba(255,255,255,.08);border-radius:1rem;border:1px solid var(--border);backdrop-filter:blur(12px);">
         [Добавить реальные проекты портфолио]<br><br>
         <small>Полная версия с фильтрами и кейсами — в Next.js-проекте (корень репозитория)</small>
       </p>
@@ -318,7 +337,7 @@
         <p style="margin-top:1rem;">Я AI-специалист и художник с опытом более 10 лет. Создаю видео, изображения, сайты и визуальное оформление для экспертов, брендов и творческих проектов.</p>
         <p style="margin-top:1rem;">Мне важно внимательно услышать человека и почувствовать его проект. Поэтому я не работаю по одному шаблону — для каждой задачи ищу собственную интонацию и визуальное решение.</p>
         <div style="margin-top:2rem;display:flex;flex-wrap:wrap;gap:1rem;">
-          <a href="#portfolio" class="btn btn-outline" style="color:var(--text-dark);border-color:rgba(37,33,41,.15);background:white;">Посмотреть работы</a>
+          <a href="#portfolio" class="btn btn-outline">Посмотреть работы</a>
           <a href="https://vk.ru/id170079854" target="_blank" rel="noopener" class="btn btn-gold">Написать ВКонтакте</a>
         </div>
       </div>
@@ -364,7 +383,7 @@
           <label for="description">Описание задачи *</label>
           <textarea id="description" name="description" required placeholder="Расскажите о задаче..."></textarea>
         </div>
-        <p style="font-size:.8125rem;color:rgba(37,33,41,.6);margin-bottom:1.25rem;">
+        <p style="font-size:.8125rem;color:var(--text-sec);margin-bottom:1.25rem;">
           Отправляя форму, вы соглашаетесь на обработку персональных данных.
           Для полной версии с API — используйте Next.js-проект.
         </p>

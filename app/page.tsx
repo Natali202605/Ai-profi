@@ -13,12 +13,10 @@ import { Cooperation } from "@/components/sections/Cooperation";
 import { FAQ } from "@/components/sections/FAQ";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { FinalCTA } from "@/components/sections/FinalCTA";
-import { BackgroundGlow } from "@/components/ui/BackgroundGlow";
 
 export default function HomePage() {
   return (
     <>
-      <BackgroundGlow />
       <Hero />
       <Intro />
       <Services />

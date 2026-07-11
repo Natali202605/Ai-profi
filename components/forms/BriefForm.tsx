@@ -36,7 +36,7 @@ export function BriefForm({ service, register }: BriefFormProps) {
   if (!questions) return null;
 
   return (
-    <div className="rounded-xl border border-gold/20 bg-gold/5 p-5">
+    <div className="glass-panel p-5">
       <p className="mb-4 text-sm font-medium text-text-dark">Дополнительные вопросы</p>
       <div className="space-y-4">
         {questions.map((q) => (
@@ -47,7 +47,7 @@ export function BriefForm({ service, register }: BriefFormProps) {
             <input
               id={q.id}
               {...register(q.id as keyof LeadFormData)}
-              className="w-full rounded-lg border border-text-dark/10 bg-white px-3 py-2 text-sm text-text-dark outline-none focus:border-gold"
+              className="glass-input w-full rounded-lg px-3 py-2 text-sm"
               placeholder={q.placeholder}
             />
           </div>

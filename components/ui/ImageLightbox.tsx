@@ -45,7 +45,7 @@ export function ImageLightbox({ images, alt }: ImageLightboxProps) {
 
       {open && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-graphite/95 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-plum/90 p-4 backdrop-blur-md"
           role="dialog"
           aria-modal="true"
           aria-label="Просмотр изображения"

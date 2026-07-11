@@ -16,7 +16,7 @@ export function Cases() {
         <div className="grid gap-8 md:grid-cols-2">
           {caseStudies.map((caseItem, i) => (
             <RevealAnimation key={caseItem.id} delay={i * 0.1}>
-              <article className="group overflow-hidden rounded-2xl border border-text-dark/10 bg-white shadow-sm transition-shadow hover:shadow-md">
+              <article className="glass-panel group overflow-hidden transition-shadow hover:shadow-[0_8px_32px_rgba(164,148,255,0.12)]">
                 <div className="relative aspect-[16/9] overflow-hidden">
                   <Image
                     src={caseItem.cover}
@@ -36,7 +36,7 @@ export function Cases() {
                     {caseItem.services.map((s) => (
                       <span
                         key={s}
-                        className="rounded-full bg-sand/50 px-3 py-1 text-xs text-text-dark/70"
+                        className="rounded-full bg-white/12 px-3 py-1 text-xs text-text-secondary backdrop-blur-sm"
                       >
                         {s}
                       </span>

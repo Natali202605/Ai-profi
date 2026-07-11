@@ -105,7 +105,7 @@ export function ContactForm() {
                 <input
                   id="name"
                   {...register("name")}
-                  className="w-full rounded-xl border border-text-dark/15 bg-white px-4 py-3 text-text-dark outline-none transition-colors focus:border-gold"
+                  className="glass-input w-full"
                   placeholder="Ваше имя"
                 />
                 {errors.name && <p className="mt-1 text-sm text-berry">{errors.name.message}</p>}
@@ -117,7 +117,7 @@ export function ContactForm() {
                 <input
                   id="contact"
                   {...register("contact")}
-                  className="w-full rounded-xl border border-text-dark/15 bg-white px-4 py-3 text-text-dark outline-none transition-colors focus:border-gold"
+                  className="glass-input w-full"
                   placeholder="+7 ... или @username"
                 />
                 {errors.contact && <p className="mt-1 text-sm text-berry">{errors.contact.message}</p>}
@@ -131,7 +131,7 @@ export function ContactForm() {
               <input
                 id="projectUrl"
                 {...register("projectUrl")}
-                className="w-full rounded-xl border border-text-dark/15 bg-white px-4 py-3 text-text-dark outline-none transition-colors focus:border-gold"
+                className="glass-input w-full"
                 placeholder="https://..."
               />
             </div>
@@ -147,7 +147,7 @@ export function ContactForm() {
                   register("service").onChange(e);
                   trackEvent("service_select", { service: e.target.value });
                 }}
-                className="w-full rounded-xl border border-text-dark/15 bg-white px-4 py-3 text-text-dark outline-none transition-colors focus:border-gold"
+                className="glass-input w-full"
               >
                 <option value="">Выберите услугу</option>
                 {serviceOptions.map((s) => (
@@ -169,7 +169,7 @@ export function ContactForm() {
                 id="description"
                 {...register("description")}
                 rows={4}
-                className="w-full resize-none rounded-xl border border-text-dark/15 bg-white px-4 py-3 text-text-dark outline-none transition-colors focus:border-gold"
+                className="glass-input w-full resize-none"
                 placeholder="Расскажите о задаче..."
               />
               {errors.description && (
@@ -185,7 +185,7 @@ export function ContactForm() {
                 <input
                   id="deadline"
                   {...register("deadline")}
-                  className="w-full rounded-xl border border-text-dark/15 bg-white px-4 py-3 text-text-dark outline-none transition-colors focus:border-gold"
+                  className="glass-input w-full"
                   placeholder="Например, через 2 недели"
                 />
               </div>
@@ -196,7 +196,7 @@ export function ContactForm() {
                 <input
                   id="budget"
                   {...register("budget")}
-                  className="w-full rounded-xl border border-text-dark/15 bg-white px-4 py-3 text-text-dark outline-none transition-colors focus:border-gold"
+                  className="glass-input w-full"
                   placeholder="Необязательно"
                 />
               </div>

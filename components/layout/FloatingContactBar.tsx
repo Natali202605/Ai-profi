@@ -7,7 +7,7 @@ import { trackEvent } from "@/lib/analytics";
 
 export function FloatingContactBar() {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border-subtle bg-graphite/95 backdrop-blur-xl md:hidden">
+    <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border-subtle bg-plum/70 backdrop-blur-xl md:hidden">
       <div className="flex">
         <a
           href={VK_PROFILE_URL}

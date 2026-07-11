@@ -26,9 +26,9 @@ export function VKSection() {
         <div className="grid gap-12 lg:grid-cols-2">
           <RevealAnimation direction="left">
             <div className="rounded-2xl border border-border-subtle bg-card-bg p-6 backdrop-blur-md">
-              <div className="mb-4 h-32 rounded-xl bg-gradient-to-r from-indigo-deep via-plum to-berry/40" />
+              <div className="mb-4 h-32 rounded-xl bg-gradient-to-r from-indigo-deep/80 via-plum/70 to-berry/50" />
               <div className="flex items-end gap-4">
-                <div className="h-20 w-20 -mt-10 rounded-full border-4 border-graphite bg-sand" />
+                <div className="h-20 w-20 -mt-10 rounded-full border-4 border-plum/60 bg-sand" />
                 <div>
                   <p className="font-semibold text-white-text">[Название сообщества]</p>
                   <p className="text-sm text-text-secondary">[Описание проекта]</p>

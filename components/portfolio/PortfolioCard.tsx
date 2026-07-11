@@ -40,7 +40,7 @@ export function PortfolioCard({ project, index = 0 }: PortfolioCardProps) {
           className="object-cover transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 50vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/20 to-transparent opacity-80 transition-opacity group-hover:opacity-90" />
+        <div className="absolute inset-0 bg-gradient-to-t from-indigo-deep/80 via-indigo-deep/20 to-transparent opacity-80 transition-opacity group-hover:opacity-90" />
       </div>
 
       <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
@@ -64,7 +64,7 @@ export function PortfolioCard({ project, index = 0 }: PortfolioCardProps) {
         </div>
       </div>
 
-      <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 shadow-[inset_0_0_60px_rgba(213,168,93,0.1)] transition-opacity group-hover:opacity-100" />
+      <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 shadow-[inset_0_0_60px_rgba(164,148,255,0.15)] transition-opacity group-hover:opacity-100" />
     </Link>
   );
 }
