@@ -1,11 +1,10 @@
 import type { LeadFormData, ChatbotLeadData } from "./validation";
+import { pushLeadToMemory } from "./admin-leads";
 
 type LeadPayload = LeadFormData | ChatbotLeadData;
 
-const leadsStore: LeadPayload[] = [];
-
 export async function saveLead(data: LeadPayload) {
-  leadsStore.push(data);
+  pushLeadToMemory(data);
 
   if (process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY) {
     try {

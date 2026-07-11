@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { ChatWidget } from "@/components/chatbot/ChatWidget";
-import { FloatingContactBar } from "@/components/layout/FloatingContactBar";
-import { CookieNotice } from "@/components/layout/CookieNotice";
-import { YandexMetrika } from "@/components/layout/YandexMetrika";
+import { SiteChrome } from "@/components/layout/SiteChrome";
 import { JsonLd } from "@/components/layout/JsonLd";
 import { ScrollTracker } from "@/components/layout/ScrollTracker";
-import { AnimatedBackground } from "@/components/ui/AnimatedBackground";
+import { YandexMetrika } from "@/components/layout/YandexMetrika";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin", "cyrillic"],
@@ -59,16 +54,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ru" className={`${cormorant.variable} ${manrope.variable}`}>
       <body className="canvas-texture min-h-screen">
-        <AnimatedBackground />
         <JsonLd />
         <ScrollTracker />
         <YandexMetrika />
-        <Header />
-        <main className="pb-16 md:pb-0">{children}</main>
-        <Footer />
-        <ChatWidget />
-        <FloatingContactBar />
-        <CookieNotice />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );
