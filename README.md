@@ -38,7 +38,20 @@ npm run dev
 
 ## Деплой
 
-Проект готов к размещению на Vercel:
+### GitHub Pages (HTML-версия)
+
+Статическая версия из папки `HTML` публикуется автоматически при каждом push в `main`.
+
+Сайт: **https://natali202605.github.io/Ai-profi/**
+
+### Vercel (полный Next.js-сайт)
+
+1. Перейдите на [vercel.com/new](https://vercel.com/new)
+2. Импортируйте репозиторий `Natali202605/Ai-profi`
+3. Нажмите **Deploy** — настройки подхватятся из `vercel.json`
+4. Добавьте переменные окружения из `.env.example` в Settings → Environment Variables
+
+Или локально:
 
 ```bash
 npm run build
