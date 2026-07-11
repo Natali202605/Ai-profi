@@ -77,7 +77,7 @@ export function Hero() {
           </RevealAnimation>
         </div>
 
-        <div className="relative mx-auto w-full max-w-xl flex-1 lg:mx-0 lg:max-w-[34rem] lg:-translate-y-6">
+        <div className="relative mx-auto w-full max-w-sm flex-1 lg:mx-0 lg:max-w-[28rem] lg:-translate-y-6">
           <RevealAnimation direction="left" delay={0.15}>
             <div className="relative">
               <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-border-subtle bg-graphite/20 shadow-[0_24px_64px_rgba(14,18,48,0.35)]">
@@ -86,9 +86,9 @@ export function Hero() {
                   alt={SPECIALIST_NAME}
                   fill
                   priority
-                  quality={95}
-                  className="object-cover object-[center_12%] contrast-[1.03] saturate-[1.05]"
-                  sizes="(max-width: 1024px) 92vw, 544px"
+                  quality={100}
+                  className="object-cover object-[center_12%] contrast-[1.08] saturate-[1.06] brightness-[1.02]"
+                  sizes="(max-width: 1024px) 85vw, 448px"
                 />
               </div>
 
