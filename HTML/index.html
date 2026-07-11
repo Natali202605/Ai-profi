@@ -56,26 +56,52 @@
     }
     .bg-glow-3 {
       bottom: -5%; left: 30%; width: 45vh; height: 45vh;
-      background: radial-gradient(circle, rgba(130,100,210,.4) 0%, transparent 70%);
-      animation-duration: 28s; animation-delay: 8s;
+      background: radial-gradient(circle, rgba(200,170,120,.35) 0%, transparent 70%);
+      animation-duration: 24s; animation-delay: 6s;
     }
+    .bg-vignette {
       position: absolute; inset: 0;
       background:
-        linear-gradient(180deg, rgba(26,24,72,.3) 0%, transparent 40%, rgba(15,26,64,.4) 100%),
-        rgba(30,40,96,.15);
+        linear-gradient(180deg, rgba(26,24,72,.28) 0%, transparent 40%, rgba(15,26,64,.38) 100%),
+        rgba(30,40,96,.12);
+    }
+    .bg-shimmer {
+      position: absolute; inset: 0; overflow: hidden;
+    }
+    .bg-shimmer::after {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 60%;
+      background: linear-gradient(90deg, transparent, rgba(214,188,120,.1), transparent);
+      transform: skewX(-12deg);
+      animation: shimmer-sweep 14s ease-in-out infinite;
+      animation-delay: 2s;
+    }
+    .bg-sparkle {
+      position: absolute; border-radius: 50%; background: #fff;
+      box-shadow: 0 0 6px rgba(255,255,255,.8);
+      animation: sparkle-pulse 4s ease-in-out infinite;
     }
     @keyframes bg-drift {
-      0%, 100% { transform: scale(1) translate(0, 0); }
-      25% { transform: scale(1.04) translate(-1%, -.5%); }
-      50% { transform: scale(1.06) translate(-1.5%, -.8%); }
-      75% { transform: scale(1.03) translate(.5%, .4%); }
+      0%, 100% { transform: scale(1) translate(0, 0) rotate(0deg); }
+      25% { transform: scale(1.05) translate(-1.5%, -.8%) rotate(.3deg); }
+      50% { transform: scale(1.08) translate(-2%, -1.2%) rotate(.4deg); }
+      75% { transform: scale(1.04) translate(1%, .5%) rotate(-.2deg); }
     }
     @keyframes glow-float {
-      0%, 100% { transform: translate(0, 0) scale(1); opacity: .4; }
-      50% { transform: translate(40px, 30px) scale(1.12); opacity: .55; }
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: .45; }
+      50% { transform: translate(50px, 35px) scale(1.18); opacity: .6; }
+    }
+    @keyframes shimmer-sweep {
+      0%, 100% { left: -80%; opacity: 0; }
+      10% { opacity: 1; }
+      50% { left: 120%; opacity: 1; }
+      60% { opacity: 0; }
+    }
+    @keyframes sparkle-pulse {
+      0%, 100% { opacity: .2; transform: scale(1); }
+      50% { opacity: .9; transform: scale(1.4); }
     }
     @media (prefers-reduced-motion: reduce) {
-      .bg-image, .bg-glow { animation: none; }
+      .bg-image, .bg-glow, .bg-shimmer::after, .bg-sparkle { animation: none; }
     }
     a { color: var(--gold); text-decoration: none; transition: color .3s; }
     a:hover { color: var(--peach); }
@@ -270,6 +296,13 @@
     <div class="bg-glow bg-glow-1"></div>
     <div class="bg-glow bg-glow-2"></div>
     <div class="bg-glow bg-glow-3"></div>
+    <div class="bg-shimmer"></div>
+    <span class="bg-sparkle" style="top:12%;left:18%;width:3px;height:3px;animation-delay:0s"></span>
+    <span class="bg-sparkle" style="top:22%;left:72%;width:2px;height:2px;animation-delay:1.2s"></span>
+    <span class="bg-sparkle" style="top:38%;left:45%;width:2px;height:2px;animation-delay:.6s"></span>
+    <span class="bg-sparkle" style="top:55%;left:82%;width:3px;height:3px;animation-delay:2s"></span>
+    <span class="bg-sparkle" style="top:68%;left:28%;width:2px;height:2px;animation-delay:1.8s"></span>
+    <span class="bg-sparkle" style="top:78%;left:58%;width:3px;height:3px;animation-delay:.4s"></span>
     <div class="bg-vignette"></div>
   </div>
 
