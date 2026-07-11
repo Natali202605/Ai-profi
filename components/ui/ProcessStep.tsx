@@ -3,16 +3,15 @@ type ProcessStepProps = {
   title: string;
   description: string;
   light?: boolean;
+  className?: string;
 };
 
-export function ProcessStep({ step, title, description, light }: ProcessStepProps) {
+export function ProcessStep({ step, title, description, light, className }: ProcessStepProps) {
   return (
     <div
-      className={`rounded-2xl border p-6 md:p-8 ${
-        light
-          ? "glass-panel"
-          : "card-glass"
-      }`}
+      className={`flex h-full flex-col rounded-2xl border p-6 md:p-8 ${
+        light ? "glass-panel" : "card-glass"
+      } ${className || ""}`}
     >
       <span
         className={`mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold ${

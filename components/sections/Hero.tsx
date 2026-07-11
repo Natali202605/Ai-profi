@@ -82,13 +82,14 @@ export function Hero() {
                 />
               </div>
 
-              <div className="glass-panel-soft mt-5 rounded-2xl px-5 py-5 text-center md:px-6 md:py-6 lg:text-left">
-                <p className="font-heading text-[1.75rem] leading-tight text-white-text md:text-3xl">
-                  {hero.specialistName}
+              <div className="glass-panel-soft mt-5 rounded-2xl px-4 py-3.5 text-center lg:text-left">
+                <p className="text-[0.8125rem] leading-snug md:text-sm">
+                  <span className="font-heading text-base text-white-text md:text-lg">{hero.specialistName}</span>
+                  <span className="mx-1.5 text-text-secondary/45">·</span>
+                  <span className="text-gold">{hero.specialistRoles}</span>
+                  <span className="mx-1.5 text-text-secondary/45">·</span>
+                  <span className="text-text-secondary">{hero.specialistExperience}</span>
                 </p>
-                <p className="mt-2 break-words-safe text-sm leading-relaxed text-gold md:text-base">{hero.specialistRoles}</p>
-                <div className="gold-line mx-auto my-4 lg:mx-0" />
-                <p className="text-sm text-text-secondary">{hero.specialistExperience}</p>
               </div>
             </div>
           </RevealAnimation>

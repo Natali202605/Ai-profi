@@ -13,10 +13,10 @@ export function Cases() {
           <SectionHeading light title="Кейсы" subtitle="Реальные проекты с разными задачами и визуальными решениями." />
         </RevealAnimation>
 
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid items-stretch gap-8 md:grid-cols-2">
           {caseStudies.map((caseItem, i) => (
-            <RevealAnimation key={caseItem.id} delay={i * 0.1}>
-              <article className="glass-panel group overflow-hidden transition-shadow hover:shadow-[0_8px_32px_rgba(164,148,255,0.12)]">
+            <RevealAnimation key={caseItem.id} delay={i * 0.1} className="h-full">
+              <article className="glass-panel group flex h-full flex-col overflow-hidden transition-shadow hover:shadow-[0_8px_32px_rgba(164,148,255,0.12)]">
                 <div className="relative aspect-[16/9] overflow-hidden">
                   <Image
                     src={caseItem.cover}
@@ -26,7 +26,7 @@ export function Cases() {
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
-                <div className="p-6 md:p-8">
+                <div className="flex flex-1 flex-col p-6 md:p-8">
                   <p className="mb-1 text-xs font-medium uppercase tracking-wider text-berry">
                     {caseItem.client}
                   </p>

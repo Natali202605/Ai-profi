@@ -15,10 +15,10 @@ export function Cooperation() {
           />
         </RevealAnimation>
 
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid items-stretch gap-6 md:grid-cols-3">
           {cooperationFormats.map((format, i) => (
-            <RevealAnimation key={format.title} delay={i * 0.1}>
-              <div className="glass-panel h-full p-6 md:p-8">
+            <RevealAnimation key={format.title} delay={i * 0.1} className="h-full">
+              <div className="glass-panel flex h-full flex-col p-6 md:p-8">
                 <h3 className="heading-display mb-3 text-xl text-white-text">{format.title}</h3>
                 <p className="text-sm leading-relaxed text-text-secondary">{format.description}</p>
               </div>

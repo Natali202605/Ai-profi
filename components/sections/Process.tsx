@@ -14,10 +14,10 @@ export function Process() {
           />
         </RevealAnimation>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
           {processSteps.map((step, i) => (
-            <RevealAnimation key={step.step} delay={i * 0.08}>
-              <ProcessStep {...step} light />
+            <RevealAnimation key={step.step} delay={i * 0.08} className="h-full">
+              <ProcessStep {...step} light className="h-full" />
             </RevealAnimation>
           ))}
         </div>

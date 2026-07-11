@@ -38,14 +38,14 @@ export function Services() {
           />
         </RevealAnimation>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid items-stretch gap-6 md:grid-cols-2 xl:grid-cols-3">
           {services.items.map((service, i) => {
             const meta = serviceMeta.find((item) => item.id === service.id);
             const Icon = iconMap[meta?.icon || "layers"] || Layers;
             const slug = meta?.slug || service.id;
 
             return (
-              <RevealAnimation key={service.id} delay={i * 0.08}>
+              <RevealAnimation key={service.id} delay={i * 0.08} className="h-full">
                 <article className="card-glass group flex h-full flex-col p-6 transition-all duration-500 hover:border-gold/40 hover:shadow-[0_0_40px_rgba(164,148,255,0.12)] md:p-8">
                   <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gold/10 text-gold transition-colors group-hover:bg-gold/20">
                     <Icon className="h-6 w-6" />

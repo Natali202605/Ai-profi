@@ -34,9 +34,15 @@ export function Reviews() {
         <RevealAnimation>
           <SectionHeading title={reviews.title} subtitle={reviews.subtitle} align="center" />
         </RevealAnimation>
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid items-stretch gap-6 lg:grid-cols-3">
           {visibleReviews.map((review, i) => (
-            <TestimonialCard key={review.id} review={review} featured={i === 0} />
+            <RevealAnimation
+              key={review.id}
+              delay={i * 0.08}
+              className={i === 0 ? "h-full lg:col-span-2 lg:row-span-2" : "h-full"}
+            >
+              <TestimonialCard review={review} featured={i === 0} className="h-full" />
+            </RevealAnimation>
           ))}
         </div>
         <RevealAnimation delay={0.2}>
