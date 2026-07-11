@@ -2,19 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { ElectricSparks } from "@/components/ui/ElectricSparks";
-
-const sparkles = [
-  { top: "12%", left: "18%", size: 3, delay: 0 },
-  { top: "22%", left: "72%", size: 2, delay: 1.2 },
-  { top: "38%", left: "45%", size: 2, delay: 0.6 },
-  { top: "55%", left: "82%", size: 3, delay: 2 },
-  { top: "68%", left: "28%", size: 2, delay: 1.8 },
-  { top: "78%", left: "58%", size: 3, delay: 0.4 },
-  { top: "30%", left: "90%", size: 2, delay: 2.4 },
-  { top: "85%", left: "12%", size: 2, delay: 1.5 },
-  { top: "48%", left: "8%", size: 3, delay: 3 },
-  { top: "15%", left: "52%", size: 2, delay: 2.8 },
-];
+import { TwinklingDots } from "@/components/ui/TwinklingDots";
 
 export function AnimatedBackground() {
   const prefersReducedMotion = useReducedMotion();
@@ -98,27 +86,14 @@ export function AnimatedBackground() {
         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", repeatDelay: 4 }}
       />
 
-      {sparkles.map((s, i) => (
-        <motion.span
-          key={i}
-          className="absolute rounded-full bg-white will-change-transform"
-          style={{
-            top: s.top,
-            left: s.left,
-            width: s.size,
-            height: s.size,
-            boxShadow: "0 0 6px rgba(255,255,255,0.8)",
-          }}
-          animate={{ opacity: [0.2, 0.9, 0.3, 0.8, 0.2], scale: [1, 1.4, 1, 1.3, 1] }}
-          transition={{ duration: 4 + (i % 3), repeat: Infinity, ease: "easeInOut", delay: s.delay }}
-        />
-      ))}
-
-      <ElectricSparks />
-
       <div className="absolute inset-0 bg-[#1e2860]/16 mix-blend-multiply" />
       <div className="absolute inset-0 bg-gradient-to-b from-[#1a1848]/28 via-transparent to-[#0f1a40]/38" />
       <div className="absolute inset-0 bg-gradient-to-r from-[#1a1848]/12 via-transparent to-[#1a2860]/18" />
+
+      <div className="absolute inset-0 z-[1]">
+        <ElectricSparks />
+        <TwinklingDots />
+      </div>
     </div>
   );
 }
