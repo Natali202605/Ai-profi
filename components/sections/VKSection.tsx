@@ -38,14 +38,14 @@ export function VKSection() {
                 {["Услуги", "О нас", "Контакты", "Отзывы"].map((tab) => (
                   <span
                     key={tab}
-                    className="rounded-lg bg-white/5 px-3 py-1.5 text-xs text-text-secondary"
+                    className="glass-inset rounded-lg px-3 py-1.5 text-xs text-text-secondary"
                   >
                     {tab}
                   </span>
                 ))}
               </div>
               <div className="mt-4 space-y-3">
-                <div className="rounded-xl bg-white/5 p-4">
+                <div className="glass-inset rounded-xl p-4">
                   <p className="text-xs text-gold">Закреплённый пост</p>
                   <p className="mt-1 text-sm text-text-secondary">
                     [Текст закреплённой публикации]
@@ -53,7 +53,7 @@ export function VKSection() {
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   {["Услуга 1", "Услуга 2"].map((s) => (
-                    <div key={s} className="rounded-lg bg-white/5 p-3 text-center text-xs text-text-secondary">
+                    <div key={s} className="glass-inset rounded-lg p-3 text-center text-xs text-text-secondary">
                       {s}
                     </div>
                   ))}

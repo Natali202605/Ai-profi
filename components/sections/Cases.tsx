@@ -30,13 +30,13 @@ export function Cases() {
                   <p className="mb-1 text-xs font-medium uppercase tracking-wider text-berry">
                     {caseItem.client}
                   </p>
-                  <h3 className="heading-display mb-3 text-xl text-text-dark">{caseItem.task}</h3>
-                  <p className="mb-4 text-sm leading-relaxed text-text-dark/70">{caseItem.solution}</p>
+                  <h3 className="heading-display mb-3 text-xl text-white-text">{caseItem.task}</h3>
+                  <p className="mb-4 text-sm leading-relaxed text-text-secondary">{caseItem.solution}</p>
                   <div className="mb-4 flex flex-wrap gap-2">
                     {caseItem.services.map((s) => (
                       <span
                         key={s}
-                        className="rounded-full bg-white/12 px-3 py-1 text-xs text-text-secondary backdrop-blur-sm"
+                        className="tag-glass"
                       >
                         {s}
                       </span>

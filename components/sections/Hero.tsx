@@ -22,7 +22,7 @@ export function Hero() {
   return (
     <section id="top" className="relative min-h-screen overflow-hidden pt-20 md:pt-24">
       <div className="container-site relative z-10 flex min-h-[calc(100vh-5rem)] flex-col justify-center py-16 lg:flex-row lg:items-center lg:gap-12">
-        <div className="flex-1">
+        <div className="flex-1 glass-panel-soft rounded-3xl p-8 md:p-10 lg:p-12">
           <RevealAnimation>
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-gold">
               AI-специалист × художник
@@ -138,7 +138,7 @@ export function Hero() {
                 {floatingTags.map((tag, i) => (
                   <motion.span
                     key={tag}
-                    className="rounded-full border border-border-subtle bg-card-bg px-3 py-1 text-xs text-text-secondary backdrop-blur-sm"
+                    className="tag-glass"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1 + i * 0.2 }}

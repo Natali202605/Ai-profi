@@ -7,6 +7,7 @@ export function FinalCTA() {
     <section className="border-t border-border-subtle py-20 md:py-28">
       <div className="container-site text-center">
         <RevealAnimation>
+          <div className="glass-panel-soft mx-auto max-w-3xl rounded-3xl p-10 md:p-14">
           <h2 className="heading-display mb-4 text-balance text-4xl text-white-text md:text-5xl">
             У вас есть идея? Давайте найдём для неё визуальный образ
           </h2>
@@ -19,6 +20,7 @@ export function FinalCTA() {
               Обсудить проект
             </Link>
             <VKButton className="btn-secondary" />
+          </div>
           </div>
         </RevealAnimation>
       </div>

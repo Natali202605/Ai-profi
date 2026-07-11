@@ -10,19 +10,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --graphite: #152040;
+      --graphite: #121830;
       --plum: #2a1f52;
       --indigo: #2d4a8a;
       --milk: rgba(255,255,255,0.85);
       --sand: #ddd6f3;
-      --gold: #d4c8ff;
-      --peach: #b8a8f0;
-      --berry: #8b7ec8;
-      --white: #faf8ff;
-      --text-sec: rgba(245,242,255,0.78);
-      --text-dark: #1e1840;
-      --border: rgba(255,255,255,0.18);
-      --card: rgba(255,255,255,0.08);
+      --gold: #b8a4ff;
+      --peach: #9580e8;
+      --berry: #7c6ad4;
+      --white: #ffffff;
+      --text-sec: rgba(245,242,255,0.92);
+      --text-dark: #181530;
+      --border: rgba(200,188,255,0.28);
+      --card: rgba(44,36,92,0.76);
       --font-h: 'Cormorant Garamond', Georgia, serif;
       --font-b: 'Manrope', system-ui, sans-serif;
     }
@@ -30,14 +30,52 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: var(--font-b);
-      background-color: #243878;
-      background-image: url("images/bg-watercolor.png");
-      background-size: cover;
-      background-position: center top;
-      background-attachment: fixed;
-      background-repeat: no-repeat;
+      background-color: #1e2860;
       color: var(--white);
       line-height: 1.6;
+    }
+
+    .bg-animated { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+    .bg-image {
+      position: absolute; inset: -8%;
+      background: url("images/bg-watercolor.png") center/cover no-repeat;
+      animation: bg-drift 48s ease-in-out infinite;
+    }
+    .bg-glow {
+      position: absolute; border-radius: 50%; filter: blur(80px); opacity: .45;
+      animation: glow-float 32s ease-in-out infinite;
+    }
+    .bg-glow-1 {
+      top: -10%; left: -15%; width: 60vh; height: 60vh;
+      background: radial-gradient(circle, rgba(168,140,255,.45) 0%, transparent 70%);
+    }
+    .bg-glow-2 {
+      top: 30%; right: -15%; width: 55vh; height: 55vh;
+      background: radial-gradient(circle, rgba(100,140,230,.5) 0%, transparent 70%);
+      animation-duration: 38s; animation-delay: 4s;
+    }
+    .bg-glow-3 {
+      bottom: -5%; left: 30%; width: 45vh; height: 45vh;
+      background: radial-gradient(circle, rgba(130,100,210,.4) 0%, transparent 70%);
+      animation-duration: 28s; animation-delay: 8s;
+    }
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, rgba(26,24,72,.3) 0%, transparent 40%, rgba(15,26,64,.4) 100%),
+        rgba(30,40,96,.15);
+    }
+    @keyframes bg-drift {
+      0%, 100% { transform: scale(1) translate(0, 0); }
+      25% { transform: scale(1.04) translate(-1%, -.5%); }
+      50% { transform: scale(1.06) translate(-1.5%, -.8%); }
+      75% { transform: scale(1.03) translate(.5%, .4%); }
+    }
+    @keyframes glow-float {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: .4; }
+      50% { transform: translate(40px, 30px) scale(1.12); opacity: .55; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bg-image, .bg-glow { animation: none; }
     }
     a { color: var(--gold); text-decoration: none; transition: color .3s; }
     a:hover { color: var(--peach); }
@@ -51,7 +89,7 @@
       transition: background .4s, backdrop-filter .4s;
     }
     header.scrolled {
-      background: rgba(42,31,82,.35);
+      background: rgba(42,31,82,.55);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
@@ -96,6 +134,15 @@
     .hero { min-height: 100vh; display: flex; align-items: center; padding: 6rem 0 4rem; }
     .hero-grid { display: grid; gap: 3rem; align-items: center; }
     @media (min-width: 1024px) { .hero-grid { grid-template-columns: 1fr 1fr; } }
+    .hero-content {
+      background: linear-gradient(145deg, rgba(50,40,102,.68) 0%, rgba(36,50,114,.6) 100%);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(200,188,255,.22);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 4px 28px rgba(14,18,48,.22);
+    }
+    @media (min-width: 768px) { .hero-content { padding: 2.5rem 3rem; } }
     .eyebrow { font-size: .75rem; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
     .gold-line { width: 4rem; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin-bottom: 1.5rem; }
     h1 { font-family: var(--font-h); font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.05; font-weight: 500; margin-bottom: 1.5rem; }
@@ -115,10 +162,10 @@
     /* Sections */
     section { padding: 5rem 0; }
     .light {
-      background: rgba(255,255,255,.06);
-      backdrop-filter: blur(14px);
-      border-top: 1px solid rgba(255,255,255,.14);
-      border-bottom: 1px solid rgba(255,255,255,.06);
+      background: linear-gradient(180deg, rgba(44,36,92,.32) 0%, rgba(34,48,108,.24) 100%);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(200,188,255,.14);
+      border-bottom: 1px solid rgba(200,188,255,.08);
       color: var(--white);
     }
     .light p { color: var(--text-sec); }
@@ -129,9 +176,11 @@
 
     /* Quote */
     blockquote {
-      background: rgba(255,255,255,.08); border-radius: 1rem; padding: 2rem;
-      border: 1px solid var(--border); backdrop-filter: blur(12px); position: relative;
+      background: linear-gradient(145deg, rgba(58,48,110,.72) 0%, rgba(42,56,118,.65) 100%);
+      border-radius: 1rem; padding: 2rem;
+      border: 1px solid var(--border); backdrop-filter: blur(20px); position: relative;
       font-family: var(--font-h); font-size: 1.5rem; line-height: 1.4; color: var(--white);
+      box-shadow: 0 8px 32px rgba(18,24,58,.22);
     }
     blockquote::before { content: ''; position: absolute; left: -4px; top: 1.5rem; width: 4px; height: 3rem; background: var(--gold); border-radius: 2px; }
 
@@ -140,14 +189,16 @@
     @media (min-width: 768px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 1200px) { .services-grid { grid-template-columns: repeat(3, 1fr); } }
     .card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 1rem;
-      padding: 2rem; backdrop-filter: blur(12px); transition: border-color .4s, box-shadow .4s;
+      background: linear-gradient(145deg, rgba(52,42,108,.82) 0%, rgba(38,54,122,.76) 50%, rgba(44,36,96,.8) 100%);
+      border: 1px solid var(--border); border-radius: 1rem;
+      padding: 2rem; backdrop-filter: blur(22px); transition: border-color .4s, box-shadow .4s;
+      box-shadow: 0 8px 36px rgba(14,18,48,.28);
     }
     .card:hover { border-color: rgba(212,200,255,.4); box-shadow: 0 0 40px rgba(164,148,255,.12); }
     .card h3 { font-family: var(--font-h); font-size: 1.5rem; margin-bottom: .75rem; }
     .card p { font-size: .9375rem; color: var(--text-sec); margin-bottom: 1rem; }
     .card ul { list-style: none; margin-bottom: 1.25rem; }
-    .card li { font-size: .8125rem; color: rgba(216,209,217,.8); padding: .15rem 0; padding-left: 1rem; position: relative; }
+    .card li { font-size: .8125rem; color: rgba(245,242,255,.85); padding: .15rem 0; padding-left: 1rem; position: relative; }
     .card li::before { content: ''; position: absolute; left: 0; top: .55rem; width: 4px; height: 4px; border-radius: 50%; background: var(--gold); }
 
     /* About */
@@ -203,6 +254,14 @@
 </head>
 <body>
 
+  <div class="bg-animated" aria-hidden="true">
+    <div class="bg-image"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+    <div class="bg-vignette"></div>
+  </div>
+
   <header id="header">
     <div class="container header-inner">
       <a href="#" class="logo">NATALI NEERO<span>AI-специалист • художник • визуальный автор</span></a>
@@ -230,7 +289,7 @@
 
   <section class="hero" id="top">
     <div class="container hero-grid">
-      <div class="fade-in">
+      <div class="fade-in hero-content">
         <p class="eyebrow">AI-специалист × художник</p>
         <div class="gold-line"></div>
         <h1>Создаю визуальные проекты, в которых <em>технологии обретают характер</em></h1>

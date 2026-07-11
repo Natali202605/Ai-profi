@@ -37,11 +37,11 @@ export function BriefForm({ service, register }: BriefFormProps) {
 
   return (
     <div className="glass-panel p-5">
-      <p className="mb-4 text-sm font-medium text-text-dark">Дополнительные вопросы</p>
+      <p className="mb-4 text-sm font-medium text-white-text">Дополнительные вопросы</p>
       <div className="space-y-4">
         {questions.map((q) => (
           <div key={q.id}>
-            <label htmlFor={q.id} className="mb-1 block text-sm text-text-dark/70">
+            <label htmlFor={q.id} className="mb-1 block text-sm text-text-secondary">
               {q.label}
             </label>
             <input

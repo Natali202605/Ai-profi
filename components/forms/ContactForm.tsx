@@ -64,13 +64,15 @@ export function ContactForm() {
     return (
       <section id="contact" className="section-light py-20 md:py-28">
         <div className="container-site max-w-2xl text-center">
+          <div className="glass-panel rounded-2xl p-8">
           <CheckCircle className="mx-auto mb-4 h-12 w-12 text-gold" />
-          <h2 className="heading-display mb-4 text-3xl text-text-dark">
+          <h2 className="heading-display mb-4 text-3xl text-white-text">
             Спасибо! Ваша заявка отправлена
           </h2>
-          <p className="text-text-dark/70">
+          <p className="text-text-secondary">
             Я ознакомлюсь с задачей и свяжусь с вами удобным способом.
           </p>
+          </div>
         </div>
       </section>
     );
@@ -92,14 +94,14 @@ export function ContactForm() {
           <form
             onSubmit={handleSubmit(onSubmit)}
             onFocus={() => trackEvent("lead_form_start")}
-            className="space-y-5"
+            className="glass-panel space-y-5 rounded-2xl p-6 md:p-8"
             noValidate
           >
             <input type="text" {...register("honeypot")} className="hidden" tabIndex={-1} autoComplete="off" />
 
             <div className="grid gap-5 sm:grid-cols-2">
               <div>
-                <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-text-dark">
+                <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-white-text">
                   Имя *
                 </label>
                 <input
@@ -111,7 +113,7 @@ export function ContactForm() {
                 {errors.name && <p className="mt-1 text-sm text-berry">{errors.name.message}</p>}
               </div>
               <div>
-                <label htmlFor="contact" className="mb-1.5 block text-sm font-medium text-text-dark">
+                <label htmlFor="contact" className="mb-1.5 block text-sm font-medium text-white-text">
                   Телефон или мессенджер *
                 </label>
                 <input
@@ -125,7 +127,7 @@ export function ContactForm() {
             </div>
 
             <div>
-              <label htmlFor="projectUrl" className="mb-1.5 block text-sm font-medium text-text-dark">
+              <label htmlFor="projectUrl" className="mb-1.5 block text-sm font-medium text-white-text">
                 Ссылка на страницу или проект
               </label>
               <input
@@ -137,7 +139,7 @@ export function ContactForm() {
             </div>
 
             <div>
-              <label htmlFor="service" className="mb-1.5 block text-sm font-medium text-text-dark">
+              <label htmlFor="service" className="mb-1.5 block text-sm font-medium text-white-text">
                 Услуга *
               </label>
               <select
@@ -162,7 +164,7 @@ export function ContactForm() {
             {selectedService && <BriefForm service={selectedService} register={register} />}
 
             <div>
-              <label htmlFor="description" className="mb-1.5 block text-sm font-medium text-text-dark">
+              <label htmlFor="description" className="mb-1.5 block text-sm font-medium text-white-text">
                 Краткое описание задачи *
               </label>
               <textarea
@@ -179,7 +181,7 @@ export function ContactForm() {
 
             <div className="grid gap-5 sm:grid-cols-2">
               <div>
-                <label htmlFor="deadline" className="mb-1.5 block text-sm font-medium text-text-dark">
+                <label htmlFor="deadline" className="mb-1.5 block text-sm font-medium text-white-text">
                   Желаемый срок
                 </label>
                 <input
@@ -190,7 +192,7 @@ export function ContactForm() {
                 />
               </div>
               <div>
-                <label htmlFor="budget" className="mb-1.5 block text-sm font-medium text-text-dark">
+                <label htmlFor="budget" className="mb-1.5 block text-sm font-medium text-white-text">
                   Примерный бюджет
                 </label>
                 <input

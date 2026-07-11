@@ -15,7 +15,7 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <div
-      className={`mb-12 md:mb-16 ${align === "center" ? "text-center" : ""}`}
+      className={`mb-12 md:mb-16 text-readable ${align === "center" ? "text-center" : ""}`}
     >
       {label && (
         <p

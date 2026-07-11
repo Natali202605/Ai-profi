@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  --color-graphite: #152040;
+  --color-graphite: #121830;
   --color-plum: #2a1f52;
-  --color-indigo-deep: #2d4a8a;
-  --color-milk: rgba(255, 255, 255, 0.85);
-  --color-sand: #ddd6f3;
-  --color-gold: #d4c8ff;
-  --color-peach: #b8a8f0;
-  --color-berry: #8b7ec8;
-  --color-white-text: #faf8ff;
-  --color-text-secondary: rgba(245, 242, 255, 0.78);
-  --color-text-dark: #1e1840;
-  --color-card-bg: rgba(255, 255, 255, 0.08);
-  --color-border-subtle: rgba(255, 255, 255, 0.18);
+  --color-indigo-deep: #2a4488;
+  --color-milk: rgba(255, 255, 255, 0.88);
+  --color-sand: #d4caf0;
+  --color-gold: #b8a4ff;
+  --color-peach: #9580e8;
+  --color-berry: #7c6ad4;
+  --color-white-text: #ffffff;
+  --color-text-secondary: rgba(245, 242, 255, 0.92);
+  --color-text-dark: #181530;
+  --color-card-bg: rgba(44, 36, 92, 0.76);
+  --color-border-subtle: rgba(200, 188, 255, 0.28);
 
   --font-heading: var(--font-cormorant);
   --font-body: var(--font-manrope);
@@ -40,16 +40,11 @@
 
   body {
     @apply text-white-text font-body antialiased;
-    background-color: #243878;
-    background-image: url("/images/bg-watercolor.png");
-    background-size: cover;
-    background-position: center top;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+    background-color: #1e2860;
   }
 
   ::selection {
-    @apply bg-gold/35 text-white-text;
+    @apply bg-gold/40 text-white-text;
   }
 
   :focus-visible {
@@ -60,45 +55,79 @@
 @layer components {
   .section-light {
     @apply text-white-text;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-top: 1px solid rgba(255, 255, 255, 0.14);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  }
-
-  .section-light [class*="text-text-dark"] {
-    color: rgba(250, 248, 255, 0.95);
-  }
-
-  .section-light [class*="text-text-dark/80"] {
-    color: rgba(245, 242, 255, 0.82);
-  }
-
-  .section-light [class*="text-text-dark/70"] {
-    color: rgba(245, 242, 255, 0.75);
-  }
-
-  .section-light [class*="text-text-dark/60"] {
-    color: rgba(245, 242, 255, 0.65);
+    background: linear-gradient(
+      180deg,
+      rgba(44, 36, 92, 0.32) 0%,
+      rgba(34, 48, 108, 0.24) 100%
+    );
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(200, 188, 255, 0.14);
+    border-bottom: 1px solid rgba(200, 188, 255, 0.08);
   }
 
   .glass-panel {
-    @apply rounded-2xl border border-border-subtle bg-card-bg backdrop-blur-md;
-    box-shadow: 0 4px 24px rgba(21, 32, 64, 0.08);
+    @apply rounded-2xl;
+    background: linear-gradient(
+      145deg,
+      rgba(52, 42, 108, 0.82) 0%,
+      rgba(38, 54, 122, 0.76) 50%,
+      rgba(44, 36, 96, 0.8) 100%
+    );
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid rgba(200, 188, 255, 0.26);
+    box-shadow: 0 8px 36px rgba(14, 18, 48, 0.28);
+  }
+
+  .glass-panel-soft {
+    @apply rounded-2xl;
+    background: linear-gradient(
+      145deg,
+      rgba(50, 40, 102, 0.68) 0%,
+      rgba(36, 50, 114, 0.6) 100%
+    );
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(200, 188, 255, 0.22);
+    box-shadow: 0 4px 28px rgba(14, 18, 48, 0.22);
   }
 
   .glass-input {
-    @apply rounded-xl border border-border-subtle bg-white/15 px-4 py-3 text-white-text outline-none backdrop-blur-md transition-colors placeholder:text-text-secondary focus:border-gold/60;
+    @apply rounded-xl px-4 py-3 text-white-text outline-none backdrop-blur-md transition-colors;
+    background: rgba(38, 30, 82, 0.72);
+    border: 1px solid rgba(200, 188, 255, 0.32);
+  }
+
+  .glass-input::placeholder {
+    color: rgba(220, 214, 255, 0.55);
+  }
+
+  .glass-input:focus {
+    border-color: rgba(184, 164, 255, 0.7);
+    background: rgba(44, 36, 92, 0.82);
   }
 
   .section-light select option {
     background: #2a1f52;
-    color: #faf8ff;
+    color: #ffffff;
   }
 
   .section-dark {
     @apply bg-transparent text-white-text;
+  }
+
+  .text-readable {
+    text-shadow: 0 1px 6px rgba(14, 18, 48, 0.65), 0 0 24px rgba(14, 18, 48, 0.35);
+  }
+
+  .glass-panel .text-readable,
+  .glass-panel-soft .text-readable,
+  .card-glass .text-readable,
+  .glass-panel *,
+  .glass-panel-soft *,
+  .card-glass * {
+    text-shadow: none;
   }
 
   .container-site {
@@ -110,27 +139,54 @@
   }
 
   .btn-primary {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-7 py-3 text-[15px] font-semibold text-graphite transition-all duration-300 focus-visible:outline-gold;
-    background: linear-gradient(135deg, #f0ebff 0%, #c4b5fd 50%, #a89ee8 100%);
-    box-shadow: 0 4px 24px rgba(164, 148, 255, 0.25);
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-7 py-3 text-[15px] font-semibold transition-all duration-300 focus-visible:outline-gold;
+    color: #181530;
+    background: linear-gradient(135deg, #ede8ff 0%, #b8a4ff 45%, #9580e8 100%);
+    box-shadow: 0 4px 28px rgba(140, 120, 230, 0.35);
   }
 
   .btn-primary:hover {
-    background: linear-gradient(135deg, #f5f0ff 0%, #d4c8ff 50%, #b8a8f0 100%);
-    box-shadow: 0 8px 32px rgba(164, 148, 255, 0.4);
+    background: linear-gradient(135deg, #f5f0ff 0%, #c8b4ff 45%, #a894f0 100%);
+    box-shadow: 0 8px 36px rgba(140, 120, 230, 0.5);
   }
 
   .btn-secondary {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-border-subtle bg-card-bg px-7 py-3 text-[15px] font-medium text-white-text backdrop-blur-md transition-all duration-300 hover:border-gold/50 hover:bg-white/15;
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border px-7 py-3 text-[15px] font-medium text-white-text backdrop-blur-md transition-all duration-300;
+    background: rgba(44, 36, 92, 0.65);
+    border-color: rgba(200, 188, 255, 0.28);
+  }
+
+  .btn-secondary:hover {
+    border-color: rgba(184, 164, 255, 0.5);
+    background: rgba(52, 42, 108, 0.78);
   }
 
   .btn-secondary-light {
-    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-border-subtle bg-card-bg px-7 py-3 text-[15px] font-medium text-white-text backdrop-blur-md transition-all duration-300 hover:border-gold/50 hover:bg-white/12;
+    @apply btn-secondary;
   }
 
   .card-glass {
-    @apply rounded-2xl border border-border-subtle bg-card-bg backdrop-blur-md;
-    box-shadow: 0 4px 24px rgba(21, 32, 64, 0.1);
+    @apply rounded-2xl;
+    background: linear-gradient(
+      145deg,
+      rgba(52, 42, 108, 0.82) 0%,
+      rgba(38, 54, 122, 0.76) 50%,
+      rgba(44, 36, 96, 0.8) 100%
+    );
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid rgba(200, 188, 255, 0.26);
+    box-shadow: 0 8px 36px rgba(14, 18, 48, 0.28);
+  }
+
+  .card-glass:hover {
+    background: linear-gradient(
+      145deg,
+      rgba(58, 48, 118, 0.88) 0%,
+      rgba(44, 60, 130, 0.82) 50%,
+      rgba(50, 42, 108, 0.86) 100%
+    );
+    border-color: rgba(200, 188, 255, 0.34);
   }
 
   .text-link {
@@ -139,7 +195,19 @@
 
   .gold-line {
     @apply h-px w-16;
-    background: linear-gradient(to right, transparent, rgba(212, 200, 255, 0.8), transparent);
+    background: linear-gradient(to right, transparent, rgba(184, 164, 255, 0.9), transparent);
+  }
+
+  .tag-glass {
+    @apply rounded-full px-3 py-1 text-xs backdrop-blur-sm;
+    background: rgba(44, 36, 92, 0.65);
+    border: 1px solid rgba(200, 188, 255, 0.24);
+    color: rgba(245, 242, 255, 0.95);
+  }
+
+  .glass-inset {
+    background: rgba(44, 36, 92, 0.58);
+    border: 1px solid rgba(200, 188, 255, 0.22);
   }
 }
 
@@ -149,6 +217,6 @@
   }
 
   .canvas-texture {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.015'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.018'/%3E%3C/svg%3E");
   }
 }

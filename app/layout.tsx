@@ -9,7 +9,7 @@ import { CookieNotice } from "@/components/layout/CookieNotice";
 import { YandexMetrika } from "@/components/layout/YandexMetrika";
 import { JsonLd } from "@/components/layout/JsonLd";
 import { ScrollTracker } from "@/components/layout/ScrollTracker";
-import { BackgroundGlow } from "@/components/ui/BackgroundGlow";
+import { AnimatedBackground } from "@/components/ui/AnimatedBackground";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin", "cyrillic"],
@@ -59,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ru" className={`${cormorant.variable} ${manrope.variable}`}>
       <body className="canvas-texture min-h-screen">
-        <BackgroundGlow />
+        <AnimatedBackground />
         <JsonLd />
         <ScrollTracker />
         <YandexMetrika />

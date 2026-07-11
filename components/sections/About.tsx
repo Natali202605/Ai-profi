@@ -32,28 +32,28 @@ export function About() {
               </div>
               <div className="absolute -bottom-4 -right-4 glass-panel p-4">
                 <p className="font-heading text-3xl text-gold">10+</p>
-                <p className="text-xs text-text-dark/60">лет в искусстве</p>
+                <p className="text-xs text-text-secondary">лет в искусстве</p>
               </div>
             </div>
           </RevealAnimation>
 
-          <div>
+          <div className="glass-panel-soft rounded-2xl p-6 md:p-8">
             <RevealAnimation>
               <SectionHeading light title="Здравствуйте, я Натали" />
             </RevealAnimation>
             <RevealAnimation delay={0.1}>
-              <p className="mb-4 text-lg leading-relaxed text-text-dark/80">
+              <p className="mb-4 text-lg leading-relaxed text-text-secondary">
                 Я AI-специалист и художник с опытом более 10 лет. Создаю видео, изображения, сайты
                 и визуальное оформление для экспертов, брендов и творческих проектов. Также помогаю
                 оформлять и развивать личные страницы и сообщества ВКонтакте.
               </p>
-              <p className="mb-4 text-lg leading-relaxed text-text-dark/80">
+              <p className="mb-4 text-lg leading-relaxed text-text-secondary">
                 Художественный опыт научил меня видеть больше, чем отдельные детали. Я обращаю
                 внимание на композицию, свет, цвет, ритм, настроение и характер образа. А
                 современные AI-инструменты позволяют воплощать идеи быстрее, смелее и в самых
                 разных форматах.
               </p>
-              <p className="mb-6 text-lg leading-relaxed text-text-dark/80">
+              <p className="mb-6 text-lg leading-relaxed text-text-secondary">
                 Мне важно внимательно услышать человека и почувствовать его проект. Поэтому я не
                 работаю по одному шаблону. Для каждой задачи ищу собственную интонацию и визуальное
                 решение.
@@ -61,10 +61,10 @@ export function About() {
             </RevealAnimation>
 
             <RevealAnimation delay={0.2}>
-              <p className="mb-3 font-medium text-text-dark">В работе я соединяю:</p>
+              <p className="mb-3 font-medium text-white-text">В работе я соединяю:</p>
               <ul className="mb-8 grid grid-cols-1 gap-2 sm:grid-cols-2">
                 {skills.map((skill) => (
-                  <li key={skill} className="flex items-center gap-2 text-sm text-text-dark/70">
+                  <li key={skill} className="flex items-center gap-2 text-sm text-text-secondary">
                     <span className="h-1.5 w-1.5 rounded-full bg-berry" />
                     {skill}
                   </li>

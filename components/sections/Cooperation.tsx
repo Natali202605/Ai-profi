@@ -19,8 +19,8 @@ export function Cooperation() {
           {cooperationFormats.map((format, i) => (
             <RevealAnimation key={format.title} delay={i * 0.1}>
               <div className="glass-panel h-full p-6 md:p-8">
-                <h3 className="heading-display mb-3 text-xl text-text-dark">{format.title}</h3>
-                <p className="text-sm leading-relaxed text-text-dark/70">{format.description}</p>
+                <h3 className="heading-display mb-3 text-xl text-white-text">{format.title}</h3>
+                <p className="text-sm leading-relaxed text-text-secondary">{format.description}</p>
               </div>
             </RevealAnimation>
           ))}

@@ -40,23 +40,25 @@ export function ArtApproach() {
             </div>
           </RevealAnimation>
 
-          <RevealAnimation direction="right" delay={0.15}>
-            <p className="mb-6 text-lg leading-relaxed text-text-dark/80">
+            <RevealAnimation direction="right" delay={0.15}>
+            <div className="glass-panel-soft rounded-2xl p-6 md:p-8">
+            <p className="mb-6 text-lg leading-relaxed text-text-secondary">
               Нейросеть может предложить десятки изображений, но она не принимает за вас
               художественное решение. Важно почувствовать, какой свет подходит проекту, какая
               композиция вызывает нужную эмоцию, где необходим акцент, а где — тишина и пространство.
             </p>
-            <p className="mb-4 font-medium text-text-dark">
+            <p className="mb-4 font-medium text-white-text">
               Более 10 лет художественной практики сформировали мой подход к работе:
             </p>
             <ul className="mb-8 space-y-2">
               {artistPoints.map((point) => (
-                <li key={point} className="flex items-start gap-3 text-text-dark/80">
+                <li key={point} className="flex items-start gap-3 text-text-secondary">
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-berry" />
                   {point}
                 </li>
               ))}
             </ul>
+            </div>
           </RevealAnimation>
 
           <RevealAnimation direction="right" className="lg:col-start-2">

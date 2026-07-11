@@ -23,10 +23,12 @@ export function Process() {
         </div>
 
         <RevealAnimation delay={0.5}>
-          <p className="mt-10 text-center text-text-dark/60">
-            Количество этапов и состав работ зависят от выбранной услуги. Перед началом проекта
-            клиент получает понятный план работы.
-          </p>
+          <div className="glass-panel-soft mx-auto mt-10 max-w-2xl rounded-2xl p-6 text-center">
+            <p className="text-text-secondary">
+              Количество этапов и состав работ зависят от выбранной услуги. Перед началом проекта
+              клиент получает понятный план работы.
+            </p>
+          </div>
         </RevealAnimation>
       </div>
     </section>
