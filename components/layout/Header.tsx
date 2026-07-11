@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSiteContent } from "@/components/providers/SiteContentProvider";
 import { MobileMenu } from "./MobileMenu";
@@ -48,7 +48,7 @@ export function Header() {
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-6 lg:flex" aria-label="Основная навигация">
+          <nav className="hidden items-center gap-4 xl:gap-6 lg:flex" aria-label="Основная навигация">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -58,6 +58,13 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
+            <Link
+              href="/admin/login"
+              className="whitespace-nowrap text-xs text-text-secondary transition-colors hover:text-gold lg:text-sm"
+            >
+              <span className="xl:hidden">Сотрудникам</span>
+              <span className="hidden xl:inline">Вход для сотрудников</span>
+            </Link>
             <Link
               href="/#contact"
               className="btn-primary !px-5 !py-2.5 !text-sm"

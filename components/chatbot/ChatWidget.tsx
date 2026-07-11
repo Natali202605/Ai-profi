@@ -6,6 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { trackEvent, getUtmParams } from "@/lib/analytics";
 import { VK_PROFILE_URL } from "@/lib/utils";
 
+const BOT_NAME = "Аделин";
+
 type Message = {
   role: "bot" | "user";
   text: string;
@@ -28,7 +30,7 @@ export function ChatWidget() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "bot",
-      text: "Здравствуйте! Я помогу сориентироваться в услугах Натали. Что вы планируете создать?",
+      text: `Здравствуйте! Я ${BOT_NAME} — виртуальный ассистент NATALI NEERO. Помогу сориентироваться в услугах и подскажу, с чего начать. Что вы планируете создать?`,
       buttons: initialButtons,
     },
   ]);
@@ -52,7 +54,7 @@ export function ChatWidget() {
 
   const handleButton = (button: string) => {
     addUserMessage(button);
-    trackEvent("service_select", { service: button, source: "chatbot" });
+    trackEvent("service_select", { service: button, source: "chatbot_adelin" });
 
     if (button === "Посмотреть портфолио") {
       addBotMessage("Вот ссылка на портфолио:", ["Открыть портфолио"]);
@@ -62,7 +64,7 @@ export function ChatWidget() {
 
     if (button === "Задать вопрос") {
       setStep("free_question");
-      addBotMessage("Напишите ваш вопрос, и я постараюсь помочь.");
+      addBotMessage("Напишите ваш вопрос — я постараюсь помочь или передам его Натали.");
       return;
     }
 
@@ -123,7 +125,7 @@ export function ChatWidget() {
     if (step === "free_question") {
       addBotMessage(
         "Этот вопрос лучше обсудить лично. Оставьте контакт или напишите Натали во ВКонтакте — она уточнит детали и предложит решение.",
-        ["Оставить контакт", "Написать ВКонтакте"]
+        ["Оставить контакт", "Написать ВКонтакте"],
       );
       setStep("contact");
       return;
@@ -140,7 +142,7 @@ export function ChatWidget() {
       setLeadData((d) => ({ ...d, name: text }));
       addBotMessage(
         "Спасибо! Для отправки заявки необходимо согласие на обработку персональных данных. Нажмите «Согласен и отправить».",
-        ["Согласен и отправить"]
+        ["Согласен и отправить"],
       );
       setStep("consent");
       return;
@@ -166,14 +168,14 @@ export function ChatWidget() {
           service: leadData.service || "Не указано",
           summary,
           consent: true,
-          source: "chatbot",
+          source: "chatbot_adelin",
           ...getUtmParams(),
         }),
       });
 
       addBotMessage(
         "Заявка отправлена! Натали свяжется с вами. Также можно написать напрямую во ВКонтакте.",
-        ["Написать ВКонтакте"]
+        ["Написать ВКонтакте"],
       );
       setStep("done");
     } catch {
@@ -181,21 +183,16 @@ export function ChatWidget() {
     }
   };
 
-  useEffect(() => {
-    if (step === "consent" && messages[messages.length - 1]?.buttons?.includes("Согласен и отправить")) {
-      // handled via button
-    }
-  }, [step, messages]);
-
   return (
     <>
       <button
         onClick={() => {
           setOpen(true);
-          trackEvent("chatbot_open");
+          trackEvent("chatbot_open", { bot: "adelin" });
         }}
         className="mobile-fab-offset fixed right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gold text-graphite shadow-[0_4px_24px_rgba(164,148,255,0.4)] transition-transform hover:scale-105 md:bottom-6"
-        aria-label="Открыть чат"
+        aria-label={`Открыть чат с ${BOT_NAME}`}
+        title={BOT_NAME}
       >
         <MessageCircle className="h-6 w-6" />
       </button>
@@ -209,9 +206,14 @@ export function ChatWidget() {
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
           >
             <div className="flex items-center justify-between border-b border-border-subtle bg-plum/50 px-4 py-3 backdrop-blur-md">
-              <div>
-                <p className="text-sm font-semibold text-white-text">Помощник NATALI NEERO</p>
-                <p className="text-xs text-text-secondary">AI-консультант</p>
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/20 font-heading text-lg text-gold">
+                  А
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white-text">{BOT_NAME}</p>
+                  <p className="text-xs text-text-secondary">виртуальный ассистент</p>
+                </div>
               </div>
               <button
                 onClick={() => setOpen(false)}
@@ -222,7 +224,7 @@ export function ChatWidget() {
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-4 space-y-3">
+            <div className="flex-1 space-y-3 overflow-y-auto p-4">
               {messages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                   <div
@@ -232,6 +234,9 @@ export function ChatWidget() {
                         : "bg-card-bg text-text-secondary"
                     }`}
                   >
+                    {msg.role === "bot" ? (
+                      <span className="mb-1 block text-xs font-medium text-gold">{BOT_NAME}</span>
+                    ) : null}
                     {msg.text}
                     {msg.buttons && (
                       <div className="mt-2 flex flex-wrap gap-1.5">
@@ -266,7 +271,7 @@ export function ChatWidget() {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleSend()}
-                    placeholder="Напишите сообщение..."
+                    placeholder={`Сообщение для ${BOT_NAME}...`}
                     className="flex-1 rounded-xl border border-border-subtle bg-card-bg px-3 py-2 text-sm text-white-text outline-none focus:border-gold"
                   />
                   <button
