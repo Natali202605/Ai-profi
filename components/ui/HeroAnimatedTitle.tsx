@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { AccentText } from "@/components/ui/AccentText";
+import { useReducedEffects } from "@/lib/useReducedEffects";
 
 const SESSION_KEY = "hero-brush-reveal-played";
 
@@ -14,13 +15,18 @@ type HeroAnimatedTitleProps = {
 
 export function HeroAnimatedTitle({ text, accent, className = "" }: HeroAnimatedTitleProps) {
   const reducedMotion = useReducedMotion();
+  const reducedEffects = useReducedEffects();
   const [playFull, setPlayFull] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   const lines = (() => {
-    const breakAt = text.toLowerCase().indexOf(" для ");
-    if (breakAt === -1) return [text];
-    return [text.slice(0, breakAt).trim(), text.slice(breakAt).trim()];
+    const breakAt = text.toLowerCase().indexOf(" которые ");
+    if (breakAt !== -1) {
+      return [text.slice(0, breakAt).trim(), text.slice(breakAt).trim()];
+    }
+    const breakFor = text.toLowerCase().indexOf(" для ");
+    if (breakFor === -1) return [text];
+    return [text.slice(0, breakFor).trim(), text.slice(breakFor).trim()];
   })();
 
   useEffect(() => {
@@ -41,7 +47,7 @@ export function HeroAnimatedTitle({ text, accent, className = "" }: HeroAnimated
     </>
   );
 
-  if (!mounted || reducedMotion || !playFull) {
+  if (!mounted || reducedMotion || reducedEffects || !playFull) {
     return (
       <motion.h1
         className={`heading-display text-balance ${className}`}
@@ -67,8 +73,8 @@ export function HeroAnimatedTitle({ text, accent, className = "" }: HeroAnimated
         <motion.span
           key={line}
           className="hero-brush-line-mask block overflow-hidden"
-          initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{
             duration: 0.75,
             delay: 0.42 + lineIndex * 0.12,

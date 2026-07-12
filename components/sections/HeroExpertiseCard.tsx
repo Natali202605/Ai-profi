@@ -6,8 +6,8 @@ import { useSiteContent } from "@/components/providers/SiteContentProvider";
 
 export function HeroExpertiseCard() {
   const { hero } = useSiteContent();
-  const cardTitle = hero.expertiseCardTitle || "Профессиональный подход";
-  const cardTitleAccent = hero.expertiseCardTitleAccent || "Профессиональный";
+  const cardTitle = hero.expertiseCardTitle || "Почему проекты выглядят цельно";
+  const cardTitleAccent = hero.expertiseCardTitleAccent || "выглядят цельно";
   const items = (hero.expertiseItems || fallbackItems).filter((item) => item.isVisible !== false);
 
   return (

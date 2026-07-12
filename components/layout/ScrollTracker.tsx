@@ -8,17 +8,29 @@ const thresholds = [25, 50, 75, 100];
 export function ScrollTracker() {
   useEffect(() => {
     const tracked = new Set<number>();
+    let ticking = false;
 
     const onScroll = () => {
-      const scrollPercent = Math.round(
-        (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
-      );
+      if (ticking) return;
+      ticking = true;
 
-      thresholds.forEach((t) => {
-        if (scrollPercent >= t && !tracked.has(t)) {
-          tracked.add(t);
-          trackEvent("scroll_depth", { depth: t });
+      window.requestAnimationFrame(() => {
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        if (maxScroll <= 0) {
+          ticking = false;
+          return;
         }
+
+        const scrollPercent = Math.round((window.scrollY / maxScroll) * 100);
+
+        thresholds.forEach((t) => {
+          if (scrollPercent >= t && !tracked.has(t)) {
+            tracked.add(t);
+            trackEvent("scroll_depth", { depth: t });
+          }
+        });
+
+        ticking = false;
       });
     };
 

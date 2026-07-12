@@ -4,10 +4,15 @@ import Link from "next/link";
 import { MessageCircle, FileText } from "lucide-react";
 import { VK_PROFILE_URL } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
+import { useAdelinChat } from "@/components/chatbot/AdelinChatContext";
 
 export function FloatingContactBar() {
+  const { open } = useAdelinChat();
+
+  if (open) return null;
+
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border-subtle bg-plum/70 backdrop-blur-xl safe-bottom md:hidden">
+    <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border-subtle bg-plum/85 safe-bottom md:hidden">
       <div className="flex">
         <a
           href={VK_PROFILE_URL}

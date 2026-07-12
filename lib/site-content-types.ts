@@ -81,6 +81,9 @@ export type SiteContent = {
     titleSuffix: string;
     description: string;
     descriptionHighlight?: string;
+    descriptionHighlights?: string[];
+    sellingLine?: string;
+    sellingLineHighlights?: string[];
     note: string;
     noteHighlight?: string;
     trustMarkers: string[];

@@ -11,6 +11,7 @@ import { AccentText } from "@/components/ui/AccentText";
 import { HeroExpertiseCard } from "@/components/sections/HeroExpertiseCard";
 import { trackEvent } from "@/lib/analytics";
 import { useSiteContent } from "@/components/providers/SiteContentProvider";
+import { useAdelinChat } from "@/components/chatbot/AdelinChatContext";
 
 function HeroEyebrow({ text }: { text: string }) {
   const parts = text.split("×").map((part) => part.trim());
@@ -20,7 +21,7 @@ function HeroEyebrow({ text }: { text: string }) {
 
   return (
     <>
-      <span className="text-accent-secondary">{parts[0]}</span>
+      <span className="text-accent-sky">{parts[0]}</span>
       <span className="mx-1.5 text-text-secondary/55">×</span>
       <span className="text-accent-lilac">{parts[1]}</span>
     </>
@@ -29,7 +30,14 @@ function HeroEyebrow({ text }: { text: string }) {
 
 export function Hero() {
   const { hero } = useSiteContent();
+  const { openChat } = useAdelinChat();
   const portraitFocus = hero.portraitFocusY ?? 20;
+
+  const descriptionHighlights =
+    hero.descriptionHighlights ||
+    (hero.descriptionHighlight ? [hero.descriptionHighlight] : undefined);
+
+  const sellingHighlights = hero.sellingLineHighlights || [];
 
   return (
     <section id="top" className="relative min-h-screen overflow-hidden pt-16 md:pt-20">
@@ -47,13 +55,22 @@ export function Hero() {
                 accent={hero.titleHighlight}
                 className="mb-7 text-[34px] leading-[1.08] sm:text-[40px] md:text-[48px] lg:text-[52px] xl:text-[56px]"
               />
-              <p className="mb-10 max-w-xl text-[17px] leading-relaxed text-text-secondary md:text-lg lg:mb-12">
+              <p className="mb-4 max-w-xl text-[17px] leading-relaxed text-text-secondary md:text-lg">
                 <AccentText
                   text={hero.description}
-                  accent={hero.descriptionHighlight}
+                  accents={descriptionHighlights}
                   accentClassName="font-semibold text-accent-lilac"
                 />
               </p>
+              {hero.sellingLine ? (
+                <p className="mb-10 max-w-xl text-[15px] leading-relaxed text-text-secondary/90 md:text-base lg:mb-12">
+                  <AccentText
+                    text={hero.sellingLine}
+                    accents={sellingHighlights}
+                    accentClassName="font-medium text-accent-lilac"
+                  />
+                </p>
+              ) : null}
             </div>
 
             <div className="mt-auto">
@@ -70,13 +87,24 @@ export function Hero() {
                   className="btn-secondary"
                   onClick={() => trackEvent("portfolio_open", { source: "hero" })}
                 >
-                  Посмотреть портфолио
+                  Посмотреть работы
                 </Link>
               </div>
-              <div className="mt-4">
-                <VKButton>Написать ВКонтакте</VKButton>
+              <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+                <button
+                  type="button"
+                  className="text-sm font-medium text-gold transition-opacity hover:opacity-80"
+                  onClick={() => {
+                    trackEvent("adelin_open", { source: "hero" });
+                    openChat();
+                  }}
+                >
+                  Подобрать услугу с Аделин →
+                </button>
+                <VKButton className="!text-sm">Написать ВКонтакте</VKButton>
               </div>
-              <p className="mt-8 text-sm text-text-secondary/90">
+              <p className="mt-8 flex items-start gap-2 text-sm text-text-secondary/90">
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold/80 shadow-[0_0_8px_rgba(212,184,140,0.6)]" aria-hidden="true" />
                 <AccentText
                   text={hero.note}
                   accent={hero.noteHighlight}
@@ -93,7 +121,7 @@ export function Hero() {
                 alt={`${hero.specialistName} — AI-специалист и художник`}
                 fill
                 priority
-                quality={100}
+                quality={85}
                 className="object-cover contrast-[1.08] saturate-[1.06] brightness-[1.02]"
                 style={{ objectPosition: `center ${portraitFocus}%` }}
                 sizes="(max-width: 1024px) 90vw, 38vw"

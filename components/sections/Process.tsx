@@ -10,7 +10,8 @@ export function Process() {
         <RevealAnimation>
           <SectionHeading
             light
-            title="Понятный процесс от первой идеи до готового проекта"
+            title="Понятный путь от идеи до готового проекта"
+            titleAccent="от идеи до готового проекта"
           />
         </RevealAnimation>
 

@@ -1,6 +1,7 @@
 type AccentTextProps = {
   text: string;
   accent?: string;
+  accents?: string[];
   accentClassName?: string;
   className?: string;
 };
@@ -12,20 +13,28 @@ function escapeRegExp(value: string) {
 export function AccentText({
   text,
   accent,
+  accents,
   accentClassName = "text-accent-primary",
   className = "",
 }: AccentTextProps) {
-  if (!accent?.trim()) {
+  const phrases = accents?.length
+    ? accents.filter(Boolean)
+    : accent?.trim()
+      ? [accent]
+      : [];
+
+  if (!phrases.length) {
     return <span className={className}>{text}</span>;
   }
 
-  const parts = text.split(new RegExp(`(${escapeRegExp(accent)})`, "i"));
-  const accentLower = accent.toLowerCase();
+  const pattern = phrases.map(escapeRegExp).join("|");
+  const parts = text.split(new RegExp(`(${pattern})`, "gi"));
 
   return (
     <span className={className}>
       {parts.map((part, index) => {
-        if (part.toLowerCase() === accentLower) {
+        const isAccent = phrases.some((phrase) => phrase.toLowerCase() === part.toLowerCase());
+        if (isAccent) {
           return (
             <span key={`${part}-${index}`} className={accentClassName}>
               {part}

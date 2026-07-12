@@ -20,8 +20,9 @@ export function PortfolioDirections() {
         <RevealAnimation>
           <SectionHeading
             label={portfolio.featured.label}
-            title="Портфолио"
-            subtitle="Выберите направление и посмотрите примеры выполненных проектов"
+            title="Выберите направление и посмотрите работы"
+            titleAccent="посмотрите работы"
+            subtitle="В портфолио собраны AI-видео, изображения, сайты, чат-боты, оформление ВКонтакте и художественные проекты."
           />
         </RevealAnimation>
 

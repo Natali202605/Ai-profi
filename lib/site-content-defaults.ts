@@ -18,22 +18,25 @@ export function buildDefaultSiteContent(): SiteContent {
     hero: {
       eyebrow: "AI-СПЕЦИАЛИСТ × ХУДОЖНИК",
       titleMain:
-        "Создаю AI-визуалы профессионального уровня для брендов и экспертов",
-      titleHighlight: "AI-визуалы",
+        "Создаю выразительные AI-проекты, которые помогают брендам и экспертам выделяться, вызывать доверие и запоминаться",
+      titleHighlight: "AI-проекты",
       titleSuffix: "",
       description:
-        "AI-видео, изображения, сайты и оформление ВКонтакте — с художественным чутьём, продуманной композицией и более чем 10-летним опытом визуального видения.",
-      descriptionHighlight: "более чем 10-летним опытом",
-      note: "Индивидуальные решения вместо шаблонной генерации.",
-      noteHighlight: "Индивидуальные решения",
+        "AI-видео, изображения, сайты, чат-боты и оформление ВКонтакте — с индивидуальной концепцией, профессиональной композицией и художественным опытом более 10 лет.",
+      descriptionHighlights: ["индивидуальной концепцией", "более 10 лет"],
+      sellingLine:
+        "Подходит, если вам нужен не просто красивый контент, а цельный визуальный образ, который отражает характер проекта и помогает клиенту быстрее понять вашу ценность.",
+      sellingLineHighlights: ["цельный визуальный образ", "понять вашу ценность"],
+      note: "Индивидуальная концепция вместо шаблонной генерации",
+      noteHighlight: "Индивидуальная концепция",
       trustMarkers: [],
       specialistName: "Натали Neero",
       specialistRoles: "AI-специалист и художник",
       specialistExperience: "",
       specialistPhoto: "/images/natali-portrait.jpg",
       portraitFocusY: 20,
-      expertiseCardTitle: "Профессиональный подход",
-      expertiseCardTitleAccent: "Профессиональный",
+      expertiseCardTitle: "Почему проекты выглядят цельно",
+      expertiseCardTitleAccent: "выглядят цельно",
       expertiseItems: heroExpertiseItems.map((item) => ({ ...item, isVisible: true })),
     },
     intro: {
@@ -45,9 +48,9 @@ export function buildDefaultSiteContent(): SiteContent {
         "Благодаря этому изображения, видео, сайты и сообщества выглядят не как набор отдельных элементов, а как единая визуальная история.",
       quote: "",
     },
-  about: {
-    title: "Здравствуйте, я Натали",
-    titleHighlight: "Натали",
+    about: {
+      title: "Здравствуйте, я Натали",
+      titleHighlight: "Натали",
       paragraphs: [
         "Я AI-специалист и художник с опытом более 10 лет. Создаю AI-видео, изображения, сайты, чат-ботов и визуальное оформление для экспертов, брендов и творческих проектов.",
         "Художественный опыт помогает мне видеть проект целиком: чувствовать композицию, свет, цвет, характер и настроение. AI-инструменты расширяют возможности реализации, но основой каждой работы остаются идея, вкус и внимательное отношение к задаче клиента.",
@@ -60,10 +63,10 @@ export function buildDefaultSiteContent(): SiteContent {
       badgeLabel: "лет в искусстве",
     },
     services: {
-      sectionTitle: "Чем я могу помочь",
-      sectionTitleHighlight: "могу помочь",
+      sectionTitle: "Выберите формат решения",
+      sectionTitleHighlight: "формат решения",
       sectionSubtitle:
-        "Можно заказать отдельную услугу или собрать комплексную визуальную систему.",
+        "Можно заказать одну услугу или собрать комплексный проект в единой стилистике.",
       items: services.map((service) => ({
         id: service.id,
         title: service.title,
@@ -75,7 +78,7 @@ export function buildDefaultSiteContent(): SiteContent {
     reviews: {
       title: "Отзывы клиентов",
       titleHighlight: "клиентов",
-      subtitle: "Отзывы клиентов из сообщества ВКонтакте.",
+      subtitle: "Отзывы клиентов после работы над проектами.",
       items: reviews.map((review) => ({ ...review })),
     },
     images: {

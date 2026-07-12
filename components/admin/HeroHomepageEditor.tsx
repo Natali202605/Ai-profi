@@ -90,6 +90,38 @@ export function HeroHomepageEditor() {
           label="Акцент в подзаголовке"
           value={hero.descriptionHighlight || ""}
           onChange={(v) => updateHero({ descriptionHighlight: v })}
+          hint="Одна фраза (устаревшее поле, если заданы несколько акцентов ниже)"
+        />
+        <Field
+          label="Акценты в подзаголовке (через запятую)"
+          value={(hero.descriptionHighlights || []).join(", ")}
+          onChange={(v) =>
+            updateHero({
+              descriptionHighlights: v
+                .split(",")
+                .map((s) => s.trim())
+                .filter(Boolean),
+            })
+          }
+          hint="Например: индивидуальной концепцией, более 10 лет"
+        />
+        <Field
+          label="Продающая строка"
+          value={hero.sellingLine || ""}
+          onChange={(v) => updateHero({ sellingLine: v })}
+          multiline
+        />
+        <Field
+          label="Акценты продающей строки (через запятую)"
+          value={(hero.sellingLineHighlights || []).join(", ")}
+          onChange={(v) =>
+            updateHero({
+              sellingLineHighlights: v
+                .split(",")
+                .map((s) => s.trim())
+                .filter(Boolean),
+            })
+          }
         />
         <Field
           label="Нижняя строка"

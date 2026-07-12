@@ -2,6 +2,7 @@
 
 import { useRef, type ReactNode } from "react";
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
+import { useReducedEffects } from "@/lib/useReducedEffects";
 
 type HeroCursorCardProps = {
   children: ReactNode;
@@ -11,6 +12,8 @@ type HeroCursorCardProps = {
 export function HeroCursorCard({ children, className = "" }: HeroCursorCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
+  const reducedEffects = useReducedEffects();
+  const disableTilt = reducedMotion || reducedEffects;
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -24,7 +27,7 @@ export function HeroCursorCard({ children, className = "" }: HeroCursorCardProps
   });
 
   const handleMove = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (reducedMotion) return;
+    if (disableTilt) return;
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -50,7 +53,7 @@ export function HeroCursorCard({ children, className = "" }: HeroCursorCardProps
       ref={ref}
       className={`hero-cursor-card group relative ${className}`}
       style={
-        reducedMotion
+        disableTilt
           ? undefined
           : { rotateX, rotateY, transformPerspective: 1200 }
       }

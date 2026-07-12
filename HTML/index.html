@@ -184,6 +184,14 @@
     @media (prefers-reduced-motion: reduce) {
       .bg-image, .bg-glow, .bg-shimmer::after, .bg-sparkle, .bg-electric-svg .spark, .bg-head-star, .bg-head-stars-track { animation: none; }
     }
+    @media (max-width: 768px), (pointer: coarse) {
+      .bg-image, .bg-glow, .bg-shimmer::after, .bg-sparkle, .bg-head-star, .bg-head-stars-track { animation: none !important; }
+      .bg-electric-svg, .bg-sparkle, .bg-head-stars { display: none !important; }
+      .glass-panel, .hero-content, .hero-expertise-card, .pain-card, .card, header.scrolled {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+    }
     a { color: var(--gold); text-decoration: none; transition: color .3s; }
     a:hover { color: var(--peach); }
     img { max-width: 100%; display: block; }
@@ -336,7 +344,9 @@
       animation: title-shimmer 4.5s ease-in-out infinite;
       filter: drop-shadow(0 0 22px rgba(184,164,255,.45));
     }
-    .hero p { font-size: 1.0625rem; color: var(--text-sec); max-width: 36rem; margin-bottom: 2.5rem; line-height: 1.65; }
+    .hero p { font-size: 1.0625rem; color: var(--text-sec); max-width: 36rem; margin-bottom: 1rem; line-height: 1.65; }
+    .hero p.hero-selling { font-size: .9375rem; max-width: 34rem; margin-bottom: 2rem; line-height: 1.6; color: rgba(232,224,255,.88); }
+    .hero p.hero-selling .accent-lilac { color: #c8b4ff; font-weight: 600; }
     .hero p .accent-lilac { color: #c8b4ff; font-weight: 600; }
     .hero-btns { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
     .hero-expertise-card {
@@ -430,12 +440,25 @@
     }
     .positioning-card .bar { width: 2.5rem; height: 3px; background: var(--gold); border-radius: 999px; margin-bottom: 1rem; }
     .positioning-card h3 { font-family: var(--font-h); font-size: 1.75rem; margin-bottom: .75rem; color: var(--white); }
+    .pain-grid { display: grid; gap: 1rem; margin-top: 2rem; }
+    @media (min-width: 640px) { .pain-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .pain-grid { grid-template-columns: repeat(3, 1fr); } }
+    .pain-card {
+      border-radius: 1rem; padding: 1.25rem 1.5rem;
+      background: rgba(42,31,82,.45); border: 1px solid rgba(200,188,255,.14);
+      backdrop-filter: blur(12px);
+    }
+    .pain-card h3 { font-family: var(--font-h); font-size: 1.125rem; color: var(--white); margin-bottom: .5rem; }
+    .pain-card p { font-size: .875rem; color: var(--text-sec); line-height: 1.55; margin: 0; }
+    .solution-grid { display: grid; gap: 1.5rem; margin-top: 2rem; }
+    @media (min-width: 768px) { .solution-grid { grid-template-columns: repeat(3, 1fr); } }
 
     @media (prefers-reduced-motion: reduce) {
       .hero-brush-title .hero-line, .hero-brush-line, .hero-brush-title .kw, h1 em { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
     }
 
-    .hero-note { font-size: .875rem; color: rgba(184,164,255,.85); margin-top: auto; padding-top: 2rem; }
+    .hero-note { font-size: .875rem; color: rgba(184,164,255,.85); margin-top: auto; padding-top: 2rem; display: flex; align-items: center; gap: .5rem; }
+    .hero-note::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #c8b4ff; box-shadow: 0 0 10px rgba(200,180,255,.6); flex-shrink: 0; }
     .hero-note .accent-lilac { color: #c8b4ff; font-weight: 500; }
     .adelin-hero {
       margin-top: 1.5rem; display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 1.25rem;
@@ -565,9 +588,6 @@
     .portfolio-item .overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(18,24,48,.85), transparent 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.25rem; }
     .portfolio-item .cat { font-size: .6875rem; text-transform: uppercase; letter-spacing: .1em; color: var(--gold); margin-bottom: .25rem; }
     .portfolio-item h3 { font-family: var(--font-h); font-size: 1.25rem; color: var(--white); }
-    .trust-bar { display: flex; gap: 1.5rem; overflow-x: auto; padding: 1rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(42,31,82,.3); }
-    .trust-bar li { flex-shrink: 0; font-size: .875rem; color: var(--text-sec); list-style: none; display: flex; align-items: center; gap: .5rem; }
-    .trust-bar li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
     .reviews-grid { display: grid; gap: 1.5rem; align-items: stretch; }
     @media (min-width: 1024px) { .reviews-grid { grid-template-columns: repeat(3, 1fr); } }
     .review-card { height: 100%; display: flex; flex-direction: column; background: linear-gradient(145deg, rgba(52,42,108,.72) 0%, rgba(38,54,122,.66) 50%, rgba(44,36,96,.7) 100%); border: 1px solid var(--border); border-radius: 1rem; padding: 1.75rem; backdrop-filter: blur(22px); box-shadow: 0 8px 36px rgba(14,18,48,.28); }
@@ -783,18 +803,19 @@
           <p class="eyebrow"><span class="accent-blue">AI-СПЕЦИАЛИСТ</span><span class="accent-neutral">×</span><span class="accent-lilac">ХУДОЖНИК</span></p>
           <span class="hero-brush-line" aria-hidden="true"></span>
           <h1 class="hero-brush-title">
-            <span class="hero-line">Создаю <span class="kw">AI-визуалы</span></span>
-            <span class="hero-line">профессионального уровня для брендов и экспертов</span>
+            <span class="hero-line">Создаю выразительные <span class="kw">AI-проекты</span>, которые помогают</span>
+            <span class="hero-line">брендам и экспертам выделяться, вызывать доверие и запоминаться</span>
           </h1>
-          <p>AI-видео, изображения, сайты и оформление ВКонтакте — с художественным чутьём, продуманной композицией и <span class="accent-lilac">более чем 10-летним опытом</span> визуального видения.</p>
+          <p>AI-видео, изображения, сайты, чат-боты и оформление ВКонтакте — с <span class="accent-lilac">индивидуальной концепцией</span>, профессиональной композицией и художественным опытом <span class="accent-lilac">более 10 лет</span>.</p>
+          <p class="hero-selling">Подходит, если вам нужен не просто красивый контент, а <span class="accent-lilac">цельный визуальный образ</span>, который отражает характер проекта и помогает клиенту быстрее <span class="accent-lilac">понять вашу ценность</span>.</p>
         </div>
         <div class="hero-bottom">
           <div class="hero-btns">
             <a href="#contact" class="btn btn-gold">Обсудить проект</a>
-            <a href="portfolio.html" class="btn btn-outline">Посмотреть портфолио</a>
+            <a href="#portfolio-directions" class="btn btn-outline">Посмотреть работы</a>
           </div>
-          <a href="https://vk.ru/id170079854" target="_blank" rel="noopener">Написать ВКонтакте →</a>
-          <p class="hero-note"><span class="accent-lilac">Индивидуальные решения</span> вместо шаблонной генерации.</p>
+          <p style="margin:.75rem 0 0;font-size:.875rem;color:var(--text-sec);"><a href="#" onclick="alert('Аделин доступна в полной версии сайта на Vercel');return false;" style="color:#c8b4ff;">Подобрать услугу с Аделин</a> · <a href="https://vk.ru/id170079854" target="_blank" rel="noopener" style="color:var(--text-sec);">Написать ВКонтакте →</a></p>
+          <p class="hero-note"><span class="accent-lilac">Индивидуальная концепция</span> вместо шаблонной генерации.</p>
         </div>
       </div>
       <div class="hero-visual fade-in hero-visual-stack">
@@ -806,34 +827,34 @@
           </div>
         </div>
         <div class="hero-expertise-card">
-          <p><span class="accent-gradient">Профессиональный</span> подход</p>
+          <p>Почему проекты <span class="accent-gradient">выглядят цельно</span></p>
           <ul class="hero-expertise-list">
             <li>
               <span class="hero-expertise-num">01</span>
               <div>
-                <strong><span class="accent-secondary">10+ лет</span> художественного опыта</strong>
-                <span class="desc">Чувство композиции, цвета, света и визуального ритма.</span>
+                <strong><span class="accent-secondary">Художественный</span> опыт</strong>
+                <span class="desc">Более 10 лет работы с композицией, цветом, светом и визуальным ритмом.</span>
               </div>
             </li>
             <li>
               <span class="hero-expertise-num">02</span>
               <div>
-                <strong><span class="accent-secondary">AI</span>, дизайн и разработка</strong>
-                <span class="desc">Видео, изображения, сайты и цифровое оформление в единой системе.</span>
+                <strong>Современные <span class="accent-secondary">AI</span>-инструменты</strong>
+                <span class="desc">Изображения, видео, сайты и цифровые решения в одной системе.</span>
               </div>
             </li>
             <li>
               <span class="hero-expertise-num">03</span>
               <div>
                 <strong><span class="accent-secondary">Индивидуальная</span> концепция</strong>
-                <span class="desc">Решение создаётся под характер, задачу и аудиторию проекта.</span>
+                <span class="desc">Стиль создаётся под задачу, аудиторию и характер проекта.</span>
               </div>
             </li>
             <li>
               <span class="hero-expertise-num">04</span>
               <div>
                 <strong>Внимание к <span class="accent-secondary">деталям</span></strong>
-                <span class="desc">Каждый элемент поддерживает общий образ и профессиональное впечатление.</span>
+                <span class="desc">Каждый элемент поддерживает общее впечатление и профессиональный образ.</span>
               </div>
             </li>
           </ul>
@@ -845,35 +866,38 @@
   <section class="trust-bar fade-in" aria-label="Показатели доверия">
     <div class="container">
       <ul class="trust-bar-list">
-        <li><span class="trust-icon" aria-hidden="true">◆</span>Более 10 лет в искусстве</li>
-        <li><span class="trust-icon" aria-hidden="true">✦</span>Индивидуальные концепции</li>
-        <li><span class="trust-icon" aria-hidden="true">◉</span>Работа онлайн</li>
-        <li><span class="trust-icon" aria-hidden="true">◎</span>AI, дизайн и разработка</li>
-        <li><span class="trust-icon" aria-hidden="true">◈</span>Проекты под задачу клиента</li>
+        <li><span class="trust-icon" aria-hidden="true">◆</span>10+ лет художественного опыта</li>
+        <li><span class="trust-icon" aria-hidden="true">✦</span>Индивидуальные визуальные концепции</li>
+        <li><span class="trust-icon" aria-hidden="true">◉</span>AI, дизайн и разработка</li>
+        <li><span class="trust-icon" aria-hidden="true">◎</span>Работа онлайн</li>
+        <li><span class="trust-icon" aria-hidden="true">◈</span>Проекты для экспертов и бизнеса</li>
       </ul>
     </div>
   </section>
 
-  <section class="light fade-in" id="positioning">
+  <section class="light fade-in" id="pains">
     <div class="container">
-      <h2>Не просто создаю контент. Формирую визуальный образ проекта</h2>
-      <p class="section-sub">Каждый проект начинается с понимания человека, идеи, аудитории и задачи. Художественный опыт помогает увидеть композицию, цвет, атмосферу и смысл, а AI-инструменты — воплотить эту концепцию в изображениях, видео, сайтах и цифровых продуктах.</p>
-      <div class="positioning-cards">
-        <article class="positioning-card">
-          <div class="bar"></div>
-          <h3>Вижу</h3>
-          <p>Анализирую идею, характер проекта и визуальную задачу.</p>
-        </article>
-        <article class="positioning-card">
-          <div class="bar"></div>
-          <h3>Продумываю</h3>
-          <p>Создаю композицию, стилистику, цвет и единую концепцию.</p>
-        </article>
-        <article class="positioning-card">
-          <div class="bar"></div>
-          <h3>Реализую</h3>
-          <p>Превращаю идею в готовый цифровой продукт.</p>
-        </article>
+      <h2>Знакомо, когда визуал есть, а <span style="color:#c8b4ff;">цельного впечатления нет</span>?</h2>
+      <p class="section-sub">Часто проблема не в отсутствии изображений или сайта, а в том, что отдельные элементы не работают как единая система.</p>
+      <div class="pain-grid">
+        <article class="pain-card"><h3>Всё выглядит разрозненно</h3><p>Сайт, изображения и социальные сети выполнены в разных стилях.</p></article>
+        <article class="pain-card"><h3>AI-контент кажется шаблонным</h3><p>Визуал красивый, но не передаёт характер проекта.</p></article>
+        <article class="pain-card"><h3>Неясно, что показать клиенту</h3><p>Нет понятной структуры, портфолио и сильного первого впечатления.</p></article>
+        <article class="pain-card"><h3>Сложно собрать команду</h3><p>Для одной задачи приходится искать нескольких специалистов.</p></article>
+        <article class="pain-card"><h3>Есть идея, но нет технического задания</h3><p>Непонятно, с чего начать и какой формат выбрать.</p></article>
+        <article class="pain-card"><h3>Материалы не вызывают доверия</h3><p>Посетитель не понимает ценность и не доходит до заявки.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark fade-in" id="solution">
+    <div class="container">
+      <h2>Собираю проект в <span style="color:#c8b4ff;">единую визуальную систему</span></h2>
+      <p class="section-sub">Я изучаю задачу, аудиторию и характер проекта, разрабатываю визуальную концепцию и воплощаю её в нужных форматах: изображениях, видео, сайте, чат-боте и оформлении ВКонтакте.</p>
+      <div class="solution-grid">
+        <article class="positioning-card"><div class="bar"></div><h3>Смысл</h3><p>Определяем, что необходимо показать и какое впечатление должен получить клиент.</p></article>
+        <article class="positioning-card"><div class="bar"></div><h3>Образ</h3><p>Создаём стилистику, композицию, цвет и визуальный характер.</p></article>
+        <article class="positioning-card"><div class="bar"></div><h3>Реализация</h3><p>Разрабатываем готовые материалы и объединяем их в цельный проект.</p></article>
       </div>
     </div>
   </section>
@@ -881,8 +905,8 @@
   <section class="dark fade-in" id="portfolio-directions">
     <div class="container">
       <p style="font-size:.75rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;background:linear-gradient(90deg,#c8b4ff,#ede8ff,#9580e8);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:.75rem;">Портфолио</p>
-      <h2>Портфолио</h2>
-      <p class="section-sub">Выберите направление и посмотрите примеры выполненных проектов</p>
+      <h2>Выберите направление и <span style="color:#c8b4ff;">посмотрите работы</span></h2>
+      <p class="section-sub">В портфолио собраны AI-видео, изображения, сайты, чат-боты, оформление ВКонтакте и художественные проекты.</p>
       <div class="directions-grid">
         <div class="directions-row-2">
           <a class="direction-card" href="portfolio.html?category=video">

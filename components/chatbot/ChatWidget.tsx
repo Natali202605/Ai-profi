@@ -7,8 +7,6 @@ import { trackEvent, getUtmParams } from "@/lib/analytics";
 import { VK_PROFILE_URL } from "@/lib/utils";
 import { useAdelinChat } from "@/components/chatbot/AdelinChatContext";
 
-const BOT_NAME = "Аделин";
-
 type Message = {
   role: "bot" | "user";
   text: string;
@@ -16,22 +14,24 @@ type Message = {
 };
 
 const initialButtons = [
-  "Посмотреть портфолио",
   "Мне нужно видео",
-  "Мне нужны изображения",
+  "Нужны изображения",
   "Хочу сайт",
   "Нужен чат-бот",
   "Оформить ВКонтакте",
-  "Нужна комплексная упаковка",
-  "Задать вопрос",
+  "Нужна упаковка под ключ",
+  "Посмотреть портфолио",
+  "Не знаю, что выбрать",
 ];
+
+const BOT_NAME = "Аделин";
 
 export function ChatWidget() {
   const { open, setOpen } = useAdelinChat();
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "bot",
-      text: `Здравствуйте! Я ${BOT_NAME}, виртуальный ассистент Натали. Помогу выбрать услугу, посмотреть работы или оставить заявку.`,
+      text: "Здравствуйте! Я Аделин, AI-ассистент Натали. Расскажите, что вы хотите создать, и я помогу выбрать подходящую услугу, покажу примеры работ и подготовлю краткую заявку.",
       buttons: initialButtons,
     },
   ]);
@@ -41,8 +41,31 @@ export function ChatWidget() {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+    if (!open) return;
+    bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, [messages, open]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const scrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      window.scrollTo(0, scrollY);
+    };
+  }, [open]);
 
   const addBotMessage = (text: string, buttons?: string[]) => {
     setMessages((prev) => [...prev, { role: "bot", text, buttons }]);
@@ -55,6 +78,15 @@ export function ChatWidget() {
   const handleButton = (button: string) => {
     addUserMessage(button);
     trackEvent("service_select", { service: button, source: "chatbot_adelin" });
+    if (step === "start") {
+      trackEvent("adelin_flow_start", { service: button });
+    }
+
+    if (button === "Не знаю, что выбрать") {
+      addBotMessage("Расскажите своими словами, что хотите получить — я помогу определить формат.");
+      setStep("free_question");
+      return;
+    }
 
     if (button === "Посмотреть портфолио") {
       addBotMessage("Вот ссылка на портфолио:", ["Открыть портфолио"]);
@@ -70,11 +102,11 @@ export function ChatWidget() {
 
     const serviceMap: Record<string, string> = {
       "Мне нужно видео": "AI-видео",
-      "Мне нужны изображения": "AI-изображения",
+      "Нужны изображения": "AI-изображения",
       "Хочу сайт": "Сайт",
       "Нужен чат-бот": "Чат-бот",
       "Оформить ВКонтакте": "Оформление ВКонтакте",
-      "Нужна комплексная упаковка": "Комплексная упаковка",
+      "Нужна упаковка под ключ": "Комплексная упаковка",
     };
 
     if (serviceMap[button]) {
@@ -170,6 +202,7 @@ export function ChatWidget() {
       });
 
       trackEvent("chatbot_lead");
+      trackEvent("adelin_flow_complete", { service: leadData.service || "unknown" });
       addBotMessage(
         "Заявка отправлена! Натали свяжется с вами. Также можно написать напрямую во ВКонтакте.",
         ["Написать ВКонтакте"],
@@ -182,9 +215,11 @@ export function ChatWidget() {
 
   return (
     <>
+      {!open ? (
       <button
         onClick={() => {
           setOpen(true);
+          trackEvent("adelin_open", { source: "fab" });
           trackEvent("chatbot_open", { bot: "adelin", source: "fab" });
         }}
         className="mobile-fab-offset fixed right-4 z-[60] flex items-center gap-2 rounded-full bg-gold text-graphite shadow-[0_4px_24px_rgba(164,148,255,0.4)] transition-transform hover:scale-105 md:bottom-6"
@@ -196,42 +231,56 @@ export function ChatWidget() {
         </span>
         <span className="hidden pr-4 text-sm font-semibold md:inline">{BOT_NAME}</span>
       </button>
+      ) : null}
 
       <AnimatePresence>
         {open && (
-          <motion.div
-            className="mobile-fab-offset fixed right-4 z-[60] flex h-[min(520px,calc(100dvh-10rem))] w-[380px] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-border-subtle bg-plum/95 shadow-2xl backdrop-blur-xl md:bottom-24 md:h-[520px]"
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-          >
-            <div className="flex items-center justify-between border-b border-border-subtle bg-plum/60 px-4 py-3 backdrop-blur-md">
+          <>
+            <motion.button
+              type="button"
+              className="adelin-overlay fixed inset-0 z-[9998] cursor-default border-0 bg-[rgba(28,24,56,0.72)] backdrop-blur-[14px] md:bg-[rgba(28,24,56,0.58)]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              aria-label="Закрыть чат"
+              onClick={() => setOpen(false)}
+            />
+            <motion.div
+              className="adelin-dialog fixed z-[9999] flex flex-col overflow-hidden rounded-2xl border border-border-subtle bg-[rgba(244,240,255,0.98)] shadow-[0_32px_90px_rgba(26,18,70,0.32)] inset-3 md:inset-auto md:bottom-6 md:right-6 md:h-[min(82vh,680px)] md:w-[min(480px,calc(100vw-3rem))]"
+              initial={{ opacity: 0, y: 20, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.98 }}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Чат с Аделин"
+            >
+            <div className="flex items-center justify-between border-b border-border-subtle bg-white/70 px-4 py-3">
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/25 font-heading text-lg text-gold">
                   А
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white-text">{BOT_NAME}</p>
-                  <p className="text-xs text-text-secondary">виртуальный ассистент Натали</p>
+                  <p className="text-sm font-semibold text-graphite">{BOT_NAME}</p>
+                  <p className="text-xs text-graphite/70">AI-ассистент Натали · Помогу подобрать решение</p>
                 </div>
               </div>
               <button
                 onClick={() => setOpen(false)}
-                className="flex min-h-11 min-w-11 items-center justify-center"
+                className="flex min-h-11 min-w-11 items-center justify-center rounded-full text-graphite/70 transition-colors hover:bg-graphite/5"
                 aria-label="Закрыть чат"
               >
-                <X className="h-5 w-5 text-text-secondary" />
+                <X className="h-5 w-5" />
               </button>
             </div>
 
-            <div className="flex-1 space-y-3 overflow-y-auto p-4">
+            <div className="flex-1 space-y-3 overflow-y-auto bg-[rgba(244,240,255,0.98)] p-4">
               {messages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                   <div
                     className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm ${
                       msg.role === "user"
                         ? "bg-gold text-graphite"
-                        : "border border-border-subtle bg-card-bg/80 text-white-text"
+                        : "border border-border-subtle bg-white text-graphite shadow-sm"
                     }`}
                   >
                     {msg.role === "bot" ? (
@@ -246,14 +295,14 @@ export function ChatWidget() {
                             onClick={() => {
                               if (btn === "Согласен и отправить") submitLead();
                               else if (btn === "Написать ВКонтакте") {
-                                trackEvent("vk_profile_click", { source: "chatbot" });
+                                trackEvent("vk_click", { source: "chatbot" });
                                 window.open(VK_PROFILE_URL, "_blank");
                               } else if (btn === "Оставить контакт") {
                                 addBotMessage("Укажите телефон или мессенджер:");
                                 setStep("contact");
                               } else handleButton(btn);
                             }}
-                            className="min-h-9 rounded-full border border-gold/30 bg-gold/10 px-3 py-2 text-xs text-gold transition-colors hover:bg-gold/20"
+                            className="min-h-9 rounded-full border border-gold/30 bg-gold/10 px-3 py-2 text-xs text-graphite transition-colors hover:bg-gold/20"
                           >
                             {btn}
                           </button>
@@ -267,14 +316,14 @@ export function ChatWidget() {
             </div>
 
             {step !== "done" && (
-              <div className="border-t border-border-subtle p-3">
+              <div className="border-t border-border-subtle bg-white/80 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
                 <div className="flex gap-2">
                   <input
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleSend()}
-                    placeholder={`Сообщение для ${BOT_NAME}...`}
-                    className="flex-1 rounded-xl border border-border-subtle bg-card-bg px-3 py-2 text-sm text-white-text outline-none focus:border-gold"
+                    placeholder="Сообщение для Аделин..."
+                    className="flex-1 rounded-xl border border-border-subtle bg-white px-3 py-2 text-sm text-graphite outline-none focus:border-gold"
                   />
                   <button
                     onClick={handleSend}
@@ -286,7 +335,8 @@ export function ChatWidget() {
                 </div>
               </div>
             )}
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

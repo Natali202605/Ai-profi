@@ -194,6 +194,10 @@
     color: #c8b4ff;
   }
 
+  .text-accent-sky {
+    color: #a9d9ff;
+  }
+
   .hero-expertise-list > li + li {
     @apply mt-4;
   }
@@ -459,5 +463,35 @@
 
   .canvas-texture {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.018'/%3E%3C/svg%3E");
+  }
+
+  @media (max-width: 768px) {
+    .glass-panel,
+    .glass-panel-soft {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .section-light {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .hero-title-highlight,
+    .hero-keyword-shimmer {
+      animation: none !important;
+      filter: none !important;
+    }
+
+    .adelin-overlay {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+  }
+
+  @media (pointer: coarse) {
+    .hero-cursor-card-glow {
+      display: none;
+    }
   }
 }
