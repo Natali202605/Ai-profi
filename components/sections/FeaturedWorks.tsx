@@ -19,6 +19,7 @@ export function FeaturedWorks() {
             light
             label="Избранное"
             title={portfolio.featured.title}
+            titleAccent={portfolio.featured.titleHighlight}
             subtitle={portfolio.featured.subtitle}
           />
         </RevealAnimation>

@@ -132,10 +132,31 @@ export const positioningCards = [
   },
 ];
 
-export const heroHighlightCards = [
-  { title: "10+ лет", subtitle: "художественного опыта" },
-  { title: "AI, дизайн и разработка", subtitle: "в одном проекте" },
-  { title: "Индивидуальный подход", subtitle: "к каждой задаче" },
+export const heroExpertiseItems = [
+  {
+    number: "01",
+    title: "10+ лет художественного опыта",
+    titleAccent: "10+ лет",
+    description: "Чувство композиции, цвета, света и визуального ритма.",
+  },
+  {
+    number: "02",
+    title: "AI, дизайн и разработка",
+    titleAccent: "AI",
+    description: "Видео, изображения, сайты и цифровое оформление в единой системе.",
+  },
+  {
+    number: "03",
+    title: "Индивидуальная концепция",
+    titleAccent: "Индивидуальная",
+    description: "Решение создаётся под характер, задачу и аудиторию проекта.",
+  },
+  {
+    number: "04",
+    title: "Внимание к деталям",
+    titleAccent: "деталям",
+    description: "Каждый элемент поддерживает общий образ и профессиональное впечатление.",
+  },
 ];
 
 export const trustBarItems = [

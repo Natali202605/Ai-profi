@@ -29,7 +29,12 @@ export function Reviews() {
     <section id="reviews" className="py-16 md:py-28">
       <div className="container-site">
         <RevealAnimation>
-          <SectionHeading title={reviews.title} subtitle={reviews.subtitle} align="center" />
+          <SectionHeading
+            title={reviews.title}
+            titleAccent={reviews.titleHighlight}
+            subtitle={reviews.subtitle}
+            align="center"
+          />
         </RevealAnimation>
 
         <RevealAnimation delay={0.1}>

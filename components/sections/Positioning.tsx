@@ -12,7 +12,11 @@ export function Positioning() {
     <section id="positioning" className="section-light py-16 md:py-28">
       <div className="container-site">
         <RevealAnimation>
-          <SectionHeading light title={intro.title} />
+          <SectionHeading
+            light
+            title={intro.title}
+            titleAccent={intro.titleHighlight}
+          />
         </RevealAnimation>
 
         <RevealAnimation delay={0.1}>

@@ -98,7 +98,8 @@ export function ContactForm() {
         <RevealAnimation>
           <SectionHeading
             light
-            title="Расскажите о вашем проекте"
+            title="Расскажите о своём проекте"
+            titleAccent="о своём проекте"
             subtitle="Даже если идея пока не оформлена в точное техническое задание, опишите её своими словами."
             align="center"
           />

@@ -35,7 +35,7 @@ export function About() {
 
           <div className="glass-panel-soft rounded-2xl p-6 md:p-8">
             <RevealAnimation>
-              <SectionHeading light title={about.title} />
+              <SectionHeading light title={about.title} titleAccent={about.titleHighlight} />
             </RevealAnimation>
             <RevealAnimation delay={0.1}>
               {about.paragraphs.map((paragraph) => (

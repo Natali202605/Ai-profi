@@ -72,21 +72,26 @@ export type SiteContent = {
     titleHighlight: string;
     titleSuffix: string;
     description: string;
+    descriptionHighlight?: string;
     note: string;
+    noteHighlight?: string;
     trustMarkers: string[];
     specialistName: string;
     specialistRoles: string;
     specialistExperience: string;
     specialistPhoto: string;
+    portraitFocusY?: number;
   };
   intro: {
     title: string;
+    titleHighlight?: string;
     paragraph1: string;
     paragraph2: string;
     quote: string;
   };
   about: {
     title: string;
+    titleHighlight?: string;
     paragraphs: string[];
     extraParagraph: string;
     skills: string[];
@@ -96,11 +101,13 @@ export type SiteContent = {
   };
   services: {
     sectionTitle: string;
+    sectionTitleHighlight?: string;
     sectionSubtitle: string;
     items: SiteService[];
   };
   reviews: {
     title: string;
+    titleHighlight?: string;
     subtitle: string;
     items: SiteReview[];
   };
@@ -115,6 +122,7 @@ export type SiteContent = {
     featured: {
       label: string;
       title: string;
+      titleHighlight?: string;
       subtitle: string;
       ctaLabel: string;
     };

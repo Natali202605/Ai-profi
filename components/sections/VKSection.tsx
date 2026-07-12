@@ -22,7 +22,8 @@ export function VKSection() {
       <div className="container-site">
         <RevealAnimation>
           <SectionHeading
-            title="Помогаю превратить ВКонтакте в понятное пространство вашего бренда"
+            title="ВКонтакте как пространство вашего бренда"
+            titleAccent="пространство вашего бренда"
             subtitle="Хорошо оформленное сообщество должно быстро отвечать на вопросы: кто вы, чем занимаетесь, кому помогаете и как с вами связаться."
           />
         </RevealAnimation>

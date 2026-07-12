@@ -134,6 +134,85 @@
     @apply mx-auto w-full max-w-7xl px-5 md:px-8 lg:px-10;
   }
 
+  .hero-container {
+    @apply mx-auto w-full max-w-[1360px] px-5 md:px-8;
+    width: calc(100% - 32px);
+  }
+
+  @media (min-width: 1024px) {
+    .hero-container {
+      width: calc(100% - 64px);
+    }
+  }
+
+  .hero-layout {
+    @apply grid items-stretch gap-6;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-layout {
+      grid-template-columns: minmax(0, 1.35fr) minmax(360px, 0.75fr);
+      gap: 24px;
+      min-height: 680px;
+    }
+
+    .hero-right-column {
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) auto;
+      gap: 24px;
+      height: 100%;
+      min-height: 680px;
+    }
+
+    .hero-portrait {
+      min-height: 0;
+    }
+  }
+
+  .hero-right-column {
+    @apply flex flex-col gap-4;
+  }
+
+  .text-accent-primary {
+    background: linear-gradient(
+      90deg,
+      #f3d9ff 0%,
+      #c9b7ff 30%,
+      #8fcfff 65%,
+      #7aa8ff 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-accent-secondary {
+    color: #d9c4ff;
+  }
+
+  .text-accent-lilac {
+    color: #c8b4ff;
+  }
+
+  .hero-expertise-list > li + li {
+    @apply mt-4;
+  }
+
+  .hero-keyword-shimmer {
+    background: linear-gradient(
+      90deg,
+      #f3d9ff 0%,
+      #c9b7ff 30%,
+      #8fcfff 65%,
+      #7aa8ff 100%
+    );
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: hero-keyword-shimmer-once 1.1s ease-out 1.05s 1 forwards;
+  }
+
   .heading-display {
     @apply font-heading font-medium leading-[1.1] tracking-tight;
   }
@@ -202,22 +281,6 @@
       transparent 100%
     );
     box-shadow: 0 0 18px rgba(184, 164, 255, 0.35);
-  }
-
-  .hero-keyword-shimmer {
-    background: linear-gradient(
-      90deg,
-      #f5f0ff 0%,
-      #b8a4ff 35%,
-      #a8d8ff 55%,
-      #c8b4ff 75%,
-      #f5f0ff 100%
-    );
-    background-size: 220% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: hero-keyword-shimmer-once 1.1s ease-out 1.05s 1 forwards;
   }
 
   .hero-cursor-card-glow {

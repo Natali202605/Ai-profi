@@ -244,22 +244,29 @@
     /* Hero */
     .hero { min-height: 100vh; display: flex; align-items: flex-start; padding: 5.5rem 0 3rem; }
     .hero-grid {
-      display: grid; gap: 2.5rem; align-items: start; width: 100%;
+      display: grid; gap: 1.5rem; align-items: stretch;
+      max-width: 1360px; margin: 0 auto; width: calc(100% - 32px);
     }
     @media (min-width: 1024px) {
       .hero-grid {
-        grid-template-columns: minmax(0, 0.6fr) minmax(280px, 0.4fr);
-        gap: 2rem;
-        align-items: stretch;
+        grid-template-columns: minmax(0, 1.35fr) minmax(360px, 0.75fr);
+        gap: 24px;
+        min-height: 680px;
+        width: calc(100% - 64px);
       }
       .hero-content {
-        display: flex; flex-direction: column; justify-content: space-between;
-        height: 100%; border-radius: 2rem; padding: 2.75rem 3rem;
+        display: flex; flex-direction: column; height: 100%;
+        border-radius: 2rem; padding: 3.25rem 3.5rem;
       }
-      .hero-visual { margin: 0; justify-self: end; max-width: 100%; width: 100%; }
-      .hero-visual-stack { height: 100%; }
-      .hero-img { flex: 1.15; min-height: 280px; aspect-ratio: auto; }
-      .hero-mini-cards { flex: 0.85; display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+      .hero-bottom { margin-top: auto; }
+      .hero-visual-stack {
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) auto;
+        gap: 24px;
+        height: 100%;
+        min-height: 680px;
+      }
+      .hero-img { min-height: 0; aspect-ratio: auto; height: 100%; }
     }
     .hero-visual-stack { display: flex; flex-direction: column; gap: 1rem; width: 100%; }
     .hero-content {
@@ -267,7 +274,7 @@
       backdrop-filter: blur(20px);
       border: 1px solid rgba(200,188,255,.22);
       border-radius: 1.5rem;
-      padding: 2rem;
+      padding: 1.75rem 1.5rem;
       box-shadow: 0 4px 28px rgba(14,18,48,.22);
       position: relative;
     }
@@ -279,15 +286,11 @@
     .hero-cursor-panel:hover::before { opacity: 1; }
     @media (min-width: 768px) { .hero-content { padding: 2.5rem 3rem; } }
     .eyebrow {
-      font-size: .75rem; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; margin-bottom: 1rem;
-      background: linear-gradient(90deg, #c8b4ff, #ede8ff, #9580e8);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-      animation: eyebrow-pulse 3s ease-in-out infinite;
+      font-size: .75rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; margin-bottom: 1.5rem;
     }
-    @keyframes eyebrow-pulse {
-      0%, 100% { filter: drop-shadow(0 0 6px rgba(184,164,255,.25)); opacity: .92; }
-      50% { filter: drop-shadow(0 0 14px rgba(184,164,255,.55)); opacity: 1; }
-    }
+    .eyebrow .accent-blue { color: #a9d9ff; }
+    .eyebrow .accent-lilac { color: #c8b4ff; }
+    .eyebrow .accent-neutral { color: rgba(245,242,255,.55); margin: 0 .375rem; }
     @keyframes title-shimmer {
       0%, 100% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -299,14 +302,13 @@
       animation: hero-line-reveal .82s cubic-bezier(.22,1,.36,1) both;
     }
     .hero-brush-title .hero-line:nth-child(1) { animation-delay: .28s; }
-    .hero-brush-title .hero-line:nth-child(2) { animation-delay: .39s; }
-    .hero-brush-title .hero-line:nth-child(3) { animation-delay: .5s; }
+    .hero-brush-title .hero-line:nth-child(2) { animation-delay: .4s; }
     @keyframes hero-line-reveal {
       from { opacity: 0; transform: translateY(18px); filter: blur(8px); }
       to { opacity: 1; transform: translateY(0); filter: blur(0); }
     }
     .hero-brush-title .kw {
-      background: linear-gradient(90deg, #f5f0ff, #b8a4ff, #a8d8ff, #c8b4ff);
+      background: linear-gradient(90deg, #f3d9ff 0%, #c9b7ff 30%, #8fcfff 65%, #7aa8ff 100%);
       background-size: 220% auto;
       -webkit-background-clip: text; background-clip: text; color: transparent;
       animation: kw-shimmer-once 1.1s ease-out 1.05s 1 forwards;
@@ -334,8 +336,34 @@
       animation: title-shimmer 4.5s ease-in-out infinite;
       filter: drop-shadow(0 0 22px rgba(184,164,255,.45));
     }
-    .hero p { font-size: 1.125rem; color: var(--text-sec); max-width: 36rem; margin-bottom: 2rem; }
+    .hero p { font-size: 1.0625rem; color: var(--text-sec); max-width: 36rem; margin-bottom: 2.5rem; line-height: 1.65; }
+    .hero p .accent-lilac { color: #c8b4ff; font-weight: 600; }
     .hero-btns { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
+    .hero-expertise-card {
+      background: linear-gradient(145deg, rgba(50,40,102,.52) 0%, rgba(36,50,114,.44) 100%);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(200,188,255,.18);
+      border-radius: 1.75rem;
+      padding: 1.25rem 1.5rem;
+    }
+    .hero-expertise-card > p {
+      font-family: var(--font-h); font-size: 1.125rem; color: var(--white); margin-bottom: 1rem; max-width: none;
+    }
+    .hero-expertise-card .accent-gradient {
+      background: linear-gradient(90deg, #f3d9ff 0%, #c9b7ff 30%, #8fcfff 65%, #7aa8ff 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero-expertise-list { list-style: none; margin: 0; padding: 0; }
+    .hero-expertise-list li {
+      display: flex; gap: .875rem; padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    .hero-expertise-list li:last-child { border-bottom: none; padding-bottom: 0; }
+    .hero-expertise-list li + li { margin-top: 1rem; }
+    .hero-expertise-num { color: #d9c4ff; font-family: monospace; font-size: .75rem; padding-top: .125rem; flex-shrink: 0; }
+    .hero-expertise-list strong { display: block; font-size: .9375rem; color: var(--white); line-height: 1.35; }
+    .hero-expertise-list strong .accent-secondary { color: #d9c4ff; }
+    .hero-expertise-list span.desc { display: block; margin-top: .25rem; font-size: .8125rem; color: var(--text-sec); line-height: 1.45; }
     .light h2, .dark h2 {
       background: linear-gradient(135deg, #fff 0%, #f5f0ff 38%, #d4c8ff 72%, #b8a4ff 100%);
       -webkit-background-clip: text; background-clip: text; color: transparent;
@@ -407,7 +435,8 @@
       .hero-brush-title .hero-line, .hero-brush-line, .hero-brush-title .kw, h1 em { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
     }
 
-    .hero-note { font-size: .875rem; color: rgba(184,164,255,.85); }
+    .hero-note { font-size: .875rem; color: rgba(184,164,255,.85); margin-top: auto; padding-top: 2rem; }
+    .hero-note .accent-lilac { color: #c8b4ff; font-weight: 500; }
     .adelin-hero {
       margin-top: 1.5rem; display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 1.25rem;
       border-radius: 1rem; border: 1px solid rgba(200,188,255,.22);
@@ -462,8 +491,15 @@
     .portfolio-work-body { padding: .75rem; }
     .portfolio-work-body h4 { font-size: .875rem; margin-bottom: .25rem; }
     .portfolio-work-body p { font-size: .75rem; color: var(--text-sec); }
-    .hero-img { border-radius: 2rem; overflow: hidden; border: 1px solid var(--border); aspect-ratio: 4/5; position: relative; box-shadow: 0 24px 64px rgba(14,18,48,.35); background: rgba(18,24,48,.2); }
-    .hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 6%; display: block; filter: contrast(1.08) saturate(1.06) brightness(1.02); image-rendering: -webkit-optimize-contrast; }
+    .hero-img { border-radius: 2rem; overflow: hidden; border: 1px solid var(--border); aspect-ratio: 4/5; position: relative; box-shadow: 0 24px 64px rgba(14,18,48,.35); background: rgba(18,24,48,.2); min-height: 280px; }
+    .hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; filter: contrast(1.08) saturate(1.06) brightness(1.02); image-rendering: -webkit-optimize-contrast; }
+    .hero-img-caption {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 1rem 1.25rem;
+      background: linear-gradient(to top, rgba(14,18,48,.85) 0%, rgba(14,18,48,.35) 70%, transparent 100%);
+    }
+    .hero-img-caption .name { font-family: var(--font-h); font-size: 1rem; color: var(--white); }
+    .hero-img-caption .roles { font-size: .875rem; color: var(--gold); margin-top: .125rem; }
     .hero-profile {
       margin-top: 1.25rem; padding: .875rem 1rem; text-align: center;
       background: linear-gradient(145deg, rgba(50,40,102,.58) 0%, rgba(36,50,114,.5) 100%);
@@ -741,40 +777,66 @@
   </div>
 
   <section class="hero" id="top">
-    <div class="container hero-grid">
+    <div class="hero-grid">
       <div class="fade-in hero-content hero-cursor-panel">
-        <p class="eyebrow">AI-СПЕЦИАЛИСТ × ХУДОЖНИК</p>
-        <span class="hero-brush-line" aria-hidden="true"></span>
-        <h1 class="hero-brush-title">
-          <span class="hero-line">Создаю <span class="kw">визуальные проекты</span>,</span>
-          <span class="hero-line">которые помогают <span class="kw">брендам</span> и экспертам</span>
-          <span class="hero-line">быть <span class="kw">заметными</span> и <span class="kw">запоминающимися</span></span>
-        </h1>
-        <p>AI-видео, изображения, сайты, чат-боты и оформление ВКонтакте — с продуманной концепцией, профессиональной композицией и художественным опытом более 10 лет.</p>
-        <div class="hero-btns">
-          <a href="#contact" class="btn btn-gold">Обсудить проект</a>
-          <a href="portfolio.html" class="btn btn-outline">Смотреть портфолио</a>
+        <div>
+          <p class="eyebrow"><span class="accent-blue">AI-СПЕЦИАЛИСТ</span><span class="accent-neutral">×</span><span class="accent-lilac">ХУДОЖНИК</span></p>
+          <span class="hero-brush-line" aria-hidden="true"></span>
+          <h1 class="hero-brush-title">
+            <span class="hero-line">Создаю <span class="kw">AI-визуалы</span></span>
+            <span class="hero-line">профессионального уровня для брендов и экспертов</span>
+          </h1>
+          <p>AI-видео, изображения, сайты и оформление ВКонтакте — с художественным чутьём, продуманной композицией и <span class="accent-lilac">более чем 10-летним опытом</span> визуального видения.</p>
         </div>
-        <a href="https://vk.ru/id170079854" target="_blank" rel="noopener">Написать ВКонтакте →</a>
-        <p class="hero-note" style="margin-top:1rem;">Для экспертов, брендов, бизнеса и творческих проектов</p>
+        <div class="hero-bottom">
+          <div class="hero-btns">
+            <a href="#contact" class="btn btn-gold">Обсудить проект</a>
+            <a href="portfolio.html" class="btn btn-outline">Посмотреть портфолио</a>
+          </div>
+          <a href="https://vk.ru/id170079854" target="_blank" rel="noopener">Написать ВКонтакте →</a>
+          <p class="hero-note"><span class="accent-lilac">Индивидуальные решения</span> вместо шаблонной генерации.</p>
+        </div>
       </div>
       <div class="hero-visual fade-in hero-visual-stack">
         <div class="hero-img">
           <img src="images/natali-portrait.jpg" alt="Натали Neero — AI-специалист и художник" loading="eager" />
+          <div class="hero-img-caption">
+            <p class="name">Натали Neero</p>
+            <p class="roles">AI-специалист и художник</p>
+          </div>
         </div>
-        <div class="hero-mini-cards">
-          <div class="hero-side-card hero-mini-card">
-            <strong>10+ лет</strong>
-            <span>художественного опыта</span>
-          </div>
-          <div class="hero-side-card hero-mini-card">
-            <strong>AI, дизайн и разработка</strong>
-            <span>в одном проекте</span>
-          </div>
-          <div class="hero-side-card hero-mini-card">
-            <strong>Индивидуальный подход</strong>
-            <span>к каждой задаче</span>
-          </div>
+        <div class="hero-expertise-card">
+          <p><span class="accent-gradient">Профессиональный</span> подход</p>
+          <ul class="hero-expertise-list">
+            <li>
+              <span class="hero-expertise-num">01</span>
+              <div>
+                <strong><span class="accent-secondary">10+ лет</span> художественного опыта</strong>
+                <span class="desc">Чувство композиции, цвета, света и визуального ритма.</span>
+              </div>
+            </li>
+            <li>
+              <span class="hero-expertise-num">02</span>
+              <div>
+                <strong><span class="accent-secondary">AI</span>, дизайн и разработка</strong>
+                <span class="desc">Видео, изображения, сайты и цифровое оформление в единой системе.</span>
+              </div>
+            </li>
+            <li>
+              <span class="hero-expertise-num">03</span>
+              <div>
+                <strong><span class="accent-secondary">Индивидуальная</span> концепция</strong>
+                <span class="desc">Решение создаётся под характер, задачу и аудиторию проекта.</span>
+              </div>
+            </li>
+            <li>
+              <span class="hero-expertise-num">04</span>
+              <div>
+                <strong>Внимание к <span class="accent-secondary">деталям</span></strong>
+                <span class="desc">Каждый элемент поддерживает общий образ и профессиональное впечатление.</span>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

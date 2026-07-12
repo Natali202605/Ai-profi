@@ -37,6 +37,7 @@ export function Services() {
           <SectionHeading
             label="Услуги"
             title={services.sectionTitle}
+            titleAccent={services.sectionTitleHighlight}
             subtitle={services.sectionSubtitle}
           />
         </RevealAnimation>

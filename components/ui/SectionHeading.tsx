@@ -1,6 +1,9 @@
+import { AccentText } from "@/components/ui/AccentText";
+
 type SectionHeadingProps = {
   label?: string;
   title: string;
+  titleAccent?: string;
   subtitle?: string;
   light?: boolean;
   align?: "left" | "center";
@@ -9,6 +12,7 @@ type SectionHeadingProps = {
 export function SectionHeading({
   label,
   title,
+  titleAccent,
   subtitle,
   light = false,
   align = "left",
@@ -21,9 +25,19 @@ export function SectionHeading({
         <p className={`label-accent mb-3 ${light ? "opacity-95" : ""}`}>{label}</p>
       )}
       <h2
-        className={`heading-display section-title-accent text-balance text-3xl sm:text-4xl md:text-5xl lg:text-[56px]`}
+        className={`heading-display text-balance text-3xl text-white-text sm:text-4xl md:text-5xl lg:text-[56px]`}
       >
-        {title}
+        {titleAccent ? (
+          <>
+            <AccentText
+              text={title}
+              accent={titleAccent}
+              accentClassName="text-accent-primary"
+            />
+          </>
+        ) : (
+          title
+        )}
       </h2>
       {subtitle && (
         <p
