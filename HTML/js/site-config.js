@@ -1,7 +1,10 @@
 /**
  * URL полной версии сайта (Next.js) с админ-панелью.
- * На GitHub Pages задайте свой Vercel-адрес, например: https://your-app.vercel.app
+ * После деплоя на Vercel замените на ваш адрес, например:
+ * https://ai-profi.vercel.app/admin/login
+ * или https://natali-neero.ru/admin/login
  */
 window.NATALI_SITE = window.NATALI_SITE || {
   adminLoginUrl: "https://natali-neero.ru/admin/login",
+  fullSiteUrl: "https://natali-neero.ru",
 };

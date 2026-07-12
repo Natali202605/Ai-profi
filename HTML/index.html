@@ -199,6 +199,7 @@
       background: rgba(42,31,82,.55);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
+      padding: .625rem 0;
     }
     .header-inner { display: flex; align-items: center; justify-content: space-between; }
     .logo { font-family: var(--font-h); font-size: 1rem; font-weight: 600; letter-spacing: .06em; color: var(--white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: min(52vw, 100%); }
@@ -247,11 +248,18 @@
     }
     @media (min-width: 1024px) {
       .hero-grid {
-        grid-template-columns: minmax(0, 1.08fr) minmax(280px, 440px);
-        gap: 3rem 4rem;
+        grid-template-columns: minmax(0, 0.6fr) minmax(280px, 0.4fr);
+        gap: 2rem;
+        align-items: stretch;
       }
-      .hero-content { align-self: center; }
-      .hero-visual { margin: 0; justify-self: end; max-width: 440px; width: 100%; }
+      .hero-content {
+        display: flex; flex-direction: column; justify-content: space-between;
+        height: 100%; border-radius: 2rem; padding: 2.75rem 3rem;
+      }
+      .hero-visual { margin: 0; justify-self: end; max-width: 100%; width: 100%; }
+      .hero-visual-stack { height: 100%; }
+      .hero-img { flex: 1.15; min-height: 280px; aspect-ratio: auto; }
+      .hero-mini-cards { flex: 0.85; display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
     }
     .hero-visual-stack { display: flex; flex-direction: column; gap: 1rem; width: 100%; }
     .hero-content {
@@ -261,7 +269,14 @@
       border-radius: 1.5rem;
       padding: 2rem;
       box-shadow: 0 4px 28px rgba(14,18,48,.22);
+      position: relative;
     }
+    .hero-cursor-panel::before {
+      content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0;
+      background: radial-gradient(600px circle at var(--mouse-x,50%) var(--mouse-y,50%), rgba(184,164,255,.12), transparent 45%);
+      transition: opacity .4s;
+    }
+    .hero-cursor-panel:hover::before { opacity: 1; }
     @media (min-width: 768px) { .hero-content { padding: 2.5rem 3rem; } }
     .eyebrow {
       font-size: .75rem; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; margin-bottom: 1rem;
@@ -278,7 +293,39 @@
       50% { background-position: 100% 50%; }
     }
     .gold-line { width: 4rem; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin-bottom: 1.5rem; }
-    h1 { font-family: var(--font-h); font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.05; font-weight: 500; margin-bottom: 1.5rem; }
+    h1 { font-family: var(--font-h); font-size: clamp(2.25rem, 4.5vw, 4rem); line-height: 1.08; font-weight: 500; margin-bottom: 1.5rem; }
+    .hero-brush-title .hero-line {
+      display: block; overflow: hidden;
+      animation: hero-line-reveal .82s cubic-bezier(.22,1,.36,1) both;
+    }
+    .hero-brush-title .hero-line:nth-child(1) { animation-delay: .28s; }
+    .hero-brush-title .hero-line:nth-child(2) { animation-delay: .39s; }
+    .hero-brush-title .hero-line:nth-child(3) { animation-delay: .5s; }
+    @keyframes hero-line-reveal {
+      from { opacity: 0; transform: translateY(18px); filter: blur(8px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+    .hero-brush-title .kw {
+      background: linear-gradient(90deg, #f5f0ff, #b8a4ff, #a8d8ff, #c8b4ff);
+      background-size: 220% auto;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      animation: kw-shimmer-once 1.1s ease-out 1.05s 1 forwards;
+    }
+    @keyframes kw-shimmer-once {
+      from { background-position: 0% 50%; filter: drop-shadow(0 0 0 rgba(184,164,255,0)); }
+      45% { filter: drop-shadow(0 0 14px rgba(184,164,255,.55)); }
+      to { background-position: 100% 50%; filter: drop-shadow(0 0 6px rgba(184,164,255,.25)); }
+    }
+    .hero-brush-line {
+      display: block; height: 1px; margin-bottom: 1rem;
+      background: linear-gradient(90deg, transparent, rgba(168,216,255,.75), transparent);
+      transform-origin: left; animation: brush-line .65s cubic-bezier(.22,1,.36,1) both;
+    }
+    @keyframes brush-line {
+      from { transform: scaleX(0); opacity: 0; }
+      60% { opacity: .85; }
+      to { transform: scaleX(1); opacity: .35; }
+    }
     h1 em {
       font-style: normal;
       background: linear-gradient(90deg, #ede8ff, #b8a4ff, #a8d8ff, #c8b4ff, #9580e8, #ede8ff);
@@ -301,6 +348,65 @@
       background: linear-gradient(135deg, #fff 0%, #ece6ff 55%, #c8b4ff 100%);
       -webkit-background-clip: text; background-clip: text; color: transparent;
     }
+    .hero-mini-card {
+      display: flex; flex-direction: column; justify-content: center; min-height: 88px;
+      text-align: center; padding: 1rem;
+    }
+    .hero-mini-card strong { font-family: var(--font-h); font-size: 1rem; color: var(--white); display: block; line-height: 1.2; }
+    .hero-mini-card span { font-size: .75rem; color: rgba(184,164,255,.8); margin-top: .25rem; display: block; }
+    @media (min-width: 640px) and (max-width: 1023px) {
+      .hero-mini-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+    }
+
+    /* Trust bar */
+    .trust-bar { padding: 1.25rem 0; border-top: 1px solid rgba(200,188,255,.14); border-bottom: 1px solid rgba(200,188,255,.14); background: rgba(42,31,82,.3); backdrop-filter: blur(12px); }
+    .trust-bar-list { display: flex; gap: 1.25rem; overflow-x: auto; list-style: none; padding-bottom: .25rem; scrollbar-width: none; }
+    .trust-bar-list::-webkit-scrollbar { display: none; }
+    @media (min-width: 768px) { .trust-bar-list { display: grid; grid-template-columns: repeat(5, 1fr); overflow: visible; } }
+    .trust-bar-list li { display: flex; align-items: center; gap: .75rem; min-width: 210px; font-size: .875rem; color: var(--text-sec); }
+    @media (min-width: 768px) { .trust-bar-list li { min-width: 0; } }
+    .trust-icon { width: 2.25rem; height: 2.25rem; border-radius: 50%; border: 1px solid rgba(184,164,255,.25); background: rgba(184,164,255,.1); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: .875rem; flex-shrink: 0; }
+
+    /* Portfolio directions */
+    .directions-grid { display: grid; gap: 1rem; }
+    @media (min-width: 768px) { .directions-grid { gap: 1.5rem; } }
+    .directions-row-2 { display: grid; gap: 1rem; }
+    @media (min-width: 768px) { .directions-row-2 { grid-template-columns: 1fr 1fr; gap: 1.5rem; } }
+    .directions-row-3 { display: grid; gap: 1rem; }
+    @media (min-width: 768px) { .directions-row-3 { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
+    .direction-card {
+      position: relative; overflow: hidden; border-radius: 1.75rem; border: 1px solid var(--border);
+      min-height: 320px; display: block; color: inherit;
+    }
+    .direction-card.wide { min-height: 240px; }
+    .direction-card img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; transition: transform .7s ease; }
+    .direction-card:hover img { transform: scale(1.04); }
+    .direction-card::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(42,31,82,.88) 0%, rgba(42,31,82,.25) 55%, transparent 100%);
+      transition: opacity .4s;
+    }
+    .direction-card:hover::after { background: linear-gradient(to top, rgba(42,31,82,.94) 0%, rgba(42,31,82,.35) 60%, transparent 100%); }
+    .direction-body { position: absolute; inset: auto 0 0 0; z-index: 1; padding: 1.25rem 1.5rem 1.5rem; }
+    .direction-body .tag { font-size: .6875rem; text-transform: uppercase; letter-spacing: .18em; color: rgba(184,164,255,.9); margin-bottom: .5rem; }
+    .direction-body h3 { font-family: var(--font-h); font-size: 1.75rem; margin-bottom: .5rem; color: var(--white); }
+    .direction-body p { font-size: .875rem; color: var(--text-sec); line-height: 1.45; max-width: 36rem; }
+    .direction-count { font-size: .8125rem; color: rgba(184,164,255,.9); margin-top: .75rem; font-weight: 600; }
+    .direction-cta { display: inline-flex; align-items: center; gap: .35rem; margin-top: 1rem; font-size: .875rem; font-weight: 600; color: var(--white); }
+    .direction-card:hover .direction-cta { color: var(--gold); }
+    .positioning-cards { display: grid; gap: 1.5rem; margin-top: 2rem; }
+    @media (min-width: 768px) { .positioning-cards { grid-template-columns: repeat(3, 1fr); } }
+    .positioning-card {
+      background: linear-gradient(145deg, rgba(52,42,108,.72), rgba(38,54,122,.66));
+      border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem 2rem;
+    }
+    .positioning-card .bar { width: 2.5rem; height: 3px; background: var(--gold); border-radius: 999px; margin-bottom: 1rem; }
+    .positioning-card h3 { font-family: var(--font-h); font-size: 1.75rem; margin-bottom: .75rem; color: var(--white); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-brush-title .hero-line, .hero-brush-line, .hero-brush-title .kw, h1 em { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
+    }
+
     .hero-note { font-size: .875rem; color: rgba(184,164,255,.85); }
     .adelin-hero {
       margin-top: 1.5rem; display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 1.25rem;
@@ -609,13 +715,13 @@
     <div class="container header-inner">
       <a href="#" class="logo">NATALI NEERO<span class="logo-tag"> · AI-специалист и художник</span></a>
       <nav>
+        <a href="#top">Главная</a>
         <a href="#portfolio">Портфолио</a>
         <a href="#services">Услуги</a>
         <a href="#about">Обо мне</a>
         <a href="#process">Процесс</a>
         <a href="#reviews">Отзывы</a>
         <a href="#contact">Контакты</a>
-        <a href="admin/login.html" class="btn btn-outline" style="padding:.5rem 1rem;font-size:.8125rem;">Вход для сотрудников</a>
         <a href="#contact" class="btn btn-gold" style="padding:.5rem 1.25rem;font-size:.875rem;">Обсудить проект</a>
       </nav>
       <button class="menu-btn" id="menuOpen" aria-label="Меню">☰</button>
@@ -624,6 +730,7 @@
 
   <div class="mobile-nav" id="mobileNav">
     <button class="mobile-close" id="menuClose" aria-label="Закрыть">✕</button>
+    <a href="#top">Главная</a>
     <a href="#portfolio">Портфолио</a>
     <a href="#services">Услуги</a>
     <a href="#about">Обо мне</a>
@@ -631,19 +738,22 @@
     <a href="#reviews">Отзывы</a>
     <a href="#contact">Контакты</a>
     <a href="#contact" class="btn btn-gold" style="margin-top:1rem;text-align:center;">Обсудить проект</a>
-    <a href="admin/login.html" class="btn btn-outline" style="margin-top:.75rem;text-align:center;">Вход для сотрудников</a>
   </div>
 
   <section class="hero" id="top">
     <div class="container hero-grid">
-      <div class="fade-in hero-content">
+      <div class="fade-in hero-content hero-cursor-panel">
         <p class="eyebrow">AI-СПЕЦИАЛИСТ × ХУДОЖНИК</p>
-        <div class="gold-line"></div>
-        <h1>Создаю визуальные проекты, которые помогают брендам и экспертам <em>быть заметными и запоминающимися</em></h1>
+        <span class="hero-brush-line" aria-hidden="true"></span>
+        <h1 class="hero-brush-title">
+          <span class="hero-line">Создаю <span class="kw">визуальные проекты</span>,</span>
+          <span class="hero-line">которые помогают <span class="kw">брендам</span> и экспертам</span>
+          <span class="hero-line">быть <span class="kw">заметными</span> и <span class="kw">запоминающимися</span></span>
+        </h1>
         <p>AI-видео, изображения, сайты, чат-боты и оформление ВКонтакте — с продуманной концепцией, профессиональной композицией и художественным опытом более 10 лет.</p>
         <div class="hero-btns">
           <a href="#contact" class="btn btn-gold">Обсудить проект</a>
-          <a href="#portfolio" class="btn btn-outline">Смотреть портфолио</a>
+          <a href="portfolio.html" class="btn btn-outline">Смотреть портфолио</a>
         </div>
         <a href="https://vk.ru/id170079854" target="_blank" rel="noopener">Написать ВКонтакте →</a>
         <p class="hero-note" style="margin-top:1rem;">Для экспертов, брендов, бизнеса и творческих проектов</p>
@@ -652,43 +762,164 @@
         <div class="hero-img">
           <img src="images/natali-portrait.jpg" alt="Натали Neero — AI-специалист и художник" loading="eager" />
         </div>
-        <div class="hero-profile hero-side-card">
-          <p class="hero-profile-line">
-            <span class="name">Натали Neero</span><span class="sep">·</span><span class="roles">AI-специалист и художник</span>
-          </p>
-          <p class="hero-profile-line" style="margin-top:.25rem;font-size:.75rem;color:rgba(184,164,255,.75);">10+ лет художественного опыта</p>
-        </div>
-        <div class="hero-side-card">
-          <ul class="hero-trust-grid">
-            <li>10+ лет художественного опыта</li>
-            <li>Индивидуальные визуальные концепции</li>
-            <li>AI, дизайн и разработка в одном проекте</li>
-            <li>Работа онлайн</li>
-            <li>Проекты под задачу клиента</li>
-          </ul>
-        </div>
-        <div class="adelin-hero hero-side-card">
-          <div class="adelin-hero-avatar" aria-hidden="true">А</div>
-          <div>
-            <p class="adelin-hero-title" style="color:var(--gold);font-family:var(--font-h);font-size:1.125rem;">Аделин</p>
-            <p class="adelin-hero-text">Виртуальный ассистент Натали. Помогу выбрать услугу, посмотреть работы или оставить заявку.</p>
-            <button type="button" class="adelin-hero-btn" id="adelinHeroBtn">Начать диалог</button>
+        <div class="hero-mini-cards">
+          <div class="hero-side-card hero-mini-card">
+            <strong>10+ лет</strong>
+            <span>художественного опыта</span>
+          </div>
+          <div class="hero-side-card hero-mini-card">
+            <strong>AI, дизайн и разработка</strong>
+            <span>в одном проекте</span>
+          </div>
+          <div class="hero-side-card hero-mini-card">
+            <strong>Индивидуальный подход</strong>
+            <span>к каждой задаче</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="light fade-in">
+  <section class="trust-bar fade-in" aria-label="Показатели доверия">
     <div class="container">
-      <h2>Не просто создаю контент. Помогаю увидеть образ вашего проекта</h2>
-      <div style="display:grid;gap:2.5rem;margin-top:2rem;">
-        <div>
-          <p>Каждый проект начинается не с выбора нейросети или шаблона, а с понимания человека, идеи и задачи. Я соединяю возможности современных AI-инструментов с художественным опытом, чувством композиции, цвета и атмосферы.</p>
-          <p style="margin-top:1rem;">Благодаря этому изображения, видео, сайты и сообщества выглядят не как набор отдельных элементов, а как единая визуальная история.</p>
-        </div>
-        <blockquote>Для меня важно, чтобы визуал был не только красивым. Он должен передавать характер, вызывать чувство и помогать человеку запомнить ваш проект.</blockquote>
+      <ul class="trust-bar-list">
+        <li><span class="trust-icon" aria-hidden="true">◆</span>Более 10 лет в искусстве</li>
+        <li><span class="trust-icon" aria-hidden="true">✦</span>Индивидуальные концепции</li>
+        <li><span class="trust-icon" aria-hidden="true">◉</span>Работа онлайн</li>
+        <li><span class="trust-icon" aria-hidden="true">◎</span>AI, дизайн и разработка</li>
+        <li><span class="trust-icon" aria-hidden="true">◈</span>Проекты под задачу клиента</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="light fade-in" id="positioning">
+    <div class="container">
+      <h2>Не просто создаю контент. Формирую визуальный образ проекта</h2>
+      <p class="section-sub">Каждый проект начинается с понимания человека, идеи, аудитории и задачи. Художественный опыт помогает увидеть композицию, цвет, атмосферу и смысл, а AI-инструменты — воплотить эту концепцию в изображениях, видео, сайтах и цифровых продуктах.</p>
+      <div class="positioning-cards">
+        <article class="positioning-card">
+          <div class="bar"></div>
+          <h3>Вижу</h3>
+          <p>Анализирую идею, характер проекта и визуальную задачу.</p>
+        </article>
+        <article class="positioning-card">
+          <div class="bar"></div>
+          <h3>Продумываю</h3>
+          <p>Создаю композицию, стилистику, цвет и единую концепцию.</p>
+        </article>
+        <article class="positioning-card">
+          <div class="bar"></div>
+          <h3>Реализую</h3>
+          <p>Превращаю идею в готовый цифровой продукт.</p>
+        </article>
       </div>
+    </div>
+  </section>
+
+  <section class="dark fade-in" id="portfolio-directions">
+    <div class="container">
+      <p style="font-size:.75rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;background:linear-gradient(90deg,#c8b4ff,#ede8ff,#9580e8);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:.75rem;">Портфолио</p>
+      <h2>Портфолио</h2>
+      <p class="section-sub">Выберите направление и посмотрите примеры выполненных проектов</p>
+      <div class="directions-grid">
+        <div class="directions-row-2">
+          <a class="direction-card" href="portfolio.html?category=video">
+            <img src="images/portfolio/creator.jpg" alt="AI-видео" loading="lazy" />
+            <div class="direction-body">
+              <p class="tag">AI-видео</p>
+              <h3>AI-видео</h3>
+              <p>Кинематографические, рекламные и художественные ролики с продуманной концепцией.</p>
+              <p class="direction-count">3 проекта</p>
+              <span class="direction-cta">Посмотреть работы →</span>
+            </div>
+          </a>
+          <a class="direction-card" href="portfolio.html?category=images">
+            <img src="images/specialist-creator.jpg" alt="AI-изображения" loading="lazy" />
+            <div class="direction-body">
+              <p class="tag">Изображения</p>
+              <h3>AI-изображения</h3>
+              <p>Рекламные визуалы, серии в едином стиле и художественные образы.</p>
+              <p class="direction-count">1 проект</p>
+              <span class="direction-cta">Посмотреть работы →</span>
+            </div>
+          </a>
+        </div>
+        <div class="directions-row-3">
+          <a class="direction-card" href="portfolio.html?category=websites">
+            <img src="images/portfolio/site-preview.png" alt="Сайты" loading="lazy" />
+            <div class="direction-body">
+              <p class="tag">Сайты</p>
+              <h3>Сайты</h3>
+              <p>Современные сайты с индивидуальной визуальной концепцией.</p>
+              <p class="direction-count">2 проекта</p>
+              <span class="direction-cta">Посмотреть работы →</span>
+            </div>
+          </a>
+          <a class="direction-card" href="portfolio.html?category=chatbots">
+            <img src="images/bg-watercolor.png" alt="Чат-боты" loading="lazy" />
+            <div class="direction-body">
+              <p class="tag">Чат-боты</p>
+              <h3>Чат-боты</h3>
+              <p>Умные ассистенты для сайта: выбор услуги, бриф и сбор заявок.</p>
+              <p class="direction-count">1 проект</p>
+              <span class="direction-cta">Посмотреть работы →</span>
+            </div>
+          </a>
+          <a class="direction-card" href="portfolio.html?category=vk">
+            <img src="images/portfolio/creator.jpg" alt="ВКонтакте" loading="lazy" />
+            <div class="direction-body">
+              <p class="tag">ВКонтакте</p>
+              <h3>Оформление ВКонтакте</h3>
+              <p>Цельный визуальный образ сообщества с продуманной навигацией.</p>
+              <p class="direction-count">1 проект</p>
+              <span class="direction-cta">Посмотреть работы →</span>
+            </div>
+          </a>
+        </div>
+        <a class="direction-card wide" href="portfolio.html?category=art">
+          <img src="images/portfolio/lilies.jpg" alt="Художественные проекты" loading="lazy" style="object-position:center;" />
+          <div class="direction-body">
+            <p class="tag">Художественные работы</p>
+            <h3>Художественные проекты</h3>
+            <p>Авторские серии, картины и визуальные работы с характером и атмосферой.</p>
+            <p class="direction-count">2 проекта</p>
+            <span class="direction-cta">Посмотреть работы →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="light fade-in" id="portfolio">
+    <div class="container">
+      <p style="font-size:.75rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;background:linear-gradient(90deg,#c8b4ff,#ede8ff,#9580e8);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:.75rem;">Избранное</p>
+      <h2>Избранные проекты</h2>
+      <p class="section-sub">Работы, в которых технологии становятся инструментом художественного замысла.</p>
+      <div class="portfolio-category">
+        <div class="portfolio-category-head"><h3>AI-видео</h3><p style="font-size:.8125rem;color:var(--text-sec);margin-top:.25rem;">3 работы</p></div>
+        <div class="portfolio-works">
+          <article class="portfolio-work"><img src="images/portfolio/creator.jpg" alt="РИС. Путь совершенства" loading="lazy" /><div class="portfolio-work-body"><h4>РИС. Путь совершенства</h4><p>Кинематографическая визуальная история</p></div></article>
+          <article class="portfolio-work"><img src="images/specialist-creator.jpg" alt="AI-видеоролик для эксперта" loading="lazy" /><div class="portfolio-work-body"><h4>AI-видеоролик для эксперта</h4><p>Имиджевый ролик с режиссурой</p></div></article>
+          <article class="portfolio-work"><img src="images/portfolio/lilies.jpg" alt="Семейная визуальная история" loading="lazy" /><div class="portfolio-work-body"><h4>Семейная визуальная история</h4><p>Эмоциональный видеоролик</p></div></article>
+        </div>
+      </div>
+      <div class="portfolio-category">
+        <div class="portfolio-category-head"><h3>Изображения</h3><p style="font-size:.8125rem;color:var(--text-sec);margin-top:.25rem;">1 работа</p></div>
+        <div class="portfolio-works">
+          <article class="portfolio-work"><img src="images/portfolio/creator.jpg" alt="AI-визуалы для креатора" loading="lazy" /><div class="portfolio-work-body"><h4>AI-визуалы для креатора</h4><p>Серия с единым стилем</p></div></article>
+        </div>
+      </div>
+      <div class="portfolio-category">
+        <div class="portfolio-category-head"><h3>Сайты</h3><p style="font-size:.8125rem;color:var(--text-sec);margin-top:.25rem;">2 работы</p></div>
+        <div class="portfolio-works">
+          <article class="portfolio-work"><img src="images/portfolio/site-preview.png" alt="Сайт NATALI NEERO" loading="lazy" /><div class="portfolio-work-body"><h4>Сайт NATALI NEERO</h4><p>Премиальный сайт AI-специалиста</p></div></article>
+          <article class="portfolio-work"><img src="images/portfolio/site-preview.png" alt="Персональный сайт эксперта" loading="lazy" /><div class="portfolio-work-body"><h4>Персональный сайт эксперта</h4><p>Индивидуальная визуальная концепция</p></div></article>
+        </div>
+      </div>
+      <p style="text-align:center;margin-top:2rem;display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;">
+        <a href="portfolio.html" class="btn btn-secondary btn-outline">Смотреть все проекты</a>
+        <a href="#contact" class="btn btn-outline">Обсудить похожий проект</a>
+      </p>
     </div>
   </section>
 
@@ -736,51 +967,18 @@
     </div>
   </section>
 
-  <section class="light fade-in" id="portfolio">
+  <section id="process" class="light fade-in">
     <div class="container">
-      <h2>Избранные проекты</h2>
-      <p class="section-sub">Работы, в которых технологии становятся инструментом художественного замысла.</p>
-      <div class="portfolio-category">
-        <div class="portfolio-category-head"><h3>AI-видео</h3><p style="font-size:.8125rem;color:var(--text-sec);margin-top:.25rem;">3 работы</p></div>
-        <div class="portfolio-works">
-          <article class="portfolio-work"><img src="images/portfolio/creator.jpg" alt="РИС. Путь совершенства" loading="lazy" /><div class="portfolio-work-body"><h4>РИС. Путь совершенства</h4><p>Кинематографическая визуальная история</p></div></article>
-          <article class="portfolio-work"><img src="images/specialist-creator.jpg" alt="AI-видеоролик для эксперта" loading="lazy" /><div class="portfolio-work-body"><h4>AI-видеоролик для эксперта</h4><p>Имиджевый ролик с режиссурой</p></div></article>
-          <article class="portfolio-work"><img src="images/portfolio/lilies.jpg" alt="Семейная визуальная история" loading="lazy" /><div class="portfolio-work-body"><h4>Семейная визуальная история</h4><p>Эмоциональный видеоролик</p></div></article>
-        </div>
+      <h2>Как проходит работа</h2>
+      <p class="section-sub">Понятный процесс от знакомства до передачи готового результата.</p>
+      <div class="services-grid" style="margin-top:2rem;">
+        <div class="card"><h3>1. Знакомство</h3><p>Обсуждаем задачу, формат, аудиторию и пожелания.</p></div>
+        <div class="card"><h3>2. Анализ задачи</h3><p>Изучаю проект, материалы, аудиторию и визуальные ориентиры.</p></div>
+        <div class="card"><h3>3. Концепция</h3><p>Определяю стилистику, композицию, настроение и основные решения.</p></div>
+        <div class="card"><h3>4. Создание</h3><p>Разрабатываю изображения, видео, сайт, чат-бот или оформление.</p></div>
+        <div class="card"><h3>5. Согласование</h3><p>Показываю результат и вношу согласованные корректировки.</p></div>
+        <div class="card"><h3>6. Передача</h3><p>Подготавливаю материалы и объясняю дальнейшее использование.</p></div>
       </div>
-      <div class="portfolio-category">
-        <div class="portfolio-category-head"><h3>Изображения</h3><p style="font-size:.8125rem;color:var(--text-sec);margin-top:.25rem;">1 работа</p></div>
-        <div class="portfolio-works">
-          <article class="portfolio-work"><img src="images/portfolio/creator.jpg" alt="AI-визуалы для креатора" loading="lazy" /><div class="portfolio-work-body"><h4>AI-визуалы для креатора</h4><p>Серия с единым стилем</p></div></article>
-        </div>
-      </div>
-      <div class="portfolio-category">
-        <div class="portfolio-category-head"><h3>Сайты</h3><p style="font-size:.8125rem;color:var(--text-sec);margin-top:.25rem;">2 работы</p></div>
-        <div class="portfolio-works">
-          <article class="portfolio-work"><img src="images/portfolio/site-preview.png" alt="Сайт NATALI NEERO" loading="lazy" /><div class="portfolio-work-body"><h4>Сайт NATALI NEERO</h4><p>Премиальный сайт AI-специалиста</p></div></article>
-          <article class="portfolio-work"><img src="images/portfolio/site-preview.png" alt="Персональный сайт эксперта" loading="lazy" /><div class="portfolio-work-body"><h4>Персональный сайт эксперта</h4><p>Индивидуальная визуальная концепция</p></div></article>
-        </div>
-      </div>
-      <div class="portfolio-category">
-        <div class="portfolio-category-head"><h3>Художественные проекты</h3><p style="font-size:.8125rem;color:var(--text-sec);margin-top:.25rem;">2 работы</p></div>
-        <div class="portfolio-works">
-          <article class="portfolio-work"><img src="images/portfolio/lilies.jpg" alt="Художественная серия Лилии" loading="lazy" /><div class="portfolio-work-body"><h4>Художественная серия «Лилии»</h4><p>Авторская серия с акцентом на свет</p></div></article>
-          <article class="portfolio-work"><img src="images/portfolio/lilies.jpg" alt="Художественные работы на заказ" loading="lazy" /><div class="portfolio-work-body"><h4>Художественные работы на заказ</h4><p>Индивидуальные картины</p></div></article>
-        </div>
-      </div>
-      <div class="portfolio-category">
-        <div class="portfolio-category-head"><h3>ВКонтакте</h3><p style="font-size:.8125rem;color:var(--text-sec);margin-top:.25rem;">1 работа</p></div>
-        <div class="portfolio-works">
-          <article class="portfolio-work"><img src="images/portfolio/creator.jpg" alt="Оформление сообщества" loading="lazy" /><div class="portfolio-work-body"><h4>Оформление сообщества</h4><p>Цельный визуальный образ</p></div></article>
-        </div>
-      </div>
-      <div class="portfolio-category">
-        <div class="portfolio-category-head"><h3>Чат-боты</h3><p style="font-size:.8125rem;color:var(--text-sec);margin-top:.25rem;">1 работа</p></div>
-        <div class="portfolio-works">
-          <article class="portfolio-work"><img src="images/bg-watercolor.png" alt="Виртуальный ассистент Аделин" loading="lazy" /><div class="portfolio-work-body"><h4>Виртуальный ассистент Аделин</h4><p>Чат-бот для сайта</p></div></article>
-        </div>
-      </div>
-      <p style="text-align:center;margin-top:2rem;"><a href="#contact" class="btn btn-outline">Обсудить похожий проект</a></p>
     </div>
   </section>
 
@@ -898,7 +1096,7 @@
         <p><a href="https://vk.com/natali_neero" target="_blank" style="font-size:.875rem;color:var(--text-sec);">Сообщество</a></p>
       </div>
     </div>
-    <p class="footer-copy container">© NATALI NEERO, 2026. AI-визуалы, видео, сайты и оформление ВКонтакте. · <a href="admin/login.html" style="color:rgba(245,242,255,.45);">Вход для сотрудников · Админ-панель</a></p>
+    <p class="footer-copy container">© NATALI NEERO, 2026. AI-визуалы, видео, сайты и оформление ВКонтакте. · <a href="admin/login.html" style="color:rgba(245,242,255,.4);">Администрирование сайта</a></p>
     <div class="footer-legal container">
       <a href="privacy.html">Политика конфиденциальности</a>
       <a href="consent.html">Согласие на обработку персональных данных</a>
@@ -992,7 +1190,7 @@
       function handleButton(label) {
         addMsg('user', label);
         if (label === 'Посмотреть портфолио') {
-          addMsg('bot', 'Прокрутите страницу до раздела «Портфолио» или напишите Натали во ВКонтакте.', ['Написать ВКонтакте', 'Оставить заявку']);
+          addMsg('bot', 'Откройте раздел «Портфолио» на странице или перейдите на portfolio.html.', ['Написать ВКонтакте', 'Оставить заявку']);
           return;
         }
         if (label === 'Задать вопрос') {
@@ -1028,6 +1226,16 @@
       };
       var heroBtn = document.getElementById('adelinHeroBtn');
       if (heroBtn) heroBtn.onclick = function () { document.getElementById('chatFab').click(); };
+
+      (function initHeroCursor() {
+        var panel = document.querySelector('.hero-cursor-panel');
+        if (!panel || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        panel.addEventListener('mousemove', function (e) {
+          var r = panel.getBoundingClientRect();
+          panel.style.setProperty('--mouse-x', ((e.clientX - r.left) / r.width * 100) + '%');
+          panel.style.setProperty('--mouse-y', ((e.clientY - r.top) / r.height * 100) + '%');
+        });
+      })();
       document.getElementById('chatClose').onclick = function () {
         panel.classList.remove('open');
         panel.setAttribute('aria-hidden', 'true');

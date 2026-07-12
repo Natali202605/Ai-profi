@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Портфолио — NATALI NEERO</title>
+  <meta name="description" content="Портфолио AI-специалиста и художника: видео, изображения, сайты, чат-боты, ВКонтакте и художественные проекты." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root { --gold:#b8a4ff; --white:#fff; --text-sec:rgba(245,242,255,.92); --border:rgba(200,188,255,.28); --card:rgba(44,36,92,.66); --font-h:'Cormorant Garamond',serif; --font-b:'Manrope',sans-serif; }
+    *{box-sizing:border-box;margin:0;padding:0} body{font-family:var(--font-b);background:#1e2860;color:var(--white);line-height:1.6}
+    .bg{position:fixed;inset:0;z-index:-1;background:url('images/bg-watercolor.png') center/cover no-repeat;opacity:.95}
+    .bg::after{content:'';position:absolute;inset:0;background:rgba(30,40,96,.35)}
+    a{color:var(--gold);text-decoration:none} a:hover{color:#9580e8}
+    .container{max-width:1200px;margin:0 auto;padding:0 1.25rem}
+    header{padding:1rem 0;border-bottom:1px solid var(--border);background:rgba(42,31,82,.55);backdrop-filter:blur(16px);position:sticky;top:0;z-index:10}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .logo{font-family:var(--font-h);font-weight:600;color:var(--white)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.65rem 1.25rem;border-radius:999px;font-size:.875rem;font-weight:600;border:1px solid var(--border);background:var(--card);color:var(--white)}
+    .btn-gold{background:linear-gradient(135deg,#f0ebff,#c4b5fd,#a89ee8);color:#181530;border:none}
+    main{padding:2.5rem 0 4rem}
+    h1{font-family:var(--font-h);font-size:clamp(2rem,4vw,3rem);margin-bottom:.75rem;background:linear-gradient(135deg,#fff,#d4c8ff,#b8a4ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .sub{color:var(--text-sec);max-width:40rem;margin-bottom:2rem}
+    .toolbar{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:2rem}
+    .toolbar input,.toolbar select{min-height:44px;border-radius:.75rem;border:1px solid var(--border);background:rgba(38,30,82,.62);color:var(--white);padding:0 1rem;font:inherit;flex:1;min-width:200px}
+    .filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
+    .filter-btn{padding:.45rem .9rem;border-radius:999px;border:1px solid var(--border);background:rgba(44,36,92,.55);color:var(--text-sec);font-size:.8125rem;cursor:pointer}
+    .filter-btn.active{background:rgba(184,164,255,.2);border-color:var(--gold);color:var(--white)}
+    .grid{display:grid;gap:1rem;grid-template-columns:1fr}
+    @media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
+    .project{border:1px solid var(--border);border-radius:1rem;overflow:hidden;background:var(--card)}
+    .project img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+    .project-body{padding:1rem}
+    .project-body .cat{font-size:.6875rem;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);margin-bottom:.35rem}
+    .project-body h2{font-family:var(--font-h);font-size:1.25rem;color:var(--white);margin-bottom:.35rem}
+    .project-body p{font-size:.8125rem;color:var(--text-sec);margin-bottom:.75rem}
+    .project-body .cta{font-size:.8125rem;font-weight:600;color:var(--gold)}
+    .empty{text-align:center;color:var(--text-sec);padding:3rem 0}
+    footer{padding:2rem 0;border-top:1px solid var(--border);text-align:center;font-size:.8125rem;color:var(--text-sec)}
+  </style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo">NATALI NEERO</a>
+      <div style="display:flex;gap:.75rem;flex-wrap:wrap;">
+        <a href="index.html" class="btn">На главную</a>
+        <a href="index.html#contact" class="btn btn-gold">Обсудить проект</a>
+      </div>
+    </div>
+  </header>
+  <main class="container">
+    <h1>Все проекты</h1>
+    <p class="sub">Каждый проект — отдельная задача, атмосфера и визуальный язык. Полная версия сайта на Next.js открывает детальные страницы кейсов.</p>
+    <div class="toolbar">
+      <input type="search" id="search" placeholder="Поиск по названию, услуге, теме..." />
+      <select id="sort" aria-label="Сортировка">
+        <option value="newest">Сначала новые</option>
+        <option value="featured">Сначала избранные</option>
+        <option value="category">По категории</option>
+      </select>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="grid"></div>
+    <p class="empty" id="empty" style="display:none;">По вашему запросу проекты не найдены.</p>
+  </main>
+  <footer>
+    <p>© NATALI NEERO, 2026 · <a href="index.html">Главная</a></p>
+  </footer>
+  <script>
+    var projects = [
+      { title:'РИС. Путь совершенства', category:'video', categoryLabel:'AI-видео', year:2025, featured:true, cover:'images/portfolio/creator.jpg', desc:'Кинематографическая визуальная история', services:['AI-видео','концепция'] },
+      { title:'AI-видеоролик для эксперта', category:'video', categoryLabel:'AI-видео', year:2025, featured:true, cover:'images/specialist-creator.jpg', desc:'Имиджевый ролик с режиссурой', services:['AI-видео','монтаж'] },
+      { title:'Семейная визуальная история', category:'video', categoryLabel:'AI-видео', year:2025, featured:true, cover:'images/portfolio/lilies.jpg', desc:'Эмоциональный видеоролик', services:['AI-видео'] },
+      { title:'AI-визуалы для креатора', category:'images', categoryLabel:'Изображения', year:2025, featured:true, cover:'images/portfolio/creator.jpg', desc:'Серия с единым стилем', services:['AI-изображения'] },
+      { title:'Сайт NATALI NEERO', category:'websites', categoryLabel:'Сайты', year:2026, featured:true, cover:'images/portfolio/site-preview.png', desc:'Премиальный сайт AI-специалиста', services:['Сайт','дизайн','чат-бот'] },
+      { title:'Персональный сайт эксперта', category:'websites', categoryLabel:'Сайты', year:2025, featured:false, cover:'images/portfolio/site-preview.png', desc:'Индивидуальная визуальная концепция', services:['Сайт'] },
+      { title:'Оформление сообщества ВКонтакте', category:'vk', categoryLabel:'ВКонтакте', year:2025, featured:true, cover:'images/portfolio/creator.jpg', desc:'Цельный визуальный образ', services:['ВКонтакте'] },
+      { title:'Виртуальный ассистент Аделин', category:'chatbots', categoryLabel:'Чат-боты', year:2026, featured:true, cover:'images/bg-watercolor.png', desc:'Чат-бот для сайта', services:['Чат-бот'] },
+      { title:'Художественная серия «Лилии»', category:'art', categoryLabel:'Художественные проекты', year:2025, featured:true, cover:'images/portfolio/lilies.jpg', desc:'Авторская серия с акцентом на свет', services:['Художественная концепция'] },
+      { title:'Художественные работы на заказ', category:'art', categoryLabel:'Художественные проекты', year:2025, featured:true, cover:'images/portfolio/lilies.jpg', desc:'Индивидуальные картины', services:['Живопись','AI-визуал'] }
+    ];
+    var categories = [
+      { id:'all', label:'Все работы' }, { id:'video', label:'AI-видео' }, { id:'images', label:'Изображения' },
+      { id:'websites', label:'Сайты' }, { id:'chatbots', label:'Чат-боты' }, { id:'vk', label:'ВКонтакте' }, { id:'art', label:'Художественные работы' }
+    ];
+    var active = new URLSearchParams(location.search).get('category') || 'all';
+    var grid = document.getElementById('grid');
+    var empty = document.getElementById('empty');
+    var filtersEl = document.getElementById('filters');
+    categories.forEach(function(c) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'filter-btn' + (c.id === active ? ' active' : '');
+      b.textContent = c.label;
+      b.onclick = function(){ active = c.id; renderFilters(); render(); };
+      filtersEl.appendChild(b);
+    });
+    function renderFilters(){ filtersEl.querySelectorAll('.filter-btn').forEach(function(btn,i){ btn.classList.toggle('active', categories[i].id === active); }); }
+    function render(){
+      var q = document.getElementById('search').value.trim().toLowerCase();
+      var sort = document.getElementById('sort').value;
+      var list = projects.filter(function(p){
+        if (active !== 'all' && p.category !== active) return false;
+        if (!q) return true;
+        return (p.title + ' ' + p.desc + ' ' + p.categoryLabel + ' ' + p.services.join(' ')).toLowerCase().indexOf(q) !== -1;
+      });
+      if (sort === 'featured') list.sort(function(a,b){ return (b.featured|0) - (a.featured|0) || b.year - a.year; });
+      else if (sort === 'category') list.sort(function(a,b){ return a.categoryLabel.localeCompare(b.categoryLabel,'ru'); });
+      else list.sort(function(a,b){ return b.year - a.year; });
+      grid.innerHTML = '';
+      empty.style.display = list.length ? 'none' : 'block';
+      list.forEach(function(p){
+        var el = document.createElement('article');
+        el.className = 'project';
+        el.innerHTML = '<img src="'+p.cover+'" alt="'+p.title+'" loading="lazy" /><div class="project-body"><p class="cat">'+p.categoryLabel+' · '+p.year+'</p><h2>'+p.title+'</h2><p>'+p.desc+'</p><a class="cta" href="index.html#contact">Обсудить похожий проект →</a></div>';
+        grid.appendChild(el);
+      });
+    }
+    document.getElementById('search').addEventListener('input', render);
+    document.getElementById('sort').addEventListener('change', render);
+    render();
+  </script>
+</body>
+</html>
