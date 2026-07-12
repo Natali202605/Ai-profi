@@ -78,6 +78,7 @@ export type SiteContent = {
     eyebrow: string;
     titleMain: string;
     titleHighlight: string;
+    titleLines?: string[];
     titleSuffix: string;
     description: string;
     descriptionHighlight?: string;
@@ -89,9 +90,13 @@ export type SiteContent = {
     trustMarkers: string[];
     specialistName: string;
     specialistRoles: string;
+    specialistCaption?: string;
     specialistExperience: string;
     specialistPhoto: string;
     portraitFocusY?: number;
+    portraitFocusX?: number;
+    portraitZoom?: number;
+    captionPosition?: "bottom-left" | "bottom-center";
     expertiseCardTitle?: string;
     expertiseCardTitleAccent?: string;
     expertiseItems?: SiteHeroExpertiseItem[];

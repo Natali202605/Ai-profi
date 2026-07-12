@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Натали Neero — AI-видео, изображения, сайты и чат-боты</title>
-  <meta name="description" content="AI-специалист и художник с опытом более 10 лет. Создание AI-видео, изображений, сайтов, чат-ботов и оформление ВКонтакте для экспертов и брендов." />
+  <title>Натали Смирнова — AI-видео, изображения, сайты и чат-боты</title>
+  <meta name="description" content="Натали Смирнова — AI-специалист и художник с опытом более 10 лет. Создание AI-видео, изображений, сайтов, чат-ботов и визуального оформления для экспертов и брендов." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -278,14 +278,26 @@
     }
     .hero-visual-stack { display: flex; flex-direction: column; gap: 1rem; width: 100%; }
     .hero-content {
-      background: linear-gradient(145deg, rgba(50,40,102,.58) 0%, rgba(36,50,114,.5) 100%);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(200,188,255,.22);
+      background: linear-gradient(135deg, rgba(40,35,86,.82), rgba(70,55,120,.66));
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,.18);
       border-radius: 1.5rem;
       padding: 1.75rem 1.5rem;
-      box-shadow: 0 4px 28px rgba(14,18,48,.22);
+      box-shadow: 0 28px 80px rgba(31,22,75,.24);
       position: relative;
     }
+    .photo-caption {
+      position: absolute; left: 16px; right: 16px; bottom: 16px;
+      padding: 16px 18px; border-radius: 20px;
+      background: rgba(38,31,78,.76); backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,.16);
+    }
+    @media (min-width:768px){ .photo-caption { left:24px; right:24px; bottom:24px; padding:18px 20px; } }
+    .photo-caption .name { font-family: var(--font-h); font-size: 20px; font-weight: 650; color: rgba(255,255,255,.98); text-shadow: 0 1px 8px rgba(20,16,45,.42); }
+    @media (min-width:768px){ .photo-caption .name { font-size: 24px; } }
+    .photo-caption .roles { margin-top: 4px; font-size: 15px; font-weight: 600; color: #c9dfff; }
+    .photo-caption .tagline { margin-top: 6px; font-size: 14px; line-height: 1.45; color: rgba(255,255,255,.76); }
+    @media (max-width:639px){ .photo-caption .tagline { display: none; } }
     .hero-cursor-panel::before {
       content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0;
       background: radial-gradient(600px circle at var(--mouse-x,50%) var(--mouse-y,50%), rgba(184,164,255,.12), transparent 45%);
@@ -311,6 +323,8 @@
     }
     .hero-brush-title .hero-line:nth-child(1) { animation-delay: .28s; }
     .hero-brush-title .hero-line:nth-child(2) { animation-delay: .4s; }
+    .hero-brush-title .hero-line:nth-child(3) { animation-delay: .52s; }
+    .hero-brush-title .hero-line { text-shadow: 0 2px 18px rgba(31,21,78,.28); }
     @keyframes hero-line-reveal {
       from { opacity: 0; transform: translateY(18px); filter: blur(8px); }
       to { opacity: 1; transform: translateY(0); filter: blur(0); }
@@ -350,9 +364,9 @@
     .hero p .accent-lilac { color: #c8b4ff; font-weight: 600; }
     .hero-btns { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
     .hero-expertise-card {
-      background: linear-gradient(145deg, rgba(50,40,102,.52) 0%, rgba(36,50,114,.44) 100%);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(200,188,255,.18);
+      background: rgba(45,38,92,.78);
+      backdrop-filter: blur(22px);
+      border: 1px solid rgba(255,255,255,.16);
       border-radius: 1.75rem;
       padding: 1.25rem 1.5rem;
     }
@@ -769,7 +783,7 @@
 
   <header id="header">
     <div class="container header-inner">
-      <a href="#" class="logo">NATALI NEERO<span class="logo-tag"> · AI-специалист и художник</span></a>
+      <a href="#" class="logo">НАТАЛИ СМИРНОВА<span class="logo-tag"> · AI-специалист и художник</span></a>
       <nav>
         <a href="#top">Главная</a>
         <a href="#portfolio">Портфолио</a>
@@ -803,16 +817,17 @@
           <p class="eyebrow"><span class="accent-blue">AI-СПЕЦИАЛИСТ</span><span class="accent-neutral">×</span><span class="accent-lilac">ХУДОЖНИК</span></p>
           <span class="hero-brush-line" aria-hidden="true"></span>
           <h1 class="hero-brush-title">
-            <span class="hero-line">Создаю выразительные <span class="kw">AI-проекты</span>, которые помогают</span>
-            <span class="hero-line">брендам и экспертам выделяться, вызывать доверие и запоминаться</span>
+            <span class="hero-line">Создаю <span class="kw">AI-визуалы, видео и сайты</span>,</span>
+            <span class="hero-line">которые помогают брендам и экспертам</span>
+            <span class="hero-line">выделяться, вызывать доверие и запоминаться</span>
           </h1>
-          <p>AI-видео, изображения, сайты, чат-боты и оформление ВКонтакте — с <span class="accent-lilac">индивидуальной концепцией</span>, профессиональной композицией и художественным опытом <span class="accent-lilac">более 10 лет</span>.</p>
-          <p class="hero-selling">Подходит, если вам нужен не просто красивый контент, а <span class="accent-lilac">цельный визуальный образ</span>, который отражает характер проекта и помогает клиенту быстрее <span class="accent-lilac">понять вашу ценность</span>.</p>
+          <p>Соединяю современные AI-инструменты, профессиональный дизайн и художественный опыт <span class="accent-lilac">более 10 лет</span>, чтобы создавать <span class="accent-lilac">цельные визуальные проекты</span> с характером.</p>
+          <p class="hero-selling">Подходит, если вам нужен не набор случайных материалов, а <span class="accent-lilac">единый образ проекта</span> — от идеи до готового визуального решения.</p>
         </div>
         <div class="hero-bottom">
           <div class="hero-btns">
             <a href="#contact" class="btn btn-gold">Обсудить проект</a>
-            <a href="#portfolio-directions" class="btn btn-outline">Посмотреть работы</a>
+            <a href="#portfolio-directions" class="btn btn-outline">Посмотреть портфолио</a>
           </div>
           <p style="margin:.75rem 0 0;font-size:.875rem;color:var(--text-sec);"><a href="#" onclick="alert('Аделин доступна в полной версии сайта на Vercel');return false;" style="color:#c8b4ff;">Подобрать услугу с Аделин</a> · <a href="https://vk.ru/id170079854" target="_blank" rel="noopener" style="color:var(--text-sec);">Написать ВКонтакте →</a></p>
           <p class="hero-note"><span class="accent-lilac">Индивидуальная концепция</span> вместо шаблонной генерации.</p>
@@ -820,41 +835,42 @@
       </div>
       <div class="hero-visual fade-in hero-visual-stack">
         <div class="hero-img">
-          <img src="images/natali-portrait.jpg" alt="Натали Neero — AI-специалист и художник" loading="eager" />
-          <div class="hero-img-caption">
-            <p class="name">Натали Neero</p>
+          <img src="images/natali-portrait.jpg" alt="Натали Смирнова — AI-специалист и художник" loading="eager" />
+          <div class="photo-caption">
+            <p class="name">Натали Смирнова</p>
             <p class="roles">AI-специалист и художник</p>
+            <p class="tagline">Создаю проекты с художественным видением и возможностями AI</p>
           </div>
         </div>
         <div class="hero-expertise-card">
-          <p>Почему проекты <span class="accent-gradient">выглядят цельно</span></p>
+          <p><span class="accent-gradient">Профессиональный</span> подход</p>
           <ul class="hero-expertise-list">
             <li>
               <span class="hero-expertise-num">01</span>
               <div>
-                <strong><span class="accent-secondary">Художественный</span> опыт</strong>
-                <span class="desc">Более 10 лет работы с композицией, цветом, светом и визуальным ритмом.</span>
+                <strong><span class="accent-secondary">10+ лет</span> художественного опыта</strong>
+                <span class="desc">Композиция, цвет, свет и визуальный ритм.</span>
               </div>
             </li>
             <li>
               <span class="hero-expertise-num">02</span>
               <div>
-                <strong>Современные <span class="accent-secondary">AI</span>-инструменты</strong>
-                <span class="desc">Изображения, видео, сайты и цифровые решения в одной системе.</span>
+                <strong><span class="accent-secondary">AI</span>, дизайн и разработка</strong>
+                <span class="desc">Изображения, видео, сайты и цифровые решения.</span>
               </div>
             </li>
             <li>
               <span class="hero-expertise-num">03</span>
               <div>
                 <strong><span class="accent-secondary">Индивидуальная</span> концепция</strong>
-                <span class="desc">Стиль создаётся под задачу, аудиторию и характер проекта.</span>
+                <span class="desc">Стиль под задачу, аудиторию и характер проекта.</span>
               </div>
             </li>
             <li>
               <span class="hero-expertise-num">04</span>
               <div>
                 <strong>Внимание к <span class="accent-secondary">деталям</span></strong>
-                <span class="desc">Каждый элемент поддерживает общее впечатление и профессиональный образ.</span>
+                <span class="desc">Каждый элемент поддерживает единый профессиональный образ.</span>
               </div>
             </li>
           </ul>
@@ -998,7 +1014,7 @@
       <div class="portfolio-category">
         <div class="portfolio-category-head"><h3>Сайты</h3><p style="font-size:.8125rem;color:var(--text-sec);margin-top:.25rem;">2 работы</p></div>
         <div class="portfolio-works">
-          <article class="portfolio-work"><img src="images/portfolio/site-preview.png" alt="Сайт NATALI NEERO" loading="lazy" /><div class="portfolio-work-body"><h4>Сайт NATALI NEERO</h4><p>Премиальный сайт AI-специалиста</p></div></article>
+          <article class="portfolio-work"><img src="images/portfolio/site-preview.png" alt="Сайт НАТАЛИ СМИРНОВА" loading="lazy" /><div class="portfolio-work-body"><h4>Сайт НАТАЛИ СМИРНОВА</h4><p>Премиальный сайт AI-специалиста</p></div></article>
           <article class="portfolio-work"><img src="images/portfolio/site-preview.png" alt="Персональный сайт эксперта" loading="lazy" /><div class="portfolio-work-body"><h4>Персональный сайт эксперта</h4><p>Индивидуальная визуальная концепция</p></div></article>
         </div>
       </div>
@@ -1071,7 +1087,7 @@
   <section id="about" class="light fade-in">
     <div class="container about-grid">
       <div class="about-photo">
-        <img src="images/natali-portrait.jpg" alt="Натали Neero — AI-специалист и художник" loading="lazy" />
+        <img src="images/natali-portrait.jpg" alt="Натали Смирнова — AI-специалист и художник" loading="lazy" />
         <div class="badge"><strong>10+</strong><span>лет в искусстве</span></div>
       </div>
       <div>
@@ -1165,7 +1181,7 @@
   <footer>
     <div class="container footer-grid">
       <div>
-        <p class="footer-logo">NATALI NEERO</p>
+        <p class="footer-logo">НАТАЛИ СМИРНОВА</p>
         <p style="font-size:.875rem;color:var(--text-sec);margin-top:.5rem;">AI-специалист и художник</p>
         <p style="font-size:.8125rem;color:var(--text-sec);margin-top:.75rem;max-width:20rem;">Изображения, видео, сайты и визуальные решения с художественным видением.</p>
       </div>
@@ -1182,7 +1198,7 @@
         <p><a href="https://vk.com/natali_neero" target="_blank" style="font-size:.875rem;color:var(--text-sec);">Сообщество</a></p>
       </div>
     </div>
-    <p class="footer-copy container">© NATALI NEERO, 2026. AI-визуалы, видео, сайты и оформление ВКонтакте. · <a href="admin/login.html" style="color:rgba(245,242,255,.4);">Администрирование сайта</a></p>
+    <p class="footer-copy container">© НАТАЛИ СМИРНОВА, 2026. AI-визуалы, видео, сайты и оформление ВКонтакте. · <a href="admin/login.html" style="color:rgba(245,242,255,.4);">Администрирование сайта</a></p>
     <div class="footer-legal container">
       <a href="privacy.html">Политика конфиденциальности</a>
       <a href="consent.html">Согласие на обработку персональных данных</a>
@@ -1307,7 +1323,7 @@
         panel.classList.add('open');
         panel.setAttribute('aria-hidden', 'false');
         if (!messagesEl.children.length) {
-          addMsg('bot', 'Здравствуйте! Я ' + BOT_NAME + ' — виртуальный ассистент NATALI NEERO. Помогу сориентироваться в услугах. Что вы планируете создать?', initialButtons);
+          addMsg('bot', 'Здравствуйте! Я ' + BOT_NAME + ', AI-ассистент Натали Смирновой. Помогу выбрать услугу и подготовить заявку. Что вы планируете создать?', initialButtons);
         }
       };
       var heroBtn = document.getElementById('adelinHeroBtn');

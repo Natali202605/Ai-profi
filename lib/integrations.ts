@@ -1,4 +1,4 @@
-import type { LeadFormData, ChatbotLeadData } from "./validation";
+﻿import type { LeadFormData, ChatbotLeadData } from "./validation";
 import { pushLeadToMemory } from "./admin-leads";
 
 type LeadPayload = LeadFormData | ChatbotLeadData;
@@ -62,7 +62,7 @@ async function notifyOwner(data: LeadPayload) {
         body: JSON.stringify({
           from: "Заявки <onboarding@resend.dev>",
           to: process.env.OWNER_EMAIL,
-          subject: "Новая заявка с сайта NATALI NEERO",
+          subject: "Новая заявка с сайта НАТАЛИ СМИРНОВА",
           text: message.replace(/<[^>]*>/g, ""),
         }),
       });

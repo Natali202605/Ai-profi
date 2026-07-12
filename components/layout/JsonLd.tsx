@@ -1,14 +1,16 @@
 import { VK_COMMUNITY_URL, VK_PROFILE_URL } from "@/lib/utils";
+import { PERSON_NAME, PERSON_NAME_EN, BRAND_NAME_DISPLAY, PERSON_JOB_TITLE } from "@/lib/brand";
 
 export function JsonLd() {
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Natali Neero",
-    jobTitle: "AI-специалист и художник",
+    name: PERSON_NAME,
+    alternateName: PERSON_NAME_EN,
+    jobTitle: PERSON_JOB_TITLE,
     description:
       "Создание AI-видео, изображений, сайтов и визуального оформления для экспертов, брендов и сообществ ВКонтакте.",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://natali-neero.ru",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://natali202605.github.io/Ai-profi/",
     sameAs: [VK_PROFILE_URL, VK_COMMUNITY_URL],
     knowsAbout: [
       "AI-видео",
@@ -22,11 +24,11 @@ export function JsonLd() {
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    name: "NATALI NEERO",
+    name: BRAND_NAME_DISPLAY,
     description:
       "AI-специалист и художник. Создание AI-видео, изображений, сайтов, оформление и развитие аккаунтов и сообществ ВКонтакте.",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://natali-neero.ru",
-    provider: { "@type": "Person", name: "Natali Neero" },
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://natali202605.github.io/Ai-profi/",
+    provider: { "@type": "Person", name: PERSON_NAME },
     areaServed: "RU",
     serviceType: [
       "AI-видео",

@@ -1,4 +1,4 @@
-export async function sendAdminEmail({
+﻿export async function sendAdminEmail({
   to,
   subject,
   text,
@@ -21,7 +21,7 @@ export async function sendAdminEmail({
       Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      from: process.env.ADMIN_EMAIL_FROM || "NATALI NEERO Admin <onboarding@resend.dev>",
+      from: process.env.ADMIN_EMAIL_FROM || "НАТАЛИ СМИРНОВА Admin <onboarding@resend.dev>",
       to,
       subject,
       text,

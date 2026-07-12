@@ -1,7 +1,7 @@
-import { VK_COMMUNITY_URL, VK_PROFILE_URL } from "@/lib/utils";
+﻿import { VK_COMMUNITY_URL, VK_PROFILE_URL } from "@/lib/utils";
 
 export const LEGAL_OPERATOR = {
-  brand: "NATALI NEERO",
+  brand: "НАТАЛИ СМИРНОВА",
   fullName: "Смирнова Наталия",
   status: "физическое лицо, оказывающее услуги в сфере digital и визуального контента",
   siteUrl: "https://natali202605.github.io/Ai-profi/",

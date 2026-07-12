@@ -1,4 +1,4 @@
-export const runtime = "nodejs";
+﻿export const runtime = "nodejs";
 
 import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
@@ -75,7 +75,7 @@ export async function POST(request: Request) {
       if (process.env.RESEND_API_KEY) {
         await sendAdminEmail({
           to: adminEmail,
-          subject: "Новый пароль админ-панели NATALI NEERO",
+          subject: "Новый пароль админ-панели НАТАЛИ СМИРНОВА",
           text: `Пароль изменён. Новый hash для ADMIN_PASSWORD_HASH:\n${hash}\n\nОбновите переменную окружения на хостинге.`,
         });
       }

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowUp } from "lucide-react";
 import { useSiteContent } from "@/components/providers/SiteContentProvider";
+import { PERSON_NAME } from "@/lib/brand";
 
 const footerNavLinks = [
   { href: "/portfolio", label: "Портфолио" },
@@ -77,12 +78,12 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border-subtle pt-8 sm:flex-row">
           <div>
-            <p className="text-sm text-text-secondary">
-              © {brand.siteName}, 2026. AI-визуалы, видео, сайты и оформление ВКонтакте.
+            <p className="text-sm text-body-secondary">
+              © {PERSON_NAME}, 2026. AI-визуалы, видео, сайты и оформление ВКонтакте.
             </p>
             <Link
               href="/admin/login"
-              className="mt-1 inline-block text-xs text-text-secondary/45 transition-colors hover:text-text-secondary/70"
+              className="mt-1 inline-block text-xs text-white/55 transition-colors hover:text-white/80"
             >
               Администрирование сайта
             </Link>

@@ -46,7 +46,7 @@ export default async function ProjectPage({ params }: Props) {
     name: project.title,
     description: project.shortDescription,
     image: project.cover,
-    creator: { "@type": "Person", name: "Natali Neero" },
+    creator: { "@type": "Person", name: "Натали Смирнова" },
   };
 
   return (

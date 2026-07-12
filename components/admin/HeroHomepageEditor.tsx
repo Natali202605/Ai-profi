@@ -150,11 +150,29 @@ export function HeroHomepageEditor() {
           onChange={(v) => updateHero({ specialistPhoto: v })}
         />
         <Field
+          label="Подпись на фото (третья строка)"
+          value={hero.specialistCaption || ""}
+          onChange={(v) => updateHero({ specialistCaption: v })}
+          multiline
+        />
+        <Field
+          label="Точка фокуса по горизонтали (%)"
+          value={String(hero.portraitFocusX ?? 50)}
+          onChange={(v) => updateHero({ portraitFocusX: Number(v) || 50 })}
+          type="number"
+        />
+        <Field
           label="Точка фокуса по вертикали (%)"
           value={String(hero.portraitFocusY ?? 20)}
           onChange={(v) => updateHero({ portraitFocusY: Number(v) || 20 })}
           type="number"
           hint="0 — верх кадра, 100 — низ. Рекомендуется 15–25."
+        />
+        <Field
+          label="Масштаб фото"
+          value={String(hero.portraitZoom ?? 1)}
+          onChange={(v) => updateHero({ portraitZoom: Number(v) || 1 })}
+          type="number"
         />
       </div>
 

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -20,7 +20,7 @@ export function About() {
               <div className="relative aspect-[3/4] overflow-hidden rounded-2xl">
                 <Image
                   src={about.photo}
-                  alt="Натали Neero — AI-специалист и художник"
+                  alt="Натали Смирнова — AI-специалист и художник"
                   fill
                   className="object-cover object-[center_15%]"
                   sizes="(max-width: 1024px) 100vw, 40vw"

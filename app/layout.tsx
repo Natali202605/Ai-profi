@@ -7,6 +7,7 @@ import { ScrollTracker } from "@/components/layout/ScrollTracker";
 import { YandexMetrika } from "@/components/layout/YandexMetrika";
 import { SiteContentProvider } from "@/components/providers/SiteContentProvider";
 import { getSiteContent } from "@/lib/site-content-store";
+import { BRAND_NAME_DISPLAY, PERSON_NAME } from "@/lib/brand";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin", "cyrillic"],
@@ -24,13 +25,14 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: {
-    default: "Натали Neero — AI-видео, изображения, сайты и чат-боты",
-    template: "%s | NATALI NEERO",
+    default: `${PERSON_NAME} — AI-видео, изображения, сайты и чат-боты`,
+    template: `%s | ${BRAND_NAME_DISPLAY}`,
   },
   description:
-    "AI-специалист и художник с опытом более 10 лет. Создание AI-видео, изображений, сайтов, чат-ботов и оформление ВКонтакте для экспертов и брендов.",
+    `${PERSON_NAME} — AI-специалист и художник с опытом более 10 лет. Создание AI-видео, изображений, сайтов, чат-ботов и визуального оформления для экспертов и брендов.`,
   keywords: [
     "AI-специалист",
+    "Натали Смирнова",
     "создание AI-видео",
     "создание изображений нейросетью",
     "AI-дизайн",
@@ -42,11 +44,11 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ru_RU",
-    siteName: "NATALI NEERO",
-    title: "Натали Neero — AI-видео, изображения, сайты и чат-боты",
+    siteName: BRAND_NAME_DISPLAY,
+    title: `${PERSON_NAME} — AI-видео, изображения, сайты и чат-боты`,
     description:
-      "AI-специалист и художник с опытом более 10 лет. Создание AI-видео, изображений, сайтов, чат-ботов и оформление ВКонтакте для экспертов и брендов.",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "NATALI NEERO" }],
+      `${PERSON_NAME} — AI-специалист и художник с опытом более 10 лет. Создание AI-видео, изображений, сайтов, чат-ботов и визуального оформления для экспертов и брендов.`,
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: BRAND_NAME_DISPLAY }],
   },
   robots: { index: true, follow: true },
   icons: { icon: "/favicon.svg" },

@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { ReviewForm } from "@/components/forms/ReviewForm";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export const metadata: Metadata = {
   title: "Оставить отзыв",
-  description: "Поделитесь впечатлениями о работе с NATALI NEERO. Отзыв публикуется после модерации.",
+  description: "Поделитесь впечатлениями о работе с НАТАЛИ СМИРНОВА. Отзыв публикуется после модерации.",
 };
 
 export default function NewReviewPage() {

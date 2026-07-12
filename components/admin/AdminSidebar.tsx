@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -31,7 +31,7 @@ export function AdminSidebar() {
   return (
     <aside className="w-full shrink-0 lg:w-60">
       <div className="card-glass sticky top-24 p-4">
-        <p className="mb-4 text-xs uppercase tracking-[0.2em] text-gold">NATALI NEERO</p>
+        <p className="mb-4 text-xs uppercase tracking-[0.2em] text-gold">НАТАЛИ СМИРНОВА</p>
         <nav className="space-y-1">
           {navItems.map(({ href, label, icon: Icon, exact }) => {
             const active = exact ? pathname === href : pathname.startsWith(href);

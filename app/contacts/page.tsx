@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { VK_PROFILE_URL, VK_COMMUNITY_URL } from "@/lib/utils";
 import { ContactForm } from "@/components/forms/ContactForm";
@@ -7,7 +7,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export const metadata: Metadata = {
   title: "Контакты",
-  description: "Свяжитесь с NATALI NEERO для обсуждения вашего визуального проекта.",
+  description: "Свяжитесь с НАТАЛИ СМИРНОВА для обсуждения вашего визуального проекта.",
 };
 
 export default function ContactsPage() {

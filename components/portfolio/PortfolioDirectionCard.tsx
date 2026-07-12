@@ -47,7 +47,7 @@ export function PortfolioDirectionCard({ direction, className }: PortfolioDirect
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
           sizes="(max-width: 768px) 100vw, 50vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-indigo-deep/85 via-indigo-deep/25 to-transparent transition-opacity duration-500 group-hover:from-indigo-deep/92" />
+        <div className="portfolio-card-overlay absolute inset-0 transition-opacity duration-500 group-hover:opacity-100" />
         {direction.videoUrl && (
           <span className="absolute left-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-gold/90 text-graphite opacity-90 transition-opacity group-hover:opacity-100">
             <Play className="h-4 w-4 fill-current" />
@@ -56,17 +56,17 @@ export function PortfolioDirectionCard({ direction, className }: PortfolioDirect
       </div>
 
       <div className="absolute inset-0 flex flex-col justify-end p-5 md:p-7">
-        <span className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-gold/90">
+        <span className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#bcdcff]">
           {direction.categoryLabel}
         </span>
-        <h3 className="heading-display text-2xl text-white-text transition-colors group-hover:text-gold md:text-3xl">
+        <h3 className="heading-display text-2xl font-semibold text-white transition-colors group-hover:text-gold md:text-3xl">
           {direction.title}
         </h3>
-        <p className="mt-2 line-clamp-2 max-w-xl text-sm leading-relaxed text-text-secondary md:text-base">
+        <p className="mt-2 line-clamp-2 max-w-xl text-sm leading-relaxed text-white/76 md:text-base">
           {direction.description}
         </p>
-        <p className="mt-3 text-sm font-medium text-gold/90">{projectLabel}</p>
-        <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white-text transition-all group-hover:text-gold">
+        <p className="mt-3 text-sm font-medium text-white/76">{projectLabel}</p>
+        <span className="portfolio-card-cta">
           Посмотреть работы
           <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </span>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { RevealAnimation } from "@/components/ui/RevealAnimation";
@@ -35,7 +35,7 @@ export function VKSection() {
               <div className="flex items-end gap-4">
                 <div className="h-20 w-20 -mt-10 rounded-full border-4 border-plum/60 bg-sand" />
                 <div>
-                  <p className="font-semibold text-white-text">NATALI NEERO</p>
+                  <p className="font-semibold text-white-text">НАТАЛИ СМИРНОВА</p>
                   <p className="text-sm text-text-secondary">
                     AI-видео, изображения, сайты, чат-боты и оформление ВКонтакте
                   </p>

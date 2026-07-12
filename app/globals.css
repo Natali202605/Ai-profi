@@ -10,7 +10,9 @@
   --color-peach: #9580e8;
   --color-berry: #7c6ad4;
   --color-white-text: #ffffff;
-  --color-text-secondary: rgba(245, 242, 255, 0.92);
+  --color-text-primary: rgba(255, 255, 255, 0.96);
+  --color-text-secondary: rgba(255, 255, 255, 0.78);
+  --color-text-caption: rgba(255, 255, 255, 0.82);
   --color-text-dark: #181530;
   --color-card-bg: rgba(44, 36, 92, 0.66);
   --color-border-subtle: rgba(200, 188, 255, 0.28);
@@ -83,29 +85,191 @@
   .glass-panel-soft {
     @apply rounded-2xl;
     background: linear-gradient(
-      145deg,
-      rgba(50, 40, 102, 0.58) 0%,
-      rgba(36, 50, 114, 0.5) 100%
+      135deg,
+      rgba(40, 35, 86, 0.82) 0%,
+      rgba(70, 55, 120, 0.66) 100%
     );
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(200, 188, 255, 0.22);
-    box-shadow: 0 4px 28px rgba(14, 18, 48, 0.22);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 28px 80px rgba(31, 22, 75, 0.24);
+  }
+
+  .hero-card-dense {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-card-dense::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at 25% 40%,
+      rgba(45, 37, 92, 0.22),
+      rgba(45, 37, 92, 0.72)
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-card-dense > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-expertise-card-dense {
+    background: rgba(45, 38, 92, 0.78);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .hero-title {
+    font-size: clamp(38px, 11vw, 48px);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+    text-shadow: 0 2px 18px rgba(31, 21, 78, 0.28);
+  }
+
+  @media (min-width: 768px) {
+    .hero-title {
+      font-size: 48px;
+      line-height: 1.04;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-title {
+      font-size: clamp(56px, 5vw, 82px);
+      line-height: 0.98;
+    }
+  }
+
+  .hero-subtitle {
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  @media (min-width: 768px) {
+    .hero-subtitle {
+      font-size: 19px;
+      line-height: 1.6;
+    }
+  }
+
+  .hero-selling {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .text-body-primary {
+    color: rgba(255, 255, 255, 0.96);
+  }
+
+  .text-body-secondary {
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .text-caption-strong {
+    color: rgba(255, 255, 255, 0.82);
+    font-weight: 500;
+  }
+
+  .photo-caption {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    padding: 16px 18px;
+    border-radius: 20px;
+    background: rgba(38, 31, 78, 0.76);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  @media (min-width: 768px) {
+    .photo-caption {
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      padding: 18px 20px;
+    }
+  }
+
+  .photo-caption-center {
+    text-align: center;
+  }
+
+  .photo-caption-name {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 650;
+    color: rgba(255, 255, 255, 0.98);
+    text-shadow: 0 1px 8px rgba(20, 16, 45, 0.42);
+  }
+
+  @media (min-width: 768px) {
+    .photo-caption-name {
+      font-size: 24px;
+    }
+  }
+
+  .photo-caption-role {
+    margin-top: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #c9dfff;
+    text-shadow: 0 1px 8px rgba(20, 16, 45, 0.42);
+  }
+
+  .photo-caption-tagline {
+    margin-top: 6px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.76);
+  }
+
+  .portfolio-card-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(24, 20, 54, 0.92) 0%,
+      rgba(24, 20, 54, 0.48) 48%,
+      transparent 78%
+    );
+  }
+
+  .portfolio-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.5rem 0.875rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #ffffff;
   }
 
   .glass-input {
-    @apply rounded-xl px-4 py-3 text-white-text outline-none backdrop-blur-md transition-colors;
-    background: rgba(38, 30, 82, 0.62);
-    border: 1px solid rgba(200, 188, 255, 0.32);
+    @apply rounded-xl px-4 py-3 outline-none backdrop-blur-md transition-colors;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #ffffff;
   }
 
   .glass-input::placeholder {
-    color: rgba(220, 214, 255, 0.55);
+    color: rgba(255, 255, 255, 0.58);
   }
 
   .glass-input:focus {
-    border-color: rgba(184, 164, 255, 0.7);
-    background: rgba(44, 36, 92, 0.72);
+    border-color: #a9d7ff;
+    box-shadow: 0 0 0 4px rgba(169, 215, 255, 0.12);
+    background: rgba(255, 255, 255, 0.14);
   }
 
   .section-light select option {
@@ -176,10 +340,10 @@
   .text-accent-primary {
     background: linear-gradient(
       90deg,
-      #f3d9ff 0%,
-      #c9b7ff 30%,
-      #8fcfff 65%,
-      #7aa8ff 100%
+      #f2d7ff 0%,
+      #c9b8ff 35%,
+      #95d4ff 70%,
+      #8aa9ff 100%
     );
     -webkit-background-clip: text;
     background-clip: text;

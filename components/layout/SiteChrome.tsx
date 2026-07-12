@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import Link from "next/link";
+import { BRAND_NAME_DISPLAY } from "@/lib/brand";
 import { usePathname } from "next/navigation";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -46,7 +46,7 @@ export function AdminAuthShell({
         <div className="w-full max-w-md">
           <div className="mb-6 text-center">
             <Link href="/" className="font-heading text-2xl tracking-wider text-white-text">
-              NATALI NEERO
+              НАТАЛИ СМИРНОВА
             </Link>
             <p className="mt-2 text-sm uppercase tracking-[0.2em] text-gold">Admin</p>
           </div>

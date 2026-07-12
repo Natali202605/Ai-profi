@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import {
   createResetToken,
   isAdminAuthConfigured,
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
 
     await sendAdminEmail({
       to: adminEmail,
-      subject: "Восстановление пароля админ-панели NATALI NEERO",
+      subject: "Восстановление пароля админ-панели НАТАЛИ СМИРНОВА",
       text: `Для смены пароля перейдите по ссылке (действует 1 час):\n${resetUrl}`,
       html: `<p>Для смены пароля перейдите по ссылке (действует 1 час):</p><p><a href="${resetUrl}">${resetUrl}</a></p>`,
     });

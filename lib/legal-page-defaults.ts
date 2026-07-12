@@ -1,4 +1,4 @@
-import type { LegalBlock, LegalPageContent, SiteLegal } from "@/lib/site-content-types";
+﻿import type { LegalBlock, LegalPageContent, SiteLegal } from "@/lib/site-content-types";
 
 function privacyPage(): LegalPageContent {
   return {
@@ -245,7 +245,7 @@ function offerPage(): LegalPageContent & { publishedAt: string } {
 export function buildDefaultLegalContent(): SiteLegal {
   return {
     operator: {
-      brand: "NATALI NEERO",
+      brand: "НАТАЛИ СМИРНОВА",
       fullName: "Смирнова Наталия",
       status: "физическое лицо, оказывающее услуги в сфере digital и визуального контента",
       siteUrl: "https://natali202605.github.io/Ai-profi/",

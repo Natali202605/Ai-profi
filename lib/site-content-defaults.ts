@@ -1,4 +1,5 @@
 import { heroExpertiseItems, reviews } from "@/data/content";
+import { BRAND_NAME_DISPLAY, BRAND_TAGLINE, PERSON_NAME, PERSON_JOB_TITLE } from "@/lib/brand";
 import { faqItems } from "@/data/faq";
 import { services } from "@/data/services";
 import { buildDefaultLegalContent } from "@/lib/legal-page-defaults";
@@ -7,8 +8,8 @@ import type { SiteContent } from "@/lib/site-content-types";
 export function buildDefaultSiteContent(): SiteContent {
   return {
     brand: {
-      siteName: "NATALI NEERO",
-      siteTagline: "AI-специалист и художник",
+      siteName: BRAND_NAME_DISPLAY,
+      siteTagline: BRAND_TAGLINE,
       footerDescription:
         "Изображения, видео, сайты и визуальные решения с художественным видением.",
       vkProfileUrl: "https://vk.ru/id170079854",
@@ -18,25 +19,34 @@ export function buildDefaultSiteContent(): SiteContent {
     hero: {
       eyebrow: "AI-СПЕЦИАЛИСТ × ХУДОЖНИК",
       titleMain:
-        "Создаю выразительные AI-проекты, которые помогают брендам и экспертам выделяться, вызывать доверие и запоминаться",
-      titleHighlight: "AI-проекты",
+        "Создаю AI-визуалы, видео и сайты, которые помогают брендам и экспертам выделяться, вызывать доверие и запоминаться",
+      titleHighlight: "AI-визуалы, видео и сайты",
+      titleLines: [
+        "Создаю AI-визуалы, видео и сайты,",
+        "которые помогают брендам и экспертам",
+        "выделяться, вызывать доверие и запоминаться",
+      ],
       titleSuffix: "",
       description:
-        "AI-видео, изображения, сайты, чат-боты и оформление ВКонтакте — с индивидуальной концепцией, профессиональной композицией и художественным опытом более 10 лет.",
-      descriptionHighlights: ["индивидуальной концепцией", "более 10 лет"],
+        "Соединяю современные AI-инструменты, профессиональный дизайн и художественный опыт более 10 лет, чтобы создавать цельные визуальные проекты с характером.",
+      descriptionHighlights: ["более 10 лет", "цельные визуальные проекты"],
       sellingLine:
-        "Подходит, если вам нужен не просто красивый контент, а цельный визуальный образ, который отражает характер проекта и помогает клиенту быстрее понять вашу ценность.",
-      sellingLineHighlights: ["цельный визуальный образ", "понять вашу ценность"],
+        "Подходит, если вам нужен не набор случайных материалов, а единый образ проекта — от идеи до готового визуального решения.",
+      sellingLineHighlights: ["единый образ проекта"],
       note: "Индивидуальная концепция вместо шаблонной генерации",
       noteHighlight: "Индивидуальная концепция",
       trustMarkers: [],
-      specialistName: "Натали Neero",
-      specialistRoles: "AI-специалист и художник",
+      specialistName: PERSON_NAME,
+      specialistRoles: PERSON_JOB_TITLE,
+      specialistCaption: "Создаю проекты с художественным видением и возможностями AI",
       specialistExperience: "",
       specialistPhoto: "/images/natali-portrait.jpg",
       portraitFocusY: 20,
-      expertiseCardTitle: "Почему проекты выглядят цельно",
-      expertiseCardTitleAccent: "выглядят цельно",
+      portraitFocusX: 50,
+      portraitZoom: 1,
+      captionPosition: "bottom-left" as const,
+      expertiseCardTitle: "Профессиональный подход",
+      expertiseCardTitleAccent: "Профессиональный",
       expertiseItems: heroExpertiseItems.map((item) => ({ ...item, isVisible: true })),
     },
     intro: {

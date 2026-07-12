@@ -6,12 +6,12 @@ import { useSiteContent } from "@/components/providers/SiteContentProvider";
 
 export function HeroExpertiseCard() {
   const { hero } = useSiteContent();
-  const cardTitle = hero.expertiseCardTitle || "Почему проекты выглядят цельно";
-  const cardTitleAccent = hero.expertiseCardTitleAccent || "выглядят цельно";
+  const cardTitle = hero.expertiseCardTitle || "Профессиональный подход";
+  const cardTitleAccent = hero.expertiseCardTitleAccent || "Профессиональный";
   const items = (hero.expertiseItems || fallbackItems).filter((item) => item.isVisible !== false);
 
   return (
-    <div className="hero-expertise-card glass-panel-soft rounded-[1.75rem] p-5 md:p-6">
+    <div className="hero-expertise-card hero-expertise-card-dense rounded-[1.75rem] p-5 md:p-6">
       <p className="mb-4 font-heading text-lg leading-snug text-white-text md:text-xl">
         <AccentText
           text={cardTitle}
@@ -39,7 +39,7 @@ export function HeroExpertiseCard() {
                     accentClassName="text-accent-secondary"
                   />
                 </p>
-                <p className="mt-1 text-xs leading-relaxed text-text-secondary md:text-sm">
+                <p className="mt-1 text-xs leading-relaxed text-body-secondary md:text-sm">
                   {item.description}
                 </p>
               </div>
