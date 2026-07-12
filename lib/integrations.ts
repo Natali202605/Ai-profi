@@ -1,29 +1,10 @@
 ﻿import type { LeadFormData, ChatbotLeadData } from "./validation";
-import { pushLeadToMemory } from "./admin-leads";
+import { createLeadFromForm } from "./crm-store";
 
 type LeadPayload = LeadFormData | ChatbotLeadData;
 
 export async function saveLead(data: LeadPayload) {
-  pushLeadToMemory(data);
-
-  if (process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY) {
-    try {
-      await fetch(`${process.env.SUPABASE_URL}/rest/v1/leads`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          apikey: process.env.SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${process.env.SUPABASE_ANON_KEY}`,
-        },
-        body: JSON.stringify({
-          ...data,
-          created_at: new Date().toISOString(),
-        }),
-      });
-    } catch (error) {
-      console.error("Supabase save error:", error);
-    }
-  }
+  await createLeadFromForm(data);
 
   await notifyOwner(data);
   return { success: true };
@@ -82,9 +63,13 @@ function formatLeadMessage(data: LeadPayload): string {
 
   if ("description" in data) {
     lines.push(`Описание: ${data.description}`);
+    if (data.email) lines.push(`Email: ${data.email}`);
+    if (data.telegram) lines.push(`Telegram: ${data.telegram}`);
+    if (data.vk) lines.push(`ВКонтакте: ${data.vk}`);
     if (data.deadline) lines.push(`Срок: ${data.deadline}`);
     if (data.budget) lines.push(`Бюджет: ${data.budget}`);
-    if (data.projectUrl) lines.push(`Ссылка: ${data.projectUrl}`);
+    if (data.projectUrl) lines.push(`Сайт: ${data.projectUrl}`);
+    if (data.socialUrl) lines.push(`Соцсети: ${data.socialUrl}`);
     if (data.referralSource) lines.push(`Откуда узнали: ${data.referralSource}`);
     if (data.attachmentName) lines.push(`Файл: ${data.attachmentName}`);
   }

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AdminPageHeader } from "@/components/admin/AdminPanelLayout";
 import { getAdminSession } from "@/lib/admin-session";
-import { getLeadsForAdmin } from "@/lib/admin-leads";
+import { countNewLeads, getLeadsForAdmin } from "@/lib/crm-store";
 import { countPendingTestimonials } from "@/lib/testimonials-store";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 
@@ -13,16 +13,18 @@ export const metadata: Metadata = {
 
 export default async function AdminDashboardPage() {
   const session = await getAdminSession();
+  const newLeadsCount = await countNewLeads();
   const leads = await getLeadsForAdmin();
-  const newLeads = leads.length;
   const pendingReviews = await countPendingTestimonials();
 
   const quickLinks = [
     { href: "/admin/homepage", label: "Изменить первый экран" },
     { href: "/admin/content", label: "Редактор контента" },
     { href: "/admin/leads", label: "Проверить заявки" },
+    { href: "/admin/clients", label: "Карточки клиентов" },
+    { href: "/admin/certificates", label: "Сертификаты" },
     { href: "/admin/reviews", label: "Модерация отзывов" },
-    { href: "/admin/media", label: "Загрузить фото" },
+    { href: "/admin/media", label: "Медиатека" },
   ];
 
   return (
@@ -40,7 +42,10 @@ export default async function AdminDashboardPage() {
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <div className="card-glass p-5">
           <p className="text-xs uppercase tracking-wider text-text-secondary">Новые заявки</p>
-          <p className="mt-2 font-heading text-3xl text-gold">{newLeads}</p>
+          <p className="mt-2 font-heading text-3xl text-gold">{newLeadsCount}</p>
+          <Link href="/admin/leads" className="mt-1 inline-block text-xs text-gold hover:underline">
+            Открыть заявки →
+          </Link>
         </div>
         <div className="card-glass p-5">
           <p className="text-xs uppercase tracking-wider text-text-secondary">Отзывы на модерации</p>
@@ -85,8 +90,8 @@ export default async function AdminDashboardPage() {
           </div>
         ) : (
           <div className="space-y-3">
-            {leads.slice(0, 3).map((lead, index) => (
-              <article key={`${lead.name}-${index}`} className="card-glass p-5">
+            {leads.slice(0, 3).map((lead) => (
+              <article key={lead.id} className="card-glass p-5">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
                     <p className="font-medium text-white-text">{lead.name}</p>
