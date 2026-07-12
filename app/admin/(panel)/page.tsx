@@ -3,6 +3,7 @@ import Link from "next/link";
 import { AdminPageHeader } from "@/components/admin/AdminPanelLayout";
 import { getAdminSession } from "@/lib/admin-session";
 import { getLeadsForAdmin } from "@/lib/admin-leads";
+import { countPendingTestimonials } from "@/lib/testimonials-store";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 
 export const metadata: Metadata = {
@@ -14,6 +15,7 @@ export default async function AdminDashboardPage() {
   const session = await getAdminSession();
   const leads = await getLeadsForAdmin();
   const newLeads = leads.length;
+  const pendingReviews = await countPendingTestimonials();
 
   const quickLinks = [
     { href: "/admin/homepage", label: "Изменить первый экран" },
@@ -42,8 +44,10 @@ export default async function AdminDashboardPage() {
         </div>
         <div className="card-glass p-5">
           <p className="text-xs uppercase tracking-wider text-text-secondary">Отзывы на модерации</p>
-          <p className="mt-2 font-heading text-3xl text-white-text">—</p>
-          <p className="mt-1 text-xs text-text-secondary">Этап 3: форма на сайте</p>
+          <p className="mt-2 font-heading text-3xl text-white-text">{pendingReviews}</p>
+          <Link href="/admin/reviews" className="mt-1 inline-block text-xs text-gold hover:underline">
+            Открыть модерацию →
+          </Link>
         </div>
         <div className="card-glass p-5">
           <p className="text-xs uppercase tracking-wider text-text-secondary">База данных</p>

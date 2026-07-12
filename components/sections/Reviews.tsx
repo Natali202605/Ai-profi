@@ -1,28 +1,39 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { Review } from "@/data/content";
 import { RevealAnimation } from "@/components/ui/RevealAnimation";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TestimonialCard } from "@/components/ui/TestimonialCard";
 import { useSiteContent } from "@/components/providers/SiteContentProvider";
 
-export function Reviews() {
+type ReviewsProps = {
+  dynamicReviews?: Review[];
+};
+
+export function Reviews({ dynamicReviews = [] }: ReviewsProps) {
   const { reviews, brand } = useSiteContent();
-  const visibleReviews = reviews.items.filter((review) => review.visible);
+  const staticReviews = reviews.items.filter((review) => review.visible);
+  const dynamicIds = new Set(dynamicReviews.map((review) => review.id));
+  const mergedReviews = [
+    ...dynamicReviews,
+    ...staticReviews.filter((review) => !dynamicIds.has(review.id)),
+  ];
   const [activeIndex, setActiveIndex] = useState(0);
 
-  if (visibleReviews.length === 0) return null;
+  if (mergedReviews.length === 0) return null;
 
-  const current = visibleReviews[activeIndex];
+  const current = mergedReviews[activeIndex];
   const featured = activeIndex === 0;
 
   const goPrev = () => {
-    setActiveIndex((i) => (i > 0 ? i - 1 : visibleReviews.length - 1));
+    setActiveIndex((i) => (i > 0 ? i - 1 : mergedReviews.length - 1));
   };
 
   const goNext = () => {
-    setActiveIndex((i) => (i < visibleReviews.length - 1 ? i + 1 : 0));
+    setActiveIndex((i) => (i < mergedReviews.length - 1 ? i + 1 : 0));
   };
 
   return (
@@ -61,7 +72,7 @@ export function Reviews() {
                     <ChevronLeft className="h-5 w-5" />
                   </button>
                   <span className="text-sm text-text-secondary">
-                    {activeIndex + 1} / {visibleReviews.length}
+                    {activeIndex + 1} / {mergedReviews.length}
                   </span>
                   <button
                     type="button"
@@ -73,7 +84,7 @@ export function Reviews() {
                   </button>
                 </div>
                 <p className="mt-3 hidden text-center text-sm text-text-secondary sm:block">
-                  {activeIndex + 1} из {visibleReviews.length}
+                  {activeIndex + 1} из {mergedReviews.length}
                 </p>
               </div>
 
@@ -88,7 +99,7 @@ export function Reviews() {
             </div>
 
             <div className="mt-4 flex justify-center gap-2">
-              {visibleReviews.map((review, i) => (
+              {mergedReviews.map((review, i) => (
                 <button
                   key={review.id}
                   type="button"
@@ -105,29 +116,16 @@ export function Reviews() {
 
         <RevealAnimation delay={0.2}>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <Link href="/reviews/new" className="btn-primary inline-flex">
+              Оставить отзыв на сайте
+            </Link>
             <a
               href={brand.vkReviewsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary inline-flex"
             >
-              Смотреть больше отзывов ВКонтакте
-            </a>
-            <a
-              href={brand.vkProfileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary inline-flex"
-            >
-              Добавить отзыв
-            </a>
-            <a
-              href={brand.vkReviewsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary inline-flex"
-            >
-              Дополнить отзыв
+              Смотреть отзывы ВКонтакте
             </a>
           </div>
         </RevealAnimation>

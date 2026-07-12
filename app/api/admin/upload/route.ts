@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { mkdir, writeFile } from "fs/promises";
 import path from "path";
 import { getAdminSession } from "@/lib/admin-session";
+import { registerMediaFile } from "@/lib/media-store";
 
 export const runtime = "nodejs";
 
@@ -34,7 +35,15 @@ export async function POST(request: Request) {
     await mkdir(uploadDir, { recursive: true });
     await writeFile(path.join(uploadDir, filename), bytes);
 
-    return NextResponse.json({ url: `/images/cms/${filename}` });
+    const url = `/images/cms/${filename}`;
+    await registerMediaFile({
+      url,
+      filename,
+      mime_type: file.type,
+      size_bytes: file.size,
+    });
+
+    return NextResponse.json({ url });
   } catch {
     return NextResponse.json({ error: "Upload failed" }, { status: 500 });
   }

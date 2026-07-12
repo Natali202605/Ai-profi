@@ -11,7 +11,7 @@ import { ComplexSolution } from "@/components/sections/ComplexSolution";
 import { About } from "@/components/sections/About";
 import { Certificates } from "@/components/sections/Certificates";
 import { VKSection } from "@/components/sections/VKSection";
-import { Reviews } from "@/components/sections/Reviews";
+import { ReviewsSection } from "@/components/sections/ReviewsSection";
 import { FAQ } from "@/components/sections/FAQ";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { ContactForm } from "@/components/forms/ContactForm";
@@ -32,7 +32,7 @@ export default function HomePage() {
       <About />
       <Certificates />
       <VKSection />
-      <Reviews />
+      <ReviewsSection />
       <FAQ />
       <FinalCTA />
       <ContactForm />

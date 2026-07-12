@@ -41,5 +41,7 @@ next-env.d.ts
 /data/.admin-password-hash
 /data/site-overrides.json
 /data/admin-account.json
+/data/testimonials-store.json
+/data/portfolio-overrides.json
 /public/images/cms/*
 !/public/images/cms/.gitkeep

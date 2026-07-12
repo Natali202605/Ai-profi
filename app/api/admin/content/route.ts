@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getAdminSession } from "@/lib/admin-session";
 import { getSiteContent, saveSiteContent } from "@/lib/site-content-store";
+import { revalidatePublicSite } from "@/lib/revalidate-site";
 import type { SiteContent } from "@/lib/site-content-types";
 
 export const runtime = "nodejs";
@@ -28,6 +29,7 @@ export async function PUT(request: Request) {
     }
 
     await saveSiteContent(body.content);
+    revalidatePublicSite();
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: "Failed to save content" }, { status: 500 });

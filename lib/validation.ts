@@ -69,3 +69,22 @@ export const chatbotLeadSchema = z.object({
 });
 
 export type ChatbotLeadData = z.infer<typeof chatbotLeadSchema>;
+
+export const reviewFormSchema = z.object({
+  name: z.string().min(2, "Укажите имя"),
+  email: z.string().email("Укажите корректный email").optional().or(z.literal("")),
+  company: z.string().optional(),
+  role: z.string().optional(),
+  service: z.enum(serviceOptions, { required_error: "Выберите услугу" }),
+  rating: z.coerce.number().int().min(1, "Минимум 1").max(5, "Максимум 5"),
+  full_text: z.string().min(20, "Напишите отзыв подробнее"),
+  consent_publication: z.literal(true, {
+    errorMap: () => ({ message: "Необходимо согласие на публикацию" }),
+  }),
+  consent_processing: z.literal(true, {
+    errorMap: () => ({ message: "Необходимо согласие на обработку данных" }),
+  }),
+  honeypot: z.string().max(0).optional(),
+});
+
+export type ReviewFormData = z.infer<typeof reviewFormSchema>;
