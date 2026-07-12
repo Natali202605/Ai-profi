@@ -13,7 +13,7 @@ export function AdminLogoutButton() {
   }
 
   return (
-    <button type="button" onClick={handleLogout} className="btn-secondary">
+    <button type="button" onClick={handleLogout} className="btn-secondary w-full">
       Выйти
     </button>
   );

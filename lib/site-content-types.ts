@@ -1,3 +1,11 @@
+export type SiteHeroExpertiseItem = {
+  number: string;
+  title: string;
+  titleAccent: string;
+  description: string;
+  isVisible?: boolean;
+};
+
 export type SiteReview = {
   id: string;
   name: string;
@@ -81,6 +89,9 @@ export type SiteContent = {
     specialistExperience: string;
     specialistPhoto: string;
     portraitFocusY?: number;
+    expertiseCardTitle?: string;
+    expertiseCardTitleAccent?: string;
+    expertiseItems?: SiteHeroExpertiseItem[];
   };
   intro: {
     title: string;

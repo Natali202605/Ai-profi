@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { SiteContent, SiteFaqItem, SiteReview, SiteService, LegalBlock, LegalPageContent } from "@/lib/site-content-types";
+import { Field, ImageField, StringListEditor } from "@/components/admin/AdminFields";
 
 type Tab =
   | "brand"
@@ -29,129 +30,6 @@ const tabs: { id: Tab; label: string }[] = [
   { id: "images", label: "Фото" },
   { id: "account", label: "Логин и пароль" },
 ];
-
-function Field({
-  label,
-  value,
-  onChange,
-  multiline,
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  multiline?: boolean;
-}) {
-  const cls =
-    "mt-1 w-full rounded-xl border border-border-subtle bg-plum/30 px-4 py-2.5 text-sm text-white-text outline-none focus:border-gold/50";
-  return (
-    <label className="block text-sm">
-      <span className="text-text-secondary">{label}</span>
-      {multiline ? (
-        <textarea value={value} onChange={(e) => onChange(e.target.value)} rows={4} className={cls} />
-      ) : (
-        <input value={value} onChange={(e) => onChange(e.target.value)} className={cls} />
-      )}
-    </label>
-  );
-}
-
-function ImageField({
-  label,
-  value,
-  onChange,
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-}) {
-  const [uploading, setUploading] = useState(false);
-
-  async function handleUpload(file: File) {
-    setUploading(true);
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
-      const data = (await res.json()) as { url?: string; error?: string };
-      if (!res.ok || !data.url) throw new Error(data.error || "Upload failed");
-      onChange(data.url);
-    } catch {
-      alert("Не удалось загрузить изображение");
-    } finally {
-      setUploading(false);
-    }
-  }
-
-  return (
-    <div className="space-y-2">
-      <Field label={label} value={value} onChange={onChange} />
-      <div className="flex flex-wrap items-center gap-3">
-        <label className="btn-secondary cursor-pointer !py-2 !text-xs">
-          {uploading ? "Загрузка..." : "Загрузить файл"}
-          <input
-            type="file"
-            accept="image/*"
-            className="hidden"
-            disabled={uploading}
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) void handleUpload(file);
-            }}
-          />
-        </label>
-        {value ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={value} alt="" className="h-16 w-16 rounded-lg object-cover" />
-        ) : null}
-      </div>
-    </div>
-  );
-}
-
-function StringListEditor({
-  label,
-  items,
-  onChange,
-}: {
-  label: string;
-  items: string[];
-  onChange: (items: string[]) => void;
-}) {
-  return (
-    <div>
-      <p className="mb-2 text-sm text-text-secondary">{label}</p>
-      <div className="space-y-2">
-        {items.map((item, index) => (
-          <div key={index} className="flex gap-2">
-            <input
-              value={item}
-              onChange={(e) => {
-                const next = [...items];
-                next[index] = e.target.value;
-                onChange(next);
-              }}
-              className="flex-1 rounded-xl border border-border-subtle bg-plum/30 px-3 py-2 text-sm text-white-text outline-none focus:border-gold/50"
-            />
-            <button
-              type="button"
-              className="btn-secondary !px-3 !py-2 !text-xs"
-              onClick={() => onChange(items.filter((_, i) => i !== index))}
-            >
-              ✕
-            </button>
-          </div>
-        ))}
-        <button
-          type="button"
-          className="btn-secondary !py-2 !text-xs"
-          onClick={() => onChange([...items, ""])}
-        >
-          + Добавить строку
-        </button>
-      </div>
-    </div>
-  );
-}
 
 export function AdminContentEditor() {
   const [tab, setTab] = useState<Tab>("brand");
@@ -253,9 +131,9 @@ export function AdminContentEditor() {
   }
 
   return (
-    <section className="mt-8">
+    <section>
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-        <h2 className="heading-display text-2xl text-white-text">Редактор сайта</h2>
+        <h2 className="heading-display text-xl text-white-text">Разделы контента</h2>
         {tab !== "account" ? (
           <button type="button" onClick={() => void handleSaveContent()} disabled={saving} className="btn-primary">
             {saving ? "Сохранение..." : "Сохранить контент"}
@@ -298,17 +176,24 @@ export function AdminContentEditor() {
 
         {tab === "hero" && (
           <>
+            <p className="text-sm text-text-secondary">
+              Для детального редактирования первого экрана используйте раздел{" "}
+              <a href="/admin/homepage" className="text-gold hover:underline">
+                Первый экран
+              </a>
+              .
+            </p>
             <Field label="Метка" value={content.hero.eyebrow} onChange={(v) => patchContent({ hero: { ...content.hero, eyebrow: v } })} />
-            <Field label="Заголовок — начало" value={content.hero.titleMain} onChange={(v) => patchContent({ hero: { ...content.hero, titleMain: v } })} />
+            <Field label="Заголовок" value={content.hero.titleMain} onChange={(v) => patchContent({ hero: { ...content.hero, titleMain: v } })} />
             <Field label="Заголовок — выделение" value={content.hero.titleHighlight} onChange={(v) => patchContent({ hero: { ...content.hero, titleHighlight: v } })} />
-            <Field label="Заголовок — окончание" value={content.hero.titleSuffix} onChange={(v) => patchContent({ hero: { ...content.hero, titleSuffix: v } })} />
             <Field label="Описание" value={content.hero.description} onChange={(v) => patchContent({ hero: { ...content.hero, description: v } })} multiline />
+            <Field label="Акцент в описании" value={content.hero.descriptionHighlight || ""} onChange={(v) => patchContent({ hero: { ...content.hero, descriptionHighlight: v } })} />
             <Field label="Примечание под кнопками" value={content.hero.note} onChange={(v) => patchContent({ hero: { ...content.hero, note: v } })} multiline />
-            <StringListEditor label="Маркеры доверия" items={content.hero.trustMarkers} onChange={(items) => patchContent({ hero: { ...content.hero, trustMarkers: items } })} />
+            <Field label="Акцент в примечании" value={content.hero.noteHighlight || ""} onChange={(v) => patchContent({ hero: { ...content.hero, noteHighlight: v } })} />
             <Field label="Имя специалиста" value={content.hero.specialistName} onChange={(v) => patchContent({ hero: { ...content.hero, specialistName: v } })} />
             <Field label="Роли специалиста" value={content.hero.specialistRoles} onChange={(v) => patchContent({ hero: { ...content.hero, specialistRoles: v } })} />
-            <Field label="Опыт специалиста" value={content.hero.specialistExperience} onChange={(v) => patchContent({ hero: { ...content.hero, specialistExperience: v } })} />
             <ImageField label="Фото специалиста (URL или загрузка)" value={content.hero.specialistPhoto} onChange={(v) => patchContent({ hero: { ...content.hero, specialistPhoto: v } })} />
+            <Field label="Точка фокуса фото (%)" value={String(content.hero.portraitFocusY ?? 20)} onChange={(v) => patchContent({ hero: { ...content.hero, portraitFocusY: Number(v) || 20 } })} type="number" />
           </>
         )}
 

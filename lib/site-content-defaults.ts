@@ -1,4 +1,4 @@
-import { reviews } from "@/data/content";
+import { heroExpertiseItems, reviews } from "@/data/content";
 import { faqItems } from "@/data/faq";
 import { services } from "@/data/services";
 import { buildDefaultLegalContent } from "@/lib/legal-page-defaults";
@@ -32,6 +32,9 @@ export function buildDefaultSiteContent(): SiteContent {
       specialistExperience: "",
       specialistPhoto: "/images/natali-portrait.jpg",
       portraitFocusY: 20,
+      expertiseCardTitle: "Профессиональный подход",
+      expertiseCardTitleAccent: "Профессиональный",
+      expertiseItems: heroExpertiseItems.map((item) => ({ ...item, isVisible: true })),
     },
     intro: {
       title: "Не просто создаю контент. Помогаю увидеть образ вашего проекта",
