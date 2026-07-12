@@ -4,10 +4,19 @@ export const serviceOptions = [
   "AI-видео",
   "AI-изображения",
   "Сайт",
+  "Чат-бот",
   "Оформление ВКонтакте",
-  "Продвижение ВКонтакте",
+  "Развитие сообщества",
   "Комплексная упаковка",
   "Консультация",
+  "Другое",
+] as const;
+
+export const referralOptions = [
+  "ВКонтакте",
+  "Поисковая система",
+  "Рекомендация",
+  "Социальные сети",
   "Другое",
 ] as const;
 
@@ -19,6 +28,8 @@ export const leadFormSchema = z.object({
   description: z.string().min(10, "Опишите задачу подробнее"),
   deadline: z.string().optional(),
   budget: z.string().optional(),
+  referralSource: z.enum(referralOptions).optional().or(z.literal("")),
+  attachmentName: z.string().optional(),
   consent: z.literal(true, {
     errorMap: () => ({ message: "Необходимо согласие на обработку данных" }),
   }),

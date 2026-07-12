@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Натали Neero — AI-видео, изображения, сайты и оформление ВКонтакте</title>
-  <meta name="description" content="AI-специалист и художник с опытом более 10 лет. Создание AI-видео, изображений, сайтов, оформление и развитие аккаунтов и сообществ ВКонтакте." />
+  <title>Натали Neero — AI-видео, изображения, сайты и чат-боты</title>
+  <meta name="description" content="AI-специалист и художник с опытом более 10 лет. Создание AI-видео, изображений, сайтов, чат-ботов и оформление ВКонтакте для экспертов и брендов." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -342,6 +342,18 @@
     .card ul { list-style: none; margin-bottom: 1.25rem; }
     .card li { font-size: .8125rem; color: rgba(245,242,255,.85); padding: .15rem 0; padding-left: 1rem; position: relative; }
     .card li::before { content: ''; position: absolute; left: 0; top: .55rem; width: 4px; height: 4px; border-radius: 50%; background: var(--gold); }
+    .portfolio-grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; margin-top: 2rem; }
+    @media (min-width: 640px) { .portfolio-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .portfolio-grid { grid-template-columns: repeat(3, 1fr); } }
+    .portfolio-item { position: relative; border-radius: 1rem; overflow: hidden; border: 1px solid var(--border); aspect-ratio: 4/3; }
+    .portfolio-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
+    .portfolio-item:hover img { transform: scale(1.05); }
+    .portfolio-item .overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(18,24,48,.85), transparent 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.25rem; }
+    .portfolio-item .cat { font-size: .6875rem; text-transform: uppercase; letter-spacing: .1em; color: var(--gold); margin-bottom: .25rem; }
+    .portfolio-item h3 { font-family: var(--font-h); font-size: 1.25rem; color: var(--white); }
+    .trust-bar { display: flex; gap: 1.5rem; overflow-x: auto; padding: 1rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(42,31,82,.3); }
+    .trust-bar li { flex-shrink: 0; font-size: .875rem; color: var(--text-sec); list-style: none; display: flex; align-items: center; gap: .5rem; }
+    .trust-bar li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
     .reviews-grid { display: grid; gap: 1.5rem; align-items: stretch; }
     @media (min-width: 1024px) { .reviews-grid { grid-template-columns: repeat(3, 1fr); } }
     .review-card { height: 100%; display: flex; flex-direction: column; background: linear-gradient(145deg, rgba(52,42,108,.72) 0%, rgba(38,54,122,.66) 50%, rgba(44,36,96,.7) 100%); border: 1px solid var(--border); border-radius: 1rem; padding: 1.75rem; backdrop-filter: blur(22px); box-shadow: 0 8px 36px rgba(14,18,48,.28); }
@@ -523,15 +535,14 @@
 
   <header id="header">
     <div class="container header-inner">
-      <a href="#" class="logo">NATALI NEERO<span class="logo-tag"> · AI-специалист • визуальные решения • 10+ лет опыта</span></a>
+      <a href="#" class="logo">NATALI NEERO<span class="logo-tag"> · AI-специалист и художник</span></a>
       <nav>
-        <a href="#about">Обо мне</a>
-        <a href="#services">Услуги</a>
         <a href="#portfolio">Портфолио</a>
+        <a href="#services">Услуги</a>
+        <a href="#about">Обо мне</a>
+        <a href="#process">Процесс</a>
         <a href="#reviews">Отзывы</a>
-        <a href="#vk">ВКонтакте</a>
         <a href="#contact">Контакты</a>
-        <a href="admin/login.html" class="btn btn-outline" style="padding:.5rem 1rem;font-size:.8125rem;">Вход для сотрудников</a>
         <a href="#contact" class="btn btn-gold" style="padding:.5rem 1.25rem;font-size:.875rem;">Обсудить проект</a>
       </nav>
       <button class="menu-btn" id="menuOpen" aria-label="Меню">☰</button>
@@ -540,53 +551,60 @@
 
   <div class="mobile-nav" id="mobileNav">
     <button class="mobile-close" id="menuClose" aria-label="Закрыть">✕</button>
-    <a href="#about">Обо мне</a>
-    <a href="#services">Услуги</a>
     <a href="#portfolio">Портфолио</a>
+    <a href="#services">Услуги</a>
+    <a href="#about">Обо мне</a>
+    <a href="#process">Процесс</a>
     <a href="#reviews">Отзывы</a>
-    <a href="#vk">ВКонтакте</a>
     <a href="#contact">Контакты</a>
     <a href="#contact" class="btn btn-gold" style="margin-top:1rem;text-align:center;">Обсудить проект</a>
-    <a href="admin/login.html" class="btn btn-outline" style="margin-top:.75rem;text-align:center;">Вход для сотрудников</a>
   </div>
 
   <section class="hero" id="top">
     <div class="container hero-grid">
       <div class="fade-in hero-content">
-        <p class="eyebrow">AI-специализация</p>
+        <p class="eyebrow">AI-СПЕЦИАЛИСТ × ХУДОЖНИК</p>
         <div class="gold-line"></div>
-        <h1>Создаю AI-визуалы <em>профессионального уровня</em> для брендов и экспертов</h1>
-        <p>AI-видео, изображения, сайты и оформление ВКонтакте — с художественным чутьём, продуманной композицией и более чем 10-летним опытом визуального видения.</p>
+        <h1>Создаю визуальные проекты, которые помогают брендам и экспертам <em>быть заметными и запоминающимися</em></h1>
+        <p>AI-видео, изображения, сайты, чат-боты и оформление ВКонтакте — с продуманной концепцией, профессиональной композицией и художественным опытом более 10 лет.</p>
         <div class="hero-btns">
           <a href="#contact" class="btn btn-gold">Обсудить проект</a>
-          <a href="#portfolio" class="btn btn-outline">Посмотреть портфолио</a>
+          <a href="#portfolio" class="btn btn-outline">Смотреть портфолио</a>
         </div>
         <a href="https://vk.ru/id170079854" target="_blank" rel="noopener">Написать ВКонтакте →</a>
-        <p class="hero-note" style="margin-top:1rem;">Стратегия, AI-инструменты и визуальная экспертиза — в одном проекте.</p>
+        <p class="hero-note" style="margin-top:1rem;">Для экспертов, брендов, бизнеса и творческих проектов</p>
         <div class="adelin-hero">
           <div class="adelin-hero-avatar" aria-hidden="true">А</div>
           <div>
             <p class="adelin-hero-title">Аделин</p>
-            <p class="adelin-hero-text">Виртуальный ассистент NATALI NEERO. Помогу выбрать услугу и ответить на вопросы.</p>
+            <p class="adelin-hero-text">Здравствуйте! Я Аделин, виртуальный ассистент Натали. Помогу выбрать услугу, посмотреть работы или оставить заявку.</p>
             <button type="button" class="adelin-hero-btn" id="adelinHeroBtn">💬 Начать диалог</button>
           </div>
         </div>
-        <ul class="trust">
-          <li>AI-видео, изображения, сайты и оформление ВКонтакте</li>
-          <li>Более 10 лет художественного видения и практики</li>
-          <li>Индивидуальные концепции вместо шаблонной генерации</li>
-        </ul>
       </div>
       <div class="hero-visual fade-in">
         <div class="hero-img">
-          <img src="images/specialist-creator.jpg" alt="Натали Смирнова" loading="eager" />
+          <img src="images/natali-portrait.jpg" alt="Натали Neero — AI-специалист и художник" loading="eager" />
         </div>
         <div class="hero-profile">
           <p class="hero-profile-line">
-            <span class="name">Натали Смирнова</span><span class="sep">·</span><span class="roles">AI-креатор • вайбкодер • нейровидеограф • SMM-специалист</span><span class="sep">·</span><span>10+ лет художественного видения и опыта</span>
+            <span class="name">Натали Neero</span><span class="sep">·</span><span class="roles">AI-специалист и художник</span>
           </p>
+          <p class="hero-profile-line" style="margin-top:.25rem;font-size:.75rem;">10+ лет художественного опыта</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="dark fade-in">
+    <div class="container">
+      <ul class="trust-bar">
+        <li>10+ лет художественного опыта</li>
+        <li>Индивидуальные визуальные концепции</li>
+        <li>AI, дизайн и разработка в одном проекте</li>
+        <li>Работа онлайн</li>
+        <li>Проекты под задачу клиента</li>
+      </ul>
     </div>
   </section>
 
@@ -650,18 +668,41 @@
   <section class="light fade-in" id="portfolio">
     <div class="container">
       <h2>Избранные проекты</h2>
-      <p class="section-sub">В каждом проекте — своя задача, атмосфера и визуальный язык.</p>
-      <p style="text-align:center;padding:2rem;background:rgba(255,255,255,.08);border-radius:1rem;border:1px solid var(--border);backdrop-filter:blur(12px);">
-        [Добавить реальные проекты портфолио]<br><br>
-        <small>Полная версия с фильтрами и кейсами — в Next.js-проекте (корень репозитория)</small>
-      </p>
+      <p class="section-sub">Работы, в которых технологии становятся инструментом художественного замысла.</p>
+      <div class="portfolio-grid">
+        <article class="portfolio-item">
+          <img src="images/portfolio/creator.jpg" alt="РИС. Путь совершенства — AI-видео" loading="lazy" />
+          <div class="overlay"><span class="cat">AI-видео</span><h3>РИС. Путь совершенства</h3></div>
+        </article>
+        <article class="portfolio-item">
+          <img src="images/specialist-creator.jpg" alt="AI-видеоролик для эксперта" loading="lazy" />
+          <div class="overlay"><span class="cat">AI-видео</span><h3>AI-видеоролик для эксперта</h3></div>
+        </article>
+        <article class="portfolio-item">
+          <img src="images/portfolio/lilies.jpg" alt="Художественная серия Лилии" loading="lazy" />
+          <div class="overlay"><span class="cat">Художественные проекты</span><h3>Художественная серия «Лилии»</h3></div>
+        </article>
+        <article class="portfolio-item">
+          <img src="images/portfolio/site-preview.png" alt="Сайт NATALI NEERO" loading="lazy" />
+          <div class="overlay"><span class="cat">Сайты</span><h3>Сайт NATALI NEERO</h3></div>
+        </article>
+        <article class="portfolio-item">
+          <img src="images/portfolio/creator.jpg" alt="Оформление ВКонтакте" loading="lazy" />
+          <div class="overlay"><span class="cat">ВКонтакте</span><h3>Оформление сообщества</h3></div>
+        </article>
+        <article class="portfolio-item">
+          <img src="images/bg-watercolor.png" alt="Виртуальный ассистент Аделин" loading="lazy" />
+          <div class="overlay"><span class="cat">Чат-боты</span><h3>Виртуальный ассистент Аделин</h3></div>
+        </article>
+      </div>
+      <p style="text-align:center;margin-top:2rem;"><a href="#contact" class="btn btn-outline">Обсудить похожий проект</a></p>
     </div>
   </section>
 
   <section id="about" class="light fade-in">
     <div class="container about-grid">
       <div class="about-photo">
-        <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600&q=80" alt="[Добавить портрет Натали]" loading="lazy" />
+        <img src="images/natali-portrait.jpg" alt="Натали Neero — AI-специалист и художник" loading="lazy" />
         <div class="badge"><strong>10+</strong><span>лет в искусстве</span></div>
       </div>
       <div>
@@ -765,7 +806,8 @@
     <div class="container footer-grid">
       <div>
         <p class="footer-logo">NATALI NEERO</p>
-        <p style="font-size:.875rem;color:var(--text-sec);margin-top:.5rem;">AI-специалист • художник • визуальный автор</p>
+        <p style="font-size:.875rem;color:var(--text-sec);margin-top:.5rem;">AI-специалист и художник</p>
+        <p style="font-size:.8125rem;color:var(--text-sec);margin-top:.75rem;max-width:20rem;">Изображения, видео, сайты и визуальные решения с художественным видением.</p>
       </div>
       <div>
         <p style="font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:.75rem;">Навигация</p>
@@ -783,7 +825,7 @@
         <p><a href="https://vk.com/natali_neero" target="_blank" style="font-size:.875rem;color:var(--text-sec);">Сообщество</a></p>
       </div>
     </div>
-    <p class="footer-copy container">© NATALI NEERO, 2026. AI-визуалы, видео, сайты и оформление ВКонтакте.</p>
+    <p class="footer-copy container">© NATALI NEERO, 2026. AI-визуалы, видео, сайты и оформление ВКонтакте. · <a href="admin/login.html" style="color:rgba(245,242,255,.45);">Вход для сотрудников</a></p>
   </footer>
 
   <div class="float-bar">

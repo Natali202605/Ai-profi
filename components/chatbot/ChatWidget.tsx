@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Send } from "lucide-react";
+import { X, Send, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { trackEvent, getUtmParams } from "@/lib/analytics";
 import { VK_PROFILE_URL } from "@/lib/utils";
@@ -16,13 +16,13 @@ type Message = {
 };
 
 const initialButtons = [
-  "Видео",
-  "Изображения",
-  "Сайт",
-  "Оформление ВКонтакте",
-  "Продвижение сообщества",
-  "Хочу комплексное решение",
   "Посмотреть портфолио",
+  "Мне нужно видео",
+  "Мне нужны изображения",
+  "Хочу сайт",
+  "Нужен чат-бот",
+  "Оформить ВКонтакте",
+  "Нужна комплексная упаковка",
   "Задать вопрос",
 ];
 
@@ -31,14 +31,13 @@ export function ChatWidget() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "bot",
-      text: `Здравствуйте! Я ${BOT_NAME} — виртуальный ассистент NATALI NEERO. Помогу сориентироваться в услугах и подскажу, с чего начать. Что вы планируете создать?`,
+      text: `Здравствуйте! Я ${BOT_NAME}, виртуальный ассистент Натали. Помогу выбрать услугу, посмотреть работы или оставить заявку.`,
       buttons: initialButtons,
     },
   ]);
   const [input, setInput] = useState("");
   const [step, setStep] = useState("start");
   const [leadData, setLeadData] = useState<Record<string, string>>({});
-  const [consent, setConsent] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -70,19 +69,19 @@ export function ChatWidget() {
     }
 
     const serviceMap: Record<string, string> = {
-      Видео: "AI-видео",
-      Изображения: "AI-изображения",
-      Сайт: "Сайт",
-      "Оформление ВКонтакте": "Оформление ВКонтакте",
-      "Продвижение сообщества": "Продвижение ВКонтакте",
-      "Хочу комплексное решение": "Комплексная упаковка",
+      "Мне нужно видео": "AI-видео",
+      "Мне нужны изображения": "AI-изображения",
+      "Хочу сайт": "Сайт",
+      "Нужен чат-бот": "Чат-бот",
+      "Оформить ВКонтакте": "Оформление ВКонтакте",
+      "Нужна комплексная упаковка": "Комплексная упаковка",
     };
 
     if (serviceMap[button]) {
       setLeadData((d) => ({ ...d, service: serviceMap[button] }));
       setStep("details");
 
-      if (button === "Видео") {
+      if (button === "Мне нужно видео") {
         addBotMessage("Подскажите, для какой задачи нужно видео?", [
           "реклама",
           "презентация",
@@ -90,7 +89,7 @@ export function ChatWidget() {
           "творческий проект",
           "пока не знаю",
         ]);
-      } else if (button === "Сайт") {
+      } else if (button === "Хочу сайт") {
         addBotMessage("Какой сайт вам необходим?", [
           "лендинг",
           "сайт-портфолио",
@@ -125,7 +124,7 @@ export function ChatWidget() {
 
     if (step === "free_question") {
       addBotMessage(
-        "Этот вопрос лучше обсудить лично. Оставьте контакт или напишите Натали во ВКонтакте — она уточнит детали и предложит решение.",
+        "Этот вопрос лучше уточнить лично у Натали. Оставьте контакт или перейдите в сообщения ВКонтакте.",
         ["Оставить контакт", "Написать ВКонтакте"],
       );
       setStep("contact");
@@ -151,10 +150,6 @@ export function ChatWidget() {
   };
 
   const submitLead = async () => {
-    if (!consent) {
-      setConsent(true);
-    }
-
     const summary = Object.entries(leadData)
       .map(([k, v]) => `${k}: ${v}`)
       .join("; ");
@@ -174,6 +169,7 @@ export function ChatWidget() {
         }),
       });
 
+      trackEvent("chatbot_lead");
       addBotMessage(
         "Заявка отправлена! Натали свяжется с вами. Также можно написать напрямую во ВКонтакте.",
         ["Написать ВКонтакте"],
@@ -196,7 +192,7 @@ export function ChatWidget() {
         title={BOT_NAME}
       >
         <span className="flex h-14 w-14 items-center justify-center">
-          <MessageCircle className="h-6 w-6" />
+          <Sparkles className="h-6 w-6" />
         </span>
         <span className="hidden pr-4 text-sm font-semibold md:inline">{BOT_NAME}</span>
       </button>
@@ -204,19 +200,19 @@ export function ChatWidget() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="mobile-fab-offset fixed right-4 z-[60] flex h-[min(500px,calc(100dvh-10rem))] w-[360px] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-border-subtle bg-plum/90 shadow-2xl backdrop-blur-xl md:bottom-24 md:h-[500px]"
+            className="mobile-fab-offset fixed right-4 z-[60] flex h-[min(520px,calc(100dvh-10rem))] w-[380px] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-2xl border border-border-subtle bg-plum/95 shadow-2xl backdrop-blur-xl md:bottom-24 md:h-[520px]"
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
           >
-            <div className="flex items-center justify-between border-b border-border-subtle bg-plum/50 px-4 py-3 backdrop-blur-md">
+            <div className="flex items-center justify-between border-b border-border-subtle bg-plum/60 px-4 py-3 backdrop-blur-md">
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/20 font-heading text-lg text-gold">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/25 font-heading text-lg text-gold">
                   А
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-white-text">{BOT_NAME}</p>
-                  <p className="text-xs text-text-secondary">виртуальный ассистент</p>
+                  <p className="text-xs text-text-secondary">виртуальный ассистент Натали</p>
                 </div>
               </div>
               <button
@@ -235,7 +231,7 @@ export function ChatWidget() {
                     className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm ${
                       msg.role === "user"
                         ? "bg-gold text-graphite"
-                        : "bg-card-bg text-text-secondary"
+                        : "border border-border-subtle bg-card-bg/80 text-white-text"
                     }`}
                   >
                     {msg.role === "bot" ? (
@@ -249,8 +245,10 @@ export function ChatWidget() {
                             key={btn}
                             onClick={() => {
                               if (btn === "Согласен и отправить") submitLead();
-                              else if (btn === "Написать ВКонтакте") window.open(VK_PROFILE_URL, "_blank");
-                              else if (btn === "Оставить контакт") {
+                              else if (btn === "Написать ВКонтакте") {
+                                trackEvent("vk_profile_click", { source: "chatbot" });
+                                window.open(VK_PROFILE_URL, "_blank");
+                              } else if (btn === "Оставить контакт") {
                                 addBotMessage("Укажите телефон или мессенджер:");
                                 setStep("contact");
                               } else handleButton(btn);

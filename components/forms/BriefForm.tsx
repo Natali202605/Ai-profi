@@ -29,6 +29,11 @@ const briefQuestions: Record<string, { id: string; label: string; placeholder: s
     { id: "brief_vk_theme", label: "Тематика", placeholder: "Услуги, бренд..." },
     { id: "brief_vk_goal", label: "Цель оформления", placeholder: "Запуск, обновление..." },
   ],
+  "Чат-бот": [
+    { id: "brief_type", label: "Где нужен бот", placeholder: "Сайт, ВКонтакте..." },
+    { id: "brief_functions", label: "Основные задачи", placeholder: "Заявки, FAQ, навигация..." },
+    { id: "brief_purpose", label: "Цель", placeholder: "Автоматизация, поддержка..." },
+  ],
 };
 
 export function BriefForm({ service, register }: BriefFormProps) {

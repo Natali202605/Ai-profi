@@ -1,20 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { leadFormSchema, serviceOptions, type LeadFormData } from "@/lib/validation";
+import {
+  leadFormSchema,
+  serviceOptions,
+  referralOptions,
+  type LeadFormData,
+} from "@/lib/validation";
 import { getUtmParams, trackEvent } from "@/lib/analytics";
 import { RevealAnimation } from "@/components/ui/RevealAnimation";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ConsentCheckbox } from "@/components/forms/ConsentCheckbox";
 import { BriefForm } from "@/components/forms/BriefForm";
+import { VKButton } from "@/components/ui/VKButton";
 import { Loader2, CheckCircle } from "lucide-react";
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [attachmentName, setAttachmentName] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const {
     register,
@@ -31,6 +39,7 @@ export function ContactForm() {
   const consent = watch("consent");
 
   const onSubmit = async (data: LeadFormData) => {
+    if (loading) return;
     setLoading(true);
     setError("");
     const utm = getUtmParams();
@@ -41,6 +50,7 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...data,
+          attachmentName: attachmentName || undefined,
           ...utm,
           source: "form",
         }),
@@ -65,13 +75,17 @@ export function ContactForm() {
       <section id="contact" className="section-light py-20 md:py-28">
         <div className="container-site max-w-2xl text-center">
           <div className="glass-panel rounded-2xl p-8">
-          <CheckCircle className="mx-auto mb-4 h-12 w-12 text-gold" />
-          <h2 className="heading-display mb-4 text-3xl text-white-text">
-            Спасибо! Ваша заявка отправлена
-          </h2>
-          <p className="text-text-secondary">
-            Я ознакомлюсь с задачей и свяжусь с вами удобным способом.
-          </p>
+            <CheckCircle className="mx-auto mb-4 h-12 w-12 text-gold" />
+            <h2 className="heading-display mb-4 text-3xl text-white-text">
+              Спасибо! Заявка отправлена
+            </h2>
+            <p className="mb-4 text-text-secondary">
+              Я ознакомлюсь с задачей и свяжусь с вами удобным способом.
+            </p>
+            <p className="text-sm text-text-secondary">
+              Для более быстрой связи можно{" "}
+              <VKButton className="inline-flex !min-h-0 !p-0" />.
+            </p>
           </div>
         </div>
       </section>
@@ -84,8 +98,8 @@ export function ContactForm() {
         <RevealAnimation>
           <SectionHeading
             light
-            title="Расскажите о своём проекте"
-            subtitle="Опишите задачу в нескольких словах. Я изучу сообщение и свяжусь с вами, чтобы уточнить детали."
+            title="Расскажите о вашем проекте"
+            subtitle="Даже если идея пока не оформлена в точное техническое задание, опишите её своими словами."
             align="center"
           />
         </RevealAnimation>
@@ -114,28 +128,16 @@ export function ContactForm() {
               </div>
               <div>
                 <label htmlFor="contact" className="mb-1.5 block text-sm font-medium text-white-text">
-                  Телефон или мессенджер *
+                  Удобный способ связи *
                 </label>
                 <input
                   id="contact"
                   {...register("contact")}
                   className="glass-input w-full"
-                  placeholder="+7 ... или @username"
+                  placeholder="+7 (___) ___-__-__ или @username"
                 />
                 {errors.contact && <p className="mt-1 text-sm text-berry">{errors.contact.message}</p>}
               </div>
-            </div>
-
-            <div>
-              <label htmlFor="projectUrl" className="mb-1.5 block text-sm font-medium text-white-text">
-                Ссылка на страницу или проект
-              </label>
-              <input
-                id="projectUrl"
-                {...register("projectUrl")}
-                className="glass-input w-full"
-                placeholder="https://..."
-              />
             </div>
 
             <div>
@@ -165,18 +167,30 @@ export function ContactForm() {
 
             <div>
               <label htmlFor="description" className="mb-1.5 block text-sm font-medium text-white-text">
-                Краткое описание задачи *
+                Описание задачи *
               </label>
               <textarea
                 id="description"
                 {...register("description")}
                 rows={4}
                 className="glass-input w-full resize-none"
-                placeholder="Расскажите о задаче..."
+                placeholder="Расскажите, что вы хотите создать..."
               />
               {errors.description && (
                 <p className="mt-1 text-sm text-berry">{errors.description.message}</p>
               )}
+            </div>
+
+            <div>
+              <label htmlFor="projectUrl" className="mb-1.5 block text-sm font-medium text-white-text">
+                Ссылка на проект
+              </label>
+              <input
+                id="projectUrl"
+                {...register("projectUrl")}
+                className="glass-input w-full"
+                placeholder="https://..."
+              />
             </div>
 
             <div className="grid gap-5 sm:grid-cols-2">
@@ -193,7 +207,7 @@ export function ContactForm() {
               </div>
               <div>
                 <label htmlFor="budget" className="mb-1.5 block text-sm font-medium text-white-text">
-                  Примерный бюджет
+                  Ориентировочный бюджет
                 </label>
                 <input
                   id="budget"
@@ -204,9 +218,50 @@ export function ContactForm() {
               </div>
             </div>
 
+            <div>
+              <label htmlFor="referralSource" className="mb-1.5 block text-sm font-medium text-white-text">
+                Откуда узнали о специалисте
+              </label>
+              <select id="referralSource" {...register("referralSource")} className="glass-input w-full">
+                <option value="">Не указано</option>
+                {referralOptions.map((s) => (
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="attachment" className="mb-1.5 block text-sm font-medium text-white-text">
+                Прикрепить файл
+              </label>
+              <input
+                id="attachment"
+                ref={fileInputRef}
+                type="file"
+                className="glass-input w-full file:mr-4 file:rounded-lg file:border-0 file:bg-gold/20 file:px-3 file:py-1.5 file:text-sm file:text-gold"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  setAttachmentName(file?.name || "");
+                  setValue("attachmentName", file?.name || "");
+                }}
+              />
+              {attachmentName && (
+                <p className="mt-1 text-xs text-text-secondary">
+                  Файл «{attachmentName}» — отправим название в заявке. При необходимости можно
+                  передать файл через ВКонтакте.
+                </p>
+              )}
+            </div>
+
             <ConsentCheckbox
               checked={!!consent}
-              onChange={(v) => setValue("consent", v ? true : (undefined as unknown as true), { shouldValidate: true })}
+              onChange={(v) =>
+                setValue("consent", v ? true : (undefined as unknown as true), {
+                  shouldValidate: true,
+                })
+              }
               error={errors.consent?.message}
             />
 

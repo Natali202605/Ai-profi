@@ -85,6 +85,8 @@ function formatLeadMessage(data: LeadPayload): string {
     if (data.deadline) lines.push(`Срок: ${data.deadline}`);
     if (data.budget) lines.push(`Бюджет: ${data.budget}`);
     if (data.projectUrl) lines.push(`Ссылка: ${data.projectUrl}`);
+    if (data.referralSource) lines.push(`Откуда узнали: ${data.referralSource}`);
+    if (data.attachmentName) lines.push(`Файл: ${data.attachmentName}`);
   }
 
   if ("summary" in data) {

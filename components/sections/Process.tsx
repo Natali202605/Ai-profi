@@ -5,12 +5,12 @@ import { ProcessStep } from "@/components/ui/ProcessStep";
 
 export function Process() {
   return (
-    <section className="section-light py-20 md:py-28">
+    <section id="process" className="section-light py-20 md:py-28">
       <div className="container-site">
         <RevealAnimation>
           <SectionHeading
             light
-            title="От идеи до готового визуального решения"
+            title="Понятный процесс от первой идеи до готового проекта"
           />
         </RevealAnimation>
 
@@ -25,8 +25,7 @@ export function Process() {
         <RevealAnimation delay={0.5}>
           <div className="glass-panel-soft mx-auto mt-10 max-w-2xl rounded-2xl p-6 text-center">
             <p className="text-text-secondary">
-              Количество этапов и состав работ зависят от выбранной услуги. Перед началом проекта
-              клиент получает понятный план работы.
+              До начала работы вы будете понимать состав проекта, этапы и формат результата.
             </p>
           </div>
         </RevealAnimation>

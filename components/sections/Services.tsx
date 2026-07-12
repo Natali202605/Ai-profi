@@ -7,6 +7,7 @@ import {
   Users,
   TrendingUp,
   Layers,
+  MessageCircle,
   ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
@@ -14,6 +15,7 @@ import { services as serviceMeta } from "@/data/services";
 import { RevealAnimation } from "@/components/ui/RevealAnimation";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useSiteContent } from "@/components/providers/SiteContentProvider";
+import { trackEvent } from "@/lib/analytics";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   video: Video,
@@ -22,6 +24,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   users: Users,
   "trending-up": TrendingUp,
   layers: Layers,
+  bot: MessageCircle,
 };
 
 export function Services() {
@@ -53,23 +56,23 @@ export function Services() {
                   <h3 className="heading-display mb-3 text-2xl text-white-text md:text-[28px]">
                     {service.title}
                   </h3>
-                  <p className="mb-4 flex-1 text-text-secondary leading-relaxed">{service.description}</p>
+                  <p className="mb-4 flex-1 text-base leading-relaxed text-text-secondary">
+                    {service.description}
+                  </p>
                   {service.includes.length > 0 && (
-                    <ul className="mb-6 space-y-1">
-                      {service.includes.slice(0, 4).map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-sm text-text-secondary/80">
+                    <ul className="mb-6 space-y-1.5">
+                      {service.includes.slice(0, 5).map((item) => (
+                        <li key={item} className="flex items-start gap-2 text-sm text-text-secondary/90">
                           <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-gold" />
                           {item}
                         </li>
                       ))}
-                      {service.includes.length > 4 && (
-                        <li className="text-sm text-gold/70">и ещё {service.includes.length - 4}...</li>
-                      )}
                     </ul>
                   )}
                   <Link
                     href={`/services/${slug}`}
                     className="inline-flex items-center gap-2 text-sm font-medium text-gold transition-colors hover:text-peach"
+                    onClick={() => trackEvent("service_select", { service: service.id })}
                   >
                     {service.cta}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

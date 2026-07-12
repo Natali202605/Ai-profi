@@ -4,11 +4,15 @@ import Link from "next/link";
 import { ArrowUp } from "lucide-react";
 import { useSiteContent } from "@/components/providers/SiteContentProvider";
 
-const footerLinks = [
-  { href: "/about", label: "Обо мне" },
-  { href: "/#services", label: "Услуги" },
+const footerNavLinks = [
   { href: "/portfolio", label: "Портфолио" },
+  { href: "/#services", label: "Услуги" },
+  { href: "/about", label: "Обо мне" },
+  { href: "/#reviews", label: "Отзывы" },
   { href: "/contacts", label: "Контакты" },
+];
+
+const legalLinks = [
   { href: "/privacy", label: "Политика конфиденциальности" },
   { href: "/consent", label: "Согласие на обработку данных" },
   { href: "/offer", label: "Публичная оферта" },
@@ -25,7 +29,7 @@ export function Footer() {
             <p className="font-heading text-2xl font-semibold tracking-wider text-white-text">
               {brand.siteName}
             </p>
-            <p className="mt-2 text-sm text-text-secondary">{brand.siteTagline}</p>
+            <p className="mt-1 text-sm text-gold">{brand.siteTagline}</p>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-text-secondary">
               {brand.footerDescription}
             </p>
@@ -34,7 +38,7 @@ export function Footer() {
           <div>
             <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-gold">Навигация</p>
             <ul className="space-y-2">
-              {footerLinks.map((link) => (
+              {footerNavLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -48,7 +52,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-gold">ВКонтакте</p>
+            <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-gold">Контакты</p>
             <ul className="space-y-2">
               <li>
                 <a
@@ -57,7 +61,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="text-sm text-text-secondary transition-colors hover:text-gold"
                 >
-                  Личная страница
+                  Личная страница ВКонтакте
                 </a>
               </li>
               <li>
@@ -71,13 +75,36 @@ export function Footer() {
                 </a>
               </li>
             </ul>
+            <p className="mb-4 mt-6 text-sm font-semibold uppercase tracking-wider text-gold">
+              Документы
+            </p>
+            <ul className="space-y-2">
+              {legalLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-text-secondary transition-colors hover:text-gold"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border-subtle pt-8 sm:flex-row">
-          <p className="text-sm text-text-secondary">
-            © {brand.siteName}, 2026. AI-визуалы, видео, сайты и оформление ВКонтакте.
-          </p>
+          <div>
+            <p className="text-sm text-text-secondary">
+              © {brand.siteName}, 2026. AI-визуалы, видео, сайты и оформление ВКонтакте.
+            </p>
+            <Link
+              href="/admin/login"
+              className="mt-1 inline-block text-xs text-text-secondary/50 transition-colors hover:text-text-secondary"
+            >
+              Вход для сотрудников
+            </Link>
+          </div>
           <a
             href="#top"
             className="inline-flex items-center gap-2 text-sm text-gold transition-colors hover:text-peach"

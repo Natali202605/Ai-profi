@@ -6,9 +6,10 @@ import { RevealAnimation } from "@/components/ui/RevealAnimation";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { VKButton } from "@/components/ui/VKButton";
 import { useSiteContent } from "@/components/providers/SiteContentProvider";
+import { aboutFacts } from "@/data/content";
 
 export function About() {
-  const { about, brand } = useSiteContent();
+  const { about } = useSiteContent();
 
   return (
     <section id="about" className="section-light py-16 md:py-28">
@@ -19,9 +20,9 @@ export function About() {
               <div className="relative aspect-[3/4] overflow-hidden rounded-2xl">
                 <Image
                   src={about.photo}
-                  alt={about.title}
+                  alt="Натали Neero — AI-специалист и художник"
                   fill
-                  className="object-cover"
+                  className="object-cover object-[center_15%]"
                   sizes="(max-width: 1024px) 100vw, 40vw"
                 />
               </div>
@@ -38,40 +39,26 @@ export function About() {
             </RevealAnimation>
             <RevealAnimation delay={0.1}>
               {about.paragraphs.map((paragraph) => (
-                <p key={paragraph.slice(0, 32)} className="mb-4 text-lg leading-relaxed text-text-secondary">
+                <p
+                  key={paragraph.slice(0, 32)}
+                  className="mb-4 text-lg leading-relaxed text-text-secondary"
+                >
                   {paragraph}
                 </p>
               ))}
-              <p className="mb-6 text-lg leading-relaxed text-text-secondary">
-                {about.extraParagraph.includes("ВКонтакте") ? (
-                  <>
-                    {about.extraParagraph.split("ВКонтакте")[0]}
-                    <a
-                      href={brand.vkCommunityUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-link"
-                    >
-                      ВКонтакте
-                    </a>
-                    {about.extraParagraph.split("ВКонтакте").slice(1).join("ВКонтакте")}
-                  </>
-                ) : (
-                  about.extraParagraph
-                )}
-              </p>
             </RevealAnimation>
 
             <RevealAnimation delay={0.2}>
-              <p className="mb-3 font-medium text-white-text">В работе я соединяю:</p>
-              <ul className="mb-8 grid grid-cols-1 gap-2 sm:grid-cols-2">
-                {about.skills.map((skill) => (
-                  <li key={skill} className="flex items-center gap-2 text-sm text-text-secondary">
-                    <span className="h-1.5 w-1.5 rounded-full bg-berry" />
-                    {skill}
-                  </li>
+              <div className="mb-8 grid grid-cols-2 gap-3">
+                {aboutFacts.map((fact) => (
+                  <div
+                    key={fact.label}
+                    className="rounded-xl border border-border-subtle bg-card-bg/40 px-3 py-2.5 text-sm text-text-secondary"
+                  >
+                    {fact.label}
+                  </div>
                 ))}
-              </ul>
+              </div>
               <div className="flex flex-wrap gap-4">
                 <Link href="/portfolio" className="btn-secondary-light">
                   Посмотреть работы

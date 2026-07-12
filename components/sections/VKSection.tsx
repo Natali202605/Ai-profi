@@ -1,5 +1,9 @@
+"use client";
+
+import Link from "next/link";
 import { RevealAnimation } from "@/components/ui/RevealAnimation";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { useSiteContent } from "@/components/providers/SiteContentProvider";
 
 const vkElements = [
   { label: "Обложка", description: "Первое впечатление и визуальный характер сообщества" },
@@ -7,19 +11,19 @@ const vkElements = [
   { label: "Меню", description: "Навигация к ключевым разделам и услугам" },
   { label: "Закреплённый пост", description: "Главное сообщение для новых посетителей" },
   { label: "Карточки услуг", description: "Структурированное представление ваших предложений" },
-  { label: "Шаблоны публикаций", description: "Единый визуальный стиль для контента" },
-  { label: "Обложки клипов", description: "Привлекательное оформление видеоконтента" },
-  { label: "Форма заявки", description: "Путь от интереса к обращению" },
+  { label: "Публикации и клипы", description: "Единый визуальный стиль для контента" },
 ];
 
 export function VKSection() {
+  const { brand } = useSiteContent();
+
   return (
     <section id="vk" className="py-20 md:py-28">
       <div className="container-site">
         <RevealAnimation>
           <SectionHeading
-            title="ВКонтакте как полноценное пространство вашего бренда"
-            subtitle="Хорошо оформленное сообщество помогает человеку быстро понять, кто вы, чем можете быть полезны и почему стоит обратиться именно к вам."
+            title="Помогаю превратить ВКонтакте в понятное пространство вашего бренда"
+            subtitle="Хорошо оформленное сообщество должно быстро отвечать на вопросы: кто вы, чем занимаетесь, кому помогаете и как с вами связаться."
           />
         </RevealAnimation>
 
@@ -30,15 +34,14 @@ export function VKSection() {
               <div className="flex items-end gap-4">
                 <div className="h-20 w-20 -mt-10 rounded-full border-4 border-plum/60 bg-sand" />
                 <div>
-                  <p className="font-semibold text-white-text">Сайты | Нейровидео | Чат-боты | Визуал</p>
+                  <p className="font-semibold text-white-text">NATALI NEERO</p>
                   <p className="text-sm text-text-secondary">
-                    Сайты под ключ, умные боты, видео с ИИ и дизайн — всё для продвижения бизнеса в
-                    одном месте.
+                    AI-видео, изображения, сайты, чат-боты и оформление ВКонтакте
                   </p>
                 </div>
               </div>
-              <div className="mt-4 flex gap-2">
-                {["Услуги", "О нас", "Контакты", "Отзывы"].map((tab) => (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {["Услуги", "Портфолио", "Отзывы", "Контакты"].map((tab) => (
                   <span
                     key={tab}
                     className="glass-inset rounded-lg px-3 py-1.5 text-xs text-text-secondary"
@@ -51,13 +54,16 @@ export function VKSection() {
                 <div className="glass-inset rounded-xl p-4">
                   <p className="text-xs text-gold">Закреплённый пост</p>
                   <p className="mt-1 text-sm text-text-secondary">
-                    Создаю digital-продукты: сайты под ключ, умные боты, видео с ИИ и дизайн. Всё для
-                    продвижения вашего бизнеса в одном месте.
+                    Создаю визуальные проекты с художественным видением: AI-видео, изображения,
+                    сайты и оформление для экспертов и брендов.
                   </p>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
-                  {["Услуга 1", "Услуга 2"].map((s) => (
-                    <div key={s} className="glass-inset rounded-lg p-3 text-center text-xs text-text-secondary">
+                  {["AI-видео", "Сайты"].map((s) => (
+                    <div
+                      key={s}
+                      className="glass-inset rounded-lg p-3 text-center text-xs text-text-secondary"
+                    >
                       {s}
                     </div>
                   ))}
@@ -67,11 +73,6 @@ export function VKSection() {
           </RevealAnimation>
 
           <RevealAnimation direction="right" delay={0.15}>
-            <p className="mb-6 text-lg leading-relaxed text-text-secondary">
-              Я рассматриваю ВКонтакте не как отдельную обложку или набор публикаций, а как цельную
-              систему: первое впечатление, позиционирование, навигация, описание услуг, визуальная
-              подача, контент, доверие и путь до заявки.
-            </p>
             <div className="space-y-4">
               {vkElements.map((el, i) => (
                 <div
@@ -87,6 +88,20 @@ export function VKSection() {
                   </div>
                 </div>
               ))}
+            </div>
+
+            <div className="mt-8 flex flex-wrap gap-4">
+              <a
+                href={brand.vkCommunityUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary"
+              >
+                Посмотреть сообщество
+              </a>
+              <Link href="/#contact" className="btn-primary">
+                Обсудить оформление
+              </Link>
             </div>
           </RevealAnimation>
         </div>

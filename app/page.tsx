@@ -1,37 +1,39 @@
 import { Hero } from "@/components/sections/Hero";
-import { Intro } from "@/components/sections/Intro";
+import { TrustBar } from "@/components/sections/TrustBar";
+import { Positioning } from "@/components/sections/Positioning";
+import { FeaturedPortfolio } from "@/components/sections/FeaturedPortfolio";
 import { Services } from "@/components/sections/Services";
 import { ArtApproach } from "@/components/sections/ArtApproach";
-import { FeaturedPortfolio } from "@/components/sections/FeaturedPortfolio";
-import { Process } from "@/components/sections/Process";
-import { VKSection } from "@/components/sections/VKSection";
-import { About } from "@/components/sections/About";
-import { Benefits } from "@/components/sections/Benefits";
 import { Cases } from "@/components/sections/Cases";
+import { Process } from "@/components/sections/Process";
+import { ComplexSolution } from "@/components/sections/ComplexSolution";
+import { About } from "@/components/sections/About";
+import { Certificates } from "@/components/sections/Certificates";
+import { VKSection } from "@/components/sections/VKSection";
 import { Reviews } from "@/components/sections/Reviews";
-import { Cooperation } from "@/components/sections/Cooperation";
 import { FAQ } from "@/components/sections/FAQ";
-import { ContactForm } from "@/components/forms/ContactForm";
 import { FinalCTA } from "@/components/sections/FinalCTA";
+import { ContactForm } from "@/components/forms/ContactForm";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <Intro />
+      <TrustBar />
+      <Positioning />
+      <FeaturedPortfolio />
       <Services />
       <ArtApproach />
-      <FeaturedPortfolio />
-      <Process />
-      <VKSection />
-      <About />
-      <Benefits />
       <Cases />
+      <Process />
+      <ComplexSolution />
+      <About />
+      <Certificates />
+      <VKSection />
       <Reviews />
-      <Cooperation />
       <FAQ />
-      <ContactForm />
       <FinalCTA />
+      <ContactForm />
     </>
   );
 }

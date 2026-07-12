@@ -62,7 +62,7 @@ export default function ContactsPage() {
                 </a>
               </p>
               <p className="text-sm text-text-secondary">
-                <span className="text-gold">Email:</span> [Добавить после подтверждения]
+                <span className="text-gold">Связь:</span> через ВКонтакте или форму заявки ниже
               </p>
             </div>
           </RevealAnimation>

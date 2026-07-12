@@ -78,6 +78,20 @@ export default async function ServicePage({ params }: Props) {
           </RevealAnimation>
         )}
 
+        {service.difference && (
+          <RevealAnimation delay={0.22}>
+            <h2 className="heading-display mb-4 text-2xl text-white-text">Отличие подхода</h2>
+            <p className="mb-8 leading-relaxed text-text-secondary">{service.difference}</p>
+          </RevealAnimation>
+        )}
+
+        {service.result && (
+          <RevealAnimation delay={0.24}>
+            <h2 className="heading-display mb-4 text-2xl text-white-text">Результат</h2>
+            <p className="mb-8 leading-relaxed text-text-secondary">{service.result}</p>
+          </RevealAnimation>
+        )}
+
         <RevealAnimation delay={0.25}>
           <Link href="/#contact" className="btn-primary">
             {service.cta}

@@ -1,12 +1,20 @@
 export type AnalyticsEvent =
   | "hero_cta_click"
   | "portfolio_open"
+  | "portfolio_view"
+  | "project_open"
   | "service_select"
   | "lead_form_start"
   | "lead_form_submit"
+  | "form_start"
+  | "form_submit"
   | "chatbot_open"
+  | "chat_open"
+  | "chatbot_lead"
+  | "chat_lead"
   | "vk_profile_click"
   | "vk_community_click"
+  | "vk_click"
   | "video_play"
   | "scroll_depth";
 

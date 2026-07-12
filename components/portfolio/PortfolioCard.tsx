@@ -30,7 +30,7 @@ export function PortfolioCard({ project, index = 0 }: PortfolioCardProps) {
         "portfolio-card-touch group relative overflow-hidden rounded-2xl border border-border-subtle bg-card-bg",
         layoutClasses[layout] || "lg:col-span-5"
       )}
-      onClick={() => trackEvent("portfolio_open", { project: project.slug })}
+      onClick={() => trackEvent("project_open", { project: project.slug })}
     >
       <div className={cn("relative w-full", isLarge ? "aspect-[16/10]" : "aspect-[4/3]")}>
         <Image
@@ -59,7 +59,7 @@ export function PortfolioCard({ project, index = 0 }: PortfolioCardProps) {
           {project.shortDescription}
         </p>
         <div className="portfolio-card-cta mt-3 flex items-center gap-2 text-sm text-gold opacity-0 transition-all duration-300 group-hover:opacity-100">
-          Смотреть проект
+          Смотреть кейс
           <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </div>
       </div>

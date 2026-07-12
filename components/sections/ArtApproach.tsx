@@ -2,14 +2,13 @@ import Image from "next/image";
 import { RevealAnimation } from "@/components/ui/RevealAnimation";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
-const artistPoints = [
-  "я вижу композицию целиком",
-  "чувствую цветовые сочетания",
-  "обращаю внимание на свет и детали",
-  "умею сохранять характер образа",
-  "отделяю эффектное от действительно выразительного",
-  "создаю визуальные серии, а не случайный набор картинок",
-  "думаю не только о красоте, но и о задаче проекта",
+const comparisonComments = [
+  "изменена композиция",
+  "усилен главный акцент",
+  "скорректирован свет",
+  "выстроена цветовая гармония",
+  "убраны лишние детали",
+  "создана единая атмосфера",
 ];
 
 export function ArtApproach() {
@@ -17,65 +16,65 @@ export function ArtApproach() {
     <section className="section-light py-20 md:py-28">
       <div className="container-site">
         <RevealAnimation>
-          <SectionHeading
-            light
-            title="AI умеет создавать варианты. Художник умеет выбирать главное"
-          />
+          <SectionHeading light title="AI создаёт варианты. Художник выбирает главное" />
         </RevealAnimation>
 
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <RevealAnimation direction="left">
-            <div className="relative">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
+        <RevealAnimation delay={0.1}>
+          <p className="mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed text-text-secondary">
+            Нейросеть может создать множество изображений, но она не определяет, какой образ точно
+            передаст характер бренда. Для этого необходимы художественное видение, насмотренность,
+            чувство композиции и понимание задачи.
+          </p>
+        </RevealAnimation>
+
+        <div className="grid items-stretch gap-6 lg:grid-cols-2">
+          <RevealAnimation delay={0.15}>
+            <div className="glass-panel overflow-hidden rounded-2xl">
+              <p className="border-b border-border-subtle px-4 py-3 text-sm font-medium text-text-secondary">
+                Исходная генерация
+              </p>
+              <div className="relative aspect-[4/3]">
                 <Image
-                  src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=800&q=80"
-                  alt="Художественный подход — живопись и мазки"
+                  src="/images/portfolio/creator.jpg"
+                  alt="Исходная AI-генерация"
                   fill
-                  className="object-cover"
+                  className="object-cover opacity-80 saturate-75"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-br from-sand/30 to-transparent" />
               </div>
-              <div className="absolute -bottom-4 -right-4 h-24 w-24 rounded-full border-2 border-gold/40 bg-white/15 backdrop-blur-md" />
             </div>
           </RevealAnimation>
 
-            <RevealAnimation direction="right" delay={0.15}>
-            <div className="glass-panel-soft rounded-2xl p-6 md:p-8">
-            <p className="mb-6 text-lg leading-relaxed text-text-secondary">
-              Нейросеть может предложить десятки изображений, но она не принимает за вас
-              художественное решение. Важно почувствовать, какой свет подходит проекту, какая
-              композиция вызывает нужную эмоцию, где необходим акцент, а где — тишина и пространство.
-            </p>
-            <p className="mb-4 font-medium text-white-text">
-              Более 10 лет художественной практики сформировали мой подход к работе:
-            </p>
-            <ul className="mb-8 space-y-2">
-              {artistPoints.map((point) => (
-                <li key={point} className="flex items-start gap-3 text-text-secondary">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-berry" />
-                  {point}
-                </li>
-              ))}
-            </ul>
-            </div>
-          </RevealAnimation>
-
-          <RevealAnimation direction="right" className="lg:col-start-2">
-            <div className="relative mt-4 lg:mt-0">
-              <div className="relative aspect-video overflow-hidden rounded-2xl border border-border-subtle">
+          <RevealAnimation delay={0.2}>
+            <div className="glass-panel overflow-hidden rounded-2xl ring-1 ring-gold/30">
+              <p className="border-b border-border-subtle px-4 py-3 text-sm font-medium text-gold">
+                Итоговый доработанный визуал
+              </p>
+              <div className="relative aspect-[4/3]">
                 <Image
-                  src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80"
-                  alt="AI-визуал и цифровые технологии"
+                  src="/images/specialist-creator.jpg"
+                  alt="Доработанный визуал с художественным подходом"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
-              <div className="absolute -left-6 top-1/2 hidden h-px w-12 bg-gradient-to-r from-gold to-transparent lg:block" />
             </div>
           </RevealAnimation>
         </div>
+
+        <RevealAnimation delay={0.25}>
+          <ul className="mt-8 flex flex-wrap justify-center gap-3">
+            {comparisonComments.map((comment) => (
+              <li
+                key={comment}
+                className="rounded-full border border-border-subtle bg-card-bg/50 px-4 py-2 text-sm text-text-secondary"
+              >
+                {comment}
+              </li>
+            ))}
+          </ul>
+        </RevealAnimation>
       </div>
     </section>
   );
