@@ -14,7 +14,7 @@ const footerNavLinks = [
 
 const legalLinks = [
   { href: "/privacy", label: "Политика конфиденциальности" },
-  { href: "/consent", label: "Согласие на обработку данных" },
+  { href: "/consent", label: "Согласие на обработку персональных данных" },
   { href: "/offer", label: "Публичная оферта" },
 ];
 
@@ -24,7 +24,7 @@ export function Footer() {
   return (
     <footer className="border-t border-border-subtle bg-plum/45 py-16 backdrop-blur-md">
       <div className="container-site">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
           <div className="lg:col-span-2">
             <p className="font-heading text-2xl font-semibold tracking-wider text-white-text">
               {brand.siteName}
@@ -49,10 +49,7 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          <div>
-            <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-gold">Контакты</p>
+            <p className="mb-4 mt-6 text-sm font-semibold uppercase tracking-wider text-gold">Контакты</p>
             <ul className="space-y-2">
               <li>
                 <a
@@ -75,21 +72,6 @@ export function Footer() {
                 </a>
               </li>
             </ul>
-            <p className="mb-4 mt-6 text-sm font-semibold uppercase tracking-wider text-gold">
-              Документы
-            </p>
-            <ul className="space-y-2">
-              {legalLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-text-secondary transition-colors hover:text-gold"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
 
@@ -102,7 +84,7 @@ export function Footer() {
               href="/admin/login"
               className="mt-1 inline-block text-xs text-text-secondary/50 transition-colors hover:text-text-secondary"
             >
-              Вход для сотрудников
+              Вход для сотрудников · Админ-панель
             </Link>
           </div>
           <a
@@ -113,6 +95,18 @@ export function Footer() {
             <ArrowUp className="h-4 w-4" />
             Наверх
           </a>
+        </div>
+
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 border-t border-border-subtle/60 pt-6">
+          {legalLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-xs text-text-secondary/70 transition-colors hover:text-gold"
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
       </div>
     </footer>

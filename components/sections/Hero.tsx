@@ -9,17 +9,15 @@ import { VKButton } from "@/components/ui/VKButton";
 import { trackEvent } from "@/lib/analytics";
 import { AdelinHeroInvite } from "@/components/chatbot/AdelinHeroInvite";
 import { useSiteContent } from "@/components/providers/SiteContentProvider";
-import { getFeaturedProjects } from "@/data/portfolio";
-
-const previewProjects = getFeaturedProjects().slice(0, 4);
+import { trustBarItems } from "@/data/content";
 
 export function Hero() {
   const { hero } = useSiteContent();
 
   return (
-    <section id="top" className="relative min-h-screen overflow-hidden pt-20 md:pt-24">
-      <div className="container-site relative z-10 flex min-h-[calc(100vh-5rem)] flex-col justify-center gap-12 py-16 lg:flex-row lg:items-center lg:gap-14">
-        <div className="flex-1 lg:max-w-2xl">
+    <section id="top" className="relative min-h-screen overflow-hidden pt-16 md:pt-20">
+      <div className="container-site relative z-10 flex min-h-[calc(100vh-4rem)] flex-col justify-center gap-10 py-10 lg:flex-row lg:items-start lg:gap-14 lg:pt-12">
+        <div className="flex-1 lg:max-w-2xl lg:pt-4">
           <RevealAnimation>
             <div className="glass-panel-soft rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12">
               <p className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-gold">
@@ -58,14 +56,13 @@ export function Hero() {
                 <VKButton>Написать ВКонтакте</VKButton>
               </div>
               <p className="mt-6 text-sm text-text-secondary/90">{hero.note}</p>
-              <AdelinHeroInvite />
             </div>
           </RevealAnimation>
         </div>
 
-        <div className="relative mx-auto w-full max-w-sm flex-1 lg:mx-0 lg:max-w-[28rem]">
+        <div className="relative mx-auto w-full max-w-sm flex-1 lg:mx-0 lg:max-w-[28rem] lg:-mt-6 xl:-mt-10">
           <RevealAnimation direction="left" delay={0.15}>
-            <div className="relative">
+            <div className="relative space-y-4">
               <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-border-subtle bg-graphite/20 shadow-[0_24px_64px_rgba(14,18,48,0.35)]">
                 <Image
                   src={hero.specialistPhoto}
@@ -73,12 +70,12 @@ export function Hero() {
                   fill
                   priority
                   quality={100}
-                  className="object-cover object-[center_12%] contrast-[1.08] saturate-[1.06] brightness-[1.02]"
+                  className="object-cover object-[center_8%] contrast-[1.08] saturate-[1.06] brightness-[1.02]"
                   sizes="(max-width: 1024px) 85vw, 448px"
                 />
               </div>
 
-              <div className="glass-panel-soft mt-5 rounded-2xl px-4 py-3.5 text-center lg:text-left">
+              <div className="glass-panel-soft rounded-2xl px-4 py-3.5 text-center lg:text-left">
                 <p className="text-[0.8125rem] leading-snug md:text-sm">
                   <span className="font-heading text-base text-white-text md:text-lg">
                     {hero.specialistName}
@@ -89,32 +86,21 @@ export function Hero() {
                 <p className="mt-1 text-xs text-text-secondary">{hero.specialistExperience}</p>
               </div>
 
-              <div className="pointer-events-none absolute inset-0 hidden lg:block">
-                {previewProjects.map((project, i) => {
-                  const positions = [
-                    "right-0 -top-6 w-24",
-                    "-left-8 top-1/4 w-20",
-                    "right-4 bottom-16 w-28",
-                    "-left-4 bottom-4 w-20",
-                  ];
-                  return (
-                    <div
-                      key={project.slug}
-                      className={`absolute ${positions[i]} overflow-hidden rounded-xl border border-border-subtle shadow-lg`}
+              <div className="glass-panel-soft rounded-2xl p-4 md:p-5">
+                <ul className="grid gap-2.5 sm:grid-cols-2">
+                  {trustBarItems.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-2 text-sm leading-snug text-text-secondary"
                     >
-                      <div className="relative aspect-square">
-                        <Image
-                          src={project.cover}
-                          alt={project.title}
-                          fill
-                          className="object-cover"
-                          sizes="120px"
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" aria-hidden="true" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
+
+              <AdelinHeroInvite />
             </div>
           </RevealAnimation>
         </div>

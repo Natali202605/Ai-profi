@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSiteContent } from "@/components/providers/SiteContentProvider";
@@ -50,7 +49,7 @@ export function Header() {
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-5 xl:gap-6 lg:flex" aria-label="Основная навигация">
+          <nav className="hidden items-center gap-4 xl:gap-5 lg:flex" aria-label="Основная навигация">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -60,6 +59,13 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
+            <Link
+              href="/admin/login"
+              className="btn-secondary whitespace-nowrap !px-4 !py-2 !text-xs xl:!px-5 xl:!py-2.5 xl:!text-sm"
+            >
+              <span className="xl:hidden">Админ</span>
+              <span className="hidden xl:inline">Вход для сотрудников</span>
+            </Link>
             <Link
               href="/#contact"
               className="btn-primary !px-5 !py-2.5 !text-sm shadow-[0_0_24px_rgba(164,148,255,0.25)]"

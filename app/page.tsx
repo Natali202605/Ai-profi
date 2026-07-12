@@ -1,5 +1,4 @@
 import { Hero } from "@/components/sections/Hero";
-import { TrustBar } from "@/components/sections/TrustBar";
 import { Positioning } from "@/components/sections/Positioning";
 import { FeaturedPortfolio } from "@/components/sections/FeaturedPortfolio";
 import { Services } from "@/components/sections/Services";
@@ -19,7 +18,6 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <TrustBar />
       <Positioning />
       <FeaturedPortfolio />
       <Services />

@@ -248,3 +248,33 @@ export function getAdjacentProjects(slug: string) {
     next: index < portfolioProjects.length - 1 ? portfolioProjects[index + 1] : null,
   };
 }
+
+export type PortfolioCategoryGroup = {
+  id: string;
+  label: string;
+  works: PortfolioProject[];
+};
+
+export function getPortfolioCategoryGroups(options?: {
+  featuredOnly?: boolean;
+  categoryId?: string;
+}): PortfolioCategoryGroup[] {
+  const { featuredOnly = false, categoryId } = options || {};
+  let projects = featuredOnly
+    ? portfolioProjects.filter((p) => p.featured)
+    : portfolioProjects;
+
+  const categories = portfolioCategories.filter((c) => c.id !== "all");
+  const filteredCategories = categoryId && categoryId !== "all"
+    ? categories.filter((c) => c.id === categoryId)
+    : categories;
+
+  return filteredCategories
+    .map((cat) => ({
+      id: cat.id,
+      label: cat.label,
+      works: projects.filter((p) => p.category === cat.id),
+    }))
+    .filter((group) => group.works.length > 0);
+}
+

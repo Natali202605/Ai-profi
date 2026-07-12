@@ -273,17 +273,46 @@
     }
     .adelin-hero-title { font-size: .875rem; font-weight: 600; color: var(--white); }
     .adelin-hero-text { margin-top: .25rem; font-size: .875rem; line-height: 1.5; color: var(--text-sec); }
-    .adelin-hero-btn {
-      margin-top: .75rem; display: inline-flex; align-items: center; gap: .5rem;
-      min-height: 36px; padding: .5rem 1rem; border-radius: 999px; border: 1px solid var(--border);
-      background: rgba(44,36,92,.55); color: var(--white); font-size: .8125rem; font-weight: 500; cursor: pointer;
-    }
-    .adelin-hero-btn:hover { border-color: rgba(184,164,255,.5); color: var(--gold); }
     .trust { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; margin-top: 2.5rem; list-style: none; }
     .trust li { display: flex; align-items: center; gap: .5rem; font-size: .875rem; color: var(--text-sec); }
     .trust li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
-    .hero-visual { position: relative; max-width: 28rem; width: 100%; margin: -1rem auto 0; transform: translateY(-.5rem); }
-    @media (min-width: 1024px) { .hero-visual { margin-top: -2rem; transform: translateY(-1rem); } }
+    .hero-visual { position: relative; max-width: 28rem; width: 100%; margin: -1.5rem auto 0; }
+    @media (min-width: 1024px) { .hero-visual { margin-top: -2.5rem; transform: translateY(-1rem); } }
+    .hero-side-card {
+      background: rgba(44,36,92,.66); border: 1px solid var(--border); border-radius: 1rem;
+      padding: 1rem 1.25rem; backdrop-filter: blur(16px);
+    }
+    .hero-trust-grid { display: grid; gap: .625rem; list-style: none; }
+    @media (min-width: 480px) { .hero-trust-grid { grid-template-columns: 1fr 1fr; } }
+    .hero-trust-grid li { display: flex; align-items: flex-start; gap: .5rem; font-size: .875rem; color: var(--text-sec); line-height: 1.35; }
+    .hero-trust-grid li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); margin-top: .45rem; flex-shrink: 0; }
+    .adelin-hero-btn {
+      display: inline-block; margin-top: .75rem; padding: .625rem 1.25rem; border-radius: 999px;
+      background: linear-gradient(135deg, var(--gold), var(--peach)); color: var(--graphite);
+      font-size: .875rem; font-weight: 600; border: none; cursor: pointer;
+    }
+    .adelin-hero-btn:hover { filter: brightness(1.08); }
+    .reviews-carousel { max-width: 42rem; margin: 2rem auto 0; position: relative; }
+    .reviews-nav { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1rem; }
+    .reviews-nav button {
+      width: 2.75rem; height: 2.75rem; border-radius: 50%; border: 1px solid var(--border);
+      background: rgba(44,36,92,.66); color: var(--gold); cursor: pointer; font-size: 1.25rem;
+    }
+    .reviews-dots { display: flex; justify-content: center; gap: .5rem; margin-top: 1rem; }
+    .reviews-dots button { width: .5rem; height: .5rem; border-radius: 999px; border: none; background: var(--border); cursor: pointer; padding: 0; }
+    .reviews-dots button.active { width: 2rem; background: var(--gold); }
+    .footer-legal { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem 1rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(200,188,255,.15); }
+    .footer-legal a { font-size: .75rem; color: rgba(245,242,255,.65); }
+    .portfolio-category { background: rgba(44,36,92,.66); border: 1px solid var(--border); border-radius: 1rem; overflow: hidden; margin-bottom: 1.5rem; }
+    .portfolio-category-head { padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); }
+    .portfolio-works { display: grid; gap: .75rem; padding: 1rem; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .portfolio-works { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .portfolio-works { grid-template-columns: repeat(3, 1fr); } }
+    .portfolio-work { border: 1px solid var(--border); border-radius: .75rem; overflow: hidden; background: rgba(255,255,255,.04); }
+    .portfolio-work img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+    .portfolio-work-body { padding: .75rem; }
+    .portfolio-work-body h4 { font-size: .875rem; margin-bottom: .25rem; }
+    .portfolio-work-body p { font-size: .75rem; color: var(--text-sec); }
     .hero-img { border-radius: 2rem; overflow: hidden; border: 1px solid var(--border); aspect-ratio: 4/5; position: relative; box-shadow: 0 24px 64px rgba(14,18,48,.35); background: rgba(18,24,48,.2); }
     .hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 12%; display: block; filter: contrast(1.08) saturate(1.06) brightness(1.02); image-rendering: -webkit-optimize-contrast; }
     .hero-profile {
@@ -543,6 +572,7 @@
         <a href="#process">Процесс</a>
         <a href="#reviews">Отзывы</a>
         <a href="#contact">Контакты</a>
+        <a href="admin/login.html" class="btn btn-outline" style="padding:.5rem 1rem;font-size:.8125rem;">Вход для сотрудников</a>
         <a href="#contact" class="btn btn-gold" style="padding:.5rem 1.25rem;font-size:.875rem;">Обсудить проект</a>
       </nav>
       <button class="menu-btn" id="menuOpen" aria-label="Меню">☰</button>
@@ -558,6 +588,7 @@
     <a href="#reviews">Отзывы</a>
     <a href="#contact">Контакты</a>
     <a href="#contact" class="btn btn-gold" style="margin-top:1rem;text-align:center;">Обсудить проект</a>
+    <a href="admin/login.html" class="btn btn-outline" style="margin-top:.75rem;text-align:center;">Вход для сотрудников</a>
   </div>
 
   <section class="hero" id="top">
@@ -573,38 +604,35 @@
         </div>
         <a href="https://vk.ru/id170079854" target="_blank" rel="noopener">Написать ВКонтакте →</a>
         <p class="hero-note" style="margin-top:1rem;">Для экспертов, брендов, бизнеса и творческих проектов</p>
-        <div class="adelin-hero">
-          <div class="adelin-hero-avatar" aria-hidden="true">А</div>
-          <div>
-            <p class="adelin-hero-title">Аделин</p>
-            <p class="adelin-hero-text">Здравствуйте! Я Аделин, виртуальный ассистент Натали. Помогу выбрать услугу, посмотреть работы или оставить заявку.</p>
-            <button type="button" class="adelin-hero-btn" id="adelinHeroBtn">💬 Начать диалог</button>
-          </div>
-        </div>
       </div>
       <div class="hero-visual fade-in">
         <div class="hero-img">
-          <img src="images/natali-portrait.jpg" alt="Натали Neero — AI-специалист и художник" loading="eager" />
+          <img src="images/natali-portrait.jpg" alt="Натали Neero — AI-специалист и художник" loading="eager" style="object-position:center 8%;" />
         </div>
-        <div class="hero-profile">
+        <div class="hero-profile hero-side-card">
           <p class="hero-profile-line">
             <span class="name">Натали Neero</span><span class="sep">·</span><span class="roles">AI-специалист и художник</span>
           </p>
           <p class="hero-profile-line" style="margin-top:.25rem;font-size:.75rem;">10+ лет художественного опыта</p>
         </div>
+        <div class="hero-side-card" style="margin-top:1rem;">
+          <ul class="hero-trust-grid">
+            <li>10+ лет художественного опыта</li>
+            <li>Индивидуальные визуальные концепции</li>
+            <li>AI, дизайн и разработка в одном проекте</li>
+            <li>Работа онлайн</li>
+            <li>Проекты под задачу клиента</li>
+          </ul>
+        </div>
+        <div class="adelin-hero hero-side-card" style="margin-top:1rem;">
+          <div class="adelin-hero-avatar" aria-hidden="true">А</div>
+          <div>
+            <p class="adelin-hero-title">Аделин</p>
+            <p class="adelin-hero-text">Виртуальный ассистент Натали. Помогу выбрать услугу, посмотреть работы или оставить заявку.</p>
+            <button type="button" class="adelin-hero-btn" id="adelinHeroBtn">Начать диалог</button>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <section class="dark fade-in">
-    <div class="container">
-      <ul class="trust-bar">
-        <li>10+ лет художественного опыта</li>
-        <li>Индивидуальные визуальные концепции</li>
-        <li>AI, дизайн и разработка в одном проекте</li>
-        <li>Работа онлайн</li>
-        <li>Проекты под задачу клиента</li>
-      </ul>
     </div>
   </section>
 
@@ -669,31 +697,45 @@
     <div class="container">
       <h2>Избранные проекты</h2>
       <p class="section-sub">Работы, в которых технологии становятся инструментом художественного замысла.</p>
-      <div class="portfolio-grid">
-        <article class="portfolio-item">
-          <img src="images/portfolio/creator.jpg" alt="РИС. Путь совершенства — AI-видео" loading="lazy" />
-          <div class="overlay"><span class="cat">AI-видео</span><h3>РИС. Путь совершенства</h3></div>
-        </article>
-        <article class="portfolio-item">
-          <img src="images/specialist-creator.jpg" alt="AI-видеоролик для эксперта" loading="lazy" />
-          <div class="overlay"><span class="cat">AI-видео</span><h3>AI-видеоролик для эксперта</h3></div>
-        </article>
-        <article class="portfolio-item">
-          <img src="images/portfolio/lilies.jpg" alt="Художественная серия Лилии" loading="lazy" />
-          <div class="overlay"><span class="cat">Художественные проекты</span><h3>Художественная серия «Лилии»</h3></div>
-        </article>
-        <article class="portfolio-item">
-          <img src="images/portfolio/site-preview.png" alt="Сайт NATALI NEERO" loading="lazy" />
-          <div class="overlay"><span class="cat">Сайты</span><h3>Сайт NATALI NEERO</h3></div>
-        </article>
-        <article class="portfolio-item">
-          <img src="images/portfolio/creator.jpg" alt="Оформление ВКонтакте" loading="lazy" />
-          <div class="overlay"><span class="cat">ВКонтакте</span><h3>Оформление сообщества</h3></div>
-        </article>
-        <article class="portfolio-item">
-          <img src="images/bg-watercolor.png" alt="Виртуальный ассистент Аделин" loading="lazy" />
-          <div class="overlay"><span class="cat">Чат-боты</span><h3>Виртуальный ассистент Аделин</h3></div>
-        </article>
+      <div class="portfolio-category">
+        <div class="portfolio-category-head"><h3>AI-видео</h3><p style="font-size:.8125rem;color:var(--text-sec);margin-top:.25rem;">3 работы</p></div>
+        <div class="portfolio-works">
+          <article class="portfolio-work"><img src="images/portfolio/creator.jpg" alt="РИС. Путь совершенства" loading="lazy" /><div class="portfolio-work-body"><h4>РИС. Путь совершенства</h4><p>Кинематографическая визуальная история</p></div></article>
+          <article class="portfolio-work"><img src="images/specialist-creator.jpg" alt="AI-видеоролик для эксперта" loading="lazy" /><div class="portfolio-work-body"><h4>AI-видеоролик для эксперта</h4><p>Имиджевый ролик с режиссурой</p></div></article>
+          <article class="portfolio-work"><img src="images/portfolio/lilies.jpg" alt="Семейная визуальная история" loading="lazy" /><div class="portfolio-work-body"><h4>Семейная визуальная история</h4><p>Эмоциональный видеоролик</p></div></article>
+        </div>
+      </div>
+      <div class="portfolio-category">
+        <div class="portfolio-category-head"><h3>Изображения</h3><p style="font-size:.8125rem;color:var(--text-sec);margin-top:.25rem;">1 работа</p></div>
+        <div class="portfolio-works">
+          <article class="portfolio-work"><img src="images/portfolio/creator.jpg" alt="AI-визуалы для креатора" loading="lazy" /><div class="portfolio-work-body"><h4>AI-визуалы для креатора</h4><p>Серия с единым стилем</p></div></article>
+        </div>
+      </div>
+      <div class="portfolio-category">
+        <div class="portfolio-category-head"><h3>Сайты</h3><p style="font-size:.8125rem;color:var(--text-sec);margin-top:.25rem;">2 работы</p></div>
+        <div class="portfolio-works">
+          <article class="portfolio-work"><img src="images/portfolio/site-preview.png" alt="Сайт NATALI NEERO" loading="lazy" /><div class="portfolio-work-body"><h4>Сайт NATALI NEERO</h4><p>Премиальный сайт AI-специалиста</p></div></article>
+          <article class="portfolio-work"><img src="images/portfolio/site-preview.png" alt="Персональный сайт эксперта" loading="lazy" /><div class="portfolio-work-body"><h4>Персональный сайт эксперта</h4><p>Индивидуальная визуальная концепция</p></div></article>
+        </div>
+      </div>
+      <div class="portfolio-category">
+        <div class="portfolio-category-head"><h3>Художественные проекты</h3><p style="font-size:.8125rem;color:var(--text-sec);margin-top:.25rem;">2 работы</p></div>
+        <div class="portfolio-works">
+          <article class="portfolio-work"><img src="images/portfolio/lilies.jpg" alt="Художественная серия Лилии" loading="lazy" /><div class="portfolio-work-body"><h4>Художественная серия «Лилии»</h4><p>Авторская серия с акцентом на свет</p></div></article>
+          <article class="portfolio-work"><img src="images/portfolio/lilies.jpg" alt="Художественные работы на заказ" loading="lazy" /><div class="portfolio-work-body"><h4>Художественные работы на заказ</h4><p>Индивидуальные картины</p></div></article>
+        </div>
+      </div>
+      <div class="portfolio-category">
+        <div class="portfolio-category-head"><h3>ВКонтакте</h3><p style="font-size:.8125rem;color:var(--text-sec);margin-top:.25rem;">1 работа</p></div>
+        <div class="portfolio-works">
+          <article class="portfolio-work"><img src="images/portfolio/creator.jpg" alt="Оформление сообщества" loading="lazy" /><div class="portfolio-work-body"><h4>Оформление сообщества</h4><p>Цельный визуальный образ</p></div></article>
+        </div>
+      </div>
+      <div class="portfolio-category">
+        <div class="portfolio-category-head"><h3>Чат-боты</h3><p style="font-size:.8125rem;color:var(--text-sec);margin-top:.25rem;">1 работа</p></div>
+        <div class="portfolio-works">
+          <article class="portfolio-work"><img src="images/bg-watercolor.png" alt="Виртуальный ассистент Аделин" loading="lazy" /><div class="portfolio-work-body"><h4>Виртуальный ассистент Аделин</h4><p>Чат-бот для сайта</p></div></article>
+        </div>
       </div>
       <p style="text-align:center;margin-top:2rem;"><a href="#contact" class="btn btn-outline">Обсудить похожий проект</a></p>
     </div>
@@ -734,29 +776,20 @@
     <div class="container">
       <h2 style="text-align:center;">Что говорят о работе со мной</h2>
       <p class="section-sub" style="text-align:center;margin-left:auto;margin-right:auto;">Отзывы клиентов из сообщества ВКонтакте.</p>
-      <div class="reviews-grid" style="margin-top:2rem;">
-        <article class="review-card">
-          <p class="review-text">«Спасибо за видео, которое вы создали для меня — оно волшебно. Вы учли все пожелания и точно уловили мысль, которую я хотела донести. А самое главное — быстро, точно, красиво. Смотрела как кинофильм.»</p>
-          <p class="review-author">Катерина Белова</p>
-          <p class="review-role">Заказчик видеоролика</p>
-          <p class="review-service">AI-видео</p>
-        </article>
-        <article class="review-card">
-          <p class="review-text">«Наташенька, ты супер! Видео класс с мамой — я проревелась. Спасибо большое за эмоции.»</p>
-          <p class="review-author">Олеся Кочнева</p>
-          <p class="review-role">Заказчик видеоролика</p>
-          <p class="review-service">AI-видео</p>
-        </article>
-        <article class="review-card">
-          <p class="review-text">«Спасибо огромное за все картины, за терпение с непростыми задумками и идеями, за вашу работу. Все получились великолепными, волшебными и замечательными — прямо то, что нужно и что задумывалось.»</p>
-          <p class="review-author">Владимир Сопов</p>
-          <p class="review-role">Заказчик художественных работ</p>
-          <p class="review-service">Художественные работы и AI-визуал</p>
-        </article>
+      <div class="reviews-carousel">
+        <article class="review-card" id="reviewSlide"></article>
+        <div class="reviews-nav">
+          <button type="button" id="reviewPrev" aria-label="Предыдущий отзыв">‹</button>
+          <span id="reviewCounter" style="font-size:.875rem;color:var(--text-sec);"></span>
+          <button type="button" id="reviewNext" aria-label="Следующий отзыв">›</button>
+        </div>
+        <div class="reviews-dots" id="reviewDots"></div>
       </div>
-      <p style="text-align:center;margin-top:2rem;font-size:.875rem;color:var(--text-sec);">
-        Больше отзывов — в обсуждении <a href="https://vk.com/topic-235128878_66094958" target="_blank" rel="noopener">ВКонтакте</a>.
-      </p>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;margin-top:2rem;">
+        <a href="https://vk.com/topic-235128878_66094958" target="_blank" rel="noopener" class="btn btn-outline">Смотреть больше отзывов ВКонтакте</a>
+        <a href="https://vk.ru/id170079854" target="_blank" rel="noopener" class="btn btn-gold">Добавить отзыв</a>
+        <a href="https://vk.com/topic-235128878_66094958" target="_blank" rel="noopener" class="btn btn-outline">Дополнить отзыв</a>
+      </div>
     </div>
   </section>
 
@@ -815,9 +848,6 @@
         <p><a href="#portfolio" style="font-size:.875rem;color:var(--text-sec);">Портфолио</a></p>
         <p><a href="#reviews" style="font-size:.875rem;color:var(--text-sec);">Отзывы</a></p>
         <p><a href="#contact" style="font-size:.875rem;color:var(--text-sec);">Контакты</a></p>
-        <p><a href="privacy.html" style="font-size:.875rem;color:var(--text-sec);">Политика конфиденциальности</a></p>
-        <p><a href="consent.html" style="font-size:.875rem;color:var(--text-sec);">Согласие на обработку данных</a></p>
-        <p><a href="offer.html" style="font-size:.875rem;color:var(--text-sec);">Публичная оферта</a></p>
       </div>
       <div>
         <p style="font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:.75rem;">ВКонтакте</p>
@@ -825,7 +855,12 @@
         <p><a href="https://vk.com/natali_neero" target="_blank" style="font-size:.875rem;color:var(--text-sec);">Сообщество</a></p>
       </div>
     </div>
-    <p class="footer-copy container">© NATALI NEERO, 2026. AI-визуалы, видео, сайты и оформление ВКонтакте. · <a href="admin/login.html" style="color:rgba(245,242,255,.45);">Вход для сотрудников</a></p>
+    <p class="footer-copy container">© NATALI NEERO, 2026. AI-визуалы, видео, сайты и оформление ВКонтакте. · <a href="admin/login.html" style="color:rgba(245,242,255,.45);">Вход для сотрудников · Админ-панель</a></p>
+    <div class="footer-legal container">
+      <a href="privacy.html">Политика конфиденциальности</a>
+      <a href="consent.html">Согласие на обработку персональных данных</a>
+      <a href="offer.html">Публичная оферта</a>
+    </div>
   </footer>
 
   <div class="float-bar">
@@ -956,6 +991,34 @@
       };
       document.getElementById('chatSend').onclick = handleSend;
       input.addEventListener('keydown', function (e) { if (e.key === 'Enter') handleSend(); });
+    })();
+
+    (function () {
+      var reviews = [
+        { text: '«Спасибо за видео, которое вы создали для меня — оно волшебно. Вы учли все пожелания и точно уловили мысль, которую я хотела донести. А самое главное — быстро, точно, красиво. Смотрела как кинофильм.»', author: 'Катерина Белова', role: 'Заказчик видеоролика', service: 'AI-видео' },
+        { text: '«Наташенька, ты супер! Видео класс с мамой — я проревелась. Спасибо большое за эмоции.»', author: 'Олеся Кочнева', role: 'Заказчик видеоролика', service: 'AI-видео' },
+        { text: '«Спасибо огромное за все картины, за терпение с непростыми задумками и идеями, за вашу работу. Все получились великолепными, волшебными и замечательными — прямо то, что нужно и что задумывалось.»', author: 'Владимир Сопов', role: 'Заказчик художественных работ', service: 'Художественные работы и AI-визуал' }
+      ];
+      var idx = 0;
+      var slide = document.getElementById('reviewSlide');
+      var counter = document.getElementById('reviewCounter');
+      var dots = document.getElementById('reviewDots');
+      if (!slide) return;
+      function render() {
+        var r = reviews[idx];
+        slide.innerHTML = '<p class="review-text">' + r.text + '</p><p class="review-author">' + r.author + '</p><p class="review-role">' + r.role + '</p><p class="review-service">' + r.service + '</p>';
+        counter.textContent = (idx + 1) + ' из ' + reviews.length;
+        dots.innerHTML = '';
+        reviews.forEach(function (_, i) {
+          var b = document.createElement('button');
+          if (i === idx) b.className = 'active';
+          b.onclick = function () { idx = i; render(); };
+          dots.appendChild(b);
+        });
+      }
+      document.getElementById('reviewPrev').onclick = function () { idx = idx > 0 ? idx - 1 : reviews.length - 1; render(); };
+      document.getElementById('reviewNext').onclick = function () { idx = idx < reviews.length - 1 ? idx + 1 : 0; render(); };
+      render();
     })();
   </script>
 </body>
