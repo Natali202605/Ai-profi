@@ -22,8 +22,12 @@ export const referralOptions = [
 
 export const leadFormSchema = z.object({
   name: z.string().min(2, "Укажите имя"),
-  contact: z.string().min(5, "Укажите телефон или мессенджер"),
+  contact: z.string().min(5, "Укажите телефон"),
+  email: z.string().email("Укажите корректный email").optional().or(z.literal("")),
+  telegram: z.string().optional(),
+  vk: z.string().optional(),
   projectUrl: z.string().url("Укажите корректную ссылку").optional().or(z.literal("")),
+  socialUrl: z.string().url("Укажите корректную ссылку").optional().or(z.literal("")),
   service: z.enum(serviceOptions, { required_error: "Выберите услугу" }),
   description: z.string().min(10, "Опишите задачу подробнее"),
   deadline: z.string().optional(),

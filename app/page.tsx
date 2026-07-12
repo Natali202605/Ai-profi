@@ -9,6 +9,8 @@ import { ArtApproach } from "@/components/sections/ArtApproach";
 import { Cases } from "@/components/sections/Cases";
 import { ComplexSolution } from "@/components/sections/ComplexSolution";
 import { Process } from "@/components/sections/Process";
+import { WorkProcessTimeline } from "@/components/sections/WorkProcessTimeline";
+import { TrustApproach } from "@/components/sections/TrustApproach";
 import { About } from "@/components/sections/About";
 import { Certificates } from "@/components/sections/Certificates";
 import { VKSection } from "@/components/sections/VKSection";
@@ -16,6 +18,7 @@ import { ReviewsSection } from "@/components/sections/ReviewsSection";
 import { ReviewFormSection } from "@/components/sections/ReviewFormSection";
 import { FAQ } from "@/components/sections/FAQ";
 import { FinalCTA } from "@/components/sections/FinalCTA";
+import { CooperationSecurity } from "@/components/sections/CooperationSecurity";
 import { ContactForm } from "@/components/forms/ContactForm";
 
 export default function HomePage() {
@@ -32,6 +35,8 @@ export default function HomePage() {
       <Cases />
       <ComplexSolution />
       <Process />
+      <WorkProcessTimeline />
+      <TrustApproach />
       <About />
       <Certificates />
       <VKSection />
@@ -39,6 +44,7 @@ export default function HomePage() {
       <ReviewFormSection />
       <FAQ />
       <FinalCTA />
+      <CooperationSecurity />
       <ContactForm />
     </>
   );

@@ -221,9 +221,11 @@ export const aboutFacts = [
 export const certificates = [
   {
     id: "cert-ai",
-    title: "AI-инструменты для визуального контента",
+    title: "AI-инструменты и генеративные технологии",
     organization: "Профессиональное обучение",
     year: "2025",
+    direction: "Искусственный интеллект / дизайн / цифровое творчество",
+    description: "Работа с генеративными моделями для создания визуального контента.",
     image: "/images/portfolio/creator.jpg",
   },
   {
@@ -231,6 +233,8 @@ export const certificates = [
     title: "Создание AI-видео",
     organization: "Профессиональное обучение",
     year: "2025",
+    direction: "AI-видео / монтаж / визуальные истории",
+    description: "Сценарий, генерация сцен и художественный монтаж роликов.",
     image: "/images/specialist-creator.jpg",
   },
   {
@@ -238,6 +242,8 @@ export const certificates = [
     title: "Разработка сайтов и vibe-coding",
     organization: "Профессиональное обучение",
     year: "2025",
+    direction: "Веб-разработка / UX / цифровые продукты",
+    description: "Создание адаптивных сайтов и лендингов с современными инструментами.",
     image: "/images/portfolio/site-preview.png",
   },
   {
@@ -245,6 +251,8 @@ export const certificates = [
     title: "SMM и оформление ВКонтакте",
     organization: "Профессиональное обучение",
     year: "2024",
+    direction: "SMM / визуальная упаковка / сообщества",
+    description: "Оформление и развитие аккаунтов и сообществ ВКонтакте.",
     image: "/images/portfolio/lilies.jpg",
   },
 ];

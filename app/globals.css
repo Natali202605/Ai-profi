@@ -255,6 +255,45 @@
     color: #ffffff;
   }
 
+  .workflow-timeline {
+    position: relative;
+    padding-left: 1.25rem;
+  }
+
+  .workflow-timeline::before {
+    content: "";
+    position: absolute;
+    left: 0.4rem;
+    top: 0.75rem;
+    bottom: 0.75rem;
+    width: 2px;
+    background: linear-gradient(
+      180deg,
+      rgba(184, 164, 255, 0.15) 0%,
+      rgba(184, 164, 255, 0.65) 50%,
+      rgba(184, 164, 255, 0.15) 100%
+    );
+  }
+
+  .workflow-step {
+    position: relative;
+  }
+
+  .workflow-step-dot {
+    position: absolute;
+    left: -1.05rem;
+    top: 1.75rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #c8b4ff;
+    box-shadow: 0 0 12px rgba(200, 180, 255, 0.75);
+  }
+
+  .form-section-label {
+    @apply mb-3 mt-2 block text-xs font-semibold uppercase tracking-[0.18em] text-gold/90;
+  }
+
   .glass-input {
     @apply rounded-xl px-4 py-3 outline-none backdrop-blur-md transition-colors;
     background: rgba(255, 255, 255, 0.12);

@@ -15,8 +15,9 @@ export function Certificates() {
       <div className="container-site">
         <RevealAnimation>
           <SectionHeading
-            title="Профессиональное развитие"
-            subtitle="Обучение по AI-инструментам, созданию видео, разработке сайтов и другим направлениям."
+            title="Образование и профессиональное развитие"
+            titleAccent="профессиональное развитие"
+            subtitle="Постоянное обучение помогает сочетать художественный опыт, современные AI-инструменты и актуальные технологии создания цифрового контента."
             align="center"
           />
         </RevealAnimation>
@@ -40,9 +41,12 @@ export function Certificates() {
                 </div>
                 <div className="p-4">
                   <p className="mb-1 text-sm font-medium text-white-text">{cert.title}</p>
-                  <p className="text-xs text-text-secondary">
+                  <p className="text-xs text-body-secondary">
                     {cert.organization} · {cert.year}
                   </p>
+                  {"direction" in cert && cert.direction ? (
+                    <p className="mt-2 line-clamp-2 text-xs text-caption-strong">{cert.direction}</p>
+                  ) : null}
                 </div>
               </button>
             </RevealAnimation>
@@ -51,7 +55,7 @@ export function Certificates() {
 
         {activeCert && (
           <div
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-plum/90 p-4 backdrop-blur-md"
+            className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-plum/90 p-4 backdrop-blur-md"
             role="dialog"
             aria-modal="true"
             aria-label={activeCert.title}
@@ -59,12 +63,12 @@ export function Certificates() {
             <button
               type="button"
               onClick={() => setActiveCert(null)}
-              className="absolute right-4 top-4 rounded-full bg-white/10 p-2 text-white hover:bg-white/20"
+              className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-2 text-white hover:bg-white/20"
               aria-label="Закрыть"
             >
               <X className="h-6 w-6" />
             </button>
-            <div className="relative h-[70vh] w-full max-w-3xl">
+            <div className="relative h-[60vh] w-full max-w-3xl">
               <Image
                 src={activeCert.image}
                 alt={activeCert.title}
@@ -73,6 +77,18 @@ export function Certificates() {
                 sizes="100vw"
                 priority
               />
+            </div>
+            <div className="mt-4 max-w-3xl text-center">
+              <p className="font-heading text-xl text-white-text">{activeCert.title}</p>
+              <p className="mt-1 text-sm text-body-secondary">
+                {activeCert.organization} · {activeCert.year}
+              </p>
+              {"direction" in activeCert && activeCert.direction ? (
+                <p className="mt-2 text-sm text-caption-strong">{activeCert.direction}</p>
+              ) : null}
+              {"description" in activeCert && activeCert.description ? (
+                <p className="mt-2 text-sm text-body-secondary">{activeCert.description}</p>
+              ) : null}
             </div>
           </div>
         )}

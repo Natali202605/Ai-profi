@@ -114,6 +114,7 @@ export function ContactForm() {
           >
             <input type="text" {...register("honeypot")} className="hidden" tabIndex={-1} autoComplete="off" />
 
+            <p className="form-section-label">Контакт</p>
             <div className="grid gap-5 sm:grid-cols-2">
               <div>
                 <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-white-text">
@@ -128,19 +129,59 @@ export function ContactForm() {
                 {errors.name && <p className="mt-1 text-sm text-berry">{errors.name.message}</p>}
               </div>
               <div>
+                <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-white-text">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  {...register("email")}
+                  className="glass-input w-full"
+                  placeholder="email@example.com"
+                />
+                {errors.email && <p className="mt-1 text-sm text-berry">{errors.email.message}</p>}
+              </div>
+            </div>
+
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div>
                 <label htmlFor="contact" className="mb-1.5 block text-sm font-medium text-white-text">
-                  Удобный способ связи *
+                  Телефон *
                 </label>
                 <input
                   id="contact"
                   {...register("contact")}
                   className="glass-input w-full"
-                  placeholder="+7 (___) ___-__-__ или @username"
+                  placeholder="+7 (___) ___-__-__"
                 />
                 {errors.contact && <p className="mt-1 text-sm text-berry">{errors.contact.message}</p>}
               </div>
+              <div>
+                <label htmlFor="telegram" className="mb-1.5 block text-sm font-medium text-white-text">
+                  Telegram
+                </label>
+                <input
+                  id="telegram"
+                  {...register("telegram")}
+                  className="glass-input w-full"
+                  placeholder="@username"
+                />
+              </div>
             </div>
 
+            <div>
+              <label htmlFor="vk" className="mb-1.5 block text-sm font-medium text-white-text">
+                ВКонтакте
+              </label>
+              <input
+                id="vk"
+                {...register("vk")}
+                className="glass-input w-full"
+                placeholder="Ссылка или id страницы"
+              />
+            </div>
+
+            <p className="form-section-label">Проект</p>
             <div>
               <label htmlFor="service" className="mb-1.5 block text-sm font-medium text-white-text">
                 Услуга *
@@ -184,7 +225,7 @@ export function ContactForm() {
 
             <div>
               <label htmlFor="projectUrl" className="mb-1.5 block text-sm font-medium text-white-text">
-                Ссылка на проект
+                Ссылка на сайт
               </label>
               <input
                 id="projectUrl"
@@ -192,6 +233,24 @@ export function ContactForm() {
                 className="glass-input w-full"
                 placeholder="https://..."
               />
+              {errors.projectUrl && (
+                <p className="mt-1 text-sm text-berry">{errors.projectUrl.message}</p>
+              )}
+            </div>
+
+            <div>
+              <label htmlFor="socialUrl" className="mb-1.5 block text-sm font-medium text-white-text">
+                Ссылка на соцсети
+              </label>
+              <input
+                id="socialUrl"
+                {...register("socialUrl")}
+                className="glass-input w-full"
+                placeholder="https://vk.com/..."
+              />
+              {errors.socialUrl && (
+                <p className="mt-1 text-sm text-berry">{errors.socialUrl.message}</p>
+              )}
             </div>
 
             <div className="grid gap-5 sm:grid-cols-2">
@@ -233,14 +292,16 @@ export function ContactForm() {
               </select>
             </div>
 
+            <p className="form-section-label">Дополнительно</p>
             <div>
               <label htmlFor="attachment" className="mb-1.5 block text-sm font-medium text-white-text">
-                Прикрепить файл
+                Прикрепить материалы
               </label>
               <input
                 id="attachment"
                 ref={fileInputRef}
                 type="file"
+                accept="image/*,.pdf,.doc,.docx,.ppt,.pptx,.zip,.rar"
                 className="glass-input w-full file:mr-4 file:rounded-lg file:border-0 file:bg-gold/20 file:px-3 file:py-1.5 file:text-sm file:text-gold"
                 onChange={(e) => {
                   const file = e.target.files?.[0];
@@ -267,6 +328,11 @@ export function ContactForm() {
             />
 
             {error && <p className="text-sm text-berry">{error}</p>}
+
+            <p className="text-sm leading-relaxed text-body-secondary">
+              После отправки заявки я свяжусь с вами, помогу определить подходящий формат работы и
+              подготовлю дальнейшие шаги проекта.
+            </p>
 
             <button type="submit" disabled={loading} className="btn-primary w-full sm:w-auto">
               {loading ? (
