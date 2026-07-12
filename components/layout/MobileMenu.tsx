@@ -60,13 +60,6 @@ export function MobileMenu({ open, onClose, links }: MobileMenuProps) {
             <Link href="/#contact" onClick={onClose} className="btn-primary mt-4 w-full text-center">
               Обсудить проект
             </Link>
-            <Link
-              href="/admin/login"
-              onClick={onClose}
-              className="btn-secondary mt-3 w-full text-center !text-sm"
-            >
-              Вход для сотрудников
-            </Link>
           </nav>
         </motion.div>
       )}

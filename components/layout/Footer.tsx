@@ -82,9 +82,9 @@ export function Footer() {
             </p>
             <Link
               href="/admin/login"
-              className="mt-1 inline-block text-xs text-text-secondary/50 transition-colors hover:text-text-secondary"
+              className="mt-1 inline-block text-xs text-text-secondary/45 transition-colors hover:text-text-secondary/70"
             >
-              Вход для сотрудников · Админ-панель
+              Администрирование сайта
             </Link>
           </div>
           <a

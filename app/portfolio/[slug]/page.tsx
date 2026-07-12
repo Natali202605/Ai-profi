@@ -171,7 +171,7 @@ export default async function ProjectPage({ params }: Props) {
             )}
 
             <Link href="/#contact" className="btn-primary w-full text-center">
-              Хочу похожий проект
+              Обсудить похожий проект
             </Link>
           </aside>
         </div>

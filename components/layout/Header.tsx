@@ -9,11 +9,11 @@ import { MobileMenu } from "./MobileMenu";
 import { trackEvent } from "@/lib/analytics";
 
 const navLinks = [
+  { href: "/", label: "Главная" },
   { href: "/portfolio", label: "Портфолио" },
   { href: "/#services", label: "Услуги" },
   { href: "/about", label: "Обо мне" },
   { href: "/#process", label: "Процесс" },
-  { href: "/#cases", label: "Кейсы" },
   { href: "/#reviews", label: "Отзывы" },
   { href: "/contacts", label: "Контакты" },
 ];
@@ -39,7 +39,12 @@ export function Header() {
             : "bg-transparent",
         )}
       >
-        <div className="container-site flex h-16 items-center justify-between md:h-20">
+        <div
+          className={cn(
+            "container-site flex items-center justify-between transition-all duration-500",
+            scrolled ? "h-14" : "h-16 md:h-20",
+          )}
+        >
           <Link href="/" className="group min-w-0">
             <span className="block font-heading text-base font-semibold tracking-wide text-white-text md:text-lg">
               {brand.siteName}
@@ -59,13 +64,6 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/admin/login"
-              className="btn-secondary whitespace-nowrap !px-4 !py-2 !text-xs xl:!px-5 xl:!py-2.5 xl:!text-sm"
-            >
-              <span className="xl:hidden">Админ</span>
-              <span className="hidden xl:inline">Вход для сотрудников</span>
-            </Link>
             <Link
               href="/#contact"
               className="btn-primary !px-5 !py-2.5 !text-sm shadow-[0_0_24px_rgba(164,148,255,0.25)]"

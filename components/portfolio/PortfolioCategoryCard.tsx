@@ -50,7 +50,7 @@ export function PortfolioCategoryCard({ group }: PortfolioCategoryCardProps) {
               </p>
               <p className="mt-1 line-clamp-2 text-xs text-text-secondary">{work.shortDescription}</p>
               <span className="mt-2 inline-flex items-center gap-1 text-xs text-gold opacity-0 transition-opacity group-hover:opacity-100">
-                Смотреть кейс
+                Смотреть проект
                 <ArrowUpRight className="h-3 w-3" />
               </span>
             </div>

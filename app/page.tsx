@@ -1,6 +1,8 @@
 import { Hero } from "@/components/sections/Hero";
+import { TrustBar } from "@/components/sections/TrustBar";
 import { Positioning } from "@/components/sections/Positioning";
-import { FeaturedPortfolio } from "@/components/sections/FeaturedPortfolio";
+import { PortfolioDirections } from "@/components/sections/PortfolioDirections";
+import { FeaturedWorks } from "@/components/sections/FeaturedWorks";
 import { Services } from "@/components/sections/Services";
 import { ArtApproach } from "@/components/sections/ArtApproach";
 import { Cases } from "@/components/sections/Cases";
@@ -18,8 +20,10 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <TrustBar />
       <Positioning />
-      <FeaturedPortfolio />
+      <PortfolioDirections />
+      <FeaturedWorks />
       <Services />
       <ArtApproach />
       <Cases />

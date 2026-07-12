@@ -31,6 +31,126 @@ export type PortfolioProject = {
   layout?: "large" | "medium" | "wide" | "tall";
 };
 
+export type PortfolioDirection = {
+  id: Exclude<PortfolioCategory, "complex">;
+  title: string;
+  categoryLabel: string;
+  description: string;
+  cover: string;
+  videoUrl?: string;
+  layout: "large" | "medium" | "wide";
+  projectCount: number;
+};
+
+export const portfolioDirections: PortfolioDirection[] = [
+  {
+    id: "video",
+    title: "AI-видео",
+    categoryLabel: "AI-видео",
+    description:
+      "Кинематографические, рекламные и художественные ролики с продуманной концепцией.",
+    cover: "/images/portfolio/creator.jpg",
+    layout: "large",
+    projectCount: 0,
+  },
+  {
+    id: "images",
+    title: "AI-изображения",
+    categoryLabel: "Изображения",
+    description: "Рекламные визуалы, серии в едином стиле и художественные образы.",
+    cover: "/images/specialist-creator.jpg",
+    layout: "large",
+    projectCount: 0,
+  },
+  {
+    id: "websites",
+    title: "Сайты",
+    categoryLabel: "Сайты",
+    description: "Современные сайты с индивидуальной визуальной концепцией и структурой.",
+    cover: "/images/portfolio/site-preview.png",
+    layout: "medium",
+    projectCount: 0,
+  },
+  {
+    id: "chatbots",
+    title: "Чат-боты",
+    categoryLabel: "Чат-боты",
+    description: "Умные ассистенты для сайта: выбор услуги, бриф и сбор заявок.",
+    cover: "/images/bg-watercolor.png",
+    layout: "medium",
+    projectCount: 0,
+  },
+  {
+    id: "vk",
+    title: "Оформление ВКонтакте",
+    categoryLabel: "ВКонтакте",
+    description: "Цельный визуальный образ сообщества с продуманной навигацией.",
+    cover: "/images/portfolio/creator.jpg",
+    layout: "medium",
+    projectCount: 0,
+  },
+  {
+    id: "art",
+    title: "Художественные проекты",
+    categoryLabel: "Художественные работы",
+    description: "Авторские серии, картины и визуальные работы с характером и атмосферой.",
+    cover: "/images/portfolio/lilies.jpg",
+    layout: "wide",
+    projectCount: 0,
+  },
+];
+
+export type PortfolioSort = "newest" | "featured" | "category";
+
+export function getProjectCountByCategory(category: PortfolioCategory) {
+  return portfolioProjects.filter((project) => project.category === category).length;
+}
+
+portfolioDirections.forEach((direction) => {
+  direction.projectCount = getProjectCountByCategory(direction.id);
+});
+
+export function filterPortfolioProjects(options: {
+  categoryId?: string;
+  query?: string;
+  sort?: PortfolioSort;
+}) {
+  const { categoryId, query = "", sort = "newest" } = options;
+  let results = [...portfolioProjects];
+
+  if (categoryId && categoryId !== "all") {
+    results = results.filter((project) => project.category === categoryId);
+  }
+
+  const normalizedQuery = query.trim().toLowerCase();
+  if (normalizedQuery) {
+    results = results.filter((project) => {
+      const haystack = [
+        project.title,
+        project.shortDescription,
+        project.categoryLabel,
+        project.task,
+        ...project.services,
+      ]
+        .join(" ")
+        .toLowerCase();
+      return haystack.includes(normalizedQuery);
+    });
+  }
+
+  switch (sort) {
+    case "featured":
+      return results.sort(
+        (a, b) => Number(b.featured) - Number(a.featured) || Number(b.year) - Number(a.year),
+      );
+    case "category":
+      return results.sort((a, b) => a.categoryLabel.localeCompare(b.categoryLabel, "ru"));
+    case "newest":
+    default:
+      return results.sort((a, b) => Number(b.year) - Number(a.year));
+  }
+}
+
 export const portfolioCategories = [
   { id: "all", label: "Все" },
   { id: "video", label: "AI-видео" },
