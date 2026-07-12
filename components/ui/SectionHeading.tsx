@@ -18,16 +18,10 @@ export function SectionHeading({
       className={`mb-12 md:mb-16 text-readable ${align === "center" ? "text-center" : ""}`}
     >
       {label && (
-        <p
-          className={`mb-3 text-xs font-semibold uppercase tracking-[0.2em] ${
-            light ? "text-berry" : "text-gold"
-          }`}
-        >
-          {label}
-        </p>
+        <p className={`label-accent mb-3 ${light ? "opacity-95" : ""}`}>{label}</p>
       )}
       <h2
-        className={`heading-display text-balance text-3xl text-white-text sm:text-4xl md:text-5xl lg:text-[56px]`}
+        className={`heading-display section-title-accent text-balance text-3xl sm:text-4xl md:text-5xl lg:text-[56px]`}
       >
         {title}
       </h2>

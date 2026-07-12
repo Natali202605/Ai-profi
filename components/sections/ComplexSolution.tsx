@@ -20,7 +20,7 @@ export function ComplexSolution() {
       <div className="container-site relative z-10">
         <RevealAnimation>
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="heading-display mb-4 text-3xl text-white-text sm:text-4xl md:text-5xl">
+            <h2 className="heading-display section-title-accent mb-4 text-3xl sm:text-4xl md:text-5xl">
               Один специалист — единый визуальный образ проекта
             </h2>
             <p className="mb-12 text-lg leading-relaxed text-text-secondary">

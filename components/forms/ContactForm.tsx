@@ -76,7 +76,7 @@ export function ContactForm() {
         <div className="container-site max-w-2xl text-center">
           <div className="glass-panel rounded-2xl p-8">
             <CheckCircle className="mx-auto mb-4 h-12 w-12 text-gold" />
-            <h2 className="heading-display mb-4 text-3xl text-white-text">
+            <h2 className="heading-display section-title-accent mb-4 text-3xl">
               Спасибо! Заявка отправлена
             </h2>
             <p className="mb-4 text-text-secondary">

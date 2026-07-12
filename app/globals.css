@@ -138,6 +138,104 @@
     @apply font-heading font-medium leading-[1.1] tracking-tight;
   }
 
+  .label-accent {
+    @apply text-xs font-semibold uppercase tracking-[0.22em];
+    background: linear-gradient(90deg, #c8b4ff 0%, #ede8ff 45%, #9580e8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-accent-gold {
+    background: linear-gradient(135deg, #ffffff 0%, #e8e0ff 42%, #b8a4ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-accent-soft {
+    color: rgba(245, 242, 255, 0.96);
+  }
+
+  .text-accent-soft .accent-word {
+    @apply text-gold;
+  }
+
+  .section-title-accent {
+    background: linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f5f0ff 38%,
+      #d4c8ff 72%,
+      #b8a4ff 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .hero-side-card {
+    @apply glass-panel-soft w-full rounded-2xl;
+  }
+
+  .hero-title-highlight {
+    display: inline;
+    background: linear-gradient(
+      90deg,
+      #ede8ff 0%,
+      #b8a4ff 18%,
+      #a8d8ff 38%,
+      #c8b4ff 58%,
+      #9580e8 78%,
+      #ede8ff 100%
+    );
+    background-size: 280% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: hero-title-shimmer 4.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 22px rgba(184, 164, 255, 0.45));
+  }
+
+  .hero-eyebrow-accent {
+    @apply label-accent;
+    animation: hero-eyebrow-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes hero-title-shimmer {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes hero-eyebrow-pulse {
+    0%,
+    100% {
+      filter: drop-shadow(0 0 6px rgba(184, 164, 255, 0.25));
+      opacity: 0.92;
+    }
+    50% {
+      filter: drop-shadow(0 0 14px rgba(184, 164, 255, 0.55));
+      opacity: 1;
+    }
+  }
+
+  .card-glass h3.heading-display,
+  .glass-panel h3.heading-display {
+    background: linear-gradient(135deg, #ffffff 0%, #ece6ff 55%, #c8b4ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .footer-heading-accent {
+    @apply text-sm font-semibold uppercase tracking-wider text-gold;
+  }
+
   .btn-primary {
     @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-7 py-3 text-[15px] font-semibold transition-all duration-300 focus-visible:outline-gold;
     color: #181530;

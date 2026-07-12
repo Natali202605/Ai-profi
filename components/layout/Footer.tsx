@@ -36,7 +36,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="mb-4 text-sm font-semibold uppercase tracking-wider text-gold">Навигация</p>
+            <p className="footer-heading-accent mb-4">Навигация</p>
             <ul className="space-y-2">
               {footerNavLinks.map((link) => (
                 <li key={link.href}>
@@ -49,7 +49,7 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-            <p className="mb-4 mt-6 text-sm font-semibold uppercase tracking-wider text-gold">Контакты</p>
+            <p className="footer-heading-accent mb-4 mt-6">Контакты</p>
             <ul className="space-y-2">
               <li>
                 <a
