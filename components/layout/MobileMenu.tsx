@@ -13,9 +13,24 @@ type MobileMenuProps = {
 
 export function MobileMenu({ open, onClose, links }: MobileMenuProps) {
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (!open) return;
+
+    const scrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
+    document.body.style.overflow = "hidden";
+
     return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
       document.body.style.overflow = "";
+      window.scrollTo(0, scrollY);
     };
   }, [open]);
 
@@ -23,10 +38,11 @@ export function MobileMenu({ open, onClose, links }: MobileMenuProps) {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[60] overflow-y-auto bg-plum/85 backdrop-blur-xl lg:hidden"
+          className="fixed inset-0 z-[60] overflow-y-auto overscroll-contain bg-plum/90 backdrop-blur-md lg:hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
         >
           <div className="container-site flex h-16 items-center justify-end">
             <button
@@ -41,21 +57,15 @@ export function MobileMenu({ open, onClose, links }: MobileMenuProps) {
             className="container-site flex max-h-[calc(100dvh-4rem)] flex-col gap-6 overflow-y-auto pb-8 pt-4"
             aria-label="Мобильная навигация"
           >
-            {links.map((link, i) => (
-              <motion.div
+            {links.map((link) => (
+              <Link
                 key={link.href}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.05 }}
+                href={link.href}
+                onClick={onClose}
+                className="block py-1 text-2xl font-heading text-white-text transition-colors hover:text-gold"
               >
-                <Link
-                  href={link.href}
-                  onClick={onClose}
-                  className="block py-1 text-2xl font-heading text-white-text transition-colors hover:text-gold"
-                >
-                  {link.label}
-                </Link>
-              </motion.div>
+                {link.label}
+              </Link>
             ))}
             <Link href="/#contact" onClick={onClose} className="btn-primary mt-4 w-full text-center">
               Обсудить проект

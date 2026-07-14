@@ -38,7 +38,15 @@ export function Header() {
   const { openChat } = useAdelinChat();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 50);
+        ticking = false;
+      });
+    };
     const onHash = () => setHash(window.location.hash);
     onHash();
     window.addEventListener("scroll", onScroll, { passive: true });

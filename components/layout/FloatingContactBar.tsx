@@ -12,7 +12,7 @@ export function FloatingContactBar() {
   if (open) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border-subtle bg-plum/85 safe-bottom md:hidden">
+    <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-border-subtle bg-plum/90 safe-bottom md:hidden">
       <div className="flex">
         <a
           href={VK_PROFILE_URL}

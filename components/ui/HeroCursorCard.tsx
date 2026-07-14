@@ -14,20 +14,27 @@ export function HeroCursorCard({ children, className = "" }: HeroCursorCardProps
   const reducedMotion = useReducedMotion();
   const reducedEffects = useReducedEffects();
   const disableTilt = reducedMotion || reducedEffects;
+
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-
   const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [1.2, -1.2]), {
-    stiffness: 260,
-    damping: 28,
+    stiffness: 220,
+    damping: 30,
   });
   const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-1.2, 1.2]), {
-    stiffness: 260,
-    damping: 28,
+    stiffness: 220,
+    damping: 30,
   });
 
+  if (disableTilt) {
+    return (
+      <div ref={ref} className={`hero-cursor-card group relative ${className}`}>
+        {children}
+      </div>
+    );
+  }
+
   const handleMove = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (disableTilt) return;
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -52,11 +59,7 @@ export function HeroCursorCard({ children, className = "" }: HeroCursorCardProps
     <motion.div
       ref={ref}
       className={`hero-cursor-card group relative ${className}`}
-      style={
-        disableTilt
-          ? undefined
-          : { rotateX, rotateY, transformPerspective: 1200 }
-      }
+      style={{ rotateX, rotateY, transformPerspective: 1200 }}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
     >

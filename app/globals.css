@@ -677,20 +677,72 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.018'/%3E%3C/svg%3E");
   }
 
+  .bg-fx-twinkle {
+    opacity: 0.2;
+    animation-name: bg-fx-twinkle;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    will-change: opacity, transform;
+  }
+
+  .bg-fx-spark {
+    stroke-dashoffset: 21;
+    opacity: 0;
+    animation: bg-fx-spark 5.4s linear infinite;
+  }
+
+  @keyframes bg-fx-twinkle {
+    0%,
+    100% {
+      opacity: 0.18;
+      transform: scale(1);
+    }
+    45% {
+      opacity: 0.95;
+      transform: scale(1.55);
+    }
+    70% {
+      opacity: 0.4;
+      transform: scale(1.15);
+    }
+  }
+
+  @keyframes bg-fx-spark {
+    0% {
+      stroke-dashoffset: 21;
+      opacity: 0;
+    }
+    12% {
+      opacity: 1;
+    }
+    55% {
+      stroke-dashoffset: 0;
+      opacity: 0.85;
+    }
+    75%,
+    100% {
+      stroke-dashoffset: 0;
+      opacity: 0;
+    }
+  }
+
   @media (max-width: 768px) {
     .glass-panel,
-    .glass-panel-soft {
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+    .glass-panel-soft,
+    .card-glass {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .section-light {
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
     }
 
     .hero-title-highlight,
-    .hero-keyword-shimmer {
+    .hero-keyword-shimmer,
+    .bg-fx-twinkle,
+    .bg-fx-spark {
       animation: none !important;
       filter: none !important;
     }
@@ -698,6 +750,22 @@
     .adelin-overlay {
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
+    }
+
+    .hero-expertise-card-dense,
+    .photo-caption {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bg-fx-twinkle,
+    .bg-fx-spark,
+    .hero-title-highlight,
+    .hero-keyword-shimmer,
+    .hero-eyebrow-accent {
+      animation: none !important;
     }
   }
 
