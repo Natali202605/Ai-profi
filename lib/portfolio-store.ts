@@ -35,23 +35,53 @@ async function writeOverrides(data: PortfolioOverrides) {
   await writeFile(OVERRIDES_PATH, JSON.stringify(data, null, 2), "utf8");
 }
 
+function categoryLabelFromId(categoryId: string): string {
+  const map: Record<string, string> = {
+    video: "AI-видео",
+    images: "Рекламные AI-визуалы",
+    websites: "Сайты",
+    vk: "ВКонтакте",
+    chatbots: "Чат-боты",
+    art: "Художественные проекты",
+    complex: "Комплексная упаковка",
+  };
+  return map[categoryId] || categoryId;
+}
+
 function mapSupabaseProject(row: Record<string, unknown>): AdminPortfolioProject {
   const services = Array.isArray(row.services) ? (row.services as string[]) : [];
+  const images = Array.isArray(row.images)
+    ? (row.images as string[])
+    : [String(row.cover || "/images/bg-watercolor.png")];
+  const stages = Array.isArray(row.stages) ? (row.stages as string[]) : undefined;
+  const tools = Array.isArray(row.tools) ? (row.tools as string[]) : undefined;
+  const category = (row.category_id as PortfolioCategory) || "video";
+
   return {
     id: String(row.id),
     slug: String(row.slug),
     title: String(row.title),
-    category: (row.category_id as PortfolioCategory) || "video",
-    categoryLabel: String(row.category_id || "Проект"),
+    category,
+    categoryLabel: categoryLabelFromId(category),
     shortDescription: String(row.short_description || ""),
     task: String(row.task || ""),
     solution: String(row.concept || row.result || row.full_description || ""),
+    concept: row.concept ? String(row.concept) : undefined,
+    problem: row.problem ? String(row.problem) : undefined,
+    clientWishes: row.client_wishes ? String(row.client_wishes) : undefined,
+    references: row.references ? String(row.references) : undefined,
+    stages,
+    tools,
+    artRefinement: row.art_refinement ? String(row.art_refinement) : undefined,
+    result: row.result ? String(row.result) : undefined,
+    confidential: Boolean(row.confidential),
     services,
     cover: String(row.cover || "/images/bg-watercolor.png"),
-    images: [String(row.cover || "/images/bg-watercolor.png")],
+    images,
     videoUrl: row.video_url ? String(row.video_url) : undefined,
     client: row.client ? String(row.client) : undefined,
     year: row.year ? String(row.year) : undefined,
+    taskType: row.task_type ? String(row.task_type) : undefined,
     featured: Boolean(row.is_featured),
     status: row.status === "published" ? "published" : "draft",
     source: "supabase",
@@ -97,6 +127,14 @@ export type CreatePortfolioProjectInput = {
   services: string[];
   featured?: boolean;
   status?: "draft" | "published";
+  problem?: string;
+  clientWishes?: string;
+  concept?: string;
+  stages?: string[];
+  tools?: string[];
+  result?: string;
+  client?: string;
+  confidential?: boolean;
 };
 
 export async function createPortfolioProject(input: CreatePortfolioProjectInput) {
@@ -109,7 +147,14 @@ export async function createPortfolioProject(input: CreatePortfolioProjectInput)
       category_id: input.category,
       short_description: input.shortDescription,
       task: input.task,
-      concept: input.solution,
+      concept: input.concept || input.solution,
+      problem: input.problem || null,
+      client_wishes: input.clientWishes || null,
+      stages: input.stages || [],
+      tools: input.tools || [],
+      result: input.result || null,
+      client: input.client || null,
+      confidential: input.confidential ?? false,
       services: input.services,
       cover: input.cover,
       status: input.status || "draft",
@@ -135,6 +180,14 @@ export async function createPortfolioProject(input: CreatePortfolioProjectInput)
     shortDescription: input.shortDescription,
     task: input.task,
     solution: input.solution,
+    problem: input.problem,
+    clientWishes: input.clientWishes,
+    concept: input.concept || input.solution,
+    stages: input.stages,
+    tools: input.tools,
+    result: input.result,
+    client: input.client,
+    confidential: input.confidential,
     services: input.services,
     cover: input.cover,
     images: [input.cover],

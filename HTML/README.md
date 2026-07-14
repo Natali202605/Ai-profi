@@ -1,41 +1,16 @@
-# Статическая HTML-версия (GitHub Pages)
+# Статическая HTML-версия (архив)
 
-Автономная версия для публикации на **GitHub Pages** без Node.js.
+Папка `HTML/` — устаревшее зеркало для GitHub Pages.
 
-## Страницы
+**Автодеплой Pages отключён.** Production-сайт — Next.js на Vercel: [natali-neero.ru](https://natali-neero.ru).
 
-| Файл | Описание |
-|------|----------|
-| `index.html` | Главная |
-| `portfolio.html` | Портфолио с фильтрами и поиском |
-| `privacy.html`, `consent.html`, `offer.html` | Юридические документы |
-| `admin/login.html` | Переход в админ-панель полной версии |
-
-## GitHub Pages
-
-При push в `main` автоматически публикуется папка `HTML/`:
-
-**https://natali202605.github.io/Ai-profi/**
+Не развивайте эту папку параллельно с Next.js: в HTML нет API заявок, динамического портфолио и полноценной админки (`admin/login.html` только редиректит на Next).
 
 ## Полная версия (Next.js)
-
-Для форм с API, детальных страниц проектов, CMS и админ-панели используйте Next.js в корне репозитория.
-
-### Локально
 
 ```bash
 npm install
 npm run dev
 ```
 
-### Vercel (рекомендуется для production)
-
-1. Зайдите на [vercel.com](https://vercel.com) → **Add New Project**
-2. Импортируйте репозиторий `Natali202605/Ai-profi`
-3. Framework: **Next.js** (определится автоматически)
-4. Добавьте переменные из `.env.example` (Supabase, Resend и т.д.)
-5. Deploy
-
-После деплоя укажите URL в `js/site-config.js` → `adminLoginUrl`, чтобы ссылка «Администрирование сайта» вела на живую админку.
-
-Можно подключить свой домен (например `natali-neero.ru`) в настройках Vercel.
+Деплой: Vercel + переменные из `.env.example`.

@@ -10,7 +10,7 @@ export function JsonLd() {
     jobTitle: PERSON_JOB_TITLE,
     description:
       "Создание AI-видео, изображений, сайтов и визуального оформления для экспертов, брендов и сообществ ВКонтакте.",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://natali202605.github.io/Ai-profi/",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://natali-neero.ru",
     sameAs: [VK_PROFILE_URL, VK_COMMUNITY_URL],
     knowsAbout: [
       "AI-видео",
@@ -27,7 +27,7 @@ export function JsonLd() {
     name: BRAND_NAME_DISPLAY,
     description:
       "AI-специалист и художник. Создание AI-видео, изображений, сайтов, оформление и развитие аккаунтов и сообществ ВКонтакте.",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://natali202605.github.io/Ai-profi/",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://natali-neero.ru",
     provider: { "@type": "Person", name: PERSON_NAME },
     areaServed: "RU",
     serviceType: [

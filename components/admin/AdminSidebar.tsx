@@ -13,6 +13,7 @@ import {
   Settings,
   Award,
   Users,
+  Tags,
 } from "lucide-react";
 import { AdminLogoutButton } from "@/components/admin/AdminShell";
 
@@ -23,6 +24,7 @@ const navItems = [
   { href: "/admin/leads", label: "Заявки", icon: Inbox },
   { href: "/admin/clients", label: "Клиенты", icon: Users },
   { href: "/admin/portfolio", label: "Портфолио", icon: Briefcase },
+  { href: "/admin/categories", label: "Категории", icon: Tags },
   { href: "/admin/reviews", label: "Отзывы", icon: Star },
   { href: "/admin/certificates", label: "Сертификаты", icon: Award },
   { href: "/admin/media", label: "Медиатека", icon: ImageIcon },

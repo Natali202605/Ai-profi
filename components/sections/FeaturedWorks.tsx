@@ -1,15 +1,20 @@
-"use client";
-
 import Link from "next/link";
-import { getFeaturedProjects } from "@/data/portfolio";
+import { getPublishedPortfolioProjects } from "@/lib/portfolio-store";
+import { getFeaturedProjects, portfolioProjects } from "@/data/portfolio";
 import { PortfolioCard } from "@/components/portfolio/PortfolioCard";
 import { RevealAnimation } from "@/components/ui/RevealAnimation";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { useSiteContent } from "@/components/providers/SiteContentProvider";
 
-export function FeaturedWorks() {
-  const { portfolio } = useSiteContent();
-  const projects = getFeaturedProjects().slice(0, 4);
+export async function FeaturedWorks() {
+  let source = portfolioProjects;
+  try {
+    const published = await getPublishedPortfolioProjects();
+    if (published.length) source = published;
+  } catch {
+    /* seed fallback */
+  }
+
+  const projects = getFeaturedProjects(source).slice(0, 4);
 
   return (
     <section id="portfolio" className="section-light py-16 md:py-28">
@@ -18,9 +23,9 @@ export function FeaturedWorks() {
           <SectionHeading
             light
             label="Избранное"
-            title={portfolio.featured.title}
-            titleAccent={portfolio.featured.titleHighlight}
-            subtitle={portfolio.featured.subtitle}
+            title="Избранные проекты"
+            titleAccent="проекты"
+            subtitle="Ключевые работы с художественной концепцией и коммерческой задачей."
           />
         </RevealAnimation>
 
@@ -34,7 +39,7 @@ export function FeaturedWorks() {
 
         <RevealAnimation className="mt-12 text-center" delay={0.2}>
           <Link href="/portfolio" className="btn-secondary">
-            {portfolio.featured.ctaLabel}
+            Смотреть всё портфолио
           </Link>
         </RevealAnimation>
       </div>

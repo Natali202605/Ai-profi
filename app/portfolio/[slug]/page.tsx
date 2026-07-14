@@ -4,23 +4,36 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import {
-  portfolioProjects,
   getProjectBySlug,
   getAdjacentProjects,
+  portfolioProjects,
+  type PortfolioProject,
 } from "@/data/portfolio";
+import { getPublishedPortfolioProjects } from "@/lib/portfolio-store";
 import { ImageLightbox } from "@/components/ui/ImageLightbox";
 import { VideoPreview } from "@/components/ui/VideoPreview";
 import { RevealAnimation } from "@/components/ui/RevealAnimation";
 
 type Props = { params: Promise<{ slug: string }> };
 
+async function loadProjects(): Promise<PortfolioProject[]> {
+  try {
+    const published = await getPublishedPortfolioProjects();
+    return published.length ? published : portfolioProjects;
+  } catch {
+    return portfolioProjects;
+  }
+}
+
 export async function generateStaticParams() {
-  return portfolioProjects.map((p) => ({ slug: p.slug }));
+  const projects = await loadProjects();
+  return projects.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const projects = await loadProjects();
+  const project = getProjectBySlug(slug, projects);
   if (!project) return { title: "Проект не найден" };
   return {
     title: project.title,
@@ -33,12 +46,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+function CaseBlock({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <h2 className="heading-display mb-3 text-2xl text-white-text">{title}</h2>
+      <div className="leading-relaxed text-text-secondary">{children}</div>
+    </div>
+  );
+}
+
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const projects = await loadProjects();
+  const project = getProjectBySlug(slug, projects);
   if (!project) notFound();
 
-  const { prev, next } = getAdjacentProjects(slug);
+  const { prev, next } = getAdjacentProjects(slug, projects);
+  const clientLabel = project.confidential ? "Конфиденциальный клиент" : project.client;
 
   const creativeWorkSchema = {
     "@context": "https://schema.org",
@@ -67,13 +91,15 @@ export default async function ProjectPage({ params }: Props) {
         <RevealAnimation>
           <span className="text-xs font-medium uppercase tracking-wider text-gold">
             {project.categoryLabel}
+            {project.taskType ? ` · ${project.taskType}` : ""}
           </span>
-          <h1 className="heading-display mt-2 mb-6 text-4xl text-white-text md:text-5xl">
+          <h1 className="heading-display mt-2 mb-4 text-4xl text-white-text md:text-5xl">
             {project.title}
           </h1>
+          <p className="max-w-3xl text-lg text-text-secondary">{project.shortDescription}</p>
         </RevealAnimation>
 
-        <RevealAnimation delay={0.1}>
+        <RevealAnimation delay={0.1} className="mt-8">
           {project.videoUrl ? (
             <VideoPreview
               videoUrl={project.videoUrl}
@@ -95,29 +121,111 @@ export default async function ProjectPage({ params }: Props) {
         </RevealAnimation>
 
         <div className="mt-12 grid gap-12 lg:grid-cols-3">
-          <div className="lg:col-span-2 space-y-10">
+          <div className="space-y-10 lg:col-span-2">
+            {clientLabel && (
+              <RevealAnimation>
+                <CaseBlock title="О клиенте / направлении">{clientLabel}</CaseBlock>
+              </RevealAnimation>
+            )}
+
             <RevealAnimation>
-              <div>
-                <h2 className="heading-display mb-3 text-2xl text-white-text">Задача</h2>
-                <p className="leading-relaxed text-text-secondary">{project.task}</p>
-              </div>
+              <CaseBlock title="Задача">{project.task}</CaseBlock>
             </RevealAnimation>
 
-            <RevealAnimation delay={0.1}>
-              <div>
-                <h2 className="heading-display mb-3 text-2xl text-white-text">Решение</h2>
-                <p className="leading-relaxed text-text-secondary">{project.solution}</p>
-              </div>
+            {project.problem && (
+              <RevealAnimation>
+                <CaseBlock title="Проблема">{project.problem}</CaseBlock>
+              </RevealAnimation>
+            )}
+
+            {project.clientWishes && (
+              <RevealAnimation>
+                <CaseBlock title="Пожелания клиента">{project.clientWishes}</CaseBlock>
+              </RevealAnimation>
+            )}
+
+            {project.references && (
+              <RevealAnimation>
+                <CaseBlock title="Референсы и ограничения">{project.references}</CaseBlock>
+              </RevealAnimation>
+            )}
+
+            <RevealAnimation>
+              <CaseBlock title="Концепция / решение">
+                {project.concept || project.solution}
+              </CaseBlock>
             </RevealAnimation>
 
-            {project.artDirection && (
-              <RevealAnimation delay={0.15}>
-                <div>
-                  <h2 className="heading-display mb-3 text-2xl text-white-text">
-                    Художественная идея
-                  </h2>
-                  <p className="leading-relaxed text-text-secondary">{project.artDirection}</p>
-                </div>
+            {(project.artDirection || project.artRefinement) && (
+              <RevealAnimation>
+                <CaseBlock title="Художественная доработка">
+                  {project.artRefinement || project.artDirection}
+                </CaseBlock>
+              </RevealAnimation>
+            )}
+
+            {project.stages && project.stages.length > 0 && (
+              <RevealAnimation>
+                <CaseBlock title="Этапы работы">
+                  <ol className="list-decimal space-y-2 pl-5">
+                    {project.stages.map((stage) => (
+                      <li key={stage}>{stage}</li>
+                    ))}
+                  </ol>
+                </CaseBlock>
+              </RevealAnimation>
+            )}
+
+            {project.tools && project.tools.length > 0 && (
+              <RevealAnimation>
+                <CaseBlock title="AI-инструменты и технологии">
+                  <ul className="flex flex-wrap gap-2">
+                    {project.tools.map((tool) => (
+                      <li
+                        key={tool}
+                        className="rounded-full border border-border-subtle bg-card-bg px-3 py-1 text-sm"
+                      >
+                        {tool}
+                      </li>
+                    ))}
+                  </ul>
+                </CaseBlock>
+              </RevealAnimation>
+            )}
+
+            {project.beforeAfter && project.beforeAfter.length > 0 && (
+              <RevealAnimation>
+                <CaseBlock title="До / после">
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    {project.beforeAfter.map((pair) => (
+                      <div key={pair.before + pair.after} className="space-y-2">
+                        {pair.label && (
+                          <p className="text-sm font-medium text-gold">{pair.label}</p>
+                        )}
+                        <div className="grid grid-cols-2 gap-2">
+                          <div className="relative aspect-square overflow-hidden rounded-xl">
+                            <Image src={pair.before} alt="До" fill className="object-cover" />
+                            <span className="absolute bottom-2 left-2 rounded bg-black/60 px-2 py-0.5 text-xs">
+                              До
+                            </span>
+                          </div>
+                          <div className="relative aspect-square overflow-hidden rounded-xl">
+                            <Image src={pair.after} alt="После" fill className="object-cover" />
+                            <span className="absolute bottom-2 left-2 rounded bg-black/60 px-2 py-0.5 text-xs">
+                              После
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CaseBlock>
+              </RevealAnimation>
+            )}
+
+            {project.result && (
+              <RevealAnimation>
+                <CaseBlock title="Итоговый результат">{project.result}</CaseBlock>
               </RevealAnimation>
             )}
 
@@ -133,9 +241,9 @@ export default async function ProjectPage({ params }: Props) {
             <RevealAnimation>
               <div className="card-glass p-6">
                 <h3 className="mb-4 font-semibold text-white-text">О проекте</h3>
-                {project.client && (
+                {clientLabel && (
                   <p className="mb-2 text-sm text-text-secondary">
-                    <span className="text-gold">Клиент:</span> {project.client}
+                    <span className="text-gold">Клиент:</span> {clientLabel}
                   </p>
                 )}
                 {project.year && (
@@ -160,9 +268,7 @@ export default async function ProjectPage({ params }: Props) {
                   <p className="mb-3 text-sm italic text-text-secondary">
                     «{project.testimonial.text}»
                   </p>
-                  <p className="text-sm font-medium text-white-text">
-                    {project.testimonial.name}
-                  </p>
+                  <p className="text-sm font-medium text-white-text">{project.testimonial.name}</p>
                   {project.testimonial.role && (
                     <p className="text-xs text-text-secondary">{project.testimonial.role}</p>
                   )}

@@ -1,9 +1,19 @@
+# GitHub Pages HTML-зеркало отключено.
+# Production — Next.js на Vercel (natali-neero.ru).
+# Папка HTML/ не публикуется, чтобы не путать посетителей с устаревшей версией.
+#
+# Чтобы снова включить деплой Pages, восстановите job ниже и убедитесь,
+# что HTML синхронизирован с Next.js (сейчас не поддерживается).
+
 name: Deploy HTML to GitHub Pages
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Type ENABLE to publish legacy HTML folder (not recommended)"
+        required: true
+        default: ""
 
 permissions:
   contents: read
@@ -16,6 +26,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.event.inputs.confirm == 'ENABLE'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

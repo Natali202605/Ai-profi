@@ -48,6 +48,15 @@ export function About() {
               ))}
             </RevealAnimation>
 
+            <RevealAnimation delay={0.15}>
+              <blockquote className="mb-8 border-l-2 border-gold/60 pl-5">
+                <p className="font-heading text-lg leading-relaxed text-white-text md:text-xl">
+                  «Для меня важно не просто создать красивый кадр, а понять, какое впечатление он
+                  должен произвести и какую задачу решить».
+                </p>
+              </blockquote>
+            </RevealAnimation>
+
             <RevealAnimation delay={0.2}>
               <div className="mb-8 grid grid-cols-2 gap-3">
                 {aboutFacts.map((fact) => (

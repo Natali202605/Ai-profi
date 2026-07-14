@@ -61,7 +61,7 @@ export function Services() {
                     {service.description}
                   </p>
                   {service.includes.length > 0 && (
-                    <ul className="mb-6 space-y-1.5">
+                    <ul className="mb-4 space-y-1.5">
                       {service.includes.slice(0, 5).map((item) => (
                         <li key={item} className="flex items-start gap-2 text-sm text-text-secondary/90">
                           <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-gold" />
@@ -70,14 +70,36 @@ export function Services() {
                       ))}
                     </ul>
                   )}
-                  <Link
-                    href={`/services/${slug}`}
-                    className="inline-flex items-center gap-2 text-sm font-medium text-gold transition-colors hover:text-peach"
-                    onClick={() => trackEvent("service_select", { service: service.id })}
-                  >
-                    {service.cta}
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
+                  {meta?.forWhom && meta.forWhom.length > 0 && (
+                    <p className="mb-2 text-xs text-text-secondary/80">
+                      <span className="text-gold">Для кого: </span>
+                      {meta.forWhom.slice(0, 4).join(", ")}
+                    </p>
+                  )}
+                  {meta?.duration && (
+                    <p className="mb-4 text-xs text-text-secondary/80">
+                      <span className="text-gold">Срок: </span>
+                      {meta.duration}
+                    </p>
+                  )}
+                  <div className="mt-auto flex flex-wrap items-center gap-3">
+                    <Link
+                      href={`/services/${slug}`}
+                      className="inline-flex items-center gap-2 text-sm font-medium text-gold transition-colors hover:text-peach"
+                      onClick={() => trackEvent("service_select", { service: service.id })}
+                    >
+                      {service.cta}
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                    {meta?.portfolioCategory && (
+                      <Link
+                        href={`/portfolio?category=${meta.portfolioCategory}`}
+                        className="text-sm text-text-secondary transition-colors hover:text-gold"
+                      >
+                        Смотреть кейсы
+                      </Link>
+                    )}
+                  </div>
                 </article>
               </RevealAnimation>
             );

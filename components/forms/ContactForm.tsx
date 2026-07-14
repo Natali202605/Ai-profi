@@ -58,6 +58,7 @@ export function ContactForm() {
 
       if (!res.ok) {
         const err = await res.json();
+        trackEvent("form_error", { reason: String(err.error || "submit_failed") });
         throw new Error(err.error || "Ошибка отправки");
       }
 
@@ -65,6 +66,7 @@ export function ContactForm() {
       setSubmitted(true);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Не удалось отправить заявку");
+      trackEvent("form_error", { reason: "exception" });
     } finally {
       setLoading(false);
     }

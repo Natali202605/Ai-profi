@@ -59,7 +59,7 @@ export function PortfolioCard({ project, index = 0 }: PortfolioCardProps) {
           {project.shortDescription}
         </p>
         <div className="portfolio-card-cta mt-3 flex items-center gap-2 text-sm text-gold opacity-0 transition-all duration-300 group-hover:opacity-100">
-          Смотреть проект
+          Смотреть кейс
           <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </div>
       </div>

@@ -31,14 +31,23 @@ export function ChatWidget() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "bot",
-      text: "Здравствуйте! Я Аделин, AI-ассистент Натали. Расскажите, что вы хотите создать, и я помогу выбрать подходящую услугу, покажу примеры работ и подготовлю краткую заявку.",
-      buttons: initialButtons,
+      text: "Здравствуйте! Я Аделин, виртуальный ассистент Натали Смирновой. Помогу подобрать услугу, сориентироваться по этапам работы и подготовить заявку.",
+      buttons: [
+        "Подобрать услугу",
+        "Посмотреть портфолио",
+        "Узнать, как проходит работа",
+        "Обсудить стоимость",
+        "Подготовить заявку",
+        "Связаться с Натали",
+      ],
     },
   ]);
   const [input, setInput] = useState("");
   const [step, setStep] = useState("start");
   const [leadData, setLeadData] = useState<Record<string, string>>({});
   const bottomRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -56,7 +65,32 @@ export function ChatWidget() {
     document.body.style.width = "100%";
     document.body.style.overflow = "hidden";
 
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (event.key !== "Tab" || !dialogRef.current) return;
+      const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    window.addEventListener("keydown", onKey);
+    window.setTimeout(() => inputRef.current?.focus(), 50);
+
     return () => {
+      window.removeEventListener("keydown", onKey);
       document.body.style.position = "";
       document.body.style.top = "";
       document.body.style.left = "";
@@ -65,7 +99,7 @@ export function ChatWidget() {
       document.body.style.overflow = "";
       window.scrollTo(0, scrollY);
     };
-  }, [open]);
+  }, [open, setOpen]);
 
   const addBotMessage = (text: string, buttons?: string[]) => {
     setMessages((prev) => [...prev, { role: "bot", text, buttons }]);
@@ -82,6 +116,36 @@ export function ChatWidget() {
       trackEvent("adelin_flow_start", { service: button });
     }
 
+    if (button === "Подобрать услугу" || button === "Подготовить заявку") {
+      addBotMessage("Что необходимо создать?", initialButtons.filter((b) => !b.includes("портфолио") && b !== "Не знаю, что выбрать").concat(["Не знаю, что выбрать"]));
+      setStep("start");
+      return;
+    }
+
+    if (button === "Узнать, как проходит работа") {
+      addBotMessage(
+        "Работа идёт по этапам: заявка → обсуждение → предложение → ТЗ → договор → оплата → концепция → согласование → передача. Точные сроки и стоимость фиксирую после обсуждения задачи — без исходных данных обещать цифры нельзя.",
+        ["Подобрать услугу", "Подготовить заявку", "Связаться с Натали"],
+      );
+      return;
+    }
+
+    if (button === "Обсудить стоимость") {
+      addBotMessage(
+        "Стоимость зависит от формата, объёма, сложности и сроков. Я помогу собрать бриф и передать заявку Натали — точную цену без данных о задаче назвать нельзя.",
+        ["Подготовить заявку", "Связаться с Натали"],
+      );
+      return;
+    }
+
+    if (button === "Связаться с Натали") {
+      addBotMessage("Можно оставить контакт здесь или написать напрямую во ВКонтакте.", [
+        "Оставить контакт",
+        "Написать ВКонтакте",
+      ]);
+      return;
+    }
+
     if (button === "Не знаю, что выбрать") {
       addBotMessage("Расскажите своими словами, что хотите получить — я помогу определить формат.");
       setStep("free_question");
@@ -89,7 +153,7 @@ export function ChatWidget() {
     }
 
     if (button === "Посмотреть портфолио") {
-      addBotMessage("Вот ссылка на портфолио:", ["Открыть портфолио"]);
+      addBotMessage("Открываю портфолио — там можно посмотреть кейсы по направлениям.", ["Открыть портфолио"]);
       window.open("/portfolio", "_blank");
       return;
     }
@@ -238,7 +302,7 @@ export function ChatWidget() {
           <>
             <motion.button
               type="button"
-              className="adelin-overlay fixed inset-0 z-[9998] cursor-default border-0 bg-[rgba(28,24,56,0.72)] backdrop-blur-[14px] md:bg-[rgba(28,24,56,0.58)]"
+              className="adelin-overlay fixed inset-0 z-[9998] cursor-default border-0 bg-[rgba(12,10,28,0.88)] backdrop-blur-[16px]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -246,7 +310,8 @@ export function ChatWidget() {
               onClick={() => setOpen(false)}
             />
             <motion.div
-              className="adelin-dialog fixed z-[9999] flex flex-col overflow-hidden rounded-2xl border border-border-subtle bg-[rgba(244,240,255,0.98)] shadow-[0_32px_90px_rgba(26,18,70,0.32)] inset-3 md:inset-auto md:bottom-6 md:right-6 md:h-[min(82vh,680px)] md:w-[min(480px,calc(100vw-3rem))]"
+              ref={dialogRef}
+              className="adelin-dialog fixed z-[9999] flex flex-col overflow-hidden rounded-none border border-border-subtle bg-[rgba(244,240,255,0.99)] shadow-[0_32px_90px_rgba(26,18,70,0.45)] inset-0 md:inset-auto md:bottom-6 md:right-6 md:h-[min(86vh,720px)] md:w-[min(480px,calc(100vw-3rem))] md:rounded-2xl"
               initial={{ opacity: 0, y: 20, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.98 }}
@@ -319,6 +384,7 @@ export function ChatWidget() {
               <div className="border-t border-border-subtle bg-white/80 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
                 <div className="flex gap-2">
                   <input
+                    ref={inputRef}
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleSend()}

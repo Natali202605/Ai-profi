@@ -22,6 +22,18 @@ export type PortfolioProject = {
   videoUrl?: string;
   client?: string;
   year?: string;
+  /** Hide client name publicly while keeping case details */
+  confidential?: boolean;
+  problem?: string;
+  clientWishes?: string;
+  references?: string;
+  concept?: string;
+  stages?: string[];
+  tools?: string[];
+  artRefinement?: string;
+  result?: string;
+  beforeAfter?: { before: string; after: string; label?: string }[];
+  taskType?: string;
   testimonial?: {
     name: string;
     role?: string;
@@ -102,23 +114,41 @@ export const portfolioDirections: PortfolioDirection[] = [
 
 export type PortfolioSort = "newest" | "featured" | "category";
 
-export function getProjectCountByCategory(category: PortfolioCategory) {
-  return portfolioProjects.filter((project) => project.category === category).length;
+export function getProjectCountByCategory(
+  category: PortfolioCategory,
+  projects: PortfolioProject[] = portfolioProjects,
+) {
+  return projects.filter((project) => project.category === category).length;
+}
+
+export function buildPortfolioDirections(
+  projects: PortfolioProject[] = portfolioProjects,
+): PortfolioDirection[] {
+  return portfolioDirections.map((direction) => ({
+    ...direction,
+    projectCount: getProjectCountByCategory(direction.id, projects),
+  }));
 }
 
 portfolioDirections.forEach((direction) => {
   direction.projectCount = getProjectCountByCategory(direction.id);
 });
 
-export function filterPortfolioProjects(options: {
-  categoryId?: string;
-  query?: string;
-  sort?: PortfolioSort;
-}) {
-  const { categoryId, query = "", sort = "newest" } = options;
-  let results = [...portfolioProjects];
+export function filterPortfolioProjects(
+  options: {
+    categoryId?: string;
+    query?: string;
+    sort?: PortfolioSort;
+    /** When filtered category is empty, return all published projects */
+    fallbackToAll?: boolean;
+  },
+  source: PortfolioProject[] = portfolioProjects,
+) {
+  const { categoryId, query = "", sort = "newest", fallbackToAll = false } = options;
+  let results = [...source];
+  const hadCategoryFilter = Boolean(categoryId && categoryId !== "all");
 
-  if (categoryId && categoryId !== "all") {
+  if (hadCategoryFilter) {
     results = results.filter((project) => project.category === categoryId);
   }
 
@@ -138,6 +168,10 @@ export function filterPortfolioProjects(options: {
     });
   }
 
+  if (fallbackToAll && hadCategoryFilter && results.length === 0 && !normalizedQuery) {
+    results = [...source];
+  }
+
   switch (sort) {
     case "featured":
       return results.sort(
@@ -152,9 +186,9 @@ export function filterPortfolioProjects(options: {
 }
 
 export const portfolioCategories = [
-  { id: "all", label: "Все" },
+  { id: "all", label: "Все работы" },
   { id: "video", label: "AI-видео" },
-  { id: "images", label: "Изображения" },
+  { id: "images", label: "Рекламные AI-визуалы" },
   { id: "websites", label: "Сайты" },
   { id: "vk", label: "ВКонтакте" },
   { id: "chatbots", label: "Чат-боты" },
@@ -187,13 +221,28 @@ export const portfolioProjects: PortfolioProject[] = [
     categoryLabel: "AI-видео",
     shortDescription: "Атмосферный имиджевый ролик с художественной режиссурой",
     task: "Создать короткий видеоролик, который передаёт характер эксперта и помогает донести личную историю до аудитории.",
+    problem: "Готовые шаблонные ролики не передавали индивидуальность и эмоциональный тон эксперта.",
+    clientWishes: "Тёплая кинематографическая подача, акцент на личной истории, без агрессивной рекламности.",
     solution:
       "Разработана сценарная концепция, визуальная стилистика и монтажная структура. Ролик построен как цельная визуальная история с акцентом на эмоцию и атмосферу.",
+    concept:
+      "Кинематографический свет, спокойный ритм монтажа и единая цветовая интонация, усиливающие доверие к эксперту.",
+    stages: [
+      "Обсуждение задачи и референсов",
+      "Сценарная структура и ключевые кадры",
+      "Генерация сцен и отбор",
+      "Монтаж и цветокоррекция",
+      "Финальная передача файла",
+    ],
+    tools: ["генерация видео", "промпт-инжиниринг", "монтаж", "цветокоррекция"],
+    result: "Готовый имиджевый ролик, который клиентка описала как «кинофильм» — с учётом всех пожеланий.",
+    artDirection: "Кинематографический свет, плавные переходы, акцент на эмоциональном повествовании",
     services: ["AI-видео", "Сценарная концепция", "Монтаж"],
     cover: "/images/specialist-creator.jpg",
     images: ["/images/specialist-creator.jpg", "/images/portfolio/creator.jpg"],
     client: "Заказчик видеоролика",
     year: "2025",
+    taskType: "Имиджевое AI-видео",
     testimonial: {
       name: "Катерина Белова",
       role: "Заказчик видеоролика",
@@ -352,20 +401,26 @@ export const portfolioProjects: PortfolioProject[] = [
   },
 ];
 
-export function getProjectBySlug(slug: string) {
-  return portfolioProjects.find((p) => p.slug === slug);
+export function getProjectBySlug(
+  slug: string,
+  projects: PortfolioProject[] = portfolioProjects,
+) {
+  return projects.find((p) => p.slug === slug);
 }
 
-export function getFeaturedProjects() {
-  return portfolioProjects.filter((p) => p.featured);
+export function getFeaturedProjects(projects: PortfolioProject[] = portfolioProjects) {
+  return projects.filter((p) => p.featured);
 }
 
-export function getAdjacentProjects(slug: string) {
-  const index = portfolioProjects.findIndex((p) => p.slug === slug);
+export function getAdjacentProjects(
+  slug: string,
+  projects: PortfolioProject[] = portfolioProjects,
+) {
+  const index = projects.findIndex((p) => p.slug === slug);
   if (index === -1) return { prev: null, next: null };
   return {
-    prev: index > 0 ? portfolioProjects[index - 1] : null,
-    next: index < portfolioProjects.length - 1 ? portfolioProjects[index + 1] : null,
+    prev: index > 0 ? projects[index - 1] : null,
+    next: index < projects.length - 1 ? projects[index + 1] : null,
   };
 }
 
@@ -375,19 +430,21 @@ export type PortfolioCategoryGroup = {
   works: PortfolioProject[];
 };
 
-export function getPortfolioCategoryGroups(options?: {
-  featuredOnly?: boolean;
-  categoryId?: string;
-}): PortfolioCategoryGroup[] {
+export function getPortfolioCategoryGroups(
+  options?: {
+    featuredOnly?: boolean;
+    categoryId?: string;
+  },
+  source: PortfolioProject[] = portfolioProjects,
+): PortfolioCategoryGroup[] {
   const { featuredOnly = false, categoryId } = options || {};
-  let projects = featuredOnly
-    ? portfolioProjects.filter((p) => p.featured)
-    : portfolioProjects;
+  let projects = featuredOnly ? source.filter((p) => p.featured) : source;
 
   const categories = portfolioCategories.filter((c) => c.id !== "all");
-  const filteredCategories = categoryId && categoryId !== "all"
-    ? categories.filter((c) => c.id === categoryId)
-    : categories;
+  const filteredCategories =
+    categoryId && categoryId !== "all"
+      ? categories.filter((c) => c.id === categoryId)
+      : categories;
 
   return filteredCategories
     .map((cat) => ({

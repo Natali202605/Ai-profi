@@ -114,6 +114,35 @@ export function Reviews({ dynamicReviews = [] }: ReviewsProps) {
           </div>
         </RevealAnimation>
 
+        {/* SSR / noscript fallback: первые три отзыва всегда в HTML */}
+        <noscript>
+          <div className="mx-auto mt-10 grid max-w-4xl gap-4 md:grid-cols-3">
+            {mergedReviews.slice(0, 3).map((review) => (
+              <article
+                key={`noscript-${review.id}`}
+                className="rounded-2xl border border-border-subtle bg-card-bg/60 p-5"
+              >
+                <p className="mb-3 text-sm italic text-text-secondary">«{review.text}»</p>
+                <p className="text-sm font-medium text-white-text">{review.name}</p>
+                <p className="text-xs text-text-secondary">{review.service}</p>
+              </article>
+            ))}
+          </div>
+        </noscript>
+
+        <div className="sr-only" aria-hidden={false}>
+          <h3>Отзывы клиентов</h3>
+          {mergedReviews.slice(0, 3).map((review) => (
+            <blockquote key={`ssr-${review.id}`}>
+              <p>{review.text}</p>
+              <footer>
+                {review.name}
+                {review.service ? ` — ${review.service}` : ""}
+              </footer>
+            </blockquote>
+          ))}
+        </div>
+
         <RevealAnimation delay={0.2}>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Link href="/reviews/new" className="btn-primary inline-flex">

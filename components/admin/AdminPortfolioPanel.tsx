@@ -4,22 +4,32 @@ import { useCallback, useEffect, useState } from "react";
 import type { AdminPortfolioProject } from "@/lib/portfolio-store";
 import { Field } from "@/components/admin/AdminFields";
 
+const emptyForm = {
+  slug: "",
+  title: "",
+  category: "video",
+  categoryLabel: "AI-видео",
+  shortDescription: "",
+  task: "",
+  solution: "",
+  problem: "",
+  clientWishes: "",
+  concept: "",
+  stages: "",
+  tools: "",
+  result: "",
+  cover: "/images/bg-watercolor.png",
+  services: "AI-видео",
+  client: "",
+  confidential: false,
+};
+
 export function AdminPortfolioPanel() {
   const [projects, setProjects] = useState<AdminPortfolioProject[]>([]);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState({
-    slug: "",
-    title: "",
-    category: "video",
-    categoryLabel: "AI-видео",
-    shortDescription: "",
-    task: "",
-    solution: "",
-    cover: "/images/bg-watercolor.png",
-    services: "AI-видео",
-  });
+  const [form, setForm] = useState(emptyForm);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -55,7 +65,7 @@ export function AdminPortfolioPanel() {
       setMessage("Не удалось обновить проект");
       return;
     }
-    setMessage("Проект обновлён. Страницы портфолио пересобраны.");
+    setMessage("Проект обновлён. Публичные страницы обновлены.");
     await load();
   }
 
@@ -66,7 +76,18 @@ export function AdminPortfolioPanel() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         ...form,
-        services: form.services.split(",").map((item) => item.trim()).filter(Boolean),
+        services: form.services
+          .split(",")
+          .map((item) => item.trim())
+          .filter(Boolean),
+        stages: form.stages
+          .split("\n")
+          .map((item) => item.trim())
+          .filter(Boolean),
+        tools: form.tools
+          .split(",")
+          .map((item) => item.trim())
+          .filter(Boolean),
         featured: false,
         status: "draft",
       }),
@@ -76,7 +97,8 @@ export function AdminPortfolioPanel() {
       return;
     }
     setShowForm(false);
-    setMessage("Проект создан как черновик.");
+    setForm(emptyForm);
+    setMessage("Проект создан как черновик. После публикации появится на сайте.");
     await load();
   }
 
@@ -86,21 +108,76 @@ export function AdminPortfolioPanel() {
 
       <div className="flex flex-wrap gap-3">
         <button type="button" className="btn-primary" onClick={() => setShowForm((v) => !v)}>
-          {showForm ? "Скрыть форму" : "Добавить проект"}
+          {showForm ? "Скрыть форму" : "Добавить проект / кейс"}
         </button>
       </div>
 
       {showForm ? (
         <div className="card-glass space-y-4 p-6">
-          <h2 className="font-heading text-lg text-white-text">Новый проект</h2>
+          <h2 className="font-heading text-lg text-white-text">Новый кейс</h2>
           <Field label="Slug (URL)" value={form.slug} onChange={(v) => setForm({ ...form, slug: v })} />
           <Field label="Название" value={form.title} onChange={(v) => setForm({ ...form, title: v })} />
+          <Field
+            label="Категория (id)"
+            value={form.category}
+            onChange={(v) => setForm({ ...form, category: v })}
+          />
+          <Field
+            label="Подпись категории"
+            value={form.categoryLabel}
+            onChange={(v) => setForm({ ...form, categoryLabel: v })}
+          />
           <Field
             label="Краткое описание"
             value={form.shortDescription}
             onChange={(v) => setForm({ ...form, shortDescription: v })}
             multiline
           />
+          <Field label="Задача" value={form.task} onChange={(v) => setForm({ ...form, task: v })} multiline />
+          <Field
+            label="Проблема"
+            value={form.problem}
+            onChange={(v) => setForm({ ...form, problem: v })}
+            multiline
+          />
+          <Field
+            label="Пожелания клиента"
+            value={form.clientWishes}
+            onChange={(v) => setForm({ ...form, clientWishes: v })}
+            multiline
+          />
+          <Field
+            label="Концепция / решение"
+            value={form.solution}
+            onChange={(v) => setForm({ ...form, solution: v })}
+            multiline
+          />
+          <Field
+            label="Этапы (каждый с новой строки)"
+            value={form.stages}
+            onChange={(v) => setForm({ ...form, stages: v })}
+            multiline
+          />
+          <Field
+            label="AI-инструменты через запятую"
+            value={form.tools}
+            onChange={(v) => setForm({ ...form, tools: v })}
+          />
+          <Field
+            label="Итоговый результат"
+            value={form.result}
+            onChange={(v) => setForm({ ...form, result: v })}
+            multiline
+          />
+          <Field label="Клиент" value={form.client} onChange={(v) => setForm({ ...form, client: v })} />
+          <label className="flex items-center gap-2 text-sm text-text-secondary">
+            <input
+              type="checkbox"
+              checked={form.confidential}
+              onChange={(e) => setForm({ ...form, confidential: e.target.checked })}
+            />
+            Конфиденциальный клиент (скрыть имя на сайте)
+          </label>
           <Field label="Обложка (URL)" value={form.cover} onChange={(v) => setForm({ ...form, cover: v })} />
           <Field
             label="Услуги через запятую"
@@ -124,7 +201,16 @@ export function AdminPortfolioPanel() {
                   <p className="font-medium text-white-text">{project.title}</p>
                   <p className="text-sm text-text-secondary">
                     {project.categoryLabel} · {project.source} · {project.status}
+                    {project.confidential ? " · конфиденциально" : ""}
                   </p>
+                  <a
+                    href={`/portfolio/${project.slug}`}
+                    className="mt-1 inline-block text-xs text-gold hover:underline"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Открыть кейс →
+                  </a>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <button

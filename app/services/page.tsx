@@ -29,7 +29,7 @@ export default function ServicesPage() {
                 <h2 className="heading-display mb-3 text-3xl text-white-text">{service.title}</h2>
                 <p className="mb-6 max-w-2xl text-text-secondary">{service.description}</p>
                 {service.includes && (
-                  <ul className="mb-6 grid gap-2 sm:grid-cols-2">
+                  <ul className="mb-4 grid gap-2 sm:grid-cols-2">
                     {service.includes.map((item) => (
                       <li key={item} className="flex items-start gap-2 text-sm text-text-secondary">
                         <span className="mt-1.5 h-1 w-1 rounded-full bg-gold" />
@@ -38,9 +38,34 @@ export default function ServicesPage() {
                     ))}
                   </ul>
                 )}
-                <Link href={`/services/${service.slug}`} className="btn-primary">
-                  {service.cta}
-                </Link>
+                {service.duration && (
+                  <p className="mb-2 text-sm text-text-secondary">
+                    <span className="text-gold">Срок: </span>
+                    {service.duration}
+                  </p>
+                )}
+                {service.forWhom && (
+                  <p className="mb-6 text-sm text-text-secondary">
+                    <span className="text-gold">Для кого: </span>
+                    {service.forWhom.join(", ")}
+                  </p>
+                )}
+                <div className="flex flex-wrap gap-3">
+                  <Link href={`/services/${service.slug}`} className="btn-primary">
+                    {service.cta}
+                  </Link>
+                  {service.portfolioCategory && (
+                    <Link
+                      href={`/portfolio?category=${service.portfolioCategory}`}
+                      className="btn-secondary"
+                    >
+                      Смотреть кейсы
+                    </Link>
+                  )}
+                  <Link href="/#contact" className="btn-secondary">
+                    Обсудить проект
+                  </Link>
+                </div>
               </article>
             </RevealAnimation>
           ))}

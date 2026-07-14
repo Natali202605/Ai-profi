@@ -9,6 +9,8 @@ export type Service = {
   forWhom?: string[];
   result?: string;
   difference?: string;
+  duration?: string;
+  portfolioCategory?: string;
   cta: string;
   icon: string;
 };
@@ -41,6 +43,8 @@ export const services: Service[] = [
       "адаптация под площадки",
     ],
     result: "Готовый видеоролик в согласованном формате.",
+    duration: "от 7–14 рабочих дней",
+    portfolioCategory: "video",
     cta: "Подробнее об AI-видео",
     icon: "video",
   },
@@ -62,6 +66,8 @@ export const services: Service[] = [
     ],
     difference:
       "Не случайная генерация, а работа с композицией, светом, цветом, деталями и единым стилем серии.",
+    duration: "от 3–10 рабочих дней",
+    portfolioCategory: "images",
     cta: "Подробнее об изображениях",
     icon: "image",
   },
@@ -88,6 +94,8 @@ export const services: Service[] = [
       "формы заявок и чат-бот",
       "аналитика и публикация",
     ],
+    duration: "от 14–30 рабочих дней",
+    portfolioCategory: "websites",
     cta: "Подробнее о сайтах",
     icon: "globe",
   },
@@ -107,6 +115,8 @@ export const services: Service[] = [
       "навигация",
       "интеграция с сайтом или ВКонтакте",
     ],
+    duration: "от 5–14 рабочих дней",
+    portfolioCategory: "chatbots",
     cta: "Обсудить чат-бота",
     icon: "bot",
   },
@@ -124,6 +134,8 @@ export const services: Service[] = [
       "закреплённый пост",
       "единый стиль",
     ],
+    duration: "от 5–10 рабочих дней",
+    portfolioCategory: "vk",
     cta: "Подробнее о ВКонтакте",
     icon: "users",
   },
@@ -141,6 +153,8 @@ export const services: Service[] = [
       "визуальная система",
       "рекомендации по продвижению",
     ],
+    duration: "по договорённости",
+    portfolioCategory: "vk",
     cta: "Обсудить развитие",
     icon: "trending-up",
   },
@@ -159,6 +173,8 @@ export const services: Service[] = [
       "оформление ВКонтакте",
       "шаблоны контента",
     ],
+    duration: "от 21 рабочего дня",
+    portfolioCategory: "websites",
     cta: "Собрать решение",
     icon: "layers",
   },

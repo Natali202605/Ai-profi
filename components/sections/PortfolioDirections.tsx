@@ -1,17 +1,23 @@
-"use client";
-
-import { portfolioDirections } from "@/data/portfolio";
+import { getPublishedPortfolioProjects } from "@/lib/portfolio-store";
+import { buildPortfolioDirections, portfolioProjects } from "@/data/portfolio";
 import { PortfolioDirectionCard } from "@/components/portfolio/PortfolioDirectionCard";
 import { RevealAnimation } from "@/components/ui/RevealAnimation";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { useSiteContent } from "@/components/providers/SiteContentProvider";
 
-export function PortfolioDirections() {
-  const { portfolio } = useSiteContent();
+export async function PortfolioDirections() {
+  let source = portfolioProjects;
+  try {
+    const published = await getPublishedPortfolioProjects();
+    if (published.length) source = published;
+  } catch {
+    /* seed fallback */
+  }
+
+  const directions = buildPortfolioDirections(source).filter((d) => d.projectCount > 0);
   const [firstRow, secondRow, wideCard] = [
-    portfolioDirections.slice(0, 2),
-    portfolioDirections.slice(2, 5),
-    portfolioDirections[5],
+    directions.slice(0, 2),
+    directions.slice(2, 5),
+    directions[5],
   ];
 
   return (
@@ -19,7 +25,7 @@ export function PortfolioDirections() {
       <div className="container-site">
         <RevealAnimation>
           <SectionHeading
-            label={portfolio.featured.label}
+            label="Портфолио"
             title="Выберите направление и посмотрите работы"
             titleAccent="посмотрите работы"
             subtitle="В портфолио собраны AI-видео, изображения, сайты, чат-боты, оформление ВКонтакте и художественные проекты."
@@ -30,18 +36,23 @@ export function PortfolioDirections() {
           <div className="grid gap-4 md:grid-cols-2 md:gap-6">
             {firstRow.map((direction, index) => (
               <RevealAnimation key={direction.id} delay={0.08 + index * 0.06}>
-                <PortfolioDirectionCard direction={direction} className="min-h-[360px] md:min-h-[420px]" />
+                <PortfolioDirectionCard
+                  direction={direction}
+                  className="min-h-[360px] md:min-h-[420px]"
+                />
               </RevealAnimation>
             ))}
           </div>
 
-          <div className="grid gap-4 md:grid-cols-3 md:gap-6">
-            {secondRow.map((direction, index) => (
-              <RevealAnimation key={direction.id} delay={0.18 + index * 0.05}>
-                <PortfolioDirectionCard direction={direction} className="min-h-[320px]" />
-              </RevealAnimation>
-            ))}
-          </div>
+          {secondRow.length > 0 && (
+            <div className="grid gap-4 md:grid-cols-3 md:gap-6">
+              {secondRow.map((direction, index) => (
+                <RevealAnimation key={direction.id} delay={0.18 + index * 0.05}>
+                  <PortfolioDirectionCard direction={direction} className="min-h-[320px]" />
+                </RevealAnimation>
+              ))}
+            </div>
+          )}
 
           {wideCard && (
             <RevealAnimation delay={0.28}>
